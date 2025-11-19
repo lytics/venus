@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--headless",
+        "--config",
+        "playwright-mcp-config.json"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@automatalabs/mcp-server-chrome@latest",
+        "--headless=true"
+      ]
+    }
+  }
+}

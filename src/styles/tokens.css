@@ -1,0 +1,268 @@
+/* Last updated: 2025-10-31T03:35:21.549Z */
+/* ==============================================================================
+   Design Token System
+   ============================================================================== */
+
+/*
+   🎨 EASY CUSTOMIZATION
+
+   To change the main colors of your app, edit these values:
+
+   LIGHT MODE:
+   - Line 56-57: --background (main bg) and --background-secondary (cards)
+   - Line 58: --foreground (main text color)
+
+   DARK MODE:
+   - Line 176-177: --background (main bg) and --background-secondary (cards)
+   - Line 178: --foreground (main text color)
+
+   Current defaults use the beautiful dark mode colors you love!
+   Everything else automatically adapts to these core values.
+*/
+
+:root {
+  /* ===== Brand Colors (Light Mode) - Monochrome ===== */
+  --brand-1: #f8f7fd;
+  --brand-2: #e9e7f8;
+  --brand-3: #d6d2f4;
+  --brand-4: #c7c1f0;
+  --brand-5: #b8b1ed;
+  --brand-6: #9f95ef;
+  --brand-7: #8f83ec;
+  --brand-8: #7b6de9;
+  --brand-9: #6b5be6;  /* primary brand color - dark monochrome */
+  --brand-10: #3721de;
+  --brand-11: #2919a4;
+  --brand-12: #1c1263;
+
+  /* ===== Neutral Scale (Light) ===== */
+  --gray-1: #fcfcfc;
+  --gray-2: #f9f9f9;
+  --gray-3: #f0f0f0;
+  --gray-4: #e4e4e7;
+  --gray-5: #d4d4d8;
+  --gray-6: #a1a1aa;
+  --gray-7: #71717a;
+  --gray-8: #52525b;
+  --gray-9: #3f3f46;
+  --gray-10: #27272a;
+  --gray-11: #18181b;
+  --gray-12: #09090b;
+
+  /* ===== Semantic Colors (Light Mode) ===== */
+  --background: #ffffff;
+  --background-secondary: #ffffff;
+  --foreground: #1C2024;
+  --card: #ffffff;
+  --card-foreground: #1C2024;
+  --popover: #ffffff;
+  --popover-foreground: #1C2024;
+
+  /* Navigation backgrounds */
+  --nav-background: #ffffff;
+  --nav-background-expanded: #fafafa;
+  --primary: 247 74% 63%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: var(--brand-3);
+  --secondary-foreground: var(--gray-9);
+  --muted: var(--brand-3);
+  --muted-foreground: #737373;
+  --accent: var(--brand-4);
+  --accent-foreground: var(--brand-9);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: var(--gray-4);
+  --input: var(--gray-3);
+  --ring: var(--brand-8);
+
+  /* Danger - Venus Design System */
+  --danger-50:  #FEE2E2;  --danger-100: #FEE2E2; --danger-200: #FEE2E2;
+  --danger-300: #FCA5A5; --danger-400: #F87171; --danger-500: #EF4444;
+  --danger-600: #DC2626; --danger-700: #DC2626; --danger-800: #991B1B;
+  --danger-900: #7F1D1D; --danger-fg: #ffffff;
+
+  /* Success - Venus Design System */
+  --success-50:  #D1FAE5; --success-100: #D1FAE5; --success-200: #BBF7D0;
+  --success-300: #86EFAC; --success-400: #4ADE80; --success-500: #10B981;
+  --success-600: #047857; --success-700: #047857; --success-800: #166534;
+  --success-900: #14532D; --success-fg: #0a0a0b;
+
+  /* Info - Venus Design System */
+  --info-50:  #DBEAFE;  --info-100: #DBEAFE; --info-200: #BFDBFE;
+  --info-300: #93C5FD; --info-400: #60A5FA; --info-500: #3B82F6;
+  --info-600: #1D4ED8; --info-700: #1D4ED8; --info-800: #1E40AF;
+  --info-900: #1E3A8A; --info-fg: #ffffff;
+
+  /* Warning - Venus Design System */
+  --warning-50:  #FEF3C7; --warning-100: #FEF3C7; --warning-200: #FDE68A;
+  --warning-300: #FCD34D; --warning-400: #FBBF24; --warning-500: #F59E0B;
+  --warning-600: #D97706; --warning-700: #D97706; --warning-800: #92400E;
+  --warning-900: #78350F; --warning-fg: #0a0a0b;
+
+  /* Badge Colors - Purple (for semantic/branded badges) */
+  --badge-purple-50:  #faf5ff; --badge-purple-100: #f3e8ff; --badge-purple-200: #e9d5ff;
+  --badge-purple-300: #d8b4fe; --badge-purple-400: #c084fc; --badge-purple-500: #a855f7;
+  --badge-purple-600: #9333ea; --badge-purple-700: #7e22ce; --badge-purple-800: #6b21a8;
+  --badge-purple-900: #581c87; --badge-purple-fg: #ffffff;
+
+  /* Badge Colors - Blue (for info/processing badges) */
+  --badge-blue-50:  #eff6ff; --badge-blue-100: #dbeafe; --badge-blue-200: #bfdbfe;
+  --badge-blue-300: #93c5fd; --badge-blue-400: #60a5fa; --badge-blue-500: #3b82f6;
+  --badge-blue-600: #2563eb; --badge-blue-700: #1d4ed8; --badge-blue-800: #1e40af;
+  --badge-blue-900: #1e3a8a; --badge-blue-fg: #ffffff;
+
+  /* Badge Colors - Green (for success/filtered badges) */
+  --badge-green-50:  #f0fdf4; --badge-green-100: #dcfce7; --badge-green-200: #bbf7d0;
+  --badge-green-300: #86efac; --badge-green-400: #4ade80; --badge-green-500: #22c55e;
+  --badge-green-600: #16a34a; --badge-green-700: #15803d; --badge-green-800: #166534;
+  --badge-green-900: #14532d; --badge-green-fg: #0a0a0b;
+
+  /* Badge Colors - Orange (for warning/aggregation badges) */
+  --badge-orange-50:  #fff7ed; --badge-orange-100: #ffedd5; --badge-orange-200: #fed7aa;
+  --badge-orange-300: #fdba74; --badge-orange-400: #fb923c; --badge-orange-500: #f97316;
+  --badge-orange-600: #ea580c; --badge-orange-700: #c2410c; --badge-orange-800: #9a3412;
+  --badge-orange-900: #7c2d12; --badge-orange-fg: #0a0a0b;
+
+  /* ===== Showcase Background Colors (Light Mode) ===== */
+  --showcase-bg-rose: #e85a8f;
+  --showcase-bg-red: #e85a5a;
+  --showcase-bg-orange: #e88a5a;
+  --showcase-bg-amber: #e8b05a;
+  --showcase-bg-yellow: #e8d85a;
+  --showcase-bg-lime: #b0e85a;
+  --showcase-bg-green: #5ae85a;
+  --showcase-bg-emerald: #5ae8a0;
+  --showcase-bg-teal: #5ae8c8;
+  --showcase-bg-cyan: #5ac8e8;
+  --showcase-bg-sky: #5a9ae8;
+  --showcase-bg-blue: #5a5ae8;
+  --showcase-bg-indigo: #8a5ae8;
+  --showcase-bg-violet: #b05ae8;
+  --showcase-bg-purple: #d85ae8;
+  --showcase-bg-slate: #27272a;   /* Blackish gray */
+  --showcase-bg-gray: #e4e4e7;    /* Light gray */
+}
+
+/* Dark Mode */
+.dark {
+  /* ===== Brand Colors (Dark Mode) - Monochrome ===== */
+  --brand-1: #0a0721;
+  --brand-2: #130e3f;
+  --brand-3: #1a115f;
+  --brand-4: #23177d;
+  --brand-5: #2818a0;
+  --brand-6: #2e1cba;
+  --brand-7: #3620d9;
+  --brand-8: #4f3ce2;
+  --brand-9: #6b5be6;  /* primary brand color in dark - light monochrome */
+  --brand-10: #8b7eec;
+  --brand-11: #aba2f1;
+  --brand-12: #cec9f2;
+
+  /* ===== Neutral Scale (Dark) ===== */
+  --gray-1: #0a0a0a;
+  --gray-2: #0f0f0f;
+  --gray-3: #131313;
+  --gray-4: #262626;
+  --gray-5: #3a3a3a;
+  --gray-6: #525252;
+  --gray-7: #737373;
+  --gray-8: #a1a1a1;
+  --gray-9: #d4d4d4;
+  --gray-10: #e5e5e5;
+  --gray-11: #f5f5f5;
+  --gray-12: #ffffff;
+
+  /* ===== Semantic Colors (Dark Mode) ===== */
+  --background: #131313;
+  --background-secondary: #0f0f0f;
+  --foreground: #EDEEF0;
+  --card: #0f0f0f;
+  --card-foreground: #EDEEF0;
+  --popover: #0f0f0f;
+  --popover-foreground: #EDEEF0;
+
+  /* Navigation backgrounds */
+  --nav-background: #131313;
+  --nav-background-expanded: #0f0f0f;
+  --primary: 247 74% 63%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: var(--brand-4);
+  --secondary-foreground: var(--gray-10);
+  --muted: var(--brand-3);
+  --muted-foreground: #a1a1a1;
+  --accent: var(--brand-4);
+  --accent-foreground: var(--brand-11);
+  --destructive: #EF4444;
+  --destructive-foreground: #ffffff;
+  --border: var(--gray-4);
+  --input: var(--gray-3);
+  --ring: var(--brand-9);
+
+  /* Danger - Venus Design System (Dark Mode) */
+  --danger-50:  #1A0808;   --danger-100: #2A0F0F; --danger-200: #3D1515;
+  --danger-300: #5C1E1E;   --danger-400: #7C2626; --danger-500: #EF4444;
+  --danger-600: #DC2626;   --danger-700: #DC2626; --danger-800: #FECACA;
+  --danger-900: #FEE2E2;   --danger-fg:  #ffffff;
+
+  /* Success - Venus Design System (Dark Mode) */
+  --success-50:  #0A1A0C;  --success-100: #0F2A12; --success-200: #153D19;
+  --success-300: #1E5C24;  --success-400: #267C32; --success-500: #10B981;
+  --success-600: #047857;  --success-700: #047857; --success-800: #BBF7D0;
+  --success-900: #D1FAE5;  --success-fg: #ffffff;
+
+  /* Info - Venus Design System (Dark Mode) */
+  --info-50:  #081A2A;     --info-100: #0F2544;   --info-200: #1E3A5F;
+  --info-300: #2C5282;     --info-400: #3C6CB4;   --info-500: #3B82F6;
+  --info-600: #1D4ED8;     --info-700: #1D4ED8;   --info-800: #BFDBFE;
+  --info-900: #DBEAFE;     --info-fg: #ffffff;
+
+  /* Warning - Venus Design System (Dark Mode) */
+  --warning-50:  #1A1508;  --warning-100: #2A220F; --warning-200: #3D3015;
+  --warning-300: #5C4A1E;  --warning-400: #7C6426; --warning-500: #F59E0B;
+  --warning-600: #D97706;  --warning-700: #D97706; --warning-800: #FDE68A;
+  --warning-900: #FEF3C7;  --warning-fg: #ffffff;
+
+  /* Badge Colors - Purple (Dark Mode) */
+  --badge-purple-50:  #1a0b2e; --badge-purple-100: #2e1a47; --badge-purple-200: #4a2766;
+  --badge-purple-300: #6b3398; --badge-purple-400: #8b4cc9; --badge-purple-500: #a855f7;
+  --badge-purple-600: #c084fc; --badge-purple-700: #d8b4fe; --badge-purple-800: #e9d5ff;
+  --badge-purple-900: #f3e8ff; --badge-purple-fg: #ffffff;
+
+  /* Badge Colors - Blue (Dark Mode) */
+  --badge-blue-50:  #0a1929; --badge-blue-100: #1e2a3f; --badge-blue-200: #2d3e5f;
+  --badge-blue-300: #3d5687; --badge-blue-400: #5577b5; --badge-blue-500: #3b82f6;
+  --badge-blue-600: #60a5fa; --badge-blue-700: #93c5fd; --badge-blue-800: #bfdbfe;
+  --badge-blue-900: #dbeafe; --badge-blue-fg: #ffffff;
+
+  /* Badge Colors - Green (Dark Mode) */
+  --badge-green-50:  #0a1f0f; --badge-green-100: #1a332a; --badge-green-200: #2a4d3f;
+  --badge-green-300: #3d7059; --badge-green-400: #559373; --badge-green-500: #22c55e;
+  --badge-green-600: #4ade80; --badge-green-700: #86efac; --badge-green-800: #bbf7d0;
+  --badge-green-900: #dcfce7; --badge-green-fg: #ffffff;
+
+  /* Badge Colors - Orange (Dark Mode) */
+  --badge-orange-50:  #1a0f08; --badge-orange-100: #2e1f15; --badge-orange-200: #4d3322;
+  --badge-orange-300: #734a2f; --badge-orange-400: #99653f; --badge-orange-500: #f97316;
+  --badge-orange-600: #fb923c; --badge-orange-700: #fdba74; --badge-orange-800: #fed7aa;
+  --badge-orange-900: #ffedd5; --badge-orange-fg: #ffffff;
+
+  /* ===== Showcase Background Colors (Dark Mode) ===== */
+  --showcase-bg-rose: #c45a8f;
+  --showcase-bg-red: #c45a5a;
+  --showcase-bg-orange: #c48a5a;
+  --showcase-bg-amber: #c4a05a;
+  --showcase-bg-yellow: #c4c05a;
+  --showcase-bg-lime: #a0c45a;
+  --showcase-bg-green: #5ac45a;
+  --showcase-bg-emerald: #5ac490;
+  --showcase-bg-teal: #5ac4b0;
+  --showcase-bg-cyan: #5ab0c4;
+  --showcase-bg-sky: #5a8ac4;
+  --showcase-bg-blue: #5a5ac4;
+  --showcase-bg-indigo: #805ac4;
+  --showcase-bg-violet: #a05ac4;
+  --showcase-bg-purple: #c45ac4;
+  --showcase-bg-slate: #f0f0f0;   /* Light gray in dark mode */
+  --showcase-bg-gray: #3f3f46;    /* Dark gray in dark mode */
+}
