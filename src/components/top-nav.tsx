@@ -11,7 +11,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { ChevronDown, GalleryHorizontal, BookOpen, LifeBuoy, LogOut, FileText, Package, Code, Layout, Palette, Menu, Sparkles, Bell, CircleHelp, Grid3x3, Home } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image from "next/image"
-import { projectConfig } from "@/project.config"
 import { AppLauncher } from "@/components/app-launcher"
 import { Dropdown as VenusDropdown } from "@/components/venus"
 
@@ -127,8 +126,8 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
   };
 
   // Read configuration
-  const navItems = projectConfig.navigation.items
-  const { sticky } = projectConfig.navigation.topNav;
+  const navItems: any[] = []
+  const sticky = true;
 
   return (
     <>

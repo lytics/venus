@@ -1,6 +1,5 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { projectConfig } from "@/project.config"
 import { ContentstackLogo } from "@/components/contentstack-logo"
 
 interface AppLogoProps {
@@ -14,11 +13,10 @@ export function AppLogo({
   className,
   collapsed = false,
 }: AppLogoProps) {
-  const { logo } = projectConfig.branding
-
-  // Provide safe defaults for backward compatibility
-  const expanded = logo?.expanded || {
-    mode: "icon-only" as "icon-only" | "icon-with-name" | "full-logo",
+  // Logo configuration
+  const expanded = {
+    mode: "full-logo" as "icon-only" | "icon-with-name" | "full-logo",
+    fullLogoPath: "/logo-full.svg",
     textClassName: "font-bold text-lg"
   }
 
@@ -53,7 +51,7 @@ export function AppLogo({
             mode="icon-only"
           />
           <span className={expanded.textClassName}>
-            {projectConfig.name}
+            Venus
           </span>
         </div>
       )

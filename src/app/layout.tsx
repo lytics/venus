@@ -1,5 +1,4 @@
 import "./globals.css";
-import { projectConfig } from "@/project.config"
 import { CommandPaletteProvider } from "@/components/command-palette-provider";
 import { Toaster } from "sonner";
 import { Inter } from "next/font/google";
@@ -41,8 +40,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
  */
 
 export const metadata = {
-  title: projectConfig.name,
-  description: projectConfig.name,
+  title: "Venus",
+  description: "Venus",
   icons: {
     icon: '/favicon.svg',
   },

@@ -6,13 +6,12 @@ Quick reference for Claude Code when working with code in this repository.
 
 ## 🚨 CRITICAL RULES
 
-1. **Config First**: All basic project-wide settings live in `src/project.config.ts` - check there before hardcoding values
-2. **Check Existing First**: Before building custom UI, check `docs/patterns/`, grep codebase, and `src/components/ui/` for existing solutions
-3. **New Pages**: Always include `min-h-[44px]` on header
-4. **Card Padding**: CardContent uses ONLY horizontal padding (default `px-6`, configurable), Card handles vertical padding
-5. **Responsive**: Use container queries (`@5xl:`) not viewport breakpoints (`lg:`) for sidebar-aware layouts
-6. **Git**: Quote paths with parentheses: `git add 'src/app/(app)/page.tsx'`
-7. **Modal/Drawer Borders**: NEVER add `border-b` to headers or `border-t` to footers in modals, drawers, or sheets - keep clean separation
+1. **Check Existing First**: Before building custom UI, check `docs/patterns/`, grep codebase, and `src/components/ui/` for existing solutions
+2. **New Pages**: Always include `min-h-[44px]` on header
+3. **Card Padding**: CardContent uses ONLY horizontal padding (default `px-6`, configurable), Card handles vertical padding
+4. **Responsive**: Use container queries (`@5xl:`) not viewport breakpoints (`lg:`) for sidebar-aware layouts
+5. **Git**: Quote paths with parentheses: `git add 'src/app/(app)/page.tsx'`
+6. **Modal/Drawer Borders**: NEVER add `border-b` to headers or `border-t` to footers in modals, drawers, or sheets - keep clean separation
 
 ---
 
@@ -32,11 +31,6 @@ Quick reference for Claude Code when working with code in this repository.
 ---
 
 ## 📚 DETAILED DOCUMENTATION
-
-### Configuration System
-- **Project Config**: [src/project.config.ts](src/project.config.ts) - Single source of truth for many project-wide settings
-- **What's in config**: Navigation, branding, design tokens, spacing, container settings
-- **What's NOT in config**: Component-level styling
 
 ## 🏗️ ARCHITECTURE
 
@@ -109,29 +103,8 @@ From `components.json`:
 
 ## 📖 QUICK PATTERNS
 
-### Using Config
-```tsx
-import { projectConfig } from '@/src/project.config'
-
-// Get navigation items (shared between sidebar and top nav)
-const navItems = projectConfig.navigation.items
-
-// Get container max width
-const maxWidth = projectConfig.design.container.maxWidth
-
-// Get spacing values (Tailwind scale: "6" = 1.5rem, "8" = 2rem, etc.)
-const pageGap = projectConfig.design.spacing.page.gap  // "6"
-const cardPaddingX = projectConfig.design.spacing.card.paddingX  // "6"
-
-// Use in template literals (before bake) - gets replaced with static values during bake
-className={`gap-${projectConfig.design.spacing.page.gap} p-${projectConfig.design.spacing.page.padding}`}
-// Before bake: gap-${...} (dynamic)
-// After bake: gap-6 p-6 (static)
-```
-
 ### Creating a New Page
 1. Create new page file in `src/app/(app)/[page-name]/page.tsx`
-2. Add to navigation items in `src/project.config.ts` if needed
 
 ### Using Container Queries
 ```tsx

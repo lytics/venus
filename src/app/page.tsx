@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { projectConfig } from "@/project.config"
 import { AppLogo } from "@/components/app-logo";
 
 export default function HomePage() {

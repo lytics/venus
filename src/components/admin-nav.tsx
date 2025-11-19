@@ -10,7 +10,6 @@ import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/h
 import { Menu } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Switch } from "@/components/ui/switch"
-import { projectConfig } from "@/project.config"
 
 const adminNavigationTabs = [
   { id: "primatives", label: "Primatives", href: "/primatives" },
@@ -25,10 +24,10 @@ const extrasItems: Array<{ id: string; label: string; href: string; isDivider?: 
 
 export function AdminNav() {
   const pathname = usePathname();
-  const [navHeight, setNavHeight] = React.useState<string>(projectConfig.navigation.topNav.height)
+  const [navHeight, setNavHeight] = React.useState<string>("3.5rem")
 
   // Read configuration
-  const { sticky } = projectConfig.navigation.topNav;
+  const sticky = true;
   const showBorder = false; // Admin nav doesn't use border by default
 
   // Load height from localStorage and listen for changes
