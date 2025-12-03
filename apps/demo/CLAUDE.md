@@ -1,109 +1,254 @@
 # Demo App - Claude Code Reference
 
-Quick reference for working with the Venus Design System demo application.
+This is the Contentstack demo application built with the Venus Design System.
 
-## Commands
+---
 
-```bash
-# Development
-pnpm dev           # Start dev server (Turbopack)
-pnpm build         # Build for production
-pnpm start         # Start production server
-pnpm lint          # Run ESLint
-```
+## 🚨 CRITICAL: Always Use Venus Components
 
-## Using Venus Components
-
-### Import from Workspace Package
+**BEFORE creating any UI component**, check if it exists in `@contentstack/venuscn`:
 
 ```tsx
-import { Button, Input, Table } from "@contentstack/venuscn"
+// ✅ ALWAYS import Venus components from the package
+import {
+  Button, Input, Textarea, Checkbox, Radio, Toggle,
+  Field, FieldLabel, HelpText, ValidationMessage,
+  Table, TableHeader, TableBody, TableRow, TableCell,
+  Tag, Tabs, PageHeader, Dropdown, Search
+} from "@contentstack/venuscn"
+
+// ❌ NEVER recreate these components locally
 ```
 
-### Import Styles
+For full component list: `packages/venuscn/README.md`
 
-Add to your `globals.css`:
+---
 
-```css
-@import "@contentstack/venuscn/styles";
+## 🛠️ Commands
+
+```bash
+pnpm dev        # Start dev server (Turbopack) on localhost:3000
+pnpm build      # Build for production
+pnpm lint       # Run ESLint
 ```
 
-## Project Structure
+---
+
+## 📁 Project Structure
 
 ```
-apps/demo/
-├── src/
-│   ├── app/
-│   │   └── (app)/          # Main app pages
-│   ├── components/         # App-specific components
-│   └── styles/            # Global styles
-├── public/                # Static assets
-└── package.json
+apps/demo/src/
+├── app/
+│   ├── (app)/              # Main application pages
+│   │   ├── dashboard/      # Dashboard page
+│   │   └── personalize/    # Personalize feature pages
+│   ├── (galleries)/        # Component gallery pages
+│   │   ├── primatives/     # Venus component showcase
+│   │   ├── colors/         # Color system
+│   │   ├── text/           # Typography
+│   │   └── icons/          # Icon library
+│   ├── globals.css         # Global styles + Venus tokens import
+│   └── layout.tsx          # Root layout
+│
+├── components/
+│   ├── ui/                 # shadcn/ui components (app-specific only)
+│   ├── admin-nav.tsx       # Navigation component
+│   └── ...                 # Other app-specific components
+│
+├── hooks/                  # Custom React hooks
+├── lib/                    # Utilities
+└── data/                   # Static data
 ```
 
-## Key Patterns
+---
+
+## 🎯 When to Use What
+
+| Need | Use | Import From |
+|------|-----|-------------|
+| Buttons, Inputs, Forms | **Venus** | `@contentstack/venuscn` |
+| Tables, Tags, Tabs | **Venus** | `@contentstack/venuscn` |
+| Page headers | **Venus** | `@contentstack/venuscn` |
+| Cards, Dialogs, Sheets | shadcn/ui | `@/components/ui/*` |
+| Modals, Drawers | shadcn/ui | `@/components/ui/*` |
+| Icons | lucide-react | `lucide-react` |
+
+---
+
+## 📝 Common Patterns
 
 ### Creating a New Page
 
-Create page file in `src/app/(app)/[page-name]/page.tsx`:
-
 ```tsx
-export default function MyPage() {
+// src/app/(app)/my-feature/page.tsx
+import { PageHeader, Button } from "@contentstack/venuscn"
+import { Plus } from "lucide-react"
+
+export default function MyFeaturePage() {
   return (
-    <div className="p-6">
-      <h1 className="text-4xl font-bold">Page Title</h1>
+    <div className="p-6 space-y-6">
+      <PageHeader
+        title="My Feature"
+        actions={[
+          {
+            label: "Add New",
+            icon: Plus,
+            variant: "primary",
+            onClick: () => console.log("Add")
+          }
+        ]}
+      />
+
+      {/* Page content */}
     </div>
   )
 }
 ```
 
-### Using Venus Form Components
+### Form with Validation
 
 ```tsx
-import { Field, FieldLabel, Input, Button } from "@contentstack/venuscn"
+import {
+  Field, FieldLabel, Input, Textarea, Button,
+  HelpText, ValidationMessage
+} from "@contentstack/venuscn"
 
-export default function Form() {
+export function MyForm() {
   return (
-    <form>
+    <form className="space-y-4 max-w-md">
       <Field>
-        <FieldLabel required>Name</FieldLabel>
-        <Input placeholder="Enter name" />
+        <FieldLabel htmlFor="title" required>Title</FieldLabel>
+        <Input id="title" placeholder="Enter title" />
+        <HelpText>This will be displayed publicly</HelpText>
       </Field>
-      <Button variant="primary">Submit</Button>
+
+      <Field>
+        <FieldLabel htmlFor="desc" optional>Description</FieldLabel>
+        <Textarea id="desc" placeholder="Enter description" rows={4} />
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="email" required>Email</FieldLabel>
+        <Input id="email" type="email" error placeholder="Enter email" />
+        <ValidationMessage type="error">Email is required</ValidationMessage>
+      </Field>
+
+      <div className="flex gap-3">
+        <Button variant="secondary">Cancel</Button>
+        <Button variant="primary">Save</Button>
+      </div>
     </form>
   )
 }
 ```
 
-### Page Headers
+### Data Table
 
 ```tsx
-import { PageHeader } from "@contentstack/venuscn"
-import { Plus } from "lucide-react"
+import {
+  Table, TableHeader, TableBody, TableHead, TableRow, TableCell, Tag
+} from "@contentstack/venuscn"
 
-export default function ListPage() {
+export function DataTable({ data }) {
   return (
-    <>
-      <PageHeader
-        title="Content Types"
-        description="Manage your content models"
-        actions={[
-          {
-            label: "Add Content Type",
-            icon: Plus,
-            onClick: () => console.log("Add")
-          }
-        ]}
-      />
-      {/* Page content */}
-    </>
+    <div className="border border-border rounded-lg overflow-hidden">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Modified</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.name}</TableCell>
+              <TableCell>
+                <Tag>{item.status}</Tag>
+              </TableCell>
+              <TableCell>{item.modified}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   )
 }
 ```
 
-## Development Tips
+### Tabs Navigation
 
-1. All Venus components are production-ready and match app.contentstack.com
-2. Use `--color-*` design tokens for consistent theming
-3. Production specs: 16px buttons, 4px border radius, 600 weight labels
-4. Refer to package README for complete component API
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@contentstack/venuscn"
+
+export function TabbedContent() {
+  return (
+    <Tabs defaultValue="overview">
+      <TabsList>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
+        <TabsTrigger value="advanced" disabled>Advanced</TabsTrigger>
+      </TabsList>
+      <TabsContent value="overview">
+        <p>Overview content here</p>
+      </TabsContent>
+      <TabsContent value="settings">
+        <p>Settings content here</p>
+      </TabsContent>
+    </Tabs>
+  )
+}
+```
+
+---
+
+## 🎨 Styling Guidelines
+
+### Design Tokens
+Venus tokens are imported via `globals.css`. Use them for consistency:
+
+```tsx
+// Use token-based colors
+<div className="text-[color:var(--color-title)]">Title</div>
+<div className="text-[color:var(--color-body)]">Body text</div>
+<div className="border-[color:var(--color-border)]">Bordered</div>
+```
+
+### Production Specs
+- **Border radius:** 4px (use `rounded` not `rounded-md`)
+- **Button font:** 16px, weight 600
+- **Input font:** 16px, weight 400
+- **Label font:** 14px, weight 600
+
+### Container Queries (Sidebar-aware)
+```tsx
+// Responsive to sidebar state, not viewport
+<div className="@5xl:hidden">Mobile layout</div>
+<div className="hidden @5xl:block">Desktop layout</div>
+```
+
+---
+
+## ⚙️ Path Aliases
+
+```tsx
+@/components  → src/components
+@/lib         → src/lib
+@/hooks       → src/hooks
+@/ui          → src/components/ui
+```
+
+---
+
+## 📋 Pre-flight Checklist
+
+Before building UI in this app:
+
+```
+[ ] Check @contentstack/venuscn for existing component
+[ ] Import Venus components, not local recreations
+[ ] Use 4px border radius
+[ ] Use production font sizes (16px buttons/inputs, 14px labels)
+[ ] Test with sidebar open/closed (container queries)
+```

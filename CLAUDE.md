@@ -1,116 +1,213 @@
-# CLAUDE.md
+# Venus Monorepo - Claude Code Reference
 
-Quick reference for Claude Code when working with code in this repository.
+This is a **pnpm monorepo** containing the Venus Design System component library and a demo application.
 
 ---
 
 ## 🚨 CRITICAL RULES
 
-1. **Check Existing First**: Before building custom UI, check `docs/patterns/`, grep codebase, and `src/components/ui/` for existing solutions
-2. **New Pages**: Always include `min-h-[44px]` on header
-3. **Card Padding**: CardContent uses ONLY horizontal padding (default `px-6`, configurable), Card handles vertical padding
-4. **Responsive**: Use container queries (`@5xl:`) not viewport breakpoints (`lg:`) for sidebar-aware layouts
-5. **Git**: Quote paths with parentheses: `git add 'src/app/(app)/page.tsx'`
-6. **Modal/Drawer Borders**: NEVER add `border-b` to headers or `border-t` to footers in modals, drawers, or sheets - keep clean separation
+### 1. Use Venus Components from the Package
+**NEVER** create custom UI components that duplicate Venus functionality. Always import from `@contentstack/venuscn`:
 
----
+```tsx
+// ✅ CORRECT - Import from package
+import { Button, Input, Field, FieldLabel, Tag, Table } from "@contentstack/venuscn"
 
-## ⚡ PRE-FLIGHT CHECKLIST
-
-**BEFORE building/modifying ANY UI component, you MUST complete these steps:**
-
-### When Building Cards/Containers
-```
-[ ] 1. Read src/components/ui/card.tsx to see actual implementation
-[ ] 2. Search codebase for similar existing patterns (grep/glob)
-[ ] 3. Check docs/patterns/cards.md for examples
-[ ] 4. Verify: Card has py value, CardContent has px value ONLY
-[ ] 5. Verify: NO py-*, pt-*, pb-* on content
+// ❌ WRONG - Don't create custom versions
+// Don't make your own Button, Input, etc.
 ```
 
----
+### 2. Check Existing Components First
+Before building ANY UI, check what's available:
+1. **Venus components**: See `packages/venuscn/README.md` for full component list
+2. **shadcn/ui components**: `apps/demo/src/components/ui/` for app-specific UI
+3. **Grep the codebase** for similar existing patterns
 
-## 📚 DETAILED DOCUMENTATION
-
-## 🏗️ ARCHITECTURE
-
-### Stack
-- **Next.js 15** with App Router and Turbopack
-- **React 19** with TypeScript
-- **Tailwind CSS v4** with design tokens
-- **shadcn/ui** (New York variant)
-- **Radix UI** primitives
-
-### Key Technologies
-- **Animation**: motion v12.23.24 (Framer Motion), tw-animate-css v1.3.8
-- **Charts**: recharts v3.2.1, dotted-map v2.2.3
-- **3D Graphics**: @react-three/fiber v9.3.0, @react-three/drei v10.7.6, three v0.180.0
-- **UI**: sonner v2.0.7 (toasts), cmdk v1.1.1 (command palette), vaul v1.1.2 (drawers)
-- **Forms**: react-hook-form v7.63.0, zod v4.1.11
-- **DnD**: @dnd-kit/core v6.3.1
-
-Full tech stack: [README.md](README.md)
-
----
-
-## 🎨 DESIGN SYSTEM
-
-**Venus Components:** `/src/components/venus/` - Production-ready components matching app.contentstack.com
-
-**Important:** Venus components use **production values** verified from the actual Contentstack app:
-- Buttons: 16px font, 700 weight
-- Inputs: 16px font 
-- Labels: 14px, 600 weight
-
-Check VENUS_IMPLEMENTATION_GUIDE.md for complete production specs.
-
----
-
-## 🛠️ COMMANDS
-
-### Development
+### 3. Git Paths with Parentheses
+Always quote paths containing parentheses:
 ```bash
-npm run dev      # Start dev server (Turbopack)
-npm run build    # Build production (Turbopack)
-npm start        # Start production server
-npm run lint     # Run ESLint
+git add 'apps/demo/src/app/(app)/page.tsx'
 ```
 
-### Testing
-E2E testing available with Playwright (configured).
+---
+
+## 📁 Project Structure
+
+```
+venus_external/
+├── packages/
+│   ├── venuscn/              # Venus component library (@contentstack/venuscn)
+│   │   ├── README.md         # ⭐ COMPONENT DOCUMENTATION
+│   │   └── src/components/   # All Venus components
+│   │
+│   └── venusmui/             # Future MUI version (placeholder)
+│
+├── apps/
+│   └── demo/                 # Demo Contentstack application
+│       ├── CLAUDE.md         # Demo-specific instructions
+│       └── src/
+│           ├── app/(app)/        # Main app pages
+│           ├── app/(galleries)/  # Component galleries
+│           └── components/ui/    # shadcn/ui (app-specific only)
+│
+├── pnpm-workspace.yaml       # Workspace configuration
+└── tsconfig.base.json        # Shared TypeScript config
+```
 
 ---
 
-## 🔌 PROVIDERS
+## 🛠️ Commands
 
-Root layout provider hierarchy:
-1. **CommandPaletteProvider** - ⌘K command palette
+Run from the **root directory**:
 
-All (app) pages have access to this via hooks:
-- `useCommandPalette()` - Command palette
+```bash
+pnpm dev        # Start demo app with hot reload
+pnpm build      # Build venuscn package + demo app
+```
+
+Run from `packages/venuscn/`:
+```bash
+pnpm build      # Build the component library
+pnpm dev        # Watch mode for component development
+```
+
+Run from `apps/demo/`:
+```bash
+pnpm dev        # Start demo dev server
+pnpm build      # Build demo for production
+pnpm lint       # Run ESLint
+```
 
 ---
 
-## ⚙️ COMPONENT ALIASES
+## 📦 Venus Component Library
 
-From `components.json`:
-- `@/components` → src/components
-- `@/lib` → src/lib
-- `@/ui` → src/components/ui
-- `@/hooks` → src/hooks
+The `@contentstack/venuscn` package contains **27 production-ready components** matching app.contentstack.com.
+
+### Available Components
+
+**Form Controls:** Button, Input, Textarea, Checkbox, Radio, Toggle, Dropdown
+
+**Form Architecture:** Field, FieldLabel, HelpText, ValidationMessage
+
+**Data Display:** Table (+ Header/Body/Row/Cell), TablePagination, Search, SearchV3
+
+**Navigation/Layout:** Tabs, PageHeader, PageSearchHeader, PageFormHeader, FormSidebar, Divider
+
+**UI Elements:** Tag, Pill, Pills, CategoryPill, StatusPill, Tooltip
+
+**Advanced:** TargetingRuleBuilder, TargetingCategoryCard, RuleRow, RuleGroup
+
+### Production Specs (from app.contentstack.com)
+
+| Element | Font Size | Weight | Height |
+|---------|-----------|--------|--------|
+| Button (regular) | 16px | 600 | 40px |
+| Input | 16px | 400 | 40px |
+| Field Label | 14px | 600 | - |
+| Checkbox/Radio Label | 16px | 400 | - |
+
+**Border radius:** 4px (not 6px)
+
+For complete API documentation, see: `packages/venuscn/README.md`
 
 ---
 
-## 📖 QUICK PATTERNS
+## 🎨 Design Tokens
+
+Import Venus styles in your CSS:
+
+```css
+@import "@contentstack/venuscn/styles";
+```
+
+Key tokens available:
+- `--color-primary` (#6C5CE7)
+- `--color-border` (#E3E8EF)
+- `--color-title` (#111827)
+- `--color-heading` (#475161)
+- `--color-body` (#6B7280)
+
+---
+
+## ⚡ Working in the Demo App
+
+When adding pages or features to `apps/demo/`:
+
+### Importing Components
+
+```tsx
+// Venus components (primary choice)
+import { Button, Input, Field, FieldLabel, PageHeader } from "@contentstack/venuscn"
+
+// shadcn/ui components (for app-specific UI not in Venus)
+import { Card, Dialog, Sheet } from "@/components/ui/card"
+
+// Icons
+import { Plus, Settings } from "lucide-react"
+```
 
 ### Creating a New Page
-1. Create new page file in `src/app/(app)/[page-name]/page.tsx`
 
-### Using Container Queries
 ```tsx
-// Mobile/desktop responsive to sidebar state
-<div className="@5xl:hidden">Mobile</div>
-<div className="hidden @5xl:block">Desktop</div>
+// apps/demo/src/app/(app)/my-page/page.tsx
+import { PageHeader, Button } from "@contentstack/venuscn"
+import { Plus } from "lucide-react"
+
+export default function MyPage() {
+  return (
+    <div className="p-6">
+      <PageHeader
+        title="My Page"
+        actions={[
+          { label: "Add New", icon: Plus, variant: "primary", onClick: () => {} }
+        ]}
+      />
+      {/* Page content */}
+    </div>
+  )
+}
 ```
 
+### Form Example
 
+```tsx
+import { Field, FieldLabel, Input, Button, HelpText, ValidationMessage } from "@contentstack/venuscn"
+
+<form>
+  <Field>
+    <FieldLabel htmlFor="name" required>Name</FieldLabel>
+    <Input id="name" placeholder="Enter name" />
+    <HelpText>This will be displayed publicly</HelpText>
+  </Field>
+
+  <Button variant="primary">Submit</Button>
+</form>
+```
+
+---
+
+## 🔗 Quick Reference
+
+| What | Where |
+|------|-------|
+| Component documentation | `packages/venuscn/README.md` |
+| Demo app instructions | `apps/demo/CLAUDE.md` |
+| Component source code | `packages/venuscn/src/components/` |
+| Design tokens | `packages/venuscn/src/styles/tokens.css` |
+| Component galleries | `apps/demo/src/app/(galleries)/` |
+| shadcn/ui components | `apps/demo/src/components/ui/` |
+
+---
+
+## 📋 Pre-flight Checklist
+
+Before building UI:
+
+```
+[ ] Check packages/venuscn/README.md for existing Venus component
+[ ] Grep codebase for similar patterns
+[ ] Import from @contentstack/venuscn, not local files
+[ ] Use 4px border radius (not 6px)
+[ ] Use production font sizes (16px buttons, 14px labels)
+```
