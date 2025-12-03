@@ -114,7 +114,3 @@ From `components.json`:
 ```
 
 
----
-
-**Do not commit without asking first**
-- ok i do see it but you need to not use [XXpx] overrides. thats a huge no no unless i just need to do something one-off
