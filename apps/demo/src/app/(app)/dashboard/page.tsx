@@ -12,9 +12,9 @@ const AppCard = ({ children, disabled, href }: { children: React.ReactNode; disa
   const [isHovered, setIsHovered] = React.useState(false)
   const cardContent = (
     <Card
-      className={`border transition-default cursor-pointer ${disabled ? 'opacity-50' : ''}`}
-      style={{ borderColor: isHovered ? '#3B4555' : '#E5E7EB' }}
-      onMouseEnter={() => setIsHovered(true)}
+      className={`border transition-default ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+      style={{ borderColor: (!disabled && isHovered) ? 'var(--color-primary)' : 'var(--color-border)' }}
+      onMouseEnter={() => !disabled && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {children}
@@ -35,8 +35,8 @@ export default function HomePage() {
         <div className="flex flex-col gap-6 px-8 pt-8 pb-8">
           {/* Welcome Header */}
           <div className="mb-3">
-            <h1 className="text-28 font-bold text-title leading-[42px]">Welcome, Ellis</h1>
-            <p className="text-base font-bold text-[#6e6b86] mt-1">Organization Name: Ford Pro Demo</p>
+            <h1 className="text-28 font-bold text-title leading-[42px]">Welcome, Hero</h1>
+            <p className="text-base font-bold text-[#6e6b86] mt-1">Organization Name: Venus Demo Playground</p>
           </div>
 
           {/* Main Layout - Two Columns */}
