@@ -28,10 +28,10 @@ const utilityColorVars = [
 ];
 
 const chartColorVars = [
-  '--chart-rose', '--chart-red', '--chart-orange', '--chart-amber',
-  '--chart-yellow', '--chart-lime', '--chart-green', '--chart-emerald',
-  '--chart-teal', '--chart-cyan', '--chart-sky', '--chart-blue',
-  '--chart-indigo', '--chart-violet', '--chart-purple',
+  '--chart-rose', '--chart-orange',
+  '--chart-yellow', '--chart-lime', '--chart-emerald',
+  '--chart-sky', '--chart-blue',
+  '--chart-indigo', '--chart-purple',
   '--chart-slate', '--chart-gray'
 ];
 
@@ -802,7 +802,7 @@ export default function ColorsPage() {
 
                 {/* Chart Colors */}
                 <div className="space-y-4">
-                  <h3 className="text-base font-semibold text-foreground">Chart Colors</h3>
+                  <h3 className="text-base font-semibold text-foreground">Chart Colors <span className="font-normal text-muted-foreground">(Not Venus)</span></h3>
                   <p className="text-xs text-muted-foreground">Vibrant colors for charts, graphs, and data visualization. Use <code className="px-1 py-0.5 bg-muted rounded">bg-chart-rose</code>, <code className="px-1 py-0.5 bg-muted rounded">bg-chart-blue</code>, etc.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {chartColorVars.map((colorVar) => {

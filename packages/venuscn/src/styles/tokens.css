@@ -125,19 +125,13 @@
 
   /* ===== Chart Colors (Light Mode) ===== */
   --chart-rose: #e85a8f;
-  --chart-red: #e85a5a;
   --chart-orange: #e88a5a;
-  --chart-amber: #e8b05a;
   --chart-yellow: #e8d85a;
   --chart-lime: #b0e85a;
-  --chart-green: #5ae85a;
   --chart-emerald: #5ae8a0;
-  --chart-teal: #5ae8c8;
-  --chart-cyan: #5ac8e8;
   --chart-sky: #5a9ae8;
   --chart-blue: #5a5ae8;
   --chart-indigo: #8a5ae8;
-  --chart-violet: #b05ae8;
   --chart-purple: #d85ae8;
   --chart-slate: #27272a;
   --chart-gray: #e4e4e7;
@@ -249,19 +243,13 @@
 
   /* ===== Chart Colors (Dark Mode) ===== */
   --chart-rose: #c45a8f;
-  --chart-red: #c45a5a;
   --chart-orange: #c48a5a;
-  --chart-amber: #c4a05a;
   --chart-yellow: #c4c05a;
   --chart-lime: #a0c45a;
-  --chart-green: #5ac45a;
   --chart-emerald: #5ac490;
-  --chart-teal: #5ac4b0;
-  --chart-cyan: #5ab0c4;
   --chart-sky: #5a8ac4;
   --chart-blue: #5a5ac4;
   --chart-indigo: #805ac4;
-  --chart-violet: #a05ac4;
   --chart-purple: #c45ac4;
   --chart-slate: #f0f0f0;
   --chart-gray: #3f3f46;
