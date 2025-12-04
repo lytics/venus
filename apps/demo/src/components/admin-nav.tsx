@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { VenusLogo } from "@/components/venus-logo"
 import { Button } from "@/components/ui/button"
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
-import { Menu } from "lucide-react"
+import { Menu, Sun, Moon } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Switch } from "@/components/ui/switch"
 
@@ -25,10 +25,28 @@ const extrasItems: Array<{ id: string; label: string; href: string; isDivider?: 
 export function AdminNav() {
   const pathname = usePathname();
   const [navHeight, setNavHeight] = React.useState<string>("3.5rem")
+  const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
 
   // Read configuration
   const sticky = true;
   const showBorder = false; // Admin nav doesn't use border by default
+
+  // Load theme from localStorage on mount
+  React.useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    setTheme(initialTheme);
+    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+  }, []);
+
+  // Toggle theme function
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+  };
 
   // Load height from localStorage and listen for changes
   React.useEffect(() => {
@@ -91,7 +109,22 @@ export function AdminNav() {
               </nav>
 
               {/* Right side actions */}
-              <div className="flex items-center gap-2">{/* Extras menu */}
+              <div className="flex items-center gap-2">
+                {/* Theme toggle */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0"
+                  onClick={toggleTheme}
+                  title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                >
+                  {theme === 'light' ? (
+                    <Moon className="h-4 w-4" />
+                  ) : (
+                    <Sun className="h-4 w-4" />
+                  )}
+                </Button>
+                {/* Extras menu */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button

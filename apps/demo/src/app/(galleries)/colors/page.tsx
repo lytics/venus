@@ -107,9 +107,16 @@ export default function ColorsPage() {
       return colorValue;
     }
 
+    // Detect HSL values without hsl() wrapper (shadcn format: "215 27.9% 16.9%")
+    // Pattern: number, space, number%, space, number%
+    let cssColor = colorValue;
+    if (/^\d+\.?\d*\s+\d+\.?\d*%\s+\d+\.?\d*%$/.test(colorValue.trim())) {
+      cssColor = `hsl(${colorValue})`;
+    }
+
     // Create a temporary element to compute the color
     const temp = document.createElement('div');
-    temp.style.color = colorValue;
+    temp.style.color = cssColor;
     document.body.appendChild(temp);
 
     // Get computed color (will be in rgb/rgba format)
@@ -145,14 +152,15 @@ export default function ColorsPage() {
         }
       }
 
-      // Update semantic colors
+      // Update semantic colors - show HSL values (not hex) since they use HSL format
       themeColorVars.filter(v => !v.startsWith('--brand-')).forEach(colorVar => {
         const colorName = colorVar.replace('--', '');
         const value = computedStyle.getPropertyValue(colorVar).trim();
         const elementId = colorName.replace(/-/g, '');
         const element = document.getElementById(`${elementId}-value`);
         if (element) {
-          element.textContent = convertToHex(value);
+          // Show raw HSL value for semantic colors
+          element.textContent = value ? `hsl(${value})` : '';
         }
       });
 
@@ -167,7 +175,7 @@ export default function ColorsPage() {
         }
       });
 
-      // Update text style colors
+      // Update text style colors - show HSL values
       const textColors = [
         { id: 'foreground-hex-display', cssVar: '--foreground' },
         { id: 'muted-foreground-hex-display', cssVar: '--muted-foreground' },
@@ -179,7 +187,7 @@ export default function ColorsPage() {
         const value = computedStyle.getPropertyValue(cssVar).trim();
         const element = document.getElementById(id);
         if (element) {
-          element.textContent = convertToHex(value);
+          element.textContent = value ? `hsl(${value})` : '';
         }
       });
 
@@ -241,27 +249,118 @@ export default function ColorsPage() {
               </div>
 
               <p className="text-sm text-muted-foreground max-w-2xl">
-                All colors come from the design token system in <code className="px-1 py-0.5 bg-muted rounded text-xs font-mono text-foreground">src/styles/tokens.css</code> and are mapped to Tailwind utilities in <code className="px-1 py-0.5 bg-muted rounded text-xs font-mono text-foreground">src/app/globals.css</code>.
+                All colors come from the design token system in <code className="px-2 py-0.5 bg-muted rounded text-xs font-mono text-foreground">src/styles/tokens.css</code> and are mapped to Tailwind utilities in <code className="px-2 py-0.5 bg-muted rounded text-xs font-mono text-foreground">src/app/globals.css</code>.
               </p>
 
               {/* Color Rows */}
               <ColorSliver />
             </div>
 
+            {/* Main Colors Legend */}
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <h2 className="text-base font-medium text-foreground">Main Colors</h2>
+              <span className="inline-flex items-center gap-1"><span className="text-amber-500">★</span> Primary brand color</span>
+              <span className="inline-flex items-center gap-1"><span className="text-primary">●</span> Used in demo</span>
+            </div>
+
             {/* Color Details - Direct inline display */}
             <div className="space-y-8">
+                {/* Tailwind Semantic Colors */}
+                <div className="space-y-4">
+                  <h2 className="text-base font-medium text-foreground">Tailwind Semantic Colors</h2>
+                  <p className="text-xs text-muted-foreground">shadcn/ui compatible semantic tokens. Use directly with Tailwind classes like <code className="px-2 py-0.5 bg-muted rounded">bg-primary</code>, <code className="px-2 py-0.5 bg-muted rounded">text-muted-foreground</code>.</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {themeColorVars.filter(v => !v.startsWith('--brand-')).map((colorVar) => {
+                      const colorName = colorVar.replace('--', '');
+                      const bgClass = `bg-${colorName}`;
+                      const textClass = `text-${colorName}`;
+                      const elementId = colorName.replace(/-/g, '');
+                      const isPrimaryColor = colorVar === '--primary';
+                      const usedInDemo = ['--primary', '--primary-foreground', '--secondary', '--background', '--foreground', '--muted', '--muted-foreground', '--destructive', '--border', '--card', '--accent'].includes(colorVar);
+                      // All semantic tokens now use HSL format
+                      return (
+                        <div key={colorName} className={`flex items-center gap-3 p-3 border rounded-lg ${isPrimaryColor ? 'border-primary border-2' : ''}`}>
+                          <div
+                            className={`w-12 h-12 rounded-lg border cursor-pointer transition-all hover:scale-105 hover:shadow-md ${
+                              copiedItem === `${colorName}-tile` ? 'ring-2 ring-primary animate-pulse' : ''
+                            }`}
+                            style={{ backgroundColor: `hsl(var(--${colorName}))` }}
+                            onClick={() => {
+                              const computedStyle = window.getComputedStyle(document.documentElement);
+                              const value = computedStyle.getPropertyValue(`--${colorName}`).trim();
+                              copyToClipboard(value ? `hsl(${value})` : '', `${colorName}-tile`);
+                            }}
+                            title={`Click to copy HSL value`}
+                          ></div>
+                          <div className="flex-1">
+                            <div
+                              className={`text-sm font-medium text-foreground cursor-pointer transition-all hover:text-primary ${
+                                copiedItem === `${colorName}-var` ? 'text-primary font-bold' : ''
+                              }`}
+                              onClick={() => copyToClipboard(colorVar, `${colorName}-var`)}
+                              title="Click to copy CSS variable name"
+                            >
+                              {colorVar}
+                              {isPrimaryColor && <span className="text-amber-500 ml-1">★</span>}
+                              {usedInDemo && <span className="text-primary ml-1">●</span>}
+                            </div>
+                            <div
+                              className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground ${
+                                copiedItem === `${colorName}-hsl` ? 'text-foreground font-medium' : ''
+                              }`}
+                              id={`${elementId}-value`}
+                              onClick={() => {
+                                const element = document.getElementById(`${elementId}-value`);
+                                if (element?.textContent) {
+                                  copyToClipboard(element.textContent, `${colorName}-hsl`);
+                                }
+                              }}
+                              title="Click to copy HSL value"
+                            >
+                              {/* Color value will be populated by JavaScript */}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              Use:
+                              <code
+                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
+                                  copiedItem === `${colorName}-bg` ? 'bg-primary text-primary-foreground' : ''
+                                }`}
+                                onClick={() => copyToClipboard(bgClass, `${colorName}-bg`)}
+                                title="Click to copy class name"
+                              >
+                                {bgClass}
+                              </code>,
+                              <code
+                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
+                                  copiedItem === `${colorName}-text` ? 'bg-primary text-primary-foreground' : ''
+                                }`}
+                                onClick={() => copyToClipboard(textClass, `${colorName}-text`)}
+                                title="Click to copy class name"
+                              >
+                                {textClass}
+                              </code>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 {/* Primary Color Scale */}
                 <div className="space-y-4">
-                  <h2 className="text-base font-medium text-foreground">Primary Color Scale</h2>
-                  <p className="text-xs text-muted-foreground">Extended purple scale for the primary brand color. Use <code className="px-1 py-0.5 bg-muted rounded">bg-brand-*</code> or <code className="px-1 py-0.5 bg-muted rounded">text-brand-*</code>.</p>
+                  <h3 className="text-base font-semibold text-foreground">Primary Color Scale</h3>
+                  <p className="text-xs text-muted-foreground">Extended purple scale for the primary brand color. Use <code className="px-2 py-0.5 bg-muted rounded">bg-brand-*</code> or <code className="px-2 py-0.5 bg-muted rounded">text-brand-*</code>.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {Array.from({ length: 12 }, (_, i) => {
                       const step = i + 1;
                       const colorVar = `--brand-${step}`;
                       const bgClass = `bg-brand-${step}`;
                       const textClass = `text-brand-${step}`;
+                      const isPrimary = step === 9;
+                      const isUsedInDemo = [3, 9].includes(step); // brand-3 (muted), brand-9 (primary)
                       return (
-                        <div key={step} className="flex items-center gap-3 p-3 border rounded-lg">
+                        <div key={step} className={`flex items-center gap-3 p-3 border rounded-lg ${isPrimary ? 'border-primary border-2' : ''}`}>
                           <div
                             className={`w-12 h-12 rounded-lg border cursor-pointer transition-all hover:scale-105 hover:shadow-md ${
                               copiedItem === `brand-${step}-tile` ? 'ring-2 ring-primary animate-pulse' : ''
@@ -284,6 +383,8 @@ export default function ColorsPage() {
                               title="Click to copy CSS variable name"
                             >
                               {colorVar}
+                              {isPrimary && <span className="text-amber-500 ml-1">★</span>}
+                              {isUsedInDemo && <span className="text-primary ml-1">●</span>}
                             </div>
                             <div
                               className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground ${
@@ -303,7 +404,7 @@ export default function ColorsPage() {
                             <div className="text-xs text-muted-foreground">
                               Use:
                               <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
+                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `brand-${step}-bg` ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard(bgClass, `brand-${step}-bg`)}
@@ -312,88 +413,10 @@ export default function ColorsPage() {
                                 {bgClass}
                               </code>,
                               <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
+                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `brand-${step}-text` ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard(textClass, `brand-${step}-text`)}
-                                title="Click to copy class name"
-                              >
-                                {textClass}
-                              </code>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Tailwind Semantic Colors */}
-                <div className="space-y-4">
-                  <h3 className="text-base font-semibold text-foreground">Tailwind Semantic Colors</h3>
-                  <p className="text-xs text-muted-foreground">shadcn/ui compatible semantic tokens. Use directly with Tailwind classes like <code className="px-1 py-0.5 bg-muted rounded">bg-primary</code>, <code className="px-1 py-0.5 bg-muted rounded">text-muted-foreground</code>.</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {themeColorVars.filter(v => !v.startsWith('--brand-')).map((colorVar) => {
-                      const colorName = colorVar.replace('--', '');
-                      const bgClass = `bg-${colorName}`;
-                      const textClass = `text-${colorName}`;
-                      const elementId = colorName.replace(/-/g, '');
-                      return (
-                        <div key={colorName} className="flex items-center gap-3 p-3 border rounded-lg">
-                          <div
-                            className={`w-12 h-12 rounded-lg border cursor-pointer transition-all hover:scale-105 hover:shadow-md ${
-                              copiedItem === `${colorName}-tile` ? 'ring-2 ring-primary animate-pulse' : ''
-                            }`}
-                            style={{ backgroundColor: `var(--${colorName})` }}
-                            onClick={() => {
-                              const computedStyle = window.getComputedStyle(document.documentElement);
-                              const value = computedStyle.getPropertyValue(`--${colorName}`).trim();
-                              const hexValue = convertToHex(value);
-                              copyToClipboard(hexValue, `${colorName}-tile`);
-                            }}
-                            title={`Click to copy hex value`}
-                          ></div>
-                          <div className="flex-1">
-                            <div
-                              className={`text-sm font-medium text-foreground cursor-pointer transition-all hover:text-primary ${
-                                copiedItem === `${colorName}-var` ? 'text-primary font-bold' : ''
-                              }`}
-                              onClick={() => copyToClipboard(colorVar, `${colorName}-var`)}
-                              title="Click to copy CSS variable name"
-                            >
-                              {colorVar}
-                            </div>
-                            <div
-                              className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground ${
-                                copiedItem === `${colorName}-hex` ? 'text-foreground font-medium' : ''
-                              }`}
-                              id={`${elementId}-value`}
-                              onClick={() => {
-                                const element = document.getElementById(`${elementId}-value`);
-                                if (element?.textContent) {
-                                  copyToClipboard(element.textContent, `${colorName}-hex`);
-                                }
-                              }}
-                              title="Click to copy hex value"
-                            >
-                              {/* Color value will be populated by JavaScript */}
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              Use:
-                              <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
-                                  copiedItem === `${colorName}-bg` ? 'bg-primary text-primary-foreground' : ''
-                                }`}
-                                onClick={() => copyToClipboard(bgClass, `${colorName}-bg`)}
-                                title="Click to copy class name"
-                              >
-                                {bgClass}
-                              </code>,
-                              <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
-                                  copiedItem === `${colorName}-text` ? 'bg-primary text-primary-foreground' : ''
-                                }`}
-                                onClick={() => copyToClipboard(textClass, `${colorName}-text`)}
                                 title="Click to copy class name"
                               >
                                 {textClass}
@@ -415,6 +438,7 @@ export default function ColorsPage() {
                       const bgClass = `bg-${colorName}`;
                       const textClass = `text-${colorName}`;
                       const elementId = colorName.replace(/-/g, '');
+                      const usedInDemo = ['--gray-1', '--gray-12'].includes(colorVar);
                       return (
                         <div key={colorName} className="flex items-center gap-3 p-3 border rounded-lg">
                           <div
@@ -439,6 +463,7 @@ export default function ColorsPage() {
                               title="Click to copy CSS variable name"
                             >
                               {colorVar}
+                              {usedInDemo && <span className="text-primary ml-1">●</span>}
                             </div>
                             <div
                               className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground ${
@@ -458,7 +483,7 @@ export default function ColorsPage() {
                             <div className="text-xs text-muted-foreground">
                               Use:
                               <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
+                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-bg` ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard(bgClass, `${colorName}-bg`)}
@@ -467,7 +492,7 @@ export default function ColorsPage() {
                                 {bgClass}
                               </code>,
                               <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
+                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-text` ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard(textClass, `${colorName}-text`)}
@@ -495,7 +520,7 @@ export default function ColorsPage() {
                             className={`w-12 h-12 rounded-lg border cursor-pointer transition-all hover:scale-105 hover:shadow-md ${
                               copiedItem === 'foreground-tile' ? 'ring-2 ring-primary animate-pulse' : ''
                             }`}
-                            style={{ backgroundColor: 'var(--foreground)' }}
+                            style={{ backgroundColor: 'hsl(var(--foreground))' }}
                             onClick={() => {
                               const computedStyle = window.getComputedStyle(document.documentElement);
                               const value = computedStyle.getPropertyValue('--foreground').trim();
@@ -518,7 +543,7 @@ export default function ColorsPage() {
                             </div>
                             <div className="text-xs text-muted-foreground mt-1">
                               <div>Inherits from: <code
-                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                   copiedItem === 'foreground-var' ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard('--foreground', 'foreground-var')}
@@ -526,7 +551,7 @@ export default function ColorsPage() {
                               >--foreground</code></div>
                               <div className="mt-1">
                                 <code
-                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                     copiedItem === 'foreground-hex' ? 'bg-primary text-primary-foreground' : ''
                                   }`}
                                   id="foreground-hex-display"
@@ -558,7 +583,7 @@ export default function ColorsPage() {
                             className={`w-12 h-12 rounded-lg border cursor-pointer transition-all hover:scale-105 hover:shadow-md ${
                               copiedItem === 'muted-foreground-tile' ? 'ring-2 ring-primary animate-pulse' : ''
                             }`}
-                            style={{ backgroundColor: 'var(--muted-foreground)' }}
+                            style={{ backgroundColor: 'hsl(var(--muted-foreground))' }}
                             onClick={() => {
                               const computedStyle = window.getComputedStyle(document.documentElement);
                               const value = computedStyle.getPropertyValue('--muted-foreground').trim();
@@ -581,7 +606,7 @@ export default function ColorsPage() {
                             </div>
                             <div className="text-xs text-muted-foreground mt-1">
                               <div>Inherits from: <code
-                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                   copiedItem === 'muted-foreground-var' ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard('--muted-foreground', 'muted-foreground-var')}
@@ -589,7 +614,7 @@ export default function ColorsPage() {
                               >--muted-foreground</code></div>
                               <div className="mt-1">
                                 <code
-                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                     copiedItem === 'muted-foreground-hex' ? 'bg-primary text-primary-foreground' : ''
                                   }`}
                                   id="muted-foreground-hex-display"
@@ -621,7 +646,7 @@ export default function ColorsPage() {
                             className={`w-12 h-12 rounded-lg border cursor-pointer transition-all hover:scale-105 hover:shadow-md ${
                               copiedItem === 'primary-tile' ? 'ring-2 ring-primary animate-pulse' : ''
                             }`}
-                            style={{ backgroundColor: 'var(--primary)' }}
+                            style={{ backgroundColor: 'hsl(var(--primary))' }}
                             onClick={() => {
                               const computedStyle = window.getComputedStyle(document.documentElement);
                               const value = computedStyle.getPropertyValue('--primary').trim();
@@ -644,7 +669,7 @@ export default function ColorsPage() {
                             </div>
                             <div className="text-xs text-muted-foreground mt-1">
                               <div>Inherits from: <code
-                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                   copiedItem === 'primary-var' ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard('--primary', 'primary-var')}
@@ -652,7 +677,7 @@ export default function ColorsPage() {
                               >--primary</code></div>
                               <div className="mt-1">
                                 <code
-                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                     copiedItem === 'primary-hex' ? 'bg-primary text-primary-foreground' : ''
                                   }`}
                                   id="primary-hex-display"
@@ -684,7 +709,7 @@ export default function ColorsPage() {
                             className={`w-12 h-12 rounded-lg border cursor-pointer transition-all hover:scale-105 hover:shadow-md ${
                               copiedItem === 'destructive-tile' ? 'ring-2 ring-primary animate-pulse' : ''
                             }`}
-                            style={{ backgroundColor: 'var(--destructive)' }}
+                            style={{ backgroundColor: 'hsl(var(--destructive))' }}
                             onClick={() => {
                               const computedStyle = window.getComputedStyle(document.documentElement);
                               const value = computedStyle.getPropertyValue('--destructive').trim();
@@ -707,7 +732,7 @@ export default function ColorsPage() {
                             </div>
                             <div className="text-xs text-muted-foreground mt-1">
                               <div>Inherits from: <code
-                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                   copiedItem === 'destructive-var' ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard('--destructive', 'destructive-var')}
@@ -715,7 +740,7 @@ export default function ColorsPage() {
                               >--destructive</code></div>
                               <div className="mt-1">
                                 <code
-                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-1 py-0.5 rounded ${
+                                  className={`text-xs cursor-pointer transition-all hover:text-foreground px-2 py-0.5 rounded ${
                                     copiedItem === 'destructive-hex' ? 'bg-primary text-primary-foreground' : ''
                                   }`}
                                   id="destructive-hex-display"
@@ -744,7 +769,7 @@ export default function ColorsPage() {
                 {/* Status Colors */}
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold text-foreground">Status Color Scales</h3>
-                  <p className="text-xs text-muted-foreground">Full color scales for status indicators. Use <code className="px-1 py-0.5 bg-muted rounded">bg-success-500</code>, <code className="px-1 py-0.5 bg-muted rounded">text-danger-600</code>, etc.</p>
+                  <p className="text-xs text-muted-foreground">Full color scales for status indicators. Use <code className="px-2 py-0.5 bg-muted rounded">bg-success-500</code>, <code className="px-2 py-0.5 bg-muted rounded">text-danger-600</code>, etc.</p>
                   {['success', 'danger', 'info', 'warning'].map((family) => (
                     <div key={family} className="space-y-3">
                       <h4 className="text-sm font-medium capitalize text-foreground">{family}</h4>
@@ -803,7 +828,7 @@ export default function ColorsPage() {
                 {/* Chart Colors */}
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold text-foreground">Chart Colors <span className="font-normal text-muted-foreground">(Not Venus)</span></h3>
-                  <p className="text-xs text-muted-foreground">Vibrant colors for charts, graphs, and data visualization. Use <code className="px-1 py-0.5 bg-muted rounded">bg-chart-rose</code>, <code className="px-1 py-0.5 bg-muted rounded">bg-chart-blue</code>, etc.</p>
+                  <p className="text-xs text-muted-foreground">Vibrant colors for charts, graphs, and data visualization. Use <code className="px-2 py-0.5 bg-muted rounded">bg-chart-rose</code>, <code className="px-2 py-0.5 bg-muted rounded">bg-chart-blue</code>, etc.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {chartColorVars.map((colorVar) => {
                       const colorName = colorVar.replace('--', '');
@@ -852,7 +877,7 @@ export default function ColorsPage() {
                             <div className="text-xs text-muted-foreground">
                               Use:
                               <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
+                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-bg` ? 'bg-primary text-primary-foreground' : ''
                                 }`}
                                 onClick={() => copyToClipboard(bgClass, `${colorName}-bg`)}

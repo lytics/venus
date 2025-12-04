@@ -12,36 +12,36 @@
 
 /* Configure Tailwind v4 theme - direct mapping */
 @theme {
-  /* Semantic colors (map directly to Tailwind's color utilities) */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Semantic colors - all HSL format for shadcn compatibility */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
 
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
 
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
 
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
 
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
 
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
 
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
 
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
 
-  --color-background-secondary: var(--background-secondary);
+  --color-background-secondary: hsl(var(--background-secondary));
 
   /* ---- Brand colors (direct access when needed) ---- */
   --color-searchaf-1: var(--searchaf-1);
@@ -269,8 +269,8 @@
 /* Global styles - Consolidated @layer base */
 @layer base {
   html, body, :root {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   /* Chart colors */
@@ -333,15 +333,15 @@
    Then use it in your components: className="font-custom"
    =================================================================== */
 
-/* Defaults */
+/* Defaults - use hsl() wrapper for HSL-format tokens */
 * {
-  border-color: var(--border);
-  outline-color: rgb(from var(--ring) r g b / 0.5);
+  border-color: hsl(var(--border));
+  outline-color: hsl(var(--ring) / 0.5);
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
   font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: var(--text-base); /* 16px base font size */
 }
@@ -350,14 +350,14 @@ body {
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
-  color: rgb(from var(--foreground) r g b / 0.4);
+  color: hsl(var(--foreground) / 0.4);
 }
 
 /* Dark mode placeholder styling */
 .dark input::placeholder,
 .dark textarea::placeholder,
 .dark select::placeholder {
-  color: rgb(from var(--muted-foreground) r g b / 0.4);
+  color: hsl(var(--muted-foreground) / 0.4);
 }
 
 /* Animation keyframes for shadcn/ui components */
@@ -640,29 +640,29 @@ select::placeholder {
 :root {
   --sidebar: var(--nav-background);
   --sidebar-expanded: var(--nav-background-expanded);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-foreground: hsl(var(--foreground));
+  --sidebar-primary: hsl(var(--primary));
+  --sidebar-primary-foreground: hsl(var(--primary-foreground));
   --sidebar-accent: rgba(199, 193, 240, 0.30);
   --sidebar-active: rgba(199, 193, 240, 0.50);
-  --sidebar-accent-foreground: var(--accent-foreground);
-  --sidebar-active-foreground: var(--accent-foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
+  --sidebar-accent-foreground: hsl(var(--accent-foreground));
+  --sidebar-active-foreground: hsl(var(--accent-foreground));
+  --sidebar-border: hsl(var(--border));
+  --sidebar-ring: hsl(var(--ring));
 }
 
 .dark {
   --sidebar: var(--nav-background);
   --sidebar-expanded: var(--nav-background-expanded);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: rgba(35, 23, 125, 0.30);
-  --sidebar-active: rgba(35, 23, 125, 0.50);
-  --sidebar-accent-foreground: var(--accent-foreground);
-  --sidebar-active-foreground: var(--accent-foreground);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
+  --sidebar-foreground: hsl(var(--foreground));
+  --sidebar-primary: hsl(var(--primary));
+  --sidebar-primary-foreground: hsl(var(--primary-foreground));
+  --sidebar-accent: rgba(107, 91, 230, 0.15);
+  --sidebar-active: rgba(107, 91, 230, 0.25);
+  --sidebar-accent-foreground: hsl(var(--foreground));
+  --sidebar-active-foreground: hsl(var(--foreground));
+  --sidebar-border: hsl(var(--border));
+  --sidebar-ring: hsl(var(--ring));
 }
 
 @theme inline {

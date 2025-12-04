@@ -49,31 +49,32 @@
   --gray-11: #18181b;
   --gray-12: #09090b;
 
-  /* ===== Semantic Colors (Light Mode) ===== */
-  --background: #ffffff;
-  --background-secondary: #ffffff;
-  --foreground: #1C2024;
-  --card: #ffffff;
-  --card-foreground: #1C2024;
-  --popover: #ffffff;
-  --popover-foreground: #1C2024;
+  /* ===== Semantic Colors (Light Mode) - HSL format for shadcn compatibility ===== */
+  --background: 0 0% 100%;
+  --background-secondary: 0 0% 100%;
+  --foreground: 210 14% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 14% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 14% 12%;
 
-  /* Navigation backgrounds */
+  /* Navigation backgrounds (hex - not used by Tailwind) */
   --nav-background: #ffffff;
   --nav-background-expanded: #fafafa;
+
   --primary: 247 74% 63%;
   --primary-foreground: 0 0% 100%;
-  --secondary: var(--brand-3);
-  --secondary-foreground: var(--gray-9);
-  --muted: var(--brand-3);
-  --muted-foreground: #737373;
-  --accent: var(--brand-4);
-  --accent-foreground: var(--brand-9);
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: var(--gray-4);
-  --input: var(--gray-3);
-  --ring: var(--brand-8);
+  --secondary: 251 73% 89%;
+  --secondary-foreground: 240 5% 26%;
+  --muted: 251 73% 89%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 251 66% 85%;
+  --accent-foreground: 247 74% 63%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 6% 90%;
+  --input: 0 0% 94%;
+  --ring: 247 74% 67%;
 
   /* Danger - Venus Design System */
   --danger-50:  #FEE2E2;  --danger-100: #FEE2E2; --danger-200: #FEE2E2;
@@ -167,31 +168,32 @@
   --gray-11: #f5f5f5;
   --gray-12: #ffffff;
 
-  /* ===== Semantic Colors (Dark Mode) ===== */
-  --background: #131313;
-  --background-secondary: #0f0f0f;
-  --foreground: #EDEEF0;
-  --card: #0f0f0f;
-  --card-foreground: #EDEEF0;
-  --popover: #0f0f0f;
-  --popover-foreground: #EDEEF0;
+  /* ===== Semantic Colors (Dark Mode) - HSL format for shadcn compatibility ===== */
+  --background: 0 0% 7%;
+  --background-secondary: 0 0% 6%;
+  --foreground: 210 10% 94%;
+  --card: 0 0% 6%;
+  --card-foreground: 210 10% 94%;
+  --popover: 0 0% 6%;
+  --popover-foreground: 210 10% 94%;
 
-  /* Navigation backgrounds */
+  /* Navigation backgrounds (hex - not used by Tailwind) */
   --nav-background: #131313;
   --nav-background-expanded: #0f0f0f;
+
   --primary: 247 74% 63%;
   --primary-foreground: 0 0% 100%;
-  --secondary: var(--brand-4);
-  --secondary-foreground: var(--gray-10);
-  --muted: var(--brand-3);
-  --muted-foreground: #a1a1a1;
-  --accent: var(--brand-4);
-  --accent-foreground: var(--brand-11);
-  --destructive: #EF4444;
-  --destructive-foreground: #ffffff;
-  --border: var(--gray-4);
-  --input: var(--gray-3);
-  --ring: var(--brand-9);
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 210 10% 94%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 215 16% 57%;
+  --accent: 247 50% 25%;
+  --accent-foreground: 247 74% 75%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 240 4% 18%;
+  --input: 240 4% 18%;
+  --ring: 247 74% 63%;
 
   /* Danger - Venus Design System (Dark Mode) */
   --danger-50:  #1A0808;   --danger-100: #2A0F0F; --danger-200: #3D1515;
