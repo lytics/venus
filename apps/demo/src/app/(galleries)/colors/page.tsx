@@ -27,12 +27,12 @@ const utilityColorVars = [
   '--warning-50', '--warning-100', '--warning-200', '--warning-300', '--warning-400', '--warning-500', '--warning-600', '--warning-700', '--warning-800', '--warning-900', '--warning-fg',
 ];
 
-const showcaseColorVars = [
-  '--showcase-bg-rose', '--showcase-bg-red', '--showcase-bg-orange', '--showcase-bg-amber',
-  '--showcase-bg-yellow', '--showcase-bg-lime', '--showcase-bg-green', '--showcase-bg-emerald',
-  '--showcase-bg-teal', '--showcase-bg-cyan', '--showcase-bg-sky', '--showcase-bg-blue',
-  '--showcase-bg-indigo', '--showcase-bg-violet', '--showcase-bg-purple',
-  '--showcase-bg-slate', '--showcase-bg-gray'
+const chartColorVars = [
+  '--chart-rose', '--chart-red', '--chart-orange', '--chart-amber',
+  '--chart-yellow', '--chart-lime', '--chart-green', '--chart-emerald',
+  '--chart-teal', '--chart-cyan', '--chart-sky', '--chart-blue',
+  '--chart-indigo', '--chart-violet', '--chart-purple',
+  '--chart-slate', '--chart-gray'
 ];
 
 // ColorSliver component
@@ -44,7 +44,7 @@ function ColorSliver() {
   const bottomRowColors = [
     ...grayScaleVars.map(v => ({ var: v, weight: 1 })),
     ...utilityColorVars.map(v => ({ var: v, weight: 0.5 })),
-    ...showcaseColorVars.map(v => ({ var: v, weight: 0.8 })),
+    ...chartColorVars.map(v => ({ var: v, weight: 0.8 })),
   ];
 
   return (
@@ -194,8 +194,8 @@ export default function ColorsPage() {
         });
       });
 
-      // Update showcase colors
-      showcaseColorVars.forEach(colorVar => {
+      // Update chart colors
+      chartColorVars.forEach(colorVar => {
         const colorName = colorVar.replace('--', '');
         const value = computedStyle.getPropertyValue(colorVar).trim();
         const elementId = colorName.replace(/-/g, '');
@@ -800,14 +800,14 @@ export default function ColorsPage() {
                   ))}
                 </div>
 
-                {/* Showcase Colors */}
+                {/* Chart Colors */}
                 <div className="space-y-4">
-                  <h3 className="text-base font-semibold text-foreground">Showcase Colors</h3>
+                  <h3 className="text-base font-semibold text-foreground">Chart Colors</h3>
+                  <p className="text-xs text-muted-foreground">Vibrant colors for charts, graphs, and data visualization. Use <code className="px-1 py-0.5 bg-muted rounded">bg-chart-rose</code>, <code className="px-1 py-0.5 bg-muted rounded">bg-chart-blue</code>, etc.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {showcaseColorVars.map((colorVar) => {
+                    {chartColorVars.map((colorVar) => {
                       const colorName = colorVar.replace('--', '');
                       const bgClass = `bg-${colorName}`;
-                      const textClass = `text-${colorName}`;
                       const elementId = colorName.replace(/-/g, '');
                       return (
                         <div key={colorName} className="flex items-center gap-3 p-3 border rounded-lg">
@@ -859,15 +859,6 @@ export default function ColorsPage() {
                                 title="Click to copy class name"
                               >
                                 {bgClass}
-                              </code>,
-                              <code
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-1 py-0.5 rounded ${
-                                  copiedItem === `${colorName}-text` ? 'bg-primary text-primary-foreground' : ''
-                                }`}
-                                onClick={() => copyToClipboard(textClass, `${colorName}-text`)}
-                                title="Click to copy class name"
-                              >
-                                {textClass}
                               </code>
                             </div>
                           </div>
