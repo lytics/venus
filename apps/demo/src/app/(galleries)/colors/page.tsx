@@ -25,10 +25,6 @@ const utilityColorVars = [
   '--danger-50', '--danger-100', '--danger-200', '--danger-300', '--danger-400', '--danger-500', '--danger-600', '--danger-700', '--danger-800', '--danger-900', '--danger-fg',
   '--info-50', '--info-100', '--info-200', '--info-300', '--info-400', '--info-500', '--info-600', '--info-700', '--info-800', '--info-900', '--info-fg',
   '--warning-50', '--warning-100', '--warning-200', '--warning-300', '--warning-400', '--warning-500', '--warning-600', '--warning-700', '--warning-800', '--warning-900', '--warning-fg',
-  '--badge-purple-50', '--badge-purple-100', '--badge-purple-200', '--badge-purple-300', '--badge-purple-400', '--badge-purple-500', '--badge-purple-600', '--badge-purple-700', '--badge-purple-800', '--badge-purple-900', '--badge-purple-fg',
-  '--badge-blue-50', '--badge-blue-100', '--badge-blue-200', '--badge-blue-300', '--badge-blue-400', '--badge-blue-500', '--badge-blue-600', '--badge-blue-700', '--badge-blue-800', '--badge-blue-900', '--badge-blue-fg',
-  '--badge-green-50', '--badge-green-100', '--badge-green-200', '--badge-green-300', '--badge-green-400', '--badge-green-500', '--badge-green-600', '--badge-green-700', '--badge-green-800', '--badge-green-900', '--badge-green-fg',
-  '--badge-orange-50', '--badge-orange-100', '--badge-orange-200', '--badge-orange-300', '--badge-orange-400', '--badge-orange-500', '--badge-orange-600', '--badge-orange-700', '--badge-orange-800', '--badge-orange-900', '--badge-orange-fg',
 ];
 
 const showcaseColorVars = [
@@ -198,17 +194,6 @@ export default function ColorsPage() {
         });
       });
 
-      // Update badge colors
-      ['badge-purple', 'badge-blue', 'badge-green', 'badge-orange'].forEach(family => {
-        [50, 100, 200, 300, 400, 500, 600, 700, 800, 900].forEach(shade => {
-          const value = computedStyle.getPropertyValue(`--${family}-${shade}`).trim();
-          const element = document.getElementById(`${family}-${shade}-value`);
-          if (element) {
-            element.textContent = convertToHex(value);
-          }
-        });
-      });
-
       // Update showcase colors
       showcaseColorVars.forEach(colorVar => {
         const colorName = colorVar.replace('--', '');
@@ -265,9 +250,10 @@ export default function ColorsPage() {
 
             {/* Color Details - Direct inline display */}
             <div className="space-y-8">
-                {/* Brand Colors */}
+                {/* Primary Color Scale */}
                 <div className="space-y-4">
-                  <h2 className="text-base font-medium text-foreground">Brand Colors</h2>
+                  <h2 className="text-base font-medium text-foreground">Primary Color Scale</h2>
+                  <p className="text-xs text-muted-foreground">Extended purple scale for the primary brand color. Use <code className="px-1 py-0.5 bg-muted rounded">bg-brand-*</code> or <code className="px-1 py-0.5 bg-muted rounded">text-brand-*</code>.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {Array.from({ length: 12 }, (_, i) => {
                       const step = i + 1;
@@ -342,9 +328,10 @@ export default function ColorsPage() {
                   </div>
                 </div>
 
-                {/* Semantic Colors */}
+                {/* Tailwind Semantic Colors */}
                 <div className="space-y-4">
-                  <h3 className="text-base font-semibold text-foreground">Semantic Colors</h3>
+                  <h3 className="text-base font-semibold text-foreground">Tailwind Semantic Colors</h3>
+                  <p className="text-xs text-muted-foreground">shadcn/ui compatible semantic tokens. Use directly with Tailwind classes like <code className="px-1 py-0.5 bg-muted rounded">bg-primary</code>, <code className="px-1 py-0.5 bg-muted rounded">text-muted-foreground</code>.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {themeColorVars.filter(v => !v.startsWith('--brand-')).map((colorVar) => {
                       const colorName = colorVar.replace('--', '');
@@ -756,73 +743,11 @@ export default function ColorsPage() {
 
                 {/* Status Colors */}
                 <div className="space-y-4">
-                  <h3 className="text-base font-semibold text-foreground">Status Color Families</h3>
+                  <h3 className="text-base font-semibold text-foreground">Status Color Scales</h3>
+                  <p className="text-xs text-muted-foreground">Full color scales for status indicators. Use <code className="px-1 py-0.5 bg-muted rounded">bg-success-500</code>, <code className="px-1 py-0.5 bg-muted rounded">text-danger-600</code>, etc.</p>
                   {['success', 'danger', 'info', 'warning'].map((family) => (
                     <div key={family} className="space-y-3">
                       <h4 className="text-sm font-medium capitalize text-foreground">{family}</h4>
-                      <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-2">
-                        {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => {
-                          const colorVar = `--${family}-${shade}`;
-                          const bgClass = `bg-${family}-${shade}`;
-                          const textClass = `text-${family}-${shade}`;
-                          return (
-                            <div key={shade} className="flex flex-col items-center gap-2 p-2 border rounded">
-                              <div
-                                className={`w-8 h-8 rounded border cursor-pointer transition-all hover:scale-110 hover:shadow-md ${
-                                  copiedItem === `${family}-${shade}-tile` ? 'ring-2 ring-primary animate-pulse' : ''
-                                }`}
-                                style={{ backgroundColor: `var(--${family}-${shade})` }}
-                                onClick={() => {
-                                  const computedStyle = window.getComputedStyle(document.documentElement);
-                                  const value = computedStyle.getPropertyValue(`--${family}-${shade}`).trim();
-                                  const hexValue = convertToHex(value);
-                                  copyToClipboard(hexValue, `${family}-${shade}-tile`);
-                                }}
-                                title={`Click to copy ${colorVar} hex value`}
-                              ></div>
-                              <div
-                                className={`text-xs text-foreground cursor-pointer transition-all hover:text-primary ${
-                                  copiedItem === `${family}-${shade}-shade` ? 'text-primary font-bold' : ''
-                                }`}
-                                onClick={() => copyToClipboard(bgClass, `${family}-${shade}-shade`)}
-                                title={`Click to copy ${bgClass}`}
-                              >
-                                {shade}
-                              </div>
-                              <div
-                                className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground ${
-                                  copiedItem === `${family}-${shade}-hex` ? 'text-foreground font-medium' : ''
-                                }`}
-                                id={`${family}-${shade}-value`}
-                                onClick={() => {
-                                  const element = document.getElementById(`${family}-${shade}-value`);
-                                  if (element?.textContent) {
-                                    copyToClipboard(element.textContent, `${family}-${shade}-hex`);
-                                  }
-                                }}
-                                title="Click to copy hex value"
-                              >
-                                {/* Color value will be populated by JavaScript */}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Badge Colors */}
-                <div className="space-y-4">
-                  <h3 className="text-base font-semibold text-foreground">Badge Color Families</h3>
-                  {[
-                    { family: 'badge-purple', label: 'Purple' },
-                    { family: 'badge-blue', label: 'Blue' },
-                    { family: 'badge-green', label: 'Green' },
-                    { family: 'badge-orange', label: 'Orange' }
-                  ].map(({ family, label }) => (
-                    <div key={family} className="space-y-3">
-                      <h4 className="text-sm font-medium text-foreground">{label}</h4>
                       <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-2">
                         {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => {
                           const colorVar = `--${family}-${shade}`;
