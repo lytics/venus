@@ -1,47 +1,78 @@
 # Venus Design System Monorepo
 
-Component libraries matching Contentstack's Venus design system.
+A component library and working demo app that helps you build interfaces matching the Contentstack design system.
 
-## Packages
+Whether you're building new features, prototyping designs, or just exploring what's available - this repo gives you the components and patterns to build consistent, production-ready interfaces.
+
+## What's Inside
+
+**Component Library** - Pre-built React components that match Contentstack's Venus design system
+- 27+ production-ready components (buttons, forms, tables, navigation, etc.)
+- Built on Tailwind CSS v4 + shadcn/ui + Radix UI
+- TypeScript support with full type definitions
+- Design token system for consistency
+
+**Demo Application** - Working reference implementation
+- Full clone of Contentstack's interface
+- Component galleries showing every variant
+- Real-world feature examples
+- Layout and pattern reference
+
+## Quick Start
+
+Three commands to get running:
+
+```bash
+# 1. Install pnpm (if needed)
+npm install -g pnpm
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Start the demo
+pnpm dev
+```
+
+Open **http://localhost:3000** and explore the demo.
+
+**New here?** Read the [Getting Started Guide](./GETTING_STARTED.md) for a detailed walkthrough.
+
+## Documentation
+
+**Start Here:**
+- [Getting Started](./GETTING_STARTED.md) - Set up and run the demo (3 minutes)
+- [Design System Guide](./DESIGN_SYSTEM.md) - Learn about design tokens and consistency
+
+**Learn More:**
+- [How the Demo Works](./apps/demo/HOW_THE_DEMO_WORKS.md) - Tour of the demo app
+- [Venus Components](./packages/venuscn/README.md) - Component API reference
+- [Demo App Guide](./apps/demo/CLAUDE.md) - Demo-specific patterns
+
+## Packages & Apps
 
 | Package | Description | Status |
 |---------|-------------|--------|
 | [@contentstack/venuscn](./packages/venuscn) | Tailwind CSS v4 + shadcn/ui edition | Active |
 | [@contentstack/venusmui](./packages/venusmui) | Material-UI edition | Planned |
 
-## Apps
-
 | App | Description | Path |
 |-----|-------------|------|
 | [Demo](./apps/demo) | Contentstack demo application | `apps/demo` |
 
-## Getting Started
-
-### Prerequisites
+## Common Commands
 
 ```bash
-# Install pnpm if needed
-npm install -g pnpm
-```
-
-### Installation
-
-```bash
-# Install all dependencies
-pnpm install
-```
-
-### Development
-
-```bash
-# Start demo app (runs from workspace root)
+# Start demo app with hot reload
 pnpm dev
 
-# Build all packages
-pnpm build:packages
+# Build everything
+pnpm build
 
-# Build demo app
-pnpm --filter demo build
+# Build just the component library
+pnpm --filter @contentstack/venuscn build
+
+# Component library watch mode
+cd packages/venuscn && pnpm dev
 ```
 
 ## Workspace Structure
@@ -141,24 +172,21 @@ pnpm --filter demo build                     # Build demo app
 - **tsup** for bundling
 - **TypeScript** for type generation
 
-## Design System
+## What You Get
 
-The Venus Design System is based on production specifications from Contentstack's app.contentstack.com.
-
-### Key Features
-- Production-verified component specs (16px buttons, 4px radius)
-- Complete design token system
-- TypeScript support
-- Dark mode ready
-- Accessibility-focused (Radix UI)
-
-### Component Highlights
-- Form controls (Button, Input, Checkbox, Radio, Toggle)
+**Production-Ready Components:**
+- Form controls (Button, Input, Checkbox, Radio, Toggle, Dropdown)
 - Data display (Table, Search, Tags, Pills)
-- Navigation (Tabs, PageHeader)
-- Advanced (TargetingRuleBuilder, FormSidebar)
+- Navigation (Tabs, PageHeader variants)
+- Advanced features (TargetingRuleBuilder, FormSidebar)
 
-See [packages/venuscn/README.md](./packages/venuscn/README.md) for complete documentation.
+**Design System:**
+- Complete design token system for colors, spacing, typography
+- 4px border radius and consistent spacing
+- Dark mode support
+- Built on accessible Radix UI primitives
+
+See [packages/venuscn/README.md](./packages/venuscn/README.md) for the complete component list and API documentation.
 
 ## Contributing
 

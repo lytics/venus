@@ -4,26 +4,32 @@ This is a **pnpm monorepo** containing the Venus Design System component library
 
 ---
 
-## 🚨 CRITICAL RULES
+## How This Monorepo Works
 
-### 1. Use Venus Components from the Package
-**NEVER** create custom UI components that duplicate Venus functionality. Always import from `@contentstack/venuscn`:
+### Component Library Organization
+
+The Venus component library (`@contentstack/venuscn`) contains pre-built components that match the Contentstack design system. Using these components helps maintain consistency across the codebase.
 
 ```tsx
-// ✅ CORRECT - Import from package
+// Import Venus components from the package
 import { Button, Input, Field, FieldLabel, Tag, Table } from "@contentstack/venuscn"
 
-// ❌ WRONG - Don't create custom versions
-// Don't make your own Button, Input, etc.
+// These components are built to match the design system
+// and include proper styling, accessibility, and behavior
 ```
 
-### 2. Check Existing Components First
-Before building ANY UI, check what's available:
-1. **Venus components**: See `packages/venuscn/README.md` for full component list
-2. **shadcn/ui components**: `apps/demo/src/components/ui/` for app-specific UI
-3. **Grep the codebase** for similar existing patterns
+### Finding Existing Components
 
-### 3. Git Paths with Parentheses
+Before building UI, check what's already available:
+
+1. **Venus components**: See `packages/venuscn/README.md` for the full component list
+2. **shadcn/ui components**: Check `apps/demo/src/components/ui/` for app-specific components
+3. **Grep the codebase** for similar patterns and examples
+
+This helps avoid duplicating work and maintains consistency.
+
+### Git Paths with Parentheses
+
 Always quote paths containing parentheses:
 ```bash
 git add 'apps/demo/src/app/(app)/page.tsx'
@@ -200,14 +206,19 @@ import { Field, FieldLabel, Input, Button, HelpText, ValidationMessage } from "@
 
 ---
 
-## 📋 Pre-flight Checklist
+## 📋 Building UI - Quick Checklist
 
-Before building UI:
+When building UI in this monorepo:
 
 ```
-[ ] Check packages/venuscn/README.md for existing Venus component
-[ ] Grep codebase for similar patterns
-[ ] Import from @contentstack/venuscn, not local files
-[ ] Use 4px border radius (not 6px)
-[ ] Use production font sizes (16px buttons, 14px labels)
+[ ] Check packages/venuscn/README.md for existing Venus components
+[ ] Search the codebase for similar patterns
+[ ] Import from @contentstack/venuscn for consistency
+[ ] Reference the demo app for layout patterns
+[ ] Use design tokens when possible (see DESIGN_SYSTEM.md)
 ```
+
+Common patterns from the demo:
+- Border radius: 4px (use `rounded` class)
+- Button/Input font: 16px
+- Label font: 14px weight 600

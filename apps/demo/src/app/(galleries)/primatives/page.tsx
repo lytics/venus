@@ -366,6 +366,28 @@ export default function SandboxPage() {
 
         <Divider />
 
+        {/* Page Search Header */}
+        <section id="page-search-header" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Page Search Header</h3>
+
+          <div className="space-y-4">
+            <ShowcaseCard label="With Search and Actions">
+              <div className="-mx-6 -mb-6">
+                <PageSearchHeader
+                  title="Entries"
+                  searchPlaceholder="Search entries..."
+                  actions={[
+                    { label: "Import", onClick: () => toast.success("Import"), variant: "secondary" },
+                    { label: "Create New", onClick: () => toast.success("Create"), variant: "primary" }
+                  ]}
+                />
+              </div>
+            </ShowcaseCard>
+          </div>
+        </section>
+
+        <Divider />
+
         {/* Dropdown */}
         <section id="dropdown" className="space-y-6">
           <h3 className="text-xl font-semibold text-foreground">Dropdown</h3>
@@ -674,28 +696,6 @@ export default function SandboxPage() {
                   </Tooltip>
                 </div>
               </TooltipProvider>
-            </ShowcaseCard>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* Page Search Header */}
-        <section id="page-search-header" className="space-y-6">
-          <h3 className="text-xl font-semibold text-foreground">Page Search Header</h3>
-
-          <div className="space-y-4">
-            <ShowcaseCard label="With Search and Actions">
-              <div className="-mx-6 -mb-6">
-                <PageSearchHeader
-                  title="Entries"
-                  searchPlaceholder="Search entries..."
-                  actions={[
-                    { label: "Import", onClick: () => toast.success("Import"), variant: "secondary" },
-                    { label: "Create New", onClick: () => toast.success("Create"), variant: "primary" }
-                  ]}
-                />
-              </div>
             </ShowcaseCard>
           </div>
         </section>

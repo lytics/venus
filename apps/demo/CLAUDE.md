@@ -4,23 +4,27 @@ This is the Contentstack demo application built with the Venus Design System.
 
 ---
 
-## 🚨 CRITICAL: Always Use Venus Components
+## About This Demo
 
-**BEFORE creating any UI component**, check if it exists in `@contentstack/venuscn`:
+This demo app shows how Venus components work in a real application. It clones the Contentstack interface to provide working examples of layouts, patterns, and component usage.
+
+### Using Venus Components
+
+The Venus component library provides pre-built components. Import them from the package:
 
 ```tsx
-// ✅ ALWAYS import Venus components from the package
+// Import Venus components from the package
 import {
   Button, Input, Textarea, Checkbox, Radio, Toggle,
   Field, FieldLabel, HelpText, ValidationMessage,
   Table, TableHeader, TableBody, TableRow, TableCell,
   Tag, Tabs, PageHeader, Dropdown, Search
 } from "@contentstack/venuscn"
-
-// ❌ NEVER recreate these components locally
 ```
 
-For full component list: `packages/venuscn/README.md`
+This ensures consistency and avoids rebuilding components that already exist.
+
+For the full component list: `packages/venuscn/README.md`
 
 ---
 
@@ -241,14 +245,26 @@ Venus tokens are imported via `globals.css`. Use them for consistency:
 
 ---
 
-## 📋 Pre-flight Checklist
+## 📋 Building UI - Quick Reference
 
-Before building UI in this app:
+When building UI in this demo app:
 
 ```
-[ ] Check @contentstack/venuscn for existing component
-[ ] Import Venus components, not local recreations
-[ ] Use 4px border radius
-[ ] Use production font sizes (16px buttons/inputs, 14px labels)
+[ ] Check @contentstack/venuscn for existing components
+[ ] Look at similar demo pages for patterns
+[ ] Import Venus components for consistency
+[ ] Use design tokens when possible (see ../../DESIGN_SYSTEM.md)
 [ ] Test with sidebar open/closed (container queries)
 ```
+
+**Common patterns from this app:**
+- Border radius: 4px (use `rounded` class)
+- Button/Input font: 16px
+- Label font: 14px weight 600
+- Page padding: `p-6` (24px)
+- Card gaps: `gap-4` (16px)
+
+**Learn more:**
+- [How the Demo Works](./HOW_THE_DEMO_WORKS.md) - Tour of this app
+- [Design System Guide](../../DESIGN_SYSTEM.md) - Token reference
+- [Getting Started](../../GETTING_STARTED.md) - Setup guide
