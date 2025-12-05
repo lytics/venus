@@ -221,18 +221,18 @@ export default function ExperiencesPage() {
               ))}
               {/* Filler row - extends column borders to fill remaining space */}
               <tr className="h-full">
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="border-r border-[#E5E7EB]"></td>
-                <td className="sticky right-0 bg-white before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none"></td>
+                <td></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="border-l border-border"></td>
+                <td className="sticky right-0 bg-white border-l border-border before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none"></td>
               </tr>
             </TableBody>
           </Table>

@@ -13,7 +13,8 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styles": "./src/styles/tokens.css"
+    "./styles": "./src/styles/tokens.css",
+    "./styles/table.css": "./src/styles/table.css"
   },
   "files": ["dist", "src/styles", "README.md"],
   "scripts": {

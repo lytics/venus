@@ -92,7 +92,7 @@ const TableRow = React.forwardRef<
     ref={ref}
     className={cn(
       "transition-colors group",
-      "hover:bg-[#F9FAFB] dark:hover:bg-gray-800/50",
+      "hover:bg-gray-50",
       "data-[state=selected]:bg-muted",
       className
     )}
@@ -114,20 +114,15 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
       ref={ref}
       className={cn(
         "h-10 py-2 px-5 text-left align-middle",
-        "text-sm font-bold text-[#475161] dark:text-gray-300",
-        "[&:has([role=checkbox])]:pr-5 [&:has([role=checkbox])]:border-r-0",
-        "border-r border-border last:border-r-0",
+        "text-sm font-bold text-heading dark:text-gray-300",
+        "[&:has([role=checkbox])]:pr-5 [&:has([role=checkbox])]:border-l-0",
+        // Use left borders to avoid double borders with sticky columns
+        "border-l border-border first:border-l-0",
         "border-b border-border",
         // Sticky left
         sticky === "left" && "sticky left-0 bg-background z-10",
         // Sticky right with shadow
-        sticky === "right" && [
-          "sticky right-0 bg-background z-10",
-          "before:absolute before:left-[-10px] before:top-0 before:bottom-0",
-          "before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent",
-          "before:pointer-events-none",
-          "dark:before:from-white/5"
-        ],
+        sticky === "right" && "sticky right-0 bg-background z-10 venus-table-sticky-shadow",
         className
       )}
       style={{ minWidth, ...style }}
@@ -151,18 +146,13 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
       className={cn(
         "py-2 px-5 align-middle",
         "text-base text-foreground",
-        "[&:has([role=checkbox])]:pr-5 [&:has([role=checkbox])]:border-r-0",
-        "border-r border-border last:border-r-0",
+        "[&:has([role=checkbox])]:pr-5 [&:has([role=checkbox])]:border-l-0",
+        // Use left borders to avoid double borders with sticky columns
+        "border-l border-border first:border-l-0",
         // Sticky left - inherits row hover via group
-        sticky === "left" && "sticky left-0 bg-background group-hover:bg-[#F9FAFB] dark:group-hover:bg-gray-800/50 z-10",
+        sticky === "left" && "sticky left-0 bg-background group-hover:bg-gray-50 z-10",
         // Sticky right with shadow - inherits row hover via group
-        sticky === "right" && [
-          "sticky right-0 bg-background group-hover:bg-[#F9FAFB] dark:group-hover:bg-gray-800/50 z-10",
-          "before:absolute before:left-[-10px] before:top-0 before:bottom-0",
-          "before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent",
-          "before:pointer-events-none",
-          "dark:before:from-white/5"
-        ],
+        sticky === "right" && "sticky right-0 bg-background group-hover:bg-gray-50 z-10 venus-table-sticky-shadow",
         className
       )}
       style={{ minWidth, ...style }}
