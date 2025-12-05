@@ -59,9 +59,9 @@ test('Final definitive border check - side by side comparison', async ({ page })
     clip: { x: 900, y: 200, width: 400, height: 300 }
   })
 
-  // Test /primatives
-  console.log('\n=== TESTING /primatives ===\n')
-  await page.goto('http://localhost:3000/primatives')
+  // Test /primitives
+  console.log('\n=== TESTING /primitives ===\n')
+  await page.goto('http://localhost:3000/primitives')
   await page.waitForLoadState('networkidle')
 
   await page.evaluate(() => {

@@ -76,7 +76,7 @@ export default function SandboxPage() {
           <main className="space-y-12">
       {/* Header */}
       <div className="flex items-center gap-5">
-        <h1 className="text-2xl font-bold">Primatives</h1>
+        <h1 className="text-2xl font-bold">Primitives</h1>
       </div>
 
       {/* Component List */}

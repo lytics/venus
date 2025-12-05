@@ -12,7 +12,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Switch } from "@/components/ui/switch"
 
 const adminNavigationTabs = [
-  { id: "primatives", label: "Primatives", href: "/primatives" },
+  { id: "primitives", label: "Primitives", href: "/primitives" },
   { id: "templates", label: "Templates", href: "/templates" },
   { id: "colors", label: "Colors", href: "/colors" },
   { id: "text", label: "Text", href: "/text" },

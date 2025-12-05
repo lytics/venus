@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test'
  * DEBUG: Sticky table column border issue
  *
  * WORKS: /personalize/experiences - uses <Table full>
- * BROKEN: /primatives - uses <VenusTable bordered>
+ * BROKEN: /primitives - uses <VenusTable bordered>
  *
  * Expected: Sticky Actions column should have LEFT border, column before should have NO RIGHT border
  *
@@ -95,8 +95,8 @@ test.describe('Sticky Table Border Investigation', () => {
     await page.screenshot({ path: '/Users/ellisedwards/Code/workspace/venus_external/apps/demo/tests/screenshots/experiences-scrolled.png', fullPage: true })
   })
 
-  test('investigate /primatives table structure and borders', async ({ page }) => {
-    await page.goto('http://localhost:3000/primatives')
+  test('investigate /primitives table structure and borders', async ({ page }) => {
+    await page.goto('http://localhost:3000/primitives')
     await page.waitForLoadState('networkidle')
 
     // Scroll to the table section
@@ -110,7 +110,7 @@ test.describe('Sticky Table Border Investigation', () => {
 
     // Count total columns
     const headerCells = await page.locator('thead th').all()
-    console.log('\n=== /primatives TABLE ===')
+    console.log('\n=== /primitives TABLE ===')
     console.log(`Total columns: ${headerCells.length}`)
 
     // Identify which columns have sticky attribute
@@ -185,11 +185,11 @@ test.describe('Sticky Table Border Investigation', () => {
     })
 
     await page.waitForTimeout(500)
-    await page.screenshot({ path: '/Users/ellisedwards/Code/workspace/venus_external/apps/demo/tests/screenshots/primatives-scrolled.png', fullPage: true })
+    await page.screenshot({ path: '/Users/ellisedwards/Code/workspace/venus_external/apps/demo/tests/screenshots/primitives-scrolled.png', fullPage: true })
   })
 
   test('verify CSS selector specificity for nth-last-child', async ({ page }) => {
-    await page.goto('http://localhost:3000/primatives')
+    await page.goto('http://localhost:3000/primitives')
     await page.waitForLoadState('networkidle')
 
     // Scroll to the table section

@@ -43,7 +43,7 @@ The demo app will start at **http://localhost:3000**
 Once it's running, you'll see:
 
 - **Dashboard** - Example of a typical app layout with cards and navigation
-- **Primatives** - Visual gallery of all available Venus components
+- **Primitives** - Visual gallery of all available Venus components
 - **Personalize** - Complex multi-page feature showing real-world usage
 - **Colors & Text** - Design token reference pages
 
@@ -59,7 +59,7 @@ Use it as:
 ## Where to Go Next
 
 **See components in action:**
-- Browse to `/primatives` for the component gallery
+- Browse to `/primitives` for the component gallery
 - Check out `/dashboard` for layout patterns
 - Explore `/personalize` for complex feature examples
 

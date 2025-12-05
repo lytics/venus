@@ -1,9 +1,9 @@
 import { test } from '@playwright/test'
 
 test('Check table borders at rest (not scrolled)', async ({ page }) => {
-  console.log('\n=== CHECKING /primatives AT REST (no scroll) ===\n')
+  console.log('\n=== CHECKING /primitives AT REST (no scroll) ===\n')
 
-  await page.goto('http://localhost:3000/primatives')
+  await page.goto('http://localhost:3000/primitives')
   await page.waitForLoadState('networkidle')
 
   // Scroll to table but DON'T scroll it horizontally

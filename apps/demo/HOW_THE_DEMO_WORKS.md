@@ -25,7 +25,7 @@ The demo has several sections that show different aspects of the design system:
 
 ### Component Galleries (`/app/(galleries)/`)
 
-**Primatives** (`/primatives`)
+**Primitives** (`/primitives`)
 - Visual catalog of all Venus components
 - Live interactive examples
 - Shows every variant and state
@@ -231,7 +231,7 @@ This pattern ensures consistent spacing, label styling, and validation message p
 
 **Start Here:**
 1. Run `pnpm dev` and browse the demo
-2. Look at `/primatives` to see what components exist
+2. Look at `/primitives` to see what components exist
 3. Look at `/dashboard` to see layout patterns
 4. Pick a page similar to what you're building
 

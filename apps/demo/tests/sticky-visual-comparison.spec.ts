@@ -21,8 +21,8 @@ test('Visual comparison: scrolled sticky columns', async ({ page }) => {
     clip: { x: 0, y: 0, width: 1280, height: 400 }
   })
 
-  // Now check /primatives
-  await page.goto('http://localhost:3000/primatives')
+  // Now check /primitives
+  await page.goto('http://localhost:3000/primitives')
   await page.waitForLoadState('networkidle')
 
   // Scroll to table

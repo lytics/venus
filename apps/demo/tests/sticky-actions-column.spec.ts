@@ -88,7 +88,7 @@ test.describe('Table sticky Actions column', () => {
 
   test('Actions column should stick to right edge when scrolling horizontally - primitives page', async ({ page }) => {
     // Navigate to primitives gallery page
-    await page.goto('http://localhost:3000/primatives');
+    await page.goto('http://localhost:3000/primitives');
     await page.waitForLoadState('networkidle');
 
     // Find the table with sticky Actions column

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test('Check table body cells for border issues', async ({ page }) => {
-  await page.goto('http://localhost:3000/primatives')
+  await page.goto('http://localhost:3000/primitives')
   await page.waitForLoadState('networkidle')
 
   // Scroll to the table section
@@ -101,6 +101,6 @@ test('Check table body cells for border issues', async ({ page }) => {
   // Take a zoomed screenshot of just the table
   const tableElement = await page.locator('#venus-table').locator('..').first()
   await tableElement.screenshot({
-    path: '/Users/ellisedwards/Code/workspace/venus_external/apps/demo/tests/screenshots/primatives-table-zoomed.png'
+    path: '/Users/ellisedwards/Code/workspace/venus_external/apps/demo/tests/screenshots/primitives-table-zoomed.png'
   })
 })

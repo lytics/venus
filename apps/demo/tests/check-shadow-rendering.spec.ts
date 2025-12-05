@@ -3,7 +3,7 @@ import { test } from '@playwright/test'
 test('Check if sticky shadow ::before pseudo-element renders', async ({ page }) => {
   console.log('\n=== CHECKING SHADOW RENDERING ===\n')
 
-  await page.goto('http://localhost:3000/primatives')
+  await page.goto('http://localhost:3000/primitives')
   await page.waitForLoadState('networkidle')
 
   await page.evaluate(() => {

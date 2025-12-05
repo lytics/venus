@@ -261,6 +261,6 @@ The goal is consistency, not dogma. Use tokens where they help, skip them when t
 ## Need More Details?
 
 - **See all tokens:** `packages/venuscn/src/styles/tokens.css`
-- **Component examples:** Browse to `/primatives` in the demo
+- **Component examples:** Browse to `/primitives` in the demo
 - **Layout examples:** Check `/dashboard` in the demo
 - **API reference:** `packages/venuscn/README.md`

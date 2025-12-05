@@ -37,7 +37,7 @@ const CommandPaletteContext = React.createContext<CommandPaletteContextType | un
 const navigationCommands = [
   { icon: Atom, label: "Hey", href: "/dashboard" },
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard-page" },
-  { icon: Palette, label: "Components", href: "/primatives" },
+  { icon: Palette, label: "Components", href: "/primitives" },
 ];
 
 export function CommandPaletteProvider({ children }: { children: React.ReactNode }) {
