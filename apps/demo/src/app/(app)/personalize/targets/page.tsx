@@ -2,9 +2,9 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { HelpCircle, MoreVertical } from 'lucide-react'
+import { HelpCircle } from 'lucide-react'
 import Image from 'next/image'
-import { SearchV3, Button, Table, TableHeader, TableBody, TableHead, TableRow, TableCell, Dropdown } from '@contentstack/venuscn'
+import { SearchV3, Button, Table, TableHeader, TableBody, TableHead, TableRow, TableCell, TableActionButton, Dropdown } from '@contentstack/venuscn'
 import { cn } from '@/lib/utils'
 
 // Target data type
@@ -165,13 +165,10 @@ export default function TargetsPage() {
                   <TableCell>{target.modifiedAt}</TableCell>
                   <TableCell>{target.createdAt}</TableCell>
                   <TableCell className="sticky right-0 bg-white group-hover:bg-[#F9FAFB] z-10 before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none text-center">
-                    <button
+                    <TableActionButton
                       onClick={() => handleRowAction(target.name)}
-                      className="inline-flex items-center justify-center hover:bg-gray-100 rounded p-1 transition-colors"
-                      aria-label={`Actions for ${target.name}`}
-                    >
-                      <MoreVertical className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
-                    </button>
+                      label={`Actions for ${target.name}`}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

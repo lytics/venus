@@ -32,9 +32,11 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  TableActionButton,
   type TableProps,
   type TableHeadProps,
-  type TableCellProps
+  type TableCellProps,
+  type TableActionButtonProps
 } from "./Table";
 export { TablePagination, type TablePaginationProps } from "./table-pagination";
 export { Search, type SearchProps } from "./search";

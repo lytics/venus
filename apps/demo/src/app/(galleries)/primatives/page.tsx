@@ -32,10 +32,18 @@ import {
   Pill as VenusPill,
   Pills as VenusPills,
   StatusPill as VenusStatusPill,
+  CategoryPill as VenusCategoryPill,
   Tooltip as VenusTooltip,
   TooltipTrigger as VenusTooltipTrigger,
   TooltipContent as VenusTooltipContent,
   TooltipProvider as VenusTooltipProvider,
+  Table,
+  TableHeader,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableActionButton,
 } from "@contentstack/venuscn";
 
 import { Button } from "@/components/ui/button";
@@ -754,6 +762,197 @@ export default function SandboxPage() {
           </div>
         </section>
 
+        <Divider />
+
+        {/* Table */}
+        <section id="venus-table" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Table</h3>
+
+          <div className="space-y-4">
+            <ShowcaseCard label="Bordered Table">
+              <Table bordered>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Feature</TableHead>
+                    <TableHead>Environment</TableHead>
+                    <TableHead>Usage</TableHead>
+                    <TableHead className="w-20 text-center">Enabled</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">API Rate Limiting</TableCell>
+                    <TableCell>Production</TableCell>
+                    <TableCell>1,245 req/hour</TableCell>
+                    <TableCell className="text-center">
+                      <VenusToggle defaultChecked />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Webhook Notifications</TableCell>
+                    <TableCell>Staging</TableCell>
+                    <TableCell>34 events/day</TableCell>
+                    <TableCell className="text-center">
+                      <VenusToggle defaultChecked />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Image Optimization</TableCell>
+                    <TableCell>Production</TableCell>
+                    <TableCell>Not configured</TableCell>
+                    <TableCell className="text-center">
+                      <VenusToggle />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">CDN Caching</TableCell>
+                    <TableCell>Production</TableCell>
+                    <TableCell>89% hit rate</TableCell>
+                    <TableCell className="text-center">
+                      <VenusToggle defaultChecked />
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Full Table with Sticky Column">
+              <div className="h-[300px] overflow-auto bg-white relative border border-border rounded-lg">
+                <Table full className="min-h-full border-separate border-spacing-0">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead minWidth="180px">Order ID</TableHead>
+                      <TableHead minWidth="200px">Customer</TableHead>
+                      <TableHead minWidth="140px">Amount</TableHead>
+                      <TableHead minWidth="150px">Payment Status</TableHead>
+                      <TableHead minWidth="160px">Fulfillment</TableHead>
+                      <TableHead minWidth="180px">Date</TableHead>
+                      <TableHead sticky="right" className="w-12 text-center">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-mono text-sm">#ORD-2891</TableCell>
+                      <TableCell className="font-medium">Jessica Martinez</TableCell>
+                      <TableCell>$329.99</TableCell>
+                      <TableCell><VenusStatusPill variant="success">Paid</VenusStatusPill></TableCell>
+                      <TableCell><Tag>Shipped</Tag></TableCell>
+                      <TableCell>Jan 28, 2025</TableCell>
+                      <TableCell sticky="right" className="text-center">
+                        <TableActionButton />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-mono text-sm">#ORD-2890</TableCell>
+                      <TableCell className="font-medium">Robert Chen</TableCell>
+                      <TableCell>$156.50</TableCell>
+                      <TableCell><VenusStatusPill variant="warning">Pending</VenusStatusPill></TableCell>
+                      <TableCell><Tag>Processing</Tag></TableCell>
+                      <TableCell>Jan 28, 2025</TableCell>
+                      <TableCell sticky="right" className="text-center">
+                        <TableActionButton />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-mono text-sm">#ORD-2889</TableCell>
+                      <TableCell className="font-medium">Amanda Foster</TableCell>
+                      <TableCell>$89.00</TableCell>
+                      <TableCell><VenusStatusPill variant="success">Paid</VenusStatusPill></TableCell>
+                      <TableCell><Tag>Delivered</Tag></TableCell>
+                      <TableCell>Jan 27, 2025</TableCell>
+                      <TableCell sticky="right" className="text-center">
+                        <TableActionButton />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-mono text-sm">#ORD-2888</TableCell>
+                      <TableCell className="font-medium">David Kim</TableCell>
+                      <TableCell>$524.75</TableCell>
+                      <TableCell><VenusStatusPill variant="error">Failed</VenusStatusPill></TableCell>
+                      <TableCell><Tag>Cancelled</Tag></TableCell>
+                      <TableCell>Jan 27, 2025</TableCell>
+                      <TableCell sticky="right" className="text-center">
+                        <TableActionButton />
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-mono text-sm">#ORD-2887</TableCell>
+                      <TableCell className="font-medium">Maria Rodriguez</TableCell>
+                      <TableCell>$213.30</TableCell>
+                      <TableCell><VenusStatusPill variant="success">Paid</VenusStatusPill></TableCell>
+                      <TableCell><Tag>Shipped</Tag></TableCell>
+                      <TableCell>Jan 26, 2025</TableCell>
+                      <TableCell sticky="right" className="text-center">
+                        <TableActionButton />
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Edge-to-Edge Table (No Border)">
+              <div className="overflow-auto relative">
+                <Table full className="min-h-full border-separate border-spacing-0">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead minWidth="200px">Team Member</TableHead>
+                    <TableHead minWidth="180px">Email</TableHead>
+                    <TableHead minWidth="140px">Role</TableHead>
+                    <TableHead minWidth="150px">Department</TableHead>
+                    <TableHead minWidth="140px">Status</TableHead>
+                    <TableHead sticky="right" className="w-12 text-center">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">Emily Zhang</TableCell>
+                    <TableCell className="text-gray-600">emily.zhang@company.com</TableCell>
+                    <TableCell><Tag>Engineer</Tag></TableCell>
+                    <TableCell>Engineering</TableCell>
+                    <TableCell><VenusStatusPill variant="success">Active</VenusStatusPill></TableCell>
+                    <TableCell sticky="right" className="text-center">
+                      <TableActionButton />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Marcus Thompson</TableCell>
+                    <TableCell className="text-gray-600">marcus.t@company.com</TableCell>
+                    <TableCell><Tag>Designer</Tag></TableCell>
+                    <TableCell>Product</TableCell>
+                    <TableCell><VenusStatusPill variant="success">Active</VenusStatusPill></TableCell>
+                    <TableCell sticky="right" className="text-center">
+                      <TableActionButton />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Sofia Patel</TableCell>
+                    <TableCell className="text-gray-600">sofia.patel@company.com</TableCell>
+                    <TableCell><Tag>Manager</Tag></TableCell>
+                    <TableCell>Marketing</TableCell>
+                    <TableCell><VenusStatusPill variant="warning">Pending</VenusStatusPill></TableCell>
+                    <TableCell sticky="right" className="text-center">
+                      <TableActionButton />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Alex Rivera</TableCell>
+                    <TableCell className="text-gray-600">alex.rivera@company.com</TableCell>
+                    <TableCell><Tag>Engineer</Tag></TableCell>
+                    <TableCell>Engineering</TableCell>
+                    <TableCell><VenusStatusPill variant="error">Inactive</VenusStatusPill></TableCell>
+                    <TableCell sticky="right" className="text-center">
+                      <TableActionButton />
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              </div>
+            </ShowcaseCard>
+          </div>
+        </section>
+
+        <Divider />
 
         {/* Search */}
         <section id="venus-search" className="space-y-6">

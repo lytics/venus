@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from '../lib/utils';
+import { MoreVertical } from 'lucide-react';
 
 /** Venus Design System Table Component */
 
@@ -28,7 +29,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
     // Bordered variant: card-style with rounded corners
     if (bordered) {
       return (
-        <div className="border border-border rounded-lg bg-background">
+        <div className="border border-border rounded-lg bg-background overflow-hidden">
           <div className="overflow-auto relative">
             {table}
           </div>
@@ -176,6 +177,28 @@ const TableCaption = React.forwardRef<
 ));
 TableCaption.displayName = "TableCaption";
 
+export interface TableActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Accessible label for the button */
+  label?: string;
+}
+
+const TableActionButton = React.forwardRef<HTMLButtonElement, TableActionButtonProps>(
+  ({ className, label = "Actions", ...props }, ref) => (
+    <button
+      ref={ref}
+      className={cn(
+        "inline-flex items-center justify-center hover:bg-gray-100 rounded p-1 transition-colors",
+        className
+      )}
+      aria-label={label}
+      {...props}
+    >
+      <MoreVertical className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
+    </button>
+  )
+);
+TableActionButton.displayName = "TableActionButton";
+
 export {
   Table,
   TableHeader,
@@ -185,4 +208,5 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  TableActionButton,
 };

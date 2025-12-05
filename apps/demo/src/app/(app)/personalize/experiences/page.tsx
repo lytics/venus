@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { HelpCircle, MoreVertical } from 'lucide-react'
+import { HelpCircle } from 'lucide-react'
 import Image from 'next/image'
 import {
   SearchV3,
@@ -11,6 +11,7 @@ import {
   TableHead,
   TableRow,
   TableCell,
+  TableActionButton,
   Button,
   Dropdown,
   StatusPill
@@ -210,12 +211,7 @@ export default function ExperiencesPage() {
 
                   {/* Actions */}
                   <TableCell sticky="right" className="text-center">
-                    <button
-                      className="inline-flex items-center justify-center hover:bg-gray-100 rounded p-1 transition-colors"
-                      aria-label="Actions"
-                    >
-                      <MoreVertical className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
-                    </button>
+                    <TableActionButton />
                   </TableCell>
                 </TableRow>
               ))}
