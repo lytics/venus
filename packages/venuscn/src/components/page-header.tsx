@@ -8,6 +8,7 @@ export interface PageHeaderAction {
   label: string;
   onClick: () => void;
   variant?: ButtonProps["variant"];
+  size?: ButtonProps["size"];
   disabled?: boolean;
 }
 
@@ -66,7 +67,7 @@ export const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
               <Button
                 key={index}
                 variant={action.variant || "primary"}
-                size="small"
+                size={action.size || "small"}
                 onClick={action.onClick}
                 disabled={action.disabled}
                 aria-label={`action-button-${index}`}

@@ -26,6 +26,7 @@ import {
   TableHead as VenusTableHead,
   TableRow as VenusTableRow,
   TableCell as VenusTableCell,
+  TablePagination as VenusTablePagination,
   Search as VenusSearch,
   SearchV3 as VenusSearchV3,
   Tabs as VenusTabs,
@@ -33,7 +34,15 @@ import {
   TabsTrigger as VenusTabsTrigger,
   TabsContent as VenusTabsContent,
   PageHeader as VenusPageHeader,
-  type PageHeaderAction
+  PageSearchHeader as VenusPageSearchHeader,
+  type PageHeaderAction,
+  Pill as VenusPill,
+  Pills as VenusPills,
+  StatusPill as VenusStatusPill,
+  Tooltip as VenusTooltip,
+  TooltipTrigger as VenusTooltipTrigger,
+  TooltipContent as VenusTooltipContent,
+  TooltipProvider as VenusTooltipProvider,
 } from "@contentstack/venuscn";
 
 import { Button } from "@/components/ui/button";
@@ -67,6 +76,16 @@ import { VenusLogo } from "@/components/venus-logo";
 import { AdminNav } from "@/components/admin-nav";
 import { useCommandPalette } from "@/components/command-palette-provider";
 import Link from "next/link";
+
+// Showcase card for component demos
+function ShowcaseCard({ label, children, className = "" }: { label: string; children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`border border-border rounded-lg p-6 bg-card ${className}`}>
+      <div className="text-xs font-semibold text-muted-foreground/50 tracking-normal mb-4">{label}</div>
+      {children}
+    </div>
+  );
+}
 
 // Component mapping for section linking
 const componentSectionMap: Record<string, string> = {
@@ -418,47 +437,32 @@ export default function SandboxPage() {
           <h2 className="text-2xl font-bold text-foreground">Venus Design System</h2>
         </div>
 
-        {/* Venus Buttons */}
+        {/* Buttons & Actions */}
         <section id="venus-buttons" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Buttons</h3>
-            <p className="text-sm text-muted-foreground">Primary actions with Venus styling. Font: 14px (small), 16px (regular), 18px (large) • Weight: 600</p>
-          </div>
+          <h3 className="text-xl font-semibold text-foreground">Buttons & Actions</h3>
 
-          <div className="space-y-6">
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Variants</h4>
-              <div className="flex flex-wrap gap-4">
+          <div className="space-y-4">
+            <ShowcaseCard label="Button Variants">
+              <div className="flex flex-wrap gap-3">
                 <VenusButton variant="primary">Primary</VenusButton>
                 <VenusButton variant="secondary">Secondary</VenusButton>
                 <VenusButton variant="ghost">Ghost</VenusButton>
                 <VenusButton variant="danger">Danger</VenusButton>
               </div>
-            </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Sizes</h4>
-              <div className="flex flex-wrap gap-4 items-end">
-                <div className="flex flex-col gap-2 items-center">
-                  <VenusButton size="small">Small</VenusButton>
-                  <span className="text-xs text-muted-foreground">32px • 14px font</span>
-                </div>
-                <div className="flex flex-col gap-2 items-center">
-                  <VenusButton size="regular">Regular</VenusButton>
-                  <span className="text-xs text-muted-foreground">36px • 16px font</span>
-                </div>
-                <div className="flex flex-col gap-2 items-center">
-                  <VenusButton size="large">Large</VenusButton>
-                  <span className="text-xs text-muted-foreground">44px • 18px font</span>
-                </div>
+            <ShowcaseCard label="Button Sizes">
+              <div className="flex flex-wrap gap-4 items-center">
+                <VenusButton size="small">Small</VenusButton>
+                <VenusButton size="regular">Regular</VenusButton>
+                <VenusButton size="large">Large</VenusButton>
               </div>
-            </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">With Icons</h4>
-              <div className="flex flex-wrap gap-4">
+            <ShowcaseCard label="With Icons">
+              <div className="flex flex-wrap gap-3">
                 <VenusButton variant="primary">
-                  <Plus className="h-4 w-4" /> Create New
+                  <Plus className="h-4 w-4" /> Create
                 </VenusButton>
                 <VenusButton variant="secondary">
                   <Settings className="h-4 w-4" /> Settings
@@ -467,258 +471,203 @@ export default function SandboxPage() {
                   <Star className="h-4 w-4" /> Favorite
                 </VenusButton>
               </div>
-            </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Disabled State</h4>
-              <div className="flex flex-wrap gap-4">
-                <VenusButton disabled>Disabled Primary</VenusButton>
-                <VenusButton variant="secondary" disabled>Disabled Secondary</VenusButton>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Real-World Examples (as used in Contentstack)</h4>
-              <div className="space-y-6">
-                {/* Primary CTAs - Large buttons */}
-                <div className="space-y-3">
-                  <p className="text-xs text-muted-foreground">Primary CTAs (Large size - 44px)</p>
-                  <div className="flex flex-wrap gap-4">
-                    <VenusButton variant="primary" size="large">
-                      <Plus className="h-5 w-5" /> Dashboard Extension
-                    </VenusButton>
-                    <VenusButton variant="primary" size="large">
-                      <Plus className="h-5 w-5" /> Build New App
-                    </VenusButton>
-                    <VenusButton variant="primary" size="large">
-                      <Plus className="h-5 w-5" /> Create New Entry
-                    </VenusButton>
-                  </div>
-                </div>
-
-                {/* Standard Actions - Regular buttons */}
-                <div className="space-y-3">
-                  <p className="text-xs text-muted-foreground">Standard Actions (Regular size - 36px)</p>
-                  <div className="flex flex-wrap gap-4">
-                    <VenusButton variant="primary" size="regular">
-                      <Search className="h-4 w-4" /> Search
-                    </VenusButton>
-                    <VenusButton variant="secondary" size="regular">
-                      <Settings className="h-4 w-4" /> Manage Apps
-                    </VenusButton>
-                    <VenusButton variant="ghost" size="regular">
-                      Learn More
-                    </VenusButton>
-                  </div>
-                </div>
-
-                {/* Secondary Actions - Small buttons */}
-                <div className="space-y-3">
-                  <p className="text-xs text-muted-foreground">Secondary Actions (Small size - 32px)</p>
-                  <div className="flex flex-wrap gap-4">
-                    <VenusButton variant="secondary" size="small">
-                      <Edit className="h-4 w-4" /> Edit
-                    </VenusButton>
-                    <VenusButton variant="ghost" size="small">
-                      Cancel
-                    </VenusButton>
-                    <VenusButton variant="ghost" size="small">
-                      <ArrowUpRight className="h-3 w-3" /> View Details
-                    </VenusButton>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* Venus Form Inputs */}
-        <section id="venus-inputs" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Form Inputs (Venus v2)</h3>
-            <p className="text-sm text-muted-foreground">Text inputs and textareas with validation states. Font: 16px • Weight: 400 • Height: 40px</p>
-          </div>
-
-          <div className="max-w-2xl space-y-6">
-            <Field>
-              <FieldLabel htmlFor="venus-input-1">Default Input</FieldLabel>
-              <VenusInput id="venus-input-1" placeholder="Type here..." />
-              <HelpText>This is a help text for the input field</HelpText>
-            </Field>
-
-            <Field>
-              <FieldLabel htmlFor="venus-input-error" required>Input with Error</FieldLabel>
-              <VenusInput id="venus-input-error" error placeholder="Email address" />
-              <ValidationMessage type="error">Email address is required</ValidationMessage>
-            </Field>
-
-            <Field>
-              <FieldLabel htmlFor="venus-input-success">Input with Success</FieldLabel>
-              <VenusInput id="venus-input-success" success defaultValue="john@example.com" />
-              <ValidationMessage type="success">Email address verified</ValidationMessage>
-            </Field>
-
-            <Field>
-              <FieldLabel htmlFor="venus-textarea" optional>Message</FieldLabel>
-              <VenusTextarea id="venus-textarea" placeholder="Enter your message..." rows={4} />
-              <HelpText>Please provide detailed information</HelpText>
-            </Field>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* Venus Form Controls */}
-        <section id="venus-controls" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Form Controls</h3>
-            <p className="text-sm text-muted-foreground">Checkboxes, radio buttons, and toggle switches. Label font: 16px • Weight: 400</p>
-          </div>
-
-          <div className="grid gap-8 max-w-2xl">
-            <div className="space-y-4">
-              <h4 className="text-sm font-medium text-muted-foreground">Checkboxes</h4>
-              <div className="space-y-3">
-                <VenusCheckbox label="Accept terms and conditions" />
-                <VenusCheckbox label="Subscribe to newsletter" defaultChecked />
-                <VenusCheckbox label="Disabled option" disabled />
-                <VenusCheckbox label="Disabled and checked" disabled defaultChecked />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="text-sm font-medium text-muted-foreground">Radio Buttons</h4>
-              <div className="space-y-3">
-                <VenusRadio name="plan" label="Free Plan" defaultChecked />
-                <VenusRadio name="plan" label="Pro Plan" />
-                <VenusRadio name="plan" label="Enterprise Plan" />
-                <VenusRadio name="plan-disabled" label="Disabled Option" disabled />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="text-sm font-medium text-muted-foreground">Toggle Switches</h4>
-              <ToggleSwitchExamples />
-            </div>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* Venus Tags */}
-        <section id="venus-tags" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Tags (Venus V2)</h3>
-            <p className="text-sm text-muted-foreground">Label tags from Contentstack app. Height: 20px • Font: 12px/500 • Border radius: 4px • Gray background with transparent border that shows on hover</p>
-          </div>
-
-          <div className="space-y-6">
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Default Tags</h4>
-              <p className="text-xs text-muted-foreground mb-3">
-                Non-removable tags for labels and categories
-              </p>
+            <ShowcaseCard label="Button States">
               <div className="flex flex-wrap gap-3">
+                <VenusButton disabled>Disabled</VenusButton>
+                <VenusButton variant="secondary" disabled>Disabled</VenusButton>
+              </div>
+            </ShowcaseCard>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* Form Inputs */}
+        <section id="venus-inputs" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Form Inputs</h3>
+
+          <div className="space-y-4">
+            <ShowcaseCard label="Input">
+              <Field className="max-w-[800px]">
+                <FieldLabel htmlFor="venus-input-1">Email</FieldLabel>
+                <VenusInput id="venus-input-1" placeholder="Enter your email..." />
+                <HelpText>We will never share your email</HelpText>
+              </Field>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Textarea">
+              <Field className="max-w-[800px]">
+                <FieldLabel htmlFor="venus-textarea" optional>Message</FieldLabel>
+                <VenusTextarea id="venus-textarea" placeholder="Write a message..." rows={3} />
+              </Field>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Validation States">
+              <div className="space-y-4 max-w-[800px]">
+                <Field>
+                  <FieldLabel htmlFor="venus-input-error" required>Error State</FieldLabel>
+                  <VenusInput id="venus-input-error" error placeholder="Email address" />
+                  <ValidationMessage type="error">Email is required</ValidationMessage>
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="venus-input-success">Success State</FieldLabel>
+                  <VenusInput id="venus-input-success" success defaultValue="john@example.com" />
+                  <ValidationMessage type="success">Email verified</ValidationMessage>
+                </Field>
+              </div>
+            </ShowcaseCard>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* Form Controls */}
+        <section id="venus-controls" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Form Controls</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <ShowcaseCard label="Checkbox">
+              <div className="space-y-3">
+                <VenusCheckbox label="Accept terms" />
+                <VenusCheckbox label="Subscribe" defaultChecked />
+                <VenusCheckbox label="Disabled" disabled />
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Radio Group">
+              <div className="space-y-3">
+                <VenusRadio name="plan" label="Free" defaultChecked />
+                <VenusRadio name="plan" label="Pro" />
+                <VenusRadio name="plan" label="Enterprise" />
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Toggle">
+              <ToggleSwitchExamples />
+            </ShowcaseCard>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* Tags */}
+        <section id="venus-tags" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Tags</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ShowcaseCard label="Default Tags">
+              <div className="flex flex-wrap gap-2">
                 <Tag>Summer</Tag>
                 <Tag>Season</Tag>
                 <Tag>Category</Tag>
                 <Tag>Label</Tag>
-                <Tag>Content Type</Tag>
               </div>
-            </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Removable Tags</h4>
-              <p className="text-xs text-muted-foreground mb-3">
-                Tags with X button • Hover over tag: lighter gray background • Hover over X button: darker gray background
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Tag removable onRemove={() => toast.success("Tag removed")}>
-                  Removable
-                </Tag>
-                <Tag removable onRemove={() => toast.success("Tag removed")}>
-                  React
-                </Tag>
-                <Tag removable onRemove={() => toast.success("Tag removed")}>
-                  TypeScript
-                </Tag>
-                <Tag removable onRemove={() => toast.success("Tag removed")}>
-                  JavaScript
-                </Tag>
-                <Tag removable onRemove={() => toast.success("Tag removed")}>
-                  Next.js
-                </Tag>
+            <ShowcaseCard label="Removable Tags">
+              <div className="flex flex-wrap gap-2">
+                <Tag removable onRemove={() => toast.success("Removed")}>React</Tag>
+                <Tag removable onRemove={() => toast.success("Removed")}>TypeScript</Tag>
+                <Tag removable onRemove={() => toast.success("Removed")}>Next.js</Tag>
               </div>
-            </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Disabled State</h4>
-              <p className="text-xs text-muted-foreground mb-3">
-                Disabled tags with reduced opacity
-              </p>
-              <div className="flex flex-wrap gap-3">
+            <ShowcaseCard label="Tag States">
+              <div className="flex flex-wrap gap-2">
+                <Tag>Default</Tag>
                 <Tag disabled>Disabled</Tag>
-                <Tag removable disabled onRemove={() => {}}>
-                  Disabled Removable
-                </Tag>
+                <Tag removable disabled onRemove={() => console.log("disabled")}>Disabled</Tag>
               </div>
-            </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Real-World Example</h4>
-              <p className="text-xs text-muted-foreground mb-3">
-                Tag filtering as seen in Contentstack entries
-              </p>
-              <div className="space-y-2">
-                <div className="text-xs text-muted-foreground">Filtered by:</div>
-                <div className="flex flex-wrap gap-2">
-                  <Tag removable onRemove={() => toast.success("Filter removed")}>
-                    Content Type: Article
-                  </Tag>
-                  <Tag removable onRemove={() => toast.success("Filter removed")}>
-                    Status: Published
-                  </Tag>
-                  <Tag removable onRemove={() => toast.success("Filter removed")}>
-                    Author: John Doe
-                  </Tag>
-                  <Tag removable onRemove={() => toast.success("Filter removed")}>
-                    Last 7 days
-                  </Tag>
-                </div>
+            <ShowcaseCard label="Filter Example">
+              <div className="flex flex-wrap gap-2">
+                <Tag removable onRemove={() => toast.success("Removed")}>Type: Article</Tag>
+                <Tag removable onRemove={() => toast.success("Removed")}>Status: Published</Tag>
               </div>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Hover States</h4>
-              <p className="text-xs text-muted-foreground mb-3">
-                Two distinct hover states: (1) Entire tag hover changes background to #647696 and text to white. (2) X button hover changes background to darker #475161
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Tag removable onRemove={() => toast.success("Hover demonstration")}>
-                  Hover over me
-                </Tag>
-                <Tag removable onRemove={() => toast.success("Hover demonstration")}>
-                  Hover over X button
-                </Tag>
-              </div>
-            </div>
+            </ShowcaseCard>
           </div>
         </section>
 
         <Divider />
 
-        {/* Venus Tabs */}
-        <section id="venus-tabs" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Tabs (Venus v2)</h3>
-            <p className="text-sm text-muted-foreground">Clean tab navigation with simple color states. Font: 14px • Weight: 400 (normal), 400 (active) • Colors: #718096 (inactive), #6C5CE7 (active)</p>
-          </div>
+        {/* Pills */}
+        <section id="venus-pills" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Pills</h3>
 
-          <div className="space-y-6">
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Primary</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ShowcaseCard label="Label Variant">
+              <div className="flex flex-wrap gap-2">
+                <VenusPill variant="label">Default</VenusPill>
+                <VenusPill variant="label" status="success">Success</VenusPill>
+                <VenusPill variant="label" status="warning">Warning</VenusPill>
+                <VenusPill variant="label" status="danger">Danger</VenusPill>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Chip Variant">
+              <div className="flex flex-wrap gap-2">
+                <VenusPill variant="chip">Default</VenusPill>
+                <VenusPill variant="chip" status="success">Success</VenusPill>
+                <VenusPill variant="chip" status="warning">Warning</VenusPill>
+                <VenusPill variant="chip" status="danger">Danger</VenusPill>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Removable Pills">
+              <div className="flex flex-wrap gap-2">
+                <VenusPill removable onRemove={() => toast.success("Removed")}>React</VenusPill>
+                <VenusPill removable onRemove={() => toast.success("Removed")} status="success">Approved</VenusPill>
+                <VenusPill removable onRemove={() => toast.success("Removed")} variant="chip">Filter</VenusPill>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Interactive Pills">
+              <div className="flex flex-wrap gap-2">
+                <VenusPill onClick={() => toast.success("Clicked!")}>Clickable</VenusPill>
+                <VenusPill disabled>Disabled</VenusPill>
+              </div>
+            </ShowcaseCard>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* Status Pills */}
+        <section id="venus-status-pills" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Status Pills</h3>
+
+          <div className="space-y-4">
+            <ShowcaseCard label="Status Variants">
+              <div className="flex flex-wrap gap-3">
+                <VenusStatusPill status="active" />
+                <VenusStatusPill status="inactive" />
+                <VenusStatusPill status="draft" />
+                <VenusStatusPill status="paused" />
+                <VenusStatusPill status="error" />
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="Custom Labels">
+              <div className="flex flex-wrap gap-3">
+                <VenusStatusPill status="active">Live</VenusStatusPill>
+                <VenusStatusPill status="draft">In Progress</VenusStatusPill>
+                <VenusStatusPill status="paused">On Hold</VenusStatusPill>
+              </div>
+            </ShowcaseCard>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* Tabs */}
+        <section id="venus-tabs" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Tabs</h3>
+
+          <div className="space-y-4">
+            <ShowcaseCard label="Basic Tabs">
               <VenusTabs defaultValue="tab1" className="w-full">
                 <VenusTabsList>
                   <VenusTabsTrigger value="tab1">Overview</VenusTabsTrigger>
@@ -727,231 +676,105 @@ export default function SandboxPage() {
                   <VenusTabsTrigger value="tab4" disabled>Disabled</VenusTabsTrigger>
                 </VenusTabsList>
               </VenusTabs>
-            </div>
-
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Real-World Example</h4>
-              <VenusTabs defaultValue="entries" className="w-full">
-                <VenusTabsList>
-                  <VenusTabsTrigger value="entries">Entries</VenusTabsTrigger>
-                  <VenusTabsTrigger value="assets">Assets</VenusTabsTrigger>
-                  <VenusTabsTrigger value="content-types">Content Types</VenusTabsTrigger>
-                  <VenusTabsTrigger value="environments">Environments</VenusTabsTrigger>
-                </VenusTabsList>
-                <VenusTabsContent value="entries">
-                  <div className="rounded-lg border border-border p-6">
-                    <p className="text-sm text-muted-foreground">Your entries will be displayed here.</p>
-                  </div>
-                </VenusTabsContent>
-                <VenusTabsContent value="assets">
-                  <div className="rounded-lg border border-border p-6">
-                    <p className="text-sm text-muted-foreground">Your assets will be displayed here.</p>
-                  </div>
-                </VenusTabsContent>
-                <VenusTabsContent value="content-types">
-                  <div className="rounded-lg border border-border p-6">
-                    <p className="text-sm text-muted-foreground">Your content types will be displayed here.</p>
-                  </div>
-                </VenusTabsContent>
-                <VenusTabsContent value="environments">
-                  <div className="rounded-lg border border-border p-6">
-                    <p className="text-sm text-muted-foreground">Your environments will be displayed here.</p>
-                  </div>
-                </VenusTabsContent>
-              </VenusTabs>
-            </div>
+            </ShowcaseCard>
           </div>
         </section>
 
         <Divider />
 
-        {/* Venus PageHeader */}
+        {/* Page Headers */}
         <section id="venus-pageheader" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">PageHeader (Venus v2)</h3>
-            <p className="text-sm text-muted-foreground">Page header component with title and action buttons. Height: 32px • Title: 16px font, 400 weight • Button: 14px font, 600 weight</p>
-          </div>
+          <h3 className="text-xl font-semibold text-foreground">Page Headers</h3>
 
-          <div className="space-y-8">
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Simple Header with Single Action</h4>
+          <div className="space-y-4">
+            <ShowcaseCard label="Single Action">
               <VenusPageHeader
-                title="Default Title"
-                actions={[
-                  {
-                    label: "Cancel",
-                    onClick: () => toast.success("Cancel clicked"),
-                    variant: "primary"
-                  }
-                ]}
+                title="Page Title"
+                actions={[{ label: "Save", onClick: () => toast.success("Saved"), variant: "primary", size: "regular" }]}
               />
-            </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Header with Multiple Actions</h4>
-              <VenusPageHeader
-                title="Page Title 1"
-                actions={[
-                  {
-                    label: "Tertiary",
-                    onClick: () => toast.success("Tertiary clicked"),
-                    variant: "ghost"
-                  },
-                  {
-                    label: "Secondary",
-                    onClick: () => toast.success("Secondary clicked"),
-                    variant: "secondary"
-                  },
-                  {
-                    label: "Primary",
-                    onClick: () => toast.success("Primary clicked"),
-                    variant: "primary"
-                  }
-                ]}
-              />
-            </div>
-
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Header with Info Icon</h4>
-              <VenusPageHeader
-                title="Page Title 1"
-                infoIcon={
-                  <a href="#" className="flex items-center text-[#475161] hover:text-[#6C5CE7] transition-colors">
-                    <Info className="h-4 w-4" />
-                  </a>
-                }
-                actions={[
-                  {
-                    label: "Cancel",
-                    onClick: () => toast.success("Cancel clicked"),
-                    variant: "primary"
-                  }
-                ]}
-              />
-            </div>
-
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Header with Disabled Action</h4>
+            <ShowcaseCard label="Multiple Actions">
               <VenusPageHeader
                 title="Edit Entry"
                 actions={[
-                  {
-                    label: "Cancel",
-                    onClick: () => toast.success("Cancel clicked"),
-                    variant: "secondary"
-                  },
-                  {
-                    label: "Save",
-                    onClick: () => toast.success("Save clicked"),
-                    variant: "primary",
-                    disabled: true
-                  }
+                  { label: "Cancel", onClick: () => toast.success("Cancel"), variant: "ghost", size: "regular" },
+                  { label: "Draft", onClick: () => toast.success("Draft"), variant: "secondary", size: "regular" },
+                  { label: "Publish", onClick: () => toast.success("Publish"), variant: "primary", size: "regular" }
                 ]}
               />
-            </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard label="With Info Icon">
+              <VenusPageHeader
+                title="Settings"
+                infoIcon={<a href="#" className="text-muted-foreground hover:text-primary"><Info className="h-4 w-4" /></a>}
+                actions={[{ label: "Save", onClick: () => toast.success("Saved"), variant: "primary", size: "regular" }]}
+              />
+            </ShowcaseCard>
           </div>
         </section>
 
         <Divider />
 
-        {/* Venus Dropdown */}
+        {/* Dropdown */}
         <section id="venus-dropdown" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Dropdown</h3>
-            <p className="text-sm text-muted-foreground">Dropdown menu with multiple versions</p>
-          </div>
+          <h3 className="text-xl font-semibold text-foreground">Dropdown</h3>
 
-          <div className="space-y-6">
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">V1 (Minimal)</h4>
-              <p className="text-xs text-muted-foreground mb-3">Simple text-based dropdown with chevron</p>
-              <div className="w-64">
-                <VenusDropdown
-                  version="v1"
-                  items={[
-                    { label: "India", value: "india" },
-                    { label: "Belgium", value: "belgium" },
-                    { label: "Canada", value: "canada" },
-                    { label: "Denmark", value: "denmark" },
-                    { label: "England", value: "england" },
-                    { label: "France", value: "france" },
-                    { label: "Poland", value: "poland" },
-                    { label: "Germany", value: "germany" },
-                    { label: "Algeria", value: "algeria" }
-                  ]}
-                  value="india"
-                  onChange={(value) => toast.success(`Selected: ${value}`)}
-                />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <ShowcaseCard label="Minimal (V1)">
+              <VenusDropdown
+                version="v1"
+                items={[
+                  { label: "India", value: "india" },
+                  { label: "Belgium", value: "belgium" },
+                  { label: "Canada", value: "canada" },
+                ]}
+                value="india"
+                onChange={(value) => toast.success(`Selected: ${value}`)}
+              />
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">V2 (Bordered)</h4>
-              <p className="text-xs text-muted-foreground mb-3">
-                Dropdown menu with borders. Trigger: 8px 16px padding • Menu: 4px 0 padding • Items: 16px 18px padding • Font: 16px • Border radius: 4px
-              </p>
-              <div className="w-64">
-                <VenusDropdown
-                  version="v2"
-                  items={[
-                    { label: "India", value: "india" },
-                    { label: "Belgium", value: "belgium" },
-                    { label: "Canada", value: "canada" },
-                    { label: "Denmark", value: "denmark" },
-                    { label: "England", value: "england" },
-                    { label: "France", value: "france" },
-                    { label: "Poland", value: "poland" },
-                    { label: "Germany", value: "germany" },
-                    { label: "Algeria", value: "algeria" }
-                  ]}
-                  value="india"
-                  onChange={(value) => toast.success(`Selected: ${value}`)}
-                />
-              </div>
-            </div>
+            <ShowcaseCard label="Bordered (V2)">
+              <VenusDropdown
+                version="v2"
+                items={[
+                  { label: "India", value: "india" },
+                  { label: "Belgium", value: "belgium" },
+                  { label: "Canada", value: "canada" },
+                ]}
+                value="india"
+                onChange={(value) => toast.success(`Selected: ${value}`)}
+              />
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">V2 with Search</h4>
-              <p className="text-xs text-muted-foreground mb-3">
-                Dropdown menu with search input for filtering options
-              </p>
-              <div className="w-64">
-                <VenusDropdown
-                  version="v2"
-                  withSearch
-                  items={[
-                    { label: "India", value: "india" },
-                    { label: "Belgium", value: "belgium" },
-                    { label: "Canada", value: "canada" },
-                    { label: "Denmark", value: "denmark" },
-                    { label: "England", value: "england" },
-                    { label: "France", value: "france" },
-                    { label: "Poland", value: "poland" },
-                    { label: "Germany", value: "germany" },
-                    { label: "Algeria", value: "algeria" }
-                  ]}
-                  value="india"
-                  onChange={(value) => toast.success(`Selected: ${value}`)}
-                />
-              </div>
-            </div>
+            <ShowcaseCard label="With Search">
+              <VenusDropdown
+                version="v2"
+                withSearch
+                items={[
+                  { label: "India", value: "india" },
+                  { label: "Belgium", value: "belgium" },
+                  { label: "Canada", value: "canada" },
+                  { label: "Denmark", value: "denmark" },
+                ]}
+                value="india"
+                onChange={(value) => toast.success(`Selected: ${value}`)}
+              />
+            </ShowcaseCard>
           </div>
         </section>
 
         <Divider />
 
-        {/* Venus Table */}
+        {/* Data Table */}
         <section id="venus-table" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Table (Venus v2)</h3>
-            <p className="text-sm text-muted-foreground">Data tables with vertical column dividers. Header: 14px bold • Cell: 16px • Small text: 14px • Padding: 10px 15px • Row hover • Border bottom on header</p>
-          </div>
+          <h3 className="text-xl font-semibold text-foreground">Data Table</h3>
 
-          <div className="border border-[#E5E7EB] rounded-lg overflow-auto bg-white">
-            <VenusTable>
+            <VenusTable bordered>
               <VenusTableHeader>
                 <VenusTableRow className="hover:bg-transparent">
-                  <VenusTableHead className="w-12 sticky left-0 bg-white z-10">
+                  <VenusTableHead sticky="left" className="w-12">
                     <Checkbox
                       id="select-all"
                       checked={selectAll}
@@ -966,21 +789,19 @@ export default function SandboxPage() {
                       }}
                     />
                   </VenusTableHead>
-                  <VenusTableHead className="min-w-[300px]">Title</VenusTableHead>
-                  <VenusTableHead className="min-w-[150px]">Language</VenusTableHead>
-                  <VenusTableHead className="min-w-[200px]">Content Type</VenusTableHead>
-                  <VenusTableHead className="min-w-[150px]">Status</VenusTableHead>
-                  <VenusTableHead className="min-w-[200px]">Modified At</VenusTableHead>
-                  <VenusTableHead
-                    className="w-12 sticky right-0 bg-white z-10 before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none"
-                  >
+                  <VenusTableHead minWidth="300px">Title</VenusTableHead>
+                  <VenusTableHead minWidth="150px">Language</VenusTableHead>
+                  <VenusTableHead minWidth="200px">Content Type</VenusTableHead>
+                  <VenusTableHead minWidth="150px">Status</VenusTableHead>
+                  <VenusTableHead minWidth="200px">Modified At</VenusTableHead>
+                  <VenusTableHead sticky="right" className="w-12">
                     Actions
                   </VenusTableHead>
                 </VenusTableRow>
               </VenusTableHeader>
               <VenusTableBody>
                 <VenusTableRow>
-                  <VenusTableCell className="sticky left-0 bg-white group-hover:bg-[#F9FAFB] z-10">
+                  <VenusTableCell sticky="left">
                     <Checkbox
                       id="row-1"
                       checked={selectedRows.has('row-1')}
@@ -1007,15 +828,15 @@ export default function SandboxPage() {
                   <VenusTableCell>
                     <Tag>Published</Tag>
                   </VenusTableCell>
-                  <VenusTableCell className="text-[#71717A]">Jan 28, 2025 12:09 PM</VenusTableCell>
-                  <VenusTableCell className="sticky right-0 bg-white group-hover:bg-[#F9FAFB] z-10 before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none">
+                  <VenusTableCell className="text-muted-foreground">Jan 28, 2025 12:09 PM</VenusTableCell>
+                  <VenusTableCell sticky="right">
                     <Button variant="ghost" size="icon-lg">
                       <MoreVertical className="h-5 w-5" />
                     </Button>
                   </VenusTableCell>
                 </VenusTableRow>
                 <VenusTableRow>
-                  <VenusTableCell className="sticky left-0 bg-white group-hover:bg-[#F9FAFB] z-10">
+                  <VenusTableCell sticky="left">
                     <Checkbox
                       id="row-2"
                       checked={selectedRows.has('row-2')}
@@ -1042,15 +863,15 @@ export default function SandboxPage() {
                   <VenusTableCell>
                     <Tag>Draft</Tag>
                   </VenusTableCell>
-                  <VenusTableCell className="text-[#71717A]">Jan 28, 2025 11:30 AM</VenusTableCell>
-                  <VenusTableCell className="sticky right-0 bg-white group-hover:bg-[#F9FAFB] z-10 before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none">
+                  <VenusTableCell className="text-muted-foreground">Jan 28, 2025 11:30 AM</VenusTableCell>
+                  <VenusTableCell sticky="right">
                     <Button variant="ghost" size="icon-lg">
                       <MoreVertical className="h-5 w-5" />
                     </Button>
                   </VenusTableCell>
                 </VenusTableRow>
                 <VenusTableRow>
-                  <VenusTableCell className="sticky left-0 bg-white group-hover:bg-[#F9FAFB] z-10">
+                  <VenusTableCell sticky="left">
                     <Checkbox
                       id="row-3"
                       checked={selectedRows.has('row-3')}
@@ -1077,15 +898,15 @@ export default function SandboxPage() {
                   <VenusTableCell>
                     <Tag>Published</Tag>
                   </VenusTableCell>
-                  <VenusTableCell className="text-[#71717A]">Jan 27, 2025 03:15 PM</VenusTableCell>
-                  <VenusTableCell className="sticky right-0 bg-white group-hover:bg-[#F9FAFB] z-10 before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none">
+                  <VenusTableCell className="text-muted-foreground">Jan 27, 2025 03:15 PM</VenusTableCell>
+                  <VenusTableCell sticky="right">
                     <Button variant="ghost" size="icon-lg">
                       <MoreVertical className="h-5 w-5" />
                     </Button>
                   </VenusTableCell>
                 </VenusTableRow>
                 <VenusTableRow>
-                  <VenusTableCell className="sticky left-0 bg-white group-hover:bg-[#F9FAFB] z-10">
+                  <VenusTableCell sticky="left">
                     <Checkbox
                       id="row-4"
                       checked={selectedRows.has('row-4')}
@@ -1112,8 +933,8 @@ export default function SandboxPage() {
                   <VenusTableCell>
                     <Tag>Review</Tag>
                   </VenusTableCell>
-                  <VenusTableCell className="text-[#71717A]">Jan 26, 2025 09:45 AM</VenusTableCell>
-                  <VenusTableCell className="sticky right-0 bg-white group-hover:bg-[#F9FAFB] z-10 before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none">
+                  <VenusTableCell className="text-muted-foreground">Jan 26, 2025 09:45 AM</VenusTableCell>
+                  <VenusTableCell sticky="right">
                     <Button variant="ghost" size="icon-lg">
                       <MoreVertical className="h-5 w-5" />
                     </Button>
@@ -1121,60 +942,111 @@ export default function SandboxPage() {
                 </VenusTableRow>
               </VenusTableBody>
             </VenusTable>
-          </div>
+
+            <ShowcaseCard label="Table Pagination">
+              <VenusTablePagination
+                currentPage={1}
+                totalRecords={156}
+                recordsPerPage={25}
+                onPageChange={(page) => toast.success(`Page ${page}`)}
+                onRecordsPerPageChange={(perPage) => toast.success(`${perPage} per page`)}
+              />
+            </ShowcaseCard>
         </section>
 
         <Divider />
 
-        {/* Venus Search */}
+        {/* Search */}
         <section id="venus-search" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Search (Venus v2)</h3>
-            <p className="text-sm text-muted-foreground">Search input with borders. Border: purple (93,80,190) • Focus: lighter purple (108,92,231) • Height: 29px • Padding: 2px 8px • Font: 14px</p>
-          </div>
+          <h3 className="text-xl font-semibold text-foreground">Search</h3>
 
-          <div className="space-y-6 max-w-2xl">
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Default Search</h4>
-              <VenusSearch placeholder="Search in Entries..." />
-            </div>
+          <div className="space-y-4">
+            <ShowcaseCard label="Search (Compact)">
+              <div className="space-y-3 max-w-[800px]">
+                <VenusSearch placeholder="Search entries..." />
+                <VenusSearch placeholder="Disabled..." disabled />
+              </div>
+            </ShowcaseCard>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">With Custom Placeholder</h4>
-              <VenusSearch placeholder="Search for content..." />
-            </div>
-
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Disabled State</h4>
-              <VenusSearch placeholder="Search..." disabled />
-            </div>
+            <ShowcaseCard label="Search V3 (Full)">
+              <div className="space-y-3 max-w-[800px]">
+                <VenusSearchV3 placeholder="Search projects..." />
+                <VenusSearchV3 placeholder="Disabled..." disabled />
+              </div>
+            </ShowcaseCard>
           </div>
         </section>
 
         <Divider />
 
-        {/* Venus Search V3 (Secondary) */}
-        <section id="venus-search-v3" className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Search V3 (Venus Secondary)</h3>
-            <p className="text-sm text-muted-foreground">Search input with gray borders matching dropdown style. Border: #DDE3EE (idle), #5D50BE (hover), #6C5CE7 (focus) • Height: 40px • Padding: 12px horizontal • Font: 16px • Border radius: 4px</p>
+        {/* Tooltips */}
+        <section id="venus-tooltips" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Tooltips</h3>
+
+          <div className="space-y-4">
+            <ShowcaseCard label="Tooltip Positions">
+              <VenusTooltipProvider>
+                <div className="flex flex-wrap gap-4">
+                  <VenusTooltip>
+                    <VenusTooltipTrigger asChild>
+                      <VenusButton variant="secondary">Hover me (top)</VenusButton>
+                    </VenusTooltipTrigger>
+                    <VenusTooltipContent side="top">
+                      <p>Tooltip on top</p>
+                    </VenusTooltipContent>
+                  </VenusTooltip>
+
+                  <VenusTooltip>
+                    <VenusTooltipTrigger asChild>
+                      <VenusButton variant="secondary">Hover me (bottom)</VenusButton>
+                    </VenusTooltipTrigger>
+                    <VenusTooltipContent side="bottom">
+                      <p>Tooltip on bottom</p>
+                    </VenusTooltipContent>
+                  </VenusTooltip>
+
+                  <VenusTooltip>
+                    <VenusTooltipTrigger asChild>
+                      <VenusButton variant="secondary">Hover me (left)</VenusButton>
+                    </VenusTooltipTrigger>
+                    <VenusTooltipContent side="left">
+                      <p>Tooltip on left</p>
+                    </VenusTooltipContent>
+                  </VenusTooltip>
+
+                  <VenusTooltip>
+                    <VenusTooltipTrigger asChild>
+                      <VenusButton variant="secondary">Hover me (right)</VenusButton>
+                    </VenusTooltipTrigger>
+                    <VenusTooltipContent side="right">
+                      <p>Tooltip on right</p>
+                    </VenusTooltipContent>
+                  </VenusTooltip>
+                </div>
+              </VenusTooltipProvider>
+            </ShowcaseCard>
           </div>
+        </section>
 
-          <div className="space-y-6 max-w-2xl">
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Default Search</h4>
-              <VenusSearchV3 placeholder="Search projects" />
-            </div>
+        <Divider />
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">With Custom Placeholder</h4>
-              <VenusSearchV3 placeholder="Search stacks..." />
-            </div>
+        {/* Page Search Header */}
+        <section id="venus-page-search-header" className="space-y-6">
+          <h3 className="text-xl font-semibold text-foreground">Page Search Header</h3>
 
-            <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-4">Disabled State</h4>
-              <VenusSearchV3 placeholder="Search..." disabled />
-            </div>
+          <div className="space-y-4">
+            <ShowcaseCard label="With Search and Actions">
+              <div className="-mx-6 -mb-6">
+                <VenusPageSearchHeader
+                  title="Entries"
+                  searchPlaceholder="Search entries..."
+                  actions={[
+                    { label: "Import", onClick: () => toast.success("Import"), variant: "secondary" },
+                    { label: "Create New", onClick: () => toast.success("Create"), variant: "primary" }
+                  ]}
+                />
+              </div>
+            </ShowcaseCard>
           </div>
         </section>
 

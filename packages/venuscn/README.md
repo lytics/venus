@@ -236,37 +236,79 @@ import { Field, FieldLabel, Input, HelpText, ValidationMessage } from "@contents
 </Field>
 ```
 
+### Table with Sticky Columns
+
+The Table component supports bordered styling, sticky columns, and automatic shadows.
+
+```tsx
+import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@contentstack/venuscn"
+
+// Basic table with border
+<Table bordered>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Status</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>My Entry</TableCell>
+      <TableCell>Published</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+// Advanced table with sticky columns
+<Table bordered>
+  <TableHeader>
+    <TableRow>
+      <TableHead sticky="left" className="w-12">Select</TableHead>
+      <TableHead minWidth="300px">Title</TableHead>
+      <TableHead minWidth="150px">Language</TableHead>
+      <TableHead minWidth="200px">Modified</TableHead>
+      <TableHead sticky="right" className="w-12">Actions</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {data.map((item) => (
+      <TableRow key={item.id}>
+        <TableCell sticky="left"><Checkbox /></TableCell>
+        <TableCell>{item.title}</TableCell>
+        <TableCell>{item.language}</TableCell>
+        <TableCell>{item.modified}</TableCell>
+        <TableCell sticky="right"><Button>...</Button></TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+```
+
+#### Table Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `bordered` | `boolean` | Wraps table in bordered container with rounded corners |
+
+#### TableHead / TableCell Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `sticky` | `"left"` \| `"right"` | Makes column sticky. Right sticky includes automatic shadow effect |
+| `minWidth` | `string` | Sets minimum width (e.g. `"300px"`) to enable horizontal scrolling |
+
+> **Dark Mode**: All sticky columns automatically adapt to dark mode using semantic tokens.
+
 ### Table with Pagination
 
 ```tsx
-import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell, TablePagination } from "@contentstack/venuscn"
+import { Table, TablePagination } from "@contentstack/venuscn"
 
-<div>
-  <Table>
-    <TableHeader>
-      <TableRow>
-        <TableHead>Name</TableHead>
-        <TableHead>Status</TableHead>
-        <TableHead>Actions</TableHead>
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      {data.map((item) => (
-        <TableRow key={item.id}>
-          <TableCell>{item.name}</TableCell>
-          <TableCell>{item.status}</TableCell>
-          <TableCell>...</TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-
-  <TablePagination
-    currentPage={1}
-    totalPages={10}
-    onPageChange={(page) => console.log(page)}
-  />
-</div>
+<TablePagination
+  currentPage={1}
+  totalPages={10}
+  onPageChange={(page) => console.log(page)}
+/>
 ```
 
 ### Status Pills

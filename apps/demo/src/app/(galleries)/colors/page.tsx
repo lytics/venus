@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { AdminNav } from "@/components/admin-nav";
+import { Tabs, TabsList, TabsTrigger } from "@contentstack/venuscn";
 
 // Color variable definitions
 const themeColorVars = [
@@ -35,55 +36,27 @@ const chartColorVars = [
   '--chart-slate', '--chart-gray'
 ];
 
-// ColorSliver component
-function ColorSliver() {
-  const topRowColors = [
-    ...themeColorVars.map(v => ({ var: v, weight: 1.5 })),
-  ];
-
-  const bottomRowColors = [
-    ...grayScaleVars.map(v => ({ var: v, weight: 1 })),
-    ...utilityColorVars.map(v => ({ var: v, weight: 0.5 })),
-    ...chartColorVars.map(v => ({ var: v, weight: 0.8 })),
-  ];
-
-  return (
-    <div className="flex flex-col gap-1 w-full">
-      <div className="flex h-1.5 overflow-hidden rounded-full">
-        {topRowColors.map(({ var: colorVar, weight }) => (
-          <div
-            key={colorVar}
-            className="h-full"
-            style={{
-              backgroundColor: `var(${colorVar})`,
-              flexGrow: weight,
-            }}
-            title={colorVar}
-          />
-        ))}
-      </div>
-      <div className="flex h-1.5 overflow-hidden rounded-full">
-        {bottomRowColors.map(({ var: colorVar, weight }) => (
-          <div
-            key={colorVar}
-            className="h-full"
-            style={{
-              backgroundColor: `var(${colorVar})`,
-              flexGrow: weight,
-            }}
-            title={colorVar}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+type ViewMode = 'simple' | 'advanced';
 
 export default function ColorsPage() {
   const [pageMounted, setPageMounted] = useState(false);
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
+  // Default to simple mode and restore from localStorage
+  const [viewMode, setViewMode] = useState<ViewMode>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('colorsViewMode') as ViewMode) || 'simple';
+    }
+    return 'simple';
+  });
 
   useEffect(() => setPageMounted(true), []);
+
+  // Persist view mode to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('colorsViewMode', viewMode);
+    }
+  }, [viewMode]);
 
   // Copy to clipboard function with visual feedback
   const copyToClipboard = async (text: string, feedbackId: string) => {
@@ -234,6 +207,49 @@ export default function ColorsPage() {
     return () => observer.disconnect();
   }, [pageMounted]);
 
+  const isSimple = viewMode === 'simple';
+
+  // Simple color card component
+  const SimpleColorCard = ({ colorVar, colorName, isPrimary = false, usedInDemo = false, size = "normal" }: {
+    colorVar: string;
+    colorName: string;
+    isPrimary?: boolean;
+    usedInDemo?: boolean;
+    size?: "small" | "normal";
+  }) => {
+    // Determine the background color - semantic/theme colors use HSL format, others use direct values
+    const isSemanticColor = themeColorVars.filter(v => !v.startsWith('--brand-')).includes(colorVar);
+    const bgColor = isSemanticColor
+      ? `hsl(var(${colorVar}))`
+      : `var(${colorVar})`;
+
+    return (
+      <div
+        className={`flex flex-col items-center rounded-xl transition-all cursor-pointer hover:bg-muted/50 ${
+          size === "small" ? "gap-2 p-3" : "gap-3 p-6"
+        }`}
+        onClick={() => copyToClipboard(colorVar, `${colorName}-simple`)}
+        title={`Click to copy ${colorVar}`}
+      >
+        <div
+          className={`rounded-xl border shadow-sm ${
+            size === "small" ? "w-10 h-10" : "w-16 h-16"
+          } ${
+            copiedItem === `${colorName}-simple` ? 'ring-2 ring-primary animate-pulse scale-105' : ''
+          }`}
+          style={{ backgroundColor: bgColor }}
+        />
+        <div className={`font-medium text-foreground text-center ${
+          size === "small" ? "text-xs" : "text-sm"
+        }`}>
+          {colorVar}
+          {isPrimary && <span className="text-amber-500 ml-1">★</span>}
+          {usedInDemo && <span className="text-primary ml-1">●</span>}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <AdminNav />
@@ -251,16 +267,23 @@ export default function ColorsPage() {
               <p className="text-sm text-muted-foreground max-w-2xl">
                 All colors come from the design token system in <code className="px-2 py-0.5 bg-muted rounded text-xs font-mono text-foreground">src/styles/tokens.css</code> and are mapped to Tailwind utilities in <code className="px-2 py-0.5 bg-muted rounded text-xs font-mono text-foreground">src/app/globals.css</code>.
               </p>
-
-              {/* Color Rows */}
-              <ColorSliver />
             </div>
 
-            {/* Main Colors Legend */}
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <h2 className="text-base font-medium text-foreground">Main Colors</h2>
-              <span className="inline-flex items-center gap-1"><span className="text-amber-500">★</span> Primary brand color</span>
-              <span className="inline-flex items-center gap-1"><span className="text-primary">●</span> Used in demo</span>
+            {/* Main Colors Legend + View Mode Toggle */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <h2 className="text-base font-medium text-foreground">Main Colors</h2>
+                <span className="inline-flex items-center gap-1"><span className="text-amber-500">★</span> Primary brand color</span>
+                <span className="inline-flex items-center gap-1"><span className="text-primary">●</span> Used in demo</span>
+              </div>
+
+              {/* Simple/Advanced Toggle */}
+              <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as ViewMode)}>
+                <TabsList>
+                  <TabsTrigger value="simple">Simple</TabsTrigger>
+                  <TabsTrigger value="advanced">Advanced</TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
 
             {/* Color Details - Direct inline display */}
@@ -268,7 +291,28 @@ export default function ColorsPage() {
                 {/* Tailwind Semantic Colors */}
                 <div className="space-y-4">
                   <h2 className="text-base font-medium text-foreground">Tailwind Semantic Colors</h2>
-                  <p className="text-xs text-muted-foreground">shadcn/ui compatible semantic tokens. Use directly with Tailwind classes like <code className="px-2 py-0.5 bg-muted rounded">bg-primary</code>, <code className="px-2 py-0.5 bg-muted rounded">text-muted-foreground</code>.</p>
+                  {!isSimple && (
+                    <p className="text-xs text-muted-foreground">shadcn/ui compatible semantic tokens. Use directly with Tailwind classes like <code className="px-2 py-0.5 bg-muted rounded">bg-primary</code>, <code className="px-2 py-0.5 bg-muted rounded">text-muted-foreground</code>.</p>
+                  )}
+
+                  {isSimple ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                      {themeColorVars.filter(v => !v.startsWith('--brand-')).map((colorVar) => {
+                        const colorName = colorVar.replace('--', '');
+                        const isPrimaryColor = colorVar === '--primary';
+                        const usedInDemo = ['--primary', '--primary-foreground', '--secondary', '--background', '--foreground', '--muted', '--muted-foreground', '--destructive', '--border', '--card', '--accent'].includes(colorVar);
+                        return (
+                          <SimpleColorCard
+                            key={colorName}
+                            colorVar={colorVar}
+                            colorName={colorName}
+                            isPrimary={isPrimaryColor}
+                            usedInDemo={usedInDemo}
+                          />
+                        );
+                      })}
+                    </div>
+                  ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {themeColorVars.filter(v => !v.startsWith('--brand-')).map((colorVar) => {
                       const colorName = colorVar.replace('--', '');
@@ -319,8 +363,7 @@ export default function ColorsPage() {
                             >
                               {/* Color value will be populated by JavaScript */}
                             </div>
-                            <div className="text-xs text-muted-foreground">
-                              Use:
+                            <div className="text-xs text-muted-foreground flex items-center gap-1">
                               <code
                                 className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-bg` ? 'bg-primary text-primary-foreground' : ''
@@ -329,7 +372,7 @@ export default function ColorsPage() {
                                 title="Click to copy class name"
                               >
                                 {bgClass}
-                              </code>,
+                              </code>
                               <code
                                 className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-text` ? 'bg-primary text-primary-foreground' : ''
@@ -345,12 +388,35 @@ export default function ColorsPage() {
                       );
                     })}
                   </div>
+                  )}
                 </div>
 
                 {/* Primary Color Scale */}
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold text-foreground">Primary Color Scale</h3>
-                  <p className="text-xs text-muted-foreground">Extended purple scale for the primary brand color. Use <code className="px-2 py-0.5 bg-muted rounded">bg-brand-*</code> or <code className="px-2 py-0.5 bg-muted rounded">text-brand-*</code>.</p>
+                  {!isSimple && (
+                    <p className="text-xs text-muted-foreground">Extended purple scale for the primary brand color. Use <code className="px-2 py-0.5 bg-muted rounded">bg-brand-*</code> or <code className="px-2 py-0.5 bg-muted rounded">text-brand-*</code>.</p>
+                  )}
+
+                  {isSimple ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                      {Array.from({ length: 12 }, (_, i) => {
+                        const step = i + 1;
+                        const colorVar = `--brand-${step}`;
+                        const isPrimary = step === 9;
+                        const isUsedInDemo = [3, 9].includes(step);
+                        return (
+                          <SimpleColorCard
+                            key={step}
+                            colorVar={colorVar}
+                            colorName={`brand-${step}`}
+                            isPrimary={isPrimary}
+                            usedInDemo={isUsedInDemo}
+                          />
+                        );
+                      })}
+                    </div>
+                  ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {Array.from({ length: 12 }, (_, i) => {
                       const step = i + 1;
@@ -401,8 +467,7 @@ export default function ColorsPage() {
                             >
                               {/* Color value will be populated by JavaScript */}
                             </div>
-                            <div className="text-xs text-muted-foreground">
-                              Use:
+                            <div className="text-xs text-muted-foreground flex items-center gap-1">
                               <code
                                 className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `brand-${step}-bg` ? 'bg-primary text-primary-foreground' : ''
@@ -411,7 +476,7 @@ export default function ColorsPage() {
                                 title="Click to copy class name"
                               >
                                 {bgClass}
-                              </code>,
+                              </code>
                               <code
                                 className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `brand-${step}-text` ? 'bg-primary text-primary-foreground' : ''
@@ -427,11 +492,29 @@ export default function ColorsPage() {
                       );
                     })}
                   </div>
+                  )}
                 </div>
 
                 {/* Gray Scale */}
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold text-foreground">Gray Scale</h3>
+
+                  {isSimple ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                      {grayScaleVars.map((colorVar) => {
+                        const colorName = colorVar.replace('--', '');
+                        const usedInDemo = ['--gray-1', '--gray-12'].includes(colorVar);
+                        return (
+                          <SimpleColorCard
+                            key={colorName}
+                            colorVar={colorVar}
+                            colorName={colorName}
+                            usedInDemo={usedInDemo}
+                          />
+                        );
+                      })}
+                    </div>
+                  ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {grayScaleVars.map((colorVar) => {
                       const colorName = colorVar.replace('--', '');
@@ -480,8 +563,7 @@ export default function ColorsPage() {
                             >
                               {/* Color value will be populated by JavaScript */}
                             </div>
-                            <div className="text-xs text-muted-foreground">
-                              Use:
+                            <div className="text-xs text-muted-foreground flex items-center gap-1">
                               <code
                                 className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-bg` ? 'bg-primary text-primary-foreground' : ''
@@ -490,7 +572,7 @@ export default function ColorsPage() {
                                 title="Click to copy class name"
                               >
                                 {bgClass}
-                              </code>,
+                              </code>
                               <code
                                 className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-text` ? 'bg-primary text-primary-foreground' : ''
@@ -506,9 +588,11 @@ export default function ColorsPage() {
                       );
                     })}
                   </div>
+                  )}
                 </div>
 
-                {/* Text Styles Reference */}
+                {/* Text Styles Reference - only in advanced mode */}
+                {!isSimple && (
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold text-foreground">Text Styles in App</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -765,14 +849,34 @@ export default function ColorsPage() {
                     </div>
                   </div>
                 </div>
+                )}
 
                 {/* Status Colors */}
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold text-foreground">Status Color Scales</h3>
-                  <p className="text-xs text-muted-foreground">Full color scales for status indicators. Use <code className="px-2 py-0.5 bg-muted rounded">bg-success-500</code>, <code className="px-2 py-0.5 bg-muted rounded">text-danger-600</code>, etc.</p>
+                  {!isSimple && (
+                    <p className="text-xs text-muted-foreground">Full color scales for status indicators. Use <code className="px-2 py-0.5 bg-muted rounded">bg-success-500</code>, <code className="px-2 py-0.5 bg-muted rounded">text-danger-600</code>, etc.</p>
+                  )}
                   {['success', 'danger', 'info', 'warning'].map((family) => (
                     <div key={family} className="space-y-3">
                       <h4 className="text-sm font-medium capitalize text-foreground">{family}</h4>
+
+                      {isSimple ? (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                          {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => {
+                            const colorVar = `--${family}-${shade}`;
+                            const colorName = `${family}-${shade}`;
+                            return (
+                              <SimpleColorCard
+                                key={shade}
+                                colorVar={colorVar}
+                                colorName={colorName}
+                                size={shade === 500 ? "normal" : "small"}
+                              />
+                            );
+                          })}
+                        </div>
+                      ) : (
                       <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-2">
                         {[50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => {
                           const colorVar = `--${family}-${shade}`;
@@ -821,6 +925,7 @@ export default function ColorsPage() {
                           );
                         })}
                       </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -828,7 +933,24 @@ export default function ColorsPage() {
                 {/* Chart Colors */}
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold text-foreground">Chart Colors <span className="font-normal text-muted-foreground">(Not Venus)</span></h3>
-                  <p className="text-xs text-muted-foreground">Vibrant colors for charts, graphs, and data visualization. Use <code className="px-2 py-0.5 bg-muted rounded">bg-chart-rose</code>, <code className="px-2 py-0.5 bg-muted rounded">bg-chart-blue</code>, etc.</p>
+                  {!isSimple && (
+                    <p className="text-xs text-muted-foreground">Vibrant colors for charts, graphs, and data visualization. Use <code className="px-2 py-0.5 bg-muted rounded">bg-chart-rose</code>, <code className="px-2 py-0.5 bg-muted rounded">bg-chart-blue</code>, etc.</p>
+                  )}
+
+                  {isSimple ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                      {chartColorVars.map((colorVar) => {
+                        const colorName = colorVar.replace('--', '');
+                        return (
+                          <SimpleColorCard
+                            key={colorName}
+                            colorVar={colorVar}
+                            colorName={colorName}
+                          />
+                        );
+                      })}
+                    </div>
+                  ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {chartColorVars.map((colorVar) => {
                       const colorName = colorVar.replace('--', '');
@@ -874,8 +996,7 @@ export default function ColorsPage() {
                             >
                               {/* Color value will be populated by JavaScript */}
                             </div>
-                            <div className="text-xs text-muted-foreground">
-                              Use:
+                            <div className="text-xs text-muted-foreground flex items-center gap-1">
                               <code
                                 className={`font-mono text-xs text-muted-foreground cursor-pointer transition-all hover:text-foreground hover:bg-muted px-2 py-0.5 rounded ${
                                   copiedItem === `${colorName}-bg` ? 'bg-primary text-primary-foreground' : ''
@@ -891,6 +1012,7 @@ export default function ColorsPage() {
                       );
                     })}
                   </div>
+                  )}
                 </div>
             </div>
           </main>

@@ -31,7 +31,10 @@ export {
   TableHead,
   TableRow,
   TableCell,
-  TableCaption
+  TableCaption,
+  type TableProps,
+  type TableHeadProps,
+  type TableCellProps
 } from "./Table";
 export { TablePagination, type TablePaginationProps } from "./table-pagination";
 export { Search, type SearchProps } from "./search";

@@ -15,7 +15,6 @@ const adminNavigationTabs = [
   { id: "primatives", label: "Primatives", href: "/primatives" },
   { id: "colors", label: "Colors", href: "/colors" },
   { id: "text", label: "Text", href: "/text" },
-  { id: "icons", label: "Icons", href: "/icons" },
 ]
 
 const extrasItems: Array<{ id: string; label: string; href: string; isDivider?: boolean }> = [

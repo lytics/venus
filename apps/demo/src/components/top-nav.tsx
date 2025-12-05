@@ -374,7 +374,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                   <Avatar className="h-8 w-8 rounded-full">
                     <AvatarImage src={DUMMY_USER.avatar} alt={DUMMY_USER.name} />
                     <AvatarFallback className="rounded-full bg-white text-gray-900 text-xs font-semibold border-2 border-gray-300">
-                      EE
+                      HU
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -385,7 +385,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                     <Avatar className="h-8 w-8 rounded-full">
                       <AvatarImage src={DUMMY_USER.avatar} alt={DUMMY_USER.name} />
                       <AvatarFallback className="rounded-full bg-white text-gray-900 text-xs font-semibold border-2 border-gray-300">
-                        EE
+                        HU
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
