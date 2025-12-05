@@ -28,8 +28,10 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
     // Bordered variant: card-style with rounded corners
     if (bordered) {
       return (
-        <div className="border border-border rounded-lg overflow-auto bg-background">
-          {table}
+        <div className="border border-border rounded-lg bg-background">
+          <div className="overflow-auto relative">
+            {table}
+          </div>
         </div>
       );
     }
@@ -92,7 +94,7 @@ const TableRow = React.forwardRef<
     ref={ref}
     className={cn(
       "transition-colors group",
-      "hover:bg-gray-50",
+      "hover:bg-surface-gray",
       "data-[state=selected]:bg-muted",
       className
     )}
@@ -150,9 +152,9 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
         // Use left borders to avoid double borders with sticky columns
         "border-l border-border first:border-l-0",
         // Sticky left - inherits row hover via group
-        sticky === "left" && "sticky left-0 bg-background group-hover:bg-gray-50 z-10",
+        sticky === "left" && "sticky left-0 bg-background group-hover:bg-surface-gray z-10",
         // Sticky right with shadow - inherits row hover via group
-        sticky === "right" && "sticky right-0 bg-background group-hover:bg-gray-50 z-10 venus-table-sticky-shadow",
+        sticky === "right" && "sticky right-0 bg-background group-hover:bg-surface-gray z-10 venus-table-sticky-shadow",
         className
       )}
       style={{ minWidth, ...style }}

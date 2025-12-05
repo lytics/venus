@@ -283,11 +283,11 @@
 
   /* Surface Colors (from dashboard) */
   --color-surface-purple: #F9F8FF;      /* Card icon background - EXACT from dashboard */
-  --color-surface-gray: #F7F9FC;         /* Light backgrounds */
+  --color-surface-gray: #F7F9FC;         /* Light backgrounds, headers, hovers */
 
   /* Gray Scale (mapped to dashboard colors) */
   --color-gray-50: #FAFBFC;
-  --color-gray-100: #F7F9FC;
+  --color-gray-100: #F7F9FC;             /* Surface hover state */
   --color-gray-200: #EFF2F7;
   --color-gray-300: #E3E8EF;
   --color-border: #E5E7EB;               /* Card border - EXACT from dashboard */
@@ -724,6 +724,14 @@
 }
 
 .bg-surface-gray {
+  background-color: var(--color-surface-gray);
+}
+
+.hover\:bg-surface-gray:hover {
+  background-color: var(--color-surface-gray);
+}
+
+.group:hover .group-hover\:bg-surface-gray {
   background-color: var(--color-surface-gray);
 }
 

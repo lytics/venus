@@ -51,7 +51,7 @@ const SettingsIcon = () => (
 );
 
 const DUMMY_USER = {
-  name: "User Name",
+  name: "Human Being",
   email: "user@example.com",
   avatar: "",
 }

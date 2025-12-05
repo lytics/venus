@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Plus, HelpCircle, MoreVertical, RefreshCw } from 'lucide-react'
+import { HelpCircle, MoreVertical } from 'lucide-react'
 import Image from 'next/image'
 import { SearchV3, Button, Table, TableHeader, TableBody, TableHead, TableRow, TableCell, Dropdown } from '@contentstack/venuscn'
 import { cn } from '@/lib/utils'
@@ -110,43 +110,40 @@ export default function AttributesPage() {
         </div>
 
         {/* Right: Action button */}
-        <Button variant="primary" size="regular" onClick={handleNewAttribute}>
-          <Plus className="h-5 w-5" />
+        <Button variant="primary" size="regular" onClick={handleNewAttribute} className="h-10">
+          <Image src="/images/plus.svg" alt="" width={24} height={24} className="invert brightness-0" />
           New Attribute
         </Button>
       </div>
 
-      {/* Search Bar - White background with padding */}
-      <div className="bg-white px-6 py-6 border-b border-gray-200">
-        <div className="flex items-center gap-1">
-          <div className="flex-1 max-w-md">
+      {/* Search Bar */}
+      <div className="bg-[#F7F9FC] px-4 h-[75px] border-b border-gray-200 flex items-center">
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-1">
             <SearchV3
               placeholder="Search attributes"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               onClear={() => setSearchValue('')}
+              className="w-[535px]"
             />
+            <Button variant="primary" size="regular" className="h-10">
+              <Image src="/images/search.svg" alt="" width={24} height={24} className="invert brightness-0" />
+              Search
+            </Button>
           </div>
-          <Button variant="primary" size="regular">
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            Search
-          </Button>
-
-          {/* Right side icons */}
-          <div className="flex items-center gap-2 ml-auto">
+          <div className="flex items-center gap-2.5">
             <button
-              className="inline-flex items-center justify-center hover:bg-gray-100 rounded p-2 transition-colors"
+              className="inline-flex items-center justify-center hover:bg-gray-100 rounded w-10 h-10 p-2 transition-colors"
               aria-label="Refresh"
             >
-              <RefreshCw className="w-5 h-5 text-[#697B9B]" strokeWidth={1.5} />
+              <Image src="/images/refresh.svg" alt="" width={24} height={24} />
             </button>
             <button
-              className="inline-flex items-center justify-center hover:bg-gray-100 rounded p-2 transition-colors"
+              className="inline-flex items-center justify-center hover:bg-gray-100 rounded w-10 h-10 p-2 transition-colors"
               aria-label="Settings"
             >
-              <Image src="/images/searchbar-setting.svg" alt="" width={20} height={20} />
+              <Image src="/images/searchbar-setting.svg" alt="" width={24} height={24} />
             </button>
           </div>
         </div>
@@ -156,7 +153,7 @@ export default function AttributesPage() {
       <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
         {/* Table with scroll */}
         <div className="flex-1 overflow-auto bg-white relative">
-          <table className="w-full h-full border-separate border-spacing-0">
+          <Table full className="min-h-full border-separate border-spacing-0">
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
@@ -202,7 +199,7 @@ export default function AttributesPage() {
                 <td className="sticky right-0 bg-white before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none"></td>
               </tr>
             </TableBody>
-          </table>
+          </Table>
         </div>
 
         {/* Pagination Footer */}

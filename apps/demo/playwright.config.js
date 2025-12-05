@@ -1,5 +1,7 @@
 // playwright.config.js
-module.exports = {
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
   testDir: './tests',
   timeout: 30000,
   fullyParallel: true,
@@ -8,7 +10,7 @@ module.exports = {
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3001',
+    baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -16,9 +18,9 @@ module.exports = {
     {
       name: 'chromium',
       use: {
-        ...require('@playwright/test').devices['Desktop Chrome'],
+        ...devices['Desktop Chrome'],
         viewport: { width: 1280, height: 720 }
       },
     },
   ],
-};
+});

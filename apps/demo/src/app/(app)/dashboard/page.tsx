@@ -35,7 +35,7 @@ export default function HomePage() {
         <div className="flex flex-col gap-6 px-8 pt-8 pb-8">
           {/* Welcome Header */}
           <div className="mb-3">
-            <h1 className="text-28 font-bold text-title leading-[42px]">Welcome, Hero</h1>
+            <h1 className="text-28 font-bold text-title leading-[42px]">Welcome, Human</h1>
             <p className="text-base font-bold text-[#6e6b86] mt-1">Organization Name: Venus Demo Playground</p>
           </div>
 

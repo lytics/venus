@@ -20,13 +20,6 @@ import {
   Divider,
   Dropdown as VenusDropdown,
   type DropdownItem,
-  Table as VenusTable,
-  TableHeader as VenusTableHeader,
-  TableBody as VenusTableBody,
-  TableHead as VenusTableHead,
-  TableRow as VenusTableRow,
-  TableCell as VenusTableCell,
-  TablePagination as VenusTablePagination,
   Search as VenusSearch,
   SearchV3 as VenusSearchV3,
   Tabs as VenusTabs,
@@ -71,7 +64,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { VenusLogo } from "@/components/venus-logo";
 import { AdminNav } from "@/components/admin-nav";
 import { useCommandPalette } from "@/components/command-palette-provider";
@@ -108,7 +100,6 @@ const componentSectionMap: Record<string, string> = {
   'progress': 'progress',
   'slider': 'slider',
   'alert': 'alerts',
-  'table': 'data-table',
   'tooltip': 'tooltips',
   'separator': 'layout-components'
 };
@@ -335,8 +326,6 @@ export default function SandboxPage() {
   });
   const [statusCollapsed, setStatusCollapsed] = useState(false);
   const [allCollapsed, setAllCollapsed] = useState(true);
-  const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
-  const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -765,196 +754,6 @@ export default function SandboxPage() {
           </div>
         </section>
 
-        <Divider />
-
-        {/* Data Table */}
-        <section id="venus-table" className="space-y-6">
-          <h3 className="text-xl font-semibold text-foreground">Data Table</h3>
-
-            <VenusTable bordered>
-              <VenusTableHeader>
-                <VenusTableRow className="hover:bg-transparent">
-                  <VenusTableHead sticky="left" className="w-12">
-                    <Checkbox
-                      id="select-all"
-                      checked={selectAll}
-                      onCheckedChange={(checked) => {
-                        const isChecked = checked === true;
-                        setSelectAll(isChecked);
-                        if (isChecked) {
-                          setSelectedRows(new Set(['row-1', 'row-2', 'row-3', 'row-4']));
-                        } else {
-                          setSelectedRows(new Set());
-                        }
-                      }}
-                    />
-                  </VenusTableHead>
-                  <VenusTableHead minWidth="300px">Title</VenusTableHead>
-                  <VenusTableHead minWidth="150px">Language</VenusTableHead>
-                  <VenusTableHead minWidth="200px">Content Type</VenusTableHead>
-                  <VenusTableHead minWidth="150px">Status</VenusTableHead>
-                  <VenusTableHead minWidth="200px">Modified At</VenusTableHead>
-                  <VenusTableHead sticky="right" className="w-12">
-                    Actions
-                  </VenusTableHead>
-                </VenusTableRow>
-              </VenusTableHeader>
-              <VenusTableBody>
-                <VenusTableRow>
-                  <VenusTableCell sticky="left">
-                    <Checkbox
-                      id="row-1"
-                      checked={selectedRows.has('row-1')}
-                      onCheckedChange={(checked) => {
-                        const newSelected = new Set(selectedRows);
-                        if (checked) {
-                          newSelected.add('row-1');
-                        } else {
-                          newSelected.delete('row-1');
-                        }
-                        setSelectedRows(newSelected);
-                        setSelectAll(newSelected.size === 4);
-                      }}
-                    />
-                  </VenusTableCell>
-                  <VenusTableCell>
-                    <div>
-                      <div>Getting Started with Venus</div>
-                      <div className="text-sm text-muted-foreground">Content Type: Header content</div>
-                    </div>
-                  </VenusTableCell>
-                  <VenusTableCell>English</VenusTableCell>
-                  <VenusTableCell>Article</VenusTableCell>
-                  <VenusTableCell>
-                    <Tag>Published</Tag>
-                  </VenusTableCell>
-                  <VenusTableCell className="text-muted-foreground">Jan 28, 2025 12:09 PM</VenusTableCell>
-                  <VenusTableCell sticky="right">
-                    <Button variant="ghost" size="icon-lg">
-                      <MoreVertical className="h-5 w-5" />
-                    </Button>
-                  </VenusTableCell>
-                </VenusTableRow>
-                <VenusTableRow>
-                  <VenusTableCell sticky="left">
-                    <Checkbox
-                      id="row-2"
-                      checked={selectedRows.has('row-2')}
-                      onCheckedChange={(checked) => {
-                        const newSelected = new Set(selectedRows);
-                        if (checked) {
-                          newSelected.add('row-2');
-                        } else {
-                          newSelected.delete('row-2');
-                        }
-                        setSelectedRows(newSelected);
-                        setSelectAll(newSelected.size === 4);
-                      }}
-                    />
-                  </VenusTableCell>
-                  <VenusTableCell>
-                    <div>
-                      <div>Design System Principles</div>
-                      <div className="text-sm text-muted-foreground">Content Type: Header content</div>
-                    </div>
-                  </VenusTableCell>
-                  <VenusTableCell>English</VenusTableCell>
-                  <VenusTableCell>Guide</VenusTableCell>
-                  <VenusTableCell>
-                    <Tag>Draft</Tag>
-                  </VenusTableCell>
-                  <VenusTableCell className="text-muted-foreground">Jan 28, 2025 11:30 AM</VenusTableCell>
-                  <VenusTableCell sticky="right">
-                    <Button variant="ghost" size="icon-lg">
-                      <MoreVertical className="h-5 w-5" />
-                    </Button>
-                  </VenusTableCell>
-                </VenusTableRow>
-                <VenusTableRow>
-                  <VenusTableCell sticky="left">
-                    <Checkbox
-                      id="row-3"
-                      checked={selectedRows.has('row-3')}
-                      onCheckedChange={(checked) => {
-                        const newSelected = new Set(selectedRows);
-                        if (checked) {
-                          newSelected.add('row-3');
-                        } else {
-                          newSelected.delete('row-3');
-                        }
-                        setSelectedRows(newSelected);
-                        setSelectAll(newSelected.size === 4);
-                      }}
-                    />
-                  </VenusTableCell>
-                  <VenusTableCell>
-                    <div>
-                      <div>Component Library</div>
-                      <div className="text-sm text-muted-foreground">Content Type: Header content</div>
-                    </div>
-                  </VenusTableCell>
-                  <VenusTableCell>English</VenusTableCell>
-                  <VenusTableCell>Documentation</VenusTableCell>
-                  <VenusTableCell>
-                    <Tag>Published</Tag>
-                  </VenusTableCell>
-                  <VenusTableCell className="text-muted-foreground">Jan 27, 2025 03:15 PM</VenusTableCell>
-                  <VenusTableCell sticky="right">
-                    <Button variant="ghost" size="icon-lg">
-                      <MoreVertical className="h-5 w-5" />
-                    </Button>
-                  </VenusTableCell>
-                </VenusTableRow>
-                <VenusTableRow>
-                  <VenusTableCell sticky="left">
-                    <Checkbox
-                      id="row-4"
-                      checked={selectedRows.has('row-4')}
-                      onCheckedChange={(checked) => {
-                        const newSelected = new Set(selectedRows);
-                        if (checked) {
-                          newSelected.add('row-4');
-                        } else {
-                          newSelected.delete('row-4');
-                        }
-                        setSelectedRows(newSelected);
-                        setSelectAll(newSelected.size === 4);
-                      }}
-                    />
-                  </VenusTableCell>
-                  <VenusTableCell>
-                    <div>
-                      <div>API Best Practices</div>
-                      <div className="text-sm text-muted-foreground">Content Type: Header content</div>
-                    </div>
-                  </VenusTableCell>
-                  <VenusTableCell>English</VenusTableCell>
-                  <VenusTableCell>Tutorial</VenusTableCell>
-                  <VenusTableCell>
-                    <Tag>Review</Tag>
-                  </VenusTableCell>
-                  <VenusTableCell className="text-muted-foreground">Jan 26, 2025 09:45 AM</VenusTableCell>
-                  <VenusTableCell sticky="right">
-                    <Button variant="ghost" size="icon-lg">
-                      <MoreVertical className="h-5 w-5" />
-                    </Button>
-                  </VenusTableCell>
-                </VenusTableRow>
-              </VenusTableBody>
-            </VenusTable>
-
-            <ShowcaseCard label="Table Pagination">
-              <VenusTablePagination
-                currentPage={1}
-                totalRecords={156}
-                recordsPerPage={25}
-                onPageChange={(page) => toast.success(`Page ${page}`)}
-                onRecordsPerPageChange={(perPage) => toast.success(`${perPage} per page`)}
-              />
-            </ShowcaseCard>
-        </section>
-
-        <Divider />
 
         {/* Search */}
         <section id="venus-search" className="space-y-6">

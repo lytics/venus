@@ -108,8 +108,8 @@ export default function TargetsPage() {
         </Button>
       </div>
 
-      {/* Search Bar - White background with padding */}
-      <div className="bg-white px-4 h-[75px] border-b border-gray-200 flex items-center">
+      {/* Search Bar */}
+      <div className="bg-[#F7F9FC] px-4 h-[75px] border-b border-gray-200 flex items-center">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-1">
             <SearchV3
@@ -145,7 +145,7 @@ export default function TargetsPage() {
       <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
         {/* Table with scroll */}
         <div className="flex-1 overflow-auto bg-white relative">
-          <table className="w-full h-full border-separate border-spacing-0">
+          <Table full className="min-h-full border-separate border-spacing-0">
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead className="min-w-[350px]">Name</TableHead>
@@ -184,7 +184,7 @@ export default function TargetsPage() {
                 <td className="sticky right-0 bg-white before:absolute before:left-[-10px] before:top-0 before:bottom-0 before:w-[10px] before:bg-gradient-to-l before:from-black/5 before:to-transparent before:pointer-events-none"></td>
               </tr>
             </TableBody>
-          </table>
+          </Table>
         </div>
 
         {/* Pagination Footer */}
