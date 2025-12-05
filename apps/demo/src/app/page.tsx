@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AppLogo } from "@/components/app-logo";
-import { LayoutGrid, AppWindow, Code, Copy, Check } from "lucide-react";
+import { LayoutGrid, AppWindow, Code, Copy, Check, FileCode2 } from "lucide-react";
 import { useState } from "react";
 
 function CopyButton({ text }: { text: string }) {
@@ -49,7 +49,7 @@ export default function HomePage() {
       </div>
 
       {/* Action Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl w-full mb-12">
         {/* Browse Components */}
         <Link
           href="/primatives"
@@ -59,10 +59,26 @@ export default function HomePage() {
             <div className="p-2 rounded bg-[color:var(--color-surface-purple)] text-primary">
               <LayoutGrid className="w-5 h-5" />
             </div>
-            <h2 className="font-semibold text-lg">Browse Components</h2>
+            <h2 className="font-semibold text-lg">Components</h2>
           </div>
           <p className="text-[color:var(--color-body)] text-sm">
-            Buttons, inputs, tables, and 24 more production-ready components
+            Browse 27 production-ready components
+          </p>
+        </Link>
+
+        {/* Page Templates */}
+        <Link
+          href="/templates"
+          className="group p-6 rounded border border-[color:var(--color-border)] hover:border-primary hover:shadow-md transition-all bg-white"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 rounded bg-[color:var(--color-surface-purple)] text-primary">
+              <FileCode2 className="w-5 h-5" />
+            </div>
+            <h2 className="font-semibold text-lg">Templates</h2>
+          </div>
+          <p className="text-[color:var(--color-body)] text-sm">
+            Starter templates for common page layouts
           </p>
         </Link>
 
@@ -75,10 +91,10 @@ export default function HomePage() {
             <div className="p-2 rounded bg-[color:var(--color-surface-purple)] text-primary">
               <AppWindow className="w-5 h-5" />
             </div>
-            <h2 className="font-semibold text-lg">Explore Demo</h2>
+            <h2 className="font-semibold text-lg">Demo App</h2>
           </div>
           <p className="text-[color:var(--color-body)] text-sm">
-            See Venus in a real application context with working examples
+            See Venus in a real application context
           </p>
         </Link>
 
@@ -88,10 +104,10 @@ export default function HomePage() {
             <div className="p-2 rounded bg-[color:var(--color-surface-purple)] text-primary">
               <Code className="w-5 h-5" />
             </div>
-            <h2 className="font-semibold text-lg">Use in Your Project</h2>
+            <h2 className="font-semibold text-lg">Use It</h2>
           </div>
           <p className="text-[color:var(--color-body)] text-sm">
-            Import Venus components into your React application
+            Import components into your React app
           </p>
         </div>
       </div>

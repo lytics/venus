@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { Plus, Star, Settings, Info, Sparkles } from "lucide-react";
+import { Plus, Star, Settings, Info } from "lucide-react";
 
 // Venus Design System Components
 import {
@@ -79,13 +79,60 @@ export default function SandboxPage() {
         <h1 className="text-2xl font-bold">Primatives</h1>
       </div>
 
-      {/* Venus Design System Section */}
-      <div className="space-y-12">
-        <div className="flex items-center gap-3">
-          <Sparkles className="h-6 w-6 text-[#6C5CE7]" />
-          <h2 className="text-2xl font-bold text-foreground">Venus Design System</h2>
+      {/* Component List */}
+      <div className="border border-border rounded-lg p-6 bg-card">
+        <h2 className="text-sm font-semibold text-muted-foreground/50 tracking-normal mb-4">VenusCN Components</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-2 text-sm">
+          <div className="space-y-1">
+            <div className="font-semibold text-xs text-muted-foreground mb-2">Form Controls</div>
+            <a href="#buttons" className="block text-foreground hover:text-primary">Button</a>
+            <a href="#inputs" className="block text-foreground hover:text-primary">Input</a>
+            <a href="#inputs" className="block text-foreground hover:text-primary">Textarea</a>
+            <a href="#controls" className="block text-foreground hover:text-primary">Checkbox</a>
+            <a href="#controls" className="block text-foreground hover:text-primary">Radio</a>
+            <a href="#controls" className="block text-foreground hover:text-primary">Toggle</a>
+            <a href="#dropdown" className="block text-foreground hover:text-primary">Dropdown</a>
+          </div>
+          <div className="space-y-1">
+            <div className="font-semibold text-xs text-muted-foreground mb-2">Form Architecture</div>
+            <a href="#inputs" className="block text-foreground hover:text-primary">Field</a>
+            <a href="#inputs" className="block text-foreground hover:text-primary">FieldLabel</a>
+            <a href="#inputs" className="block text-foreground hover:text-primary">HelpText</a>
+            <a href="#inputs" className="block text-foreground hover:text-primary">ValidationMessage</a>
+          </div>
+          <div className="space-y-1">
+            <div className="font-semibold text-xs text-muted-foreground mb-2">Data Display</div>
+            <a href="#table" className="block text-foreground hover:text-primary">Table</a>
+            <a href="#table" className="block text-foreground hover:text-primary">TableActionButton</a>
+            <a href="#search" className="block text-foreground hover:text-primary">Search</a>
+            <a href="#search" className="block text-foreground hover:text-primary">SearchV3</a>
+          </div>
+          <div className="space-y-1">
+            <div className="font-semibold text-xs text-muted-foreground mb-2">Navigation</div>
+            <a href="#tabs" className="block text-foreground hover:text-primary">Tabs</a>
+            <a href="#pageheader" className="block text-foreground hover:text-primary">PageHeader</a>
+            <a href="#page-search-header" className="block text-foreground hover:text-primary">PageSearchHeader</a>
+          </div>
+          <div className="space-y-1">
+            <div className="font-semibold text-xs text-muted-foreground mb-2">UI Elements</div>
+            <a href="#tags" className="block text-foreground hover:text-primary">Tag</a>
+            <a href="#pills" className="block text-foreground hover:text-primary">Pill</a>
+            <a href="#status-pills" className="block text-foreground hover:text-primary">StatusPill</a>
+            <span className="block text-foreground">Divider</span>
+            <a href="#tooltips" className="block text-foreground hover:text-primary">Tooltip</a>
+          </div>
+          <div className="space-y-1">
+            <div className="font-semibold text-xs text-muted-foreground mb-2">Advanced</div>
+            <span className="block text-muted-foreground">TargetingRuleBuilder</span>
+            <span className="block text-muted-foreground">TargetingCategoryCard</span>
+            <span className="block text-muted-foreground">RuleRow</span>
+            <span className="block text-muted-foreground">RuleGroup</span>
+          </div>
         </div>
+      </div>
 
+      {/* Components */}
+      <div className="space-y-12">
         {/* Buttons & Actions */}
         <section id="buttons" className="space-y-6">
           <h3 className="text-xl font-semibold text-foreground">Buttons & Actions</h3>
