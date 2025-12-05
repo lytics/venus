@@ -1,34 +1,137 @@
+"use client";
+
 import Link from "next/link";
 import { AppLogo } from "@/components/app-logo";
+import { LayoutGrid, AppWindow, Code, Copy, Check } from "lucide-react";
+import { useState } from "react";
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="absolute top-3 right-3 p-1.5 rounded hover:bg-white/10 transition-colors text-gray-400 hover:text-white"
+      title="Copy to clipboard"
+    >
+      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+    </button>
+  );
+}
+
+function CodeBlock({ children, copyText }: { children: React.ReactNode; copyText: string }) {
+  return (
+    <div className="relative bg-gray-900 rounded text-sm font-mono text-left overflow-x-auto">
+      <CopyButton text={copyText} />
+      <pre className="p-4 pr-12 text-gray-100">{children}</pre>
+    </div>
+  );
+}
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex items-center justify-center relative">
-      <div className="text-center">
-        <div className="flex justify-center">
-          <AppLogo size={48} className="text-primary" collapsed={true} />
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16">
+      {/* Hero Section */}
+      <div className="text-center mb-12">
+        <div className="flex justify-center mb-4">
+          <AppLogo size={64} className="text-primary" collapsed={true} />
         </div>
+        <h1 className="text-4xl font-bold tracking-tight mb-2">VenusCN</h1>
+        <p className="text-[color:var(--color-body)]">
+          ShadCN/UI-based Contentstack Venus Clone
+        </p>
+      </div>
 
-        <h1 className="text-4xl tracking-tight mt-8 font-bold">
-          Playground
-        </h1>
+      {/* Action Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full mb-12">
+        {/* Browse Components */}
+        <Link
+          href="/primatives"
+          className="group p-6 rounded border border-[color:var(--color-border)] hover:border-primary hover:shadow-md transition-all bg-white"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 rounded bg-[color:var(--color-surface-purple)] text-primary">
+              <LayoutGrid className="w-5 h-5" />
+            </div>
+            <h2 className="font-semibold text-lg">Browse Components</h2>
+          </div>
+          <p className="text-[color:var(--color-body)] text-sm">
+            Buttons, inputs, tables, and 24 more production-ready components
+          </p>
+        </Link>
 
-        {/* Gallery Links - Route groups don't change URLs */}
-        <div className="flex justify-center gap-3 mt-16 flex-wrap">
-          <Link
-            href="/primatives"
-            className="inline-flex items-center justify-center gap-2 font-bold rounded-[4px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap bg-[color:var(--color-surface-purple)] text-primary border !border-default-primary hover:bg-venus-primary-light hover:!border-default-primary-active hover:text-primary-active active:bg-venus-primary-light focus:ring-venus-primary/50 text-base px-6 h-10"
-          >
-            Primatives
-          </Link>
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center justify-center gap-2 font-bold rounded-[4px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap bg-[color:var(--color-surface-purple)] text-primary border !border-default-primary hover:bg-venus-primary-light hover:!border-default-primary-active hover:text-primary-active active:bg-venus-primary-light focus:ring-venus-primary/50 text-base px-6 h-10"
-          >
-            Dashboard
-          </Link>
+        {/* Explore Demo */}
+        <Link
+          href="/dashboard"
+          className="group p-6 rounded border border-[color:var(--color-border)] hover:border-primary hover:shadow-md transition-all bg-white"
+        >
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 rounded bg-[color:var(--color-surface-purple)] text-primary">
+              <AppWindow className="w-5 h-5" />
+            </div>
+            <h2 className="font-semibold text-lg">Explore Demo</h2>
+          </div>
+          <p className="text-[color:var(--color-body)] text-sm">
+            See Venus in a real application context with working examples
+          </p>
+        </Link>
+
+        {/* Use in Your Project */}
+        <div className="p-6 rounded border border-[color:var(--color-border)] bg-white">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 rounded bg-[color:var(--color-surface-purple)] text-primary">
+              <Code className="w-5 h-5" />
+            </div>
+            <h2 className="font-semibold text-lg">Use in Your Project</h2>
+          </div>
+          <p className="text-[color:var(--color-body)] text-sm">
+            Import Venus components into your React application
+          </p>
         </div>
       </div>
+
+      {/* Quick Start Section */}
+      <div className="max-w-2xl w-full mb-12">
+        <h3 className="text-sm font-semibold text-[color:var(--color-heading)] uppercase tracking-wide mb-4">
+          Quick Start
+        </h3>
+
+        <div className="space-y-3">
+          <CodeBlock copyText="pnpm add @contentstack/venuscn">
+            <span className="text-gray-500"># Install from npm</span>
+            {"\n"}pnpm add @contentstack/venuscn
+          </CodeBlock>
+
+          <CodeBlock
+            copyText={`import { Button, Input, Field } from "@contentstack/venuscn"
+import "@contentstack/venuscn/styles"`}
+          >
+            <span className="text-gray-500">// Import components and styles</span>
+            {"\n"}
+            <span className="text-purple-400">import</span>
+            {" { Button, Input, Field } "}
+            <span className="text-purple-400">from</span>
+            {" "}
+            <span className="text-green-400">&quot;@contentstack/venuscn&quot;</span>
+            {"\n"}
+            <span className="text-purple-400">import</span>
+            {" "}
+            <span className="text-green-400">&quot;@contentstack/venuscn/styles&quot;</span>
+          </CodeBlock>
+        </div>
+
+        <p className="text-xs text-[color:var(--color-body)] mt-3">
+          For local development, clone the repo and use{" "}
+          <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">pnpm link</code>
+        </p>
+      </div>
+
     </div>
   );
 }
