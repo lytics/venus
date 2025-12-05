@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button, Input, FieldLabel } from "@contentstack/venuscn"
 import {
   Card,
   CardContent,
@@ -9,8 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
 
 export function SignupForm({
@@ -37,15 +35,15 @@ export function SignupForm({
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="first-name">First name</Label>
+                <FieldLabel htmlFor="first-name">First name</FieldLabel>
                 <Input id="first-name" placeholder="Max" required />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="last-name">Last name</Label>
+                <FieldLabel htmlFor="last-name">Last name</FieldLabel>
                 <Input id="last-name" placeholder="Robinson" required />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
                   type="email"
@@ -54,13 +52,13 @@ export function SignupForm({
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
+                <FieldLabel htmlFor="password">Password</FieldLabel>
                 <Input id="password" type="password" />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" variant="primary" className="w-full">
                 Create an account
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button variant="secondary" className="w-full">
                 Sign up with Google
               </Button>
             </div>

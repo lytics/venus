@@ -45,8 +45,10 @@ export function ProjectCard({
 
         {/* Stack label */}
         <div className="flex items-center gap-1.5 mb-8">
+          {/* TODO: Add --color-icon-muted token for #697B9B */}
           <Layers3 className="h-3.5 w-3.5 text-[#697B9B]" />
           <span className="text-xs font-medium">
+            {/* TODO: Add --color-icon-muted token for #697B9B */}
             <span className="text-[#697B9B]">Stack: </span>
             <span className="text-[#C2185B]">{stackName}</span>
           </span>
@@ -58,12 +60,14 @@ export function ProjectCard({
             <p className="text-sm font-bold text-title mb-1">
               {activeExperiences}
             </p>
+            {/* TODO: Add --color-icon-muted token for #697B9B */}
             <p className="text-xs text-[#697B9B] font-medium">Active Experiences</p>
           </div>
           <div className="flex-1 pl-4 text-center">
             <p className="text-sm font-bold text-title mb-1">
               {audiences}
             </p>
+            {/* TODO: Add --color-icon-muted token for #697B9B */}
             <p className="text-xs text-[#697B9B] font-medium">Audiences</p>
           </div>
         </div>
@@ -71,8 +75,9 @@ export function ProjectCard({
 
       {/* Date - light grey background as separate section */}
       <div className="flex items-center justify-end gap-1.5 bg-gray-100 px-4 py-4">
+        {/* TODO: Add --color-icon-muted token for #697B9B */}
         <Clock className="h-4 w-4 text-[#697B9B]" />
-        <span className="text-xs text-[#475161] font-medium">{date}</span>
+        <span className="text-xs text-[color:var(--color-heading)] font-medium">{date}</span>
       </div>
     </Card>
   )

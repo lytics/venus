@@ -283,7 +283,11 @@
 
   /* Surface Colors (from dashboard) */
   --color-surface-purple: #F9F8FF;      /* Card icon background - EXACT from dashboard */
-  --color-surface-gray: #F7F9FC;         /* Light backgrounds, headers, hovers */
+  --color-surface-blue: #F1F6FF;        /* Very light blue background - used in personalize nav */
+  --color-surface-gray: #F7F9FC;        /* Light backgrounds, headers, hovers */
+
+  /* Accent Colors */
+  --color-accent-blue: #6B7CF2;         /* Accent blue - used in app launcher */
 
   /* Gray Scale (mapped to dashboard colors) */
   --color-gray-50: #FAFBFC;
@@ -718,9 +722,17 @@
   color: var(--color-primary);
 }
 
+.text-accent-blue {
+  color: var(--color-accent-blue);
+}
+
 /* Backgrounds */
 .bg-surface-purple {
   background-color: var(--color-surface-purple);
+}
+
+.bg-surface-blue {
+  background-color: var(--color-surface-blue);
 }
 
 .bg-surface-gray {

@@ -3,13 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import { AdminNav } from "@/components/admin-nav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Button, Input, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@contentstack/venuscn";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import { Copy, Check, RefreshCw, Square, LayoutGrid, AlertTriangle } from "lucide-react";
 import * as LucideIcons from "lucide-react";
@@ -345,8 +342,8 @@ export default function IconsPage() {
                   <LayoutGrid className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <Button
-                  variant="outline"
-                  size="sm"
+                  variant="secondary"
+                  size="small"
                   onClick={scanUsedIcons}
                   disabled={isScanning}
                 >
@@ -380,7 +377,7 @@ export default function IconsPage() {
               {(searchQuery || categoryFilter !== "All") && (
                 <Button
                   variant="ghost"
-                  size="sm"
+                  size="small"
                   onClick={() => {
                     setSearchQuery("");
                     setCategoryFilter("All");
@@ -400,8 +397,8 @@ export default function IconsPage() {
                       Non-Curated Icons ({nonCuratedUsedIcons.length})
                     </div>
                     <Button
-                      variant="outline"
-                      size="sm"
+                      variant="secondary"
+                      size="small"
                       onClick={addToCuratedList}
                       disabled={isFixing}
                     >
@@ -484,8 +481,8 @@ export default function IconsPage() {
                           </button>
 
                           <Button
-                            variant="outline"
-                            size="sm"
+                            variant="secondary"
+                            size="small"
                             className="w-auto text-xs h-7"
                             onClick={() => copyToClipboard(importStatement, iconName, 'import')}
                           >
@@ -567,8 +564,8 @@ export default function IconsPage() {
                           </button>
 
                           <Button
-                            variant="outline"
-                            size="sm"
+                            variant="secondary"
+                            size="small"
                             className="w-auto text-xs h-7"
                             onClick={() => copyToClipboard(importStatement, iconName, 'import')}
                           >

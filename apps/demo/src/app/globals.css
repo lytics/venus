@@ -276,13 +276,13 @@
     color: hsl(var(--foreground));
   }
 
-  /* Chart colors */
+  /* Chart colors - using design tokens where possible */
   :root {
-    --chart-1: #8D70EF;
-    --chart-2: #3B82F6;
-    --chart-3: #48D1A0;
-    --chart-4: #C478B9;
-    --chart-5: #7DD3FC;
+    --chart-1: #8D70EF;  /* TODO: Could use primary variation */
+    --chart-2: #3B82F6;  /* Using info blue */
+    --chart-3: #48D1A0;  /* TODO: Could use success variation */
+    --chart-4: #C478B9;  /* TODO: Add accent pink token */
+    --chart-5: #7DD3FC;  /* TODO: Add accent light blue token */
 
     /* Gradient variables for animations */
     --gradient-from: var(--searchaf-4);
@@ -294,11 +294,11 @@
   }
 
   .dark {
-    --chart-1: #A78BFA;
-    --chart-2: #60A5FA;
-    --chart-3: #5BE4B3;
-    --chart-4: #D48BCC;
-    --chart-5: #93E5FF;
+    --chart-1: #A78BFA;  /* TODO: Could use primary variation */
+    --chart-2: #60A5FA;  /* Using info blue */
+    --chart-3: #5BE4B3;  /* TODO: Could use success variation */
+    --chart-4: #D48BCC;  /* TODO: Add accent pink token */
+    --chart-5: #93E5FF;  /* TODO: Add accent light blue token */
 
     /* Dark mode glow variables */
     --glow-color-1: var(--searchaf-6);
@@ -768,13 +768,13 @@ select::placeholder {
 }
 
 .project-settings-drawer input[type="range"]::-webkit-slider-runnable-track {
-  background: #e4e4e7;
+  background: var(--gray-4);  /* Using gray-400 token */
   height: 8px;
   border-radius: 4px;
 }
 
 .project-settings-drawer input[type="range"]::-moz-range-track {
-  background: #e4e4e7;
+  background: var(--gray-4);  /* Using gray-400 token */
   height: 8px;
   border-radius: 4px;
 }
@@ -814,28 +814,28 @@ select::placeholder {
 
 /* Dark mode slider - use lighter track for visibility */
 .dark .project-settings-drawer input[type="range"]::-webkit-slider-runnable-track {
-  background: #3f3f46;
+  background: var(--gray-5);  /* Using gray-500 token for dark mode */
 }
 
 .dark .project-settings-drawer input[type="range"]::-moz-range-track {
-  background: #3f3f46;
+  background: var(--gray-5);  /* Using gray-500 token for dark mode */
 }
 
 /* Neutral secondary buttons that don't change with theme colors */
 .project-settings-drawer button[data-variant="secondary"] {
-  background-color: #f4f4f5;
-  color: #71717a;
+  background-color: var(--gray-2);  /* Using gray-100 token */
+  color: var(--gray-7);  /* Using gray-600 token */
 }
 
 .project-settings-drawer button[data-variant="secondary"]:hover {
-  background-color: #e4e4e7;
+  background-color: var(--gray-4);  /* Using gray-400 token */
 }
 
 .dark .project-settings-drawer button[data-variant="secondary"] {
-  background-color: #27272a;
-  color: #a1a1aa;
+  background-color: var(--gray-4);  /* Using gray-400 token (dark mode) */
+  color: var(--gray-6);  /* Using gray-500 token (dark mode) */
 }
 
 .dark .project-settings-drawer button[data-variant="secondary"]:hover {
-  background-color: #3f3f46;
+  background-color: var(--gray-5);  /* Using gray-500 token (dark mode) */
 }

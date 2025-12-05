@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { VenusLogo } from "@/components/venus-logo"
-import { Button } from "@/components/ui/button"
+import { Button } from "@contentstack/venuscn"
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
 import { Menu, Sun, Moon } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -90,19 +90,17 @@ export function AdminNav() {
                 {adminNavigationTabs.map((tab) => {
                   const isActive = pathname === tab.href;
                   return (
-                    <Button
+                    <Link
                       key={tab.id}
-                      variant="ghost"
-                      size="sm"
+                      href={tab.href}
                       className={cn(
-                        "h-8 px-4 text-sm",
+                        "inline-flex items-center justify-center h-8 px-4 text-sm rounded font-semibold transition-colors",
                         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                         isActive && "bg-sidebar-active text-sidebar-active-foreground font-medium"
                       )}
-                      asChild
                     >
-                      <Link href={tab.href}>{tab.label}</Link>
-                    </Button>
+                      {tab.label}
+                    </Link>
                   );
                 })}
               </nav>
@@ -112,7 +110,7 @@ export function AdminNav() {
                 {/* Theme toggle */}
                 <Button
                   variant="ghost"
-                  size="sm"
+                  size="small"
                   className="h-8 w-8 p-0"
                   onClick={toggleTheme}
                   title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
@@ -128,7 +126,7 @@ export function AdminNav() {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      size="sm"
+                      size="small"
                       className="h-8 w-8 p-0"
                     >
                       <Menu className="h-4 w-4" />

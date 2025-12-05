@@ -17,13 +17,13 @@ export default function HomePage() {
         <div className="flex justify-center gap-3 mt-16 flex-wrap">
           <Link
             href="/primatives"
-            className="inline-flex items-center justify-center gap-2 font-bold rounded-[4px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap bg-[#F9F8FF] text-primary border !border-default-primary hover:bg-venus-primary-light hover:!border-default-primary-active hover:text-primary-active active:bg-venus-primary-light focus:ring-venus-primary/50 text-base px-6 h-10"
+            className="inline-flex items-center justify-center gap-2 font-bold rounded-[4px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap bg-[color:var(--color-surface-purple)] text-primary border !border-default-primary hover:bg-venus-primary-light hover:!border-default-primary-active hover:text-primary-active active:bg-venus-primary-light focus:ring-venus-primary/50 text-base px-6 h-10"
           >
             Primatives
           </Link>
           <Link
             href="/dashboard"
-            className="inline-flex items-center justify-center gap-2 font-bold rounded-[4px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap bg-[#F9F8FF] text-primary border !border-default-primary hover:bg-venus-primary-light hover:!border-default-primary-active hover:text-primary-active active:bg-venus-primary-light focus:ring-venus-primary/50 text-base px-6 h-10"
+            className="inline-flex items-center justify-center gap-2 font-bold rounded-[4px] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap bg-[color:var(--color-surface-purple)] text-primary border !border-default-primary hover:bg-venus-primary-light hover:!border-default-primary-active hover:text-primary-active active:bg-venus-primary-light focus:ring-venus-primary/50 text-base px-6 h-10"
           >
             Dashboard
           </Link>

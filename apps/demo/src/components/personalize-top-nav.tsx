@@ -39,6 +39,7 @@ export function PersonalizeTopNav() {
   const parentSection = getParentSection()
 
   return (
+    // TODO: Add --color-surface-blue token for #F1F6FF
     <div className="bg-[#F1F6FF] px-7 h-8 flex items-center border-b border-gray-200">
       <Breadcrumb>
         <BreadcrumbList className="text-xs">
@@ -46,7 +47,7 @@ export function PersonalizeTopNav() {
             <BreadcrumbLink asChild>
               <button
                 onClick={handleOrgClick}
-                className="flex items-center gap-2 hover:opacity-80 transition-opacity text-[#475161]"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity text-[color:var(--color-heading)]"
               >
                 <Image
                   src="/images/organization.svg"
@@ -65,7 +66,7 @@ export function PersonalizeTopNav() {
                 <BreadcrumbLink asChild>
                   <button
                     onClick={() => router.push(parentSection.href)}
-                    className="text-[#475161] hover:opacity-80 transition-opacity"
+                    className="text-[color:var(--color-heading)] hover:opacity-80 transition-opacity"
                   >
                     {parentSection.label}
                   </button>

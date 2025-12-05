@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useRouter } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Button } from "@/components/ui/button"
+import { Button } from "@contentstack/venuscn"
 import { Star, Info } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -45,9 +45,10 @@ export function AppLauncher() {
       <PopoverTrigger asChild>
         <Button
           variant="ghost"
-          size="sm"
+          size="small"
           className={cn(
-            "h-10 w-10 p-0 transition-colors text-[#475161] cursor-pointer",
+            "h-10 w-10 p-0 transition-colors text-[color:var(--color-heading)] cursor-pointer",
+            // TODO: Add --color-accent-blue and --color-surface-blue tokens for #6B7CF2
             open && "bg-[#6B7CF2]/10 text-[#6B7CF2]"
           )}
         >
@@ -75,7 +76,7 @@ export function AppLauncher() {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-[360px] p-2 bg-[#F9F8FF] shadow-2xl"
+        className="w-[360px] p-2 bg-[color:var(--color-surface-purple)] shadow-2xl"
         align="end"
         alignOffset={-35}
         sideOffset={8}
@@ -90,7 +91,7 @@ export function AppLauncher() {
                 onClick={() => handleAppClick(app)}
                 className={cn(
                   "flex flex-col items-center gap-2.5 p-2.5 rounded-md transition-colors",
-                  "hover:bg-[#F7F9FC] active:bg-gray-100",
+                  "hover:bg-[color:var(--color-surface-gray)] active:bg-gray-100",
                   "text-center cursor-pointer"
                 )}
               >
@@ -106,7 +107,8 @@ export function AppLauncher() {
                 <span
                   className={cn(
                     "text-xs font-medium leading-tight",
-                    index === 0 ? "text-[#6B7CF2]" : "text-[#1F2937]"
+                    // TODO: Add --color-accent-blue token for #6B7CF2
+                    index === 0 ? "text-[#6B7CF2]" : "text-[color:var(--color-title)]"
                   )}
                 >
                   {app.name}
@@ -119,8 +121,9 @@ export function AppLauncher() {
         {/* Favorites Section Container */}
         <div className="bg-white rounded-lg p-3 mt-3">
           <div className="flex items-center gap-2">
+            {/* TODO: Add --color-accent-blue token for #6B7CF2 */}
             <Star className="w-4 h-4 text-[#6B7CF2]" strokeWidth={2} />
-            <span className="text-sm font-medium text-[#1F2937]">Favorites</span>
+            <span className="text-sm font-medium text-[color:var(--color-title)]">Favorites</span>
             <Info className="w-3.5 h-3.5 text-[#6B7CF2]" strokeWidth={2} />
           </div>
         </div>

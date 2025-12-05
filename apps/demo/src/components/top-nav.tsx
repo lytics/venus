@@ -5,15 +5,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { AppLogo } from "@/components/app-logo"
-import { Button } from "@/components/ui/button"
+import { Button } from "@contentstack/venuscn"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { ChevronDown, GalleryHorizontal, BookOpen, LifeBuoy, LogOut, FileText, Package, Code, Layout, Palette, Menu, Sparkles, Bell, CircleHelp, Grid3x3, Home } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image from "next/image"
 import { AppLauncher } from "@/components/app-launcher"
-import { Dropdown as VenusDropdown } from "@contentstack/venuscn"
-
 // Inline SVG icons for Personalize nav (using currentColor for proper state inheritance)
 const ExperiencesIcon = () => (
   <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
@@ -145,8 +143,8 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <div className="flex items-center gap-2">
               <Button
                 variant="ghost"
-                size="icon"
-                className="h-7 w-7"
+                size="small"
+                className="h-7 w-7 p-0"
                 onClick={() => setMobileMenuOpen(true)}
               >
                 <Menu className="h-4 w-4" />
@@ -162,7 +160,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <div className={cn("flex items-center gap-3", !productBranding && "ml-4")}>
               {productBranding ? (
                 <>
-                  <Link href="/personalize" className="flex items-center px-2 py-1 rounded transition-colors hover:bg-[#F7F9FC]">
+                  <Link href="/personalize" className="flex items-center px-2 py-1 rounded transition-colors hover:bg-[color:var(--color-surface-gray)]">
                     <Image
                       src={productBranding.iconPath}
                       alt={productBranding.productName}
@@ -194,10 +192,10 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                     <Link
                       href="/personalize/experiences"
                       className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[#F7F9FC]",
+                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
                         pathname.startsWith('/personalize/experiences')
-                          ? "text-[#6C5CE7]"
-                          : "text-[#475161]"
+                          ? "text-[color:var(--color-primary)]"
+                          : "text-[color:var(--color-heading)]"
                       )}
                     >
                       <ExperiencesIcon />
@@ -206,10 +204,10 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                     <Link
                       href="/personalize/targets"
                       className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[#F7F9FC]",
+                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
                         pathname.startsWith('/personalize/targets')
-                          ? "text-[#6C5CE7]"
-                          : "text-[#475161]"
+                          ? "text-[color:var(--color-primary)]"
+                          : "text-[color:var(--color-heading)]"
                       )}
                     >
                       <AudiencesIcon />
@@ -218,24 +216,24 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                     <Link
                       href="/personalize/attributes"
                       className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[#F7F9FC]",
+                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
                         pathname.startsWith('/personalize/attributes')
-                          ? "text-[#6C5CE7]"
-                          : "text-[#475161]"
+                          ? "text-[color:var(--color-primary)]"
+                          : "text-[color:var(--color-heading)]"
                       )}
                     >
                       <AttributesIcon />
                       Attributes
                     </Link>
                     <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[#475161] cursor-not-allowed rounded"
+                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
                       disabled
                     >
                       <EventsIcon />
                       Events
                     </button>
                     <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[#475161] cursor-not-allowed rounded"
+                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
                       disabled
                     >
                       <SettingsIcon />
@@ -255,12 +253,12 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                           <DropdownMenuTrigger asChild>
                             <Button
                               variant="ghost"
-                              size="sm"
+                              size="small"
                               data-nav-item
                               data-active={isActive}
                               className={cn(
                                 "h-8 px-4 text-sm gap-1",
-                                "hover:bg-[#F7F9FC] hover:text-sidebar-accent-foreground",
+                                "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
                                 isActive && "text-sidebar-active-foreground font-medium"
                               )}
                             >
@@ -283,21 +281,19 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
 
                     // Simple link item
                     return (
-                      <Button
+                      <Link
                         key={item.label}
-                        variant="ghost"
-                        size="sm"
+                        href={item.href}
                         data-nav-item
                         data-active={isActive}
                         className={cn(
-                          "h-8 px-4 text-sm",
-                          "hover:bg-[#F7F9FC] hover:text-sidebar-accent-foreground",
+                          "inline-flex items-center justify-center h-8 px-4 text-sm rounded font-semibold transition-colors",
+                          "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
                           isActive && "text-sidebar-active-foreground font-medium"
                         )}
-                        asChild
                       >
-                        <Link href={item.href}>{item.label}</Link>
-                      </Button>
+                        {item.label}
+                      </Link>
                     );
                   })}
                   </>
@@ -311,7 +307,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             {/* AI/Magic Features */}
             <Button
               variant="ghost"
-              size="sm"
+              size="small"
               className="h-10 w-10 p-0"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-8">
@@ -341,10 +337,11 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             {/* Notifications */}
             <Button
               variant="ghost"
-              size="sm"
+              size="small"
               className="h-10 w-10 p-0"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
+                {/* TODO: Add --color-icon-muted token for #697B9B */}
                 <path d="M19.3 14.604V8.677C19.3 4.437 16.027 1 11.994 1 7.962 1 4.691 4.438 4.691 8.677v5.927c0 1.073-.83 1.938-1.845 1.938-1.026 0-1.846.864-1.846 1.937C1 19.323 1.644 20 2.445 20h19.11c.8 0 1.445-.677 1.445-1.52 0-1.074-.83-1.938-1.846-1.938-1.035.01-1.855-.865-1.855-1.938zM11.994 23C10.885 23 10 22.313 10 21.473V20h4v1.473c-.012.85-.909 1.527-2.006 1.527z" stroke="#697B9B" strokeWidth="2" strokeMiterlimit="10"/>
               </svg>
             </Button>
@@ -352,10 +349,11 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             {/* Help */}
             <Button
               variant="ghost"
-              size="sm"
+              size="small"
               className="h-10 w-10 p-0"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
+                {/* TODO: Add --color-icon-muted token for #697B9B */}
                 <circle cx="12" cy="12" r="11" stroke="#697B9B" strokeWidth="2"/>
                 <path d="M10.626 14.033c0-1.514.96-2.45 1.823-3.35.665-.707 1.262-1.34 1.262-2.167 0-.973-.502-1.606-1.599-1.606-1.114 0-1.892.844-2.013 2.166H8C8.13 6.57 9.797 5 12.216 5 14.791 5 16 6.496 16 8.35c0 1.36-.777 2.24-1.581 3.085-.847.863-1.71 1.644-1.762 2.718v.615h-2.013v-.735h-.018zm-.483 3.498c0-.844.665-1.496 1.477-1.496.795 0 1.443.652 1.443 1.496 0 .826-.648 1.469-1.443 1.469a1.466 1.466 0 01-1.477-1.469z" fill="#697B9B"/>
               </svg>
@@ -484,7 +482,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                               "block px-3 py-2 text-sm rounded-md transition-colors",
                               childActive
                                 ? "text-sidebar-active-foreground font-medium"
-                                : "text-foreground hover:bg-[#F7F9FC] hover:text-sidebar-accent-foreground"
+                                : "text-foreground hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground"
                             )}
                           >
                             {child.label}
@@ -505,7 +503,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                       "block px-3 py-2 text-sm rounded-md transition-colors",
                       isActive
                         ? "text-sidebar-active-foreground font-medium"
-                        : "text-foreground hover:bg-[#F7F9FC] hover:text-sidebar-accent-foreground"
+                        : "text-foreground hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground"
                     )}
                   >
                     {item.label}

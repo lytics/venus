@@ -90,6 +90,7 @@ export function PersonalizeSidebar() {
               key={item.id}
               className={cn(
                 'flex items-center justify-center p-2 transition-colors rounded-lg cursor-pointer',
+                // TODO: Add --color-surface-light-gray token for #F5F6F8
                 isActive && 'bg-[#F5F6F8]'
               )}
               onMouseEnter={() => setHoveredItem(item.id)}
@@ -111,6 +112,7 @@ export function PersonalizeSidebar() {
             href={item.href}
             className={cn(
               'flex items-center justify-center p-2 transition-colors rounded-lg',
+              // TODO: Add --color-surface-light-gray token for #F5F6F8
               isActive && 'bg-[#F5F6F8]'
             )}
             onMouseEnter={() => setHoveredItem(item.id)}

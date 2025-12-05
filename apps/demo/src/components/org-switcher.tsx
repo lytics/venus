@@ -3,7 +3,7 @@
 import * as React from "react"
 import { ChevronsUpDown } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@contentstack/venuscn"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ export function OrgSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2 h-8 px-3 min-w-24 hover:bg-accent/50">
+        <Button variant="ghost" size="small" className="gap-2 h-8 px-3 min-w-24 hover:bg-accent/50">
           <span className="font-medium">{activeOrg}</span>
           <ChevronsUpDown className="h-4 w-4 opacity-50" />
         </Button>
