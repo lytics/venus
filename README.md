@@ -1,13 +1,19 @@
-# Venus Design System Monorepo
+# (Unofficial) Venus Design System Monorepo
 
-A component library and working demo app that helps you build interfaces matching the Contentstack design system.
+A component library and working demo app that helps you prototype interfaces matching the Contentstack design system. For Vibe coding, marketplace app building and other use cases.
 
-Whether you're building new features, prototyping designs, or just exploring what's available - this repo gives you the components and patterns to build consistent, production-ready interfaces.
+It's pretty straightforward——
+
+Includes cloned Venus components (ShadCN/UI and in the future, MUI) and a demo app (just a personalize pathway right now from a personal protoype but i'll continue to expand it). There are also "library" pages with the component examples.
+
+How I'd use it?—— Things should mostly "work"— YMMV based on personal workflow, but how I usually work with this repo is to make sure that Claude/whatever knows to reference the Primatives Showcase in the Component library as examples of what to do. Ultimately its just a set of components you can use to build things.
+
+**The demo is a WIP and only has a personalize path built out, but does have a lot of reference components/code/architecture**
 
 ## What's Inside
 
 **Component Library** - Pre-built React components that match Contentstack's Venus design system
-- 27+ production-ready components (buttons, forms, tables, navigation, etc.)
+- Cloned base components (buttons, forms, tables, navigation, etc.)
 - Built on Tailwind CSS v4 + shadcn/ui + Radix UI
 - TypeScript support with full type definitions
 - Design token system for consistency
@@ -35,7 +41,7 @@ pnpm dev
 
 Open **http://localhost:3000** and explore the demo.
 
-**New here?** Read the [Getting Started Guide](./GETTING_STARTED.md) for a detailed walkthrough.
+**Questions?** Read the [Getting Started Guide](./GETTING_STARTED.md) for a detailed walkthrough. (Written by AI so hopefully not terrible)
 
 ## Documentation
 
