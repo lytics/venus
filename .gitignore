@@ -47,5 +47,8 @@ test-results/
 # Test screenshots
 apps/demo/tests/screenshots/
 
-# Claude Code
+# Claude Code / MCP
 .claude/
+.claudeignore
+.mcp.json
+playwright-mcp-config.json
