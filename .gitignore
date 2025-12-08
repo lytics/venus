@@ -44,5 +44,8 @@ playwright-report/
 test-results/
 .playwright-mcp/
 
+# Test screenshots
+apps/demo/tests/screenshots/
+
 # Claude Code
 .claude/
