@@ -134,7 +134,7 @@ export default function HomePage() {
           <CodeBlock
             copyText={`import { Button, Input, Field } from "@contentstack/venuscn"`}
           >
-            <span className="text-gray-500">// Import Venus components</span>
+            <span className="text-gray-500">{"// Import Venus components"}</span>
             {"\n"}
             <span className="text-purple-400">import</span>
             {" { Button, Input, Field } "}
