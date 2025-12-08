@@ -1,12 +1,16 @@
 # (Unofficial) Venus Design System Monorepo
 
-A component library and working demo app that helps you prototype interfaces matching the Contentstack design system. For Vibe coding, marketplace app building and other use cases.
+**Please note: This is unofficial— if you are building for the core product, please follow all guidelines for venus use**
+
+OFFICIAL VENUS DOCUMENTATION: https://venus-storybook.contentstack.com/
+
+**What this is:** A component library and working demo app that helps you prototype interfaces matching the Contentstack design system. For Vibe coding, marketplace app building and other use cases.
 
 It's pretty straightforward——
 
 Includes cloned Venus components (ShadCN/UI and in the future, MUI) and a demo app (just a personalize pathway right now from a personal protoype but i'll continue to expand it). There are also "library" pages with the component examples.
 
-How I'd use it?—— Things should mostly "work"— YMMV based on personal workflow, but how I usually work with this repo is to make sure that Claude/whatever knows to reference the Primatives Showcase in the Component library as examples of what to do. Ultimately its just a set of components you can use to build things.
+**How its meant to be used** Things should mostly "work"— YMMV based on personal workflow, but how I'd usually work with this repo is to make sure that Claude/whatever knows to reference the Primatives Showcase in the Component library as examples of what to do. Ultimately its just a set of components you can use to build things- You should be able to use them either to manually or vibe-based build prototypes etc.
 
 **The demo is a WIP and only has a personalize path built out, but does have a lot of reference components/code/architecture**
 
