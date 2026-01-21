@@ -86,6 +86,13 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
       };
     }
 
+    if (pathname.startsWith('/lytics')) {
+      return {
+        iconPath: '/images/contentstack-datainsights.svg',
+        productName: 'Data & Insights'
+      };
+    }
+
     return null;
   }, [pathname, productBrandingProp]);
 
@@ -160,7 +167,10 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <div className={cn("flex items-center gap-3", !productBranding && "ml-4")}>
               {productBranding ? (
                 <>
-                  <Link href="/personalize" className="flex items-center px-2 py-1 rounded transition-colors hover:bg-[color:var(--color-surface-gray)]">
+                  <Link
+                    href={pathname.startsWith('/lytics') ? '/lytics' : '/personalize'}
+                    className="flex items-center px-2 py-1 rounded transition-colors hover:bg-[color:var(--color-surface-gray)]"
+                  >
                     <Image
                       src={productBranding.iconPath}
                       alt={productBranding.productName}
@@ -169,8 +179,8 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                       className="h-8 w-auto"
                     />
                   </Link>
-                  {/* Separator - hidden on personalize landing page */}
-                  {pathname !== '/personalize' && (
+                  {/* Separator - hidden on product landing pages */}
+                  {pathname !== '/personalize' && pathname !== '/lytics' && (
                     <div className="h-6 w-px bg-gray-200"></div>
                   )}
                 </>
@@ -184,7 +194,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             {/* Center: Navigation */}
             <div className="flex-1 flex justify-center px-3">
               <div className="w-full flex items-center justify-between">
-                {/* Personalize Navigation or General Navigation */}
+                {/* Personalize Navigation or Lytics Navigation or General Navigation */}
                 <nav className="flex items-center gap-1">
                 {pathname.startsWith('/personalize') && pathname !== '/personalize' ? (
                   // Personalize-specific navigation
@@ -239,6 +249,34 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                       <SettingsIcon />
                       Settings
                     </button>
+                  </>
+                ) : pathname.startsWith('/lytics') && pathname !== '/lytics' ? (
+                  // Lytics-specific navigation
+                  <>
+                    <Link
+                      href="/lytics/audiences"
+                      className={cn(
+                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
+                        pathname.startsWith('/lytics/audiences')
+                          ? "text-[color:var(--color-primary)]"
+                          : "text-[color:var(--color-heading)]"
+                      )}
+                    >
+                      <AudiencesIcon />
+                      Audiences
+                    </Link>
+                    <Link
+                      href="/lytics/settings"
+                      className={cn(
+                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
+                        pathname.startsWith('/lytics/settings')
+                          ? "text-[color:var(--color-primary)]"
+                          : "text-[color:var(--color-heading)]"
+                      )}
+                    >
+                      <SettingsIcon />
+                      Settings
+                    </Link>
                   </>
                 ) : (
                   // General navigation
@@ -443,7 +481,11 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             {/* Logo or Product Branding */}
             <div className="flex h-16 items-center border-b px-6">
               {productBranding ? (
-                <Link href="/personalize" onClick={() => setMobileMenuOpen(false)} className="flex items-center -ml-1">
+                <Link
+                  href={pathname.startsWith('/lytics') ? '/lytics' : '/personalize'}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center -ml-1"
+                >
                   <Image
                     src={productBranding.iconPath}
                     alt={productBranding.productName}
