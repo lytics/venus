@@ -1,3 +1,5 @@
+"use client";
+
 import { AppCard } from "@contentstack/venuscn";
 import { MarketplaceHero } from "./components/marketplace-hero";
 import { MarketplaceSection } from "./components/marketplace-section";
