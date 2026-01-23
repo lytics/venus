@@ -102,3 +102,40 @@ export const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionPro
 );
 
 SidebarSection.displayName = "SidebarSection";
+
+export interface SidebarNavItem {
+  label: string;
+  href: string;
+  active?: boolean;
+}
+
+export interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
+  items: SidebarNavItem[];
+}
+
+export const SidebarNav = React.forwardRef<HTMLElement, SidebarNavProps>(
+  ({ className, items, ...props }, ref) => {
+    return (
+      <nav ref={ref} className={cn("flex flex-col", className)} {...props}>
+        {items.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className={cn(
+              "flex items-center h-10 px-2.5",
+              "text-base font-normal leading-4",
+              "transition-colors duration-150",
+              item.active
+                ? "text-[#6C5CE7] border-l-[3px] border-[#6C5CE7] bg-[#F0EDFC]"
+                : "text-[#475161] hover:text-[#6C5CE7] border-l-[3px] border-transparent"
+            )}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    );
+  }
+);
+
+SidebarNav.displayName = "SidebarNav";
