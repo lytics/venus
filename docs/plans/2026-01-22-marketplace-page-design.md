@@ -45,11 +45,13 @@ A collapsible sidebar with nav sections and filter sections.
 | Property | Value |
 |----------|-------|
 | Font size | 12px |
-| Font weight | 700 |
-| Color | #475161 |
+| Font weight | 700 (bold) |
+| Color | #222222 |
 | Padding | 0 10px |
 | Cursor | pointer |
-| Chevron | Up (^) expanded, Down (v) collapsed |
+| Chevron size | 12px × 8px |
+| Chevron color | #647696 |
+| Chevron | Up (^) expanded, Down (v) collapsed, rotates on toggle |
 
 #### Nav Items
 | Property | Value |
@@ -58,8 +60,10 @@ A collapsible sidebar with nav sections and filter sections.
 | Font weight | 400 |
 | Line height | 16px |
 | Height | 40px |
-| Active color | #6C5CE7 |
 | Inactive color | #475161 |
+| Active color | #6C5CE7 |
+| Active border-left | 3px solid #6C5CE7 |
+| Hover color | #6C5CE7 |
 
 #### Checkbox Filter List
 | Property | Value |
@@ -424,6 +428,28 @@ const apps = [
 
 ---
 
+## Hover States
+
+| Element | Normal | Hover |
+|---------|--------|-------|
+| Nav item | #475161 | #6C5CE7 |
+| App card | no shadow | box-shadow: rgba(34,34,34,0.1) 0 8px 20px |
+| Button | #6C5CE7 | slightly darker or opacity |
+| Link | #6C5CE7 | underline |
+| Checkbox | native | native |
+
+---
+
+## Responsive Notes
+
+- Sidebar stays 240px fixed
+- Cards wrap based on available width (flex-wrap)
+- At ~480px viewport, hamburger menu appears
+- Minimum card width: 320px
+- Cards use CSS Grid or Flexbox with wrap
+
+---
+
 ## Notes
 
 - The sidebar toggle button is positioned at the edge between sidebar and main content
@@ -431,3 +457,4 @@ const apps = [
 - Cards should have smooth hover transition (0.15s)
 - Page header bar stays fixed while content scrolls
 - Hero section scrolls with content
+- Sidebar has internal scroll (overflow-y: auto) for long category lists
