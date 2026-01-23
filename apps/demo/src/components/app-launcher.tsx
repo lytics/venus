@@ -17,7 +17,7 @@ interface App {
 
 const apps: App[] = [
   { id: "home", name: "Home", icon: "/images/icon-contentstack-home.svg", href: "/dashboard" },
-  { id: "cms", name: "CMS", icon: "/images/icon-headless-cms.svg", href: "/cms" },
+  { id: "cms", name: "CMS", icon: "/images/icon-headless-cms.svg", href: "/stacks" },
   { id: "personalize", name: "Personalize", icon: "/images/icon-personalize.svg", href: "/personalize" },
   { id: "data-insights", name: "Data & Insights", icon: "/images/dataandinsights.svg", href: "/insights" },
   { id: "automate", name: "Automate", icon: "/images/automate.svg", href: "/automate" },
