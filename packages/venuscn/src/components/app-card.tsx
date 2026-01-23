@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "../lib/utils";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Layers } from "lucide-react";
 
 export interface AppCardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: string;
@@ -9,10 +9,12 @@ export interface AppCardProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: string;
   href?: string;
   onInstall?: () => void;
+  /** Card variant: "icon" shows small centered icon, "banner" shows full-width image */
+  variant?: "icon" | "banner";
 }
 
 export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
-  ({ className, icon, title, subtitle, description, href, onInstall, ...props }, ref) => {
+  ({ className, icon, title, subtitle, description, href, onInstall, variant = "icon", ...props }, ref) => {
     const CardWrapper = href ? 'a' : 'div';
     const wrapperProps = href ? { href } : {};
 
@@ -20,7 +22,8 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
       <CardWrapper
         {...wrapperProps}
         className={cn(
-          "group relative block w-80 h-[246px]",
+          "group relative block w-80",
+          variant === "icon" ? "h-[246px]" : "h-auto",
           "border border-[#DDE3EE] rounded bg-white",
           "transition-shadow duration-150",
           "hover:shadow-[0_8px_20px_rgba(34,34,34,0.1)]",
@@ -32,14 +35,24 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
           ref={ref}
           {...props}
         >
-          {/* Icon Area */}
-          <div className="flex items-center justify-center h-40 bg-[#F7F9FC]">
-            <img
-              src={icon}
-              alt={title}
-              className="w-[72px] h-[72px] object-contain"
-            />
-          </div>
+          {/* Image Area */}
+          {variant === "icon" ? (
+            <div className="flex items-center justify-center h-40 bg-[#F7F9FC]">
+              <img
+                src={icon}
+                alt={title}
+                className="w-[72px] h-[72px] object-contain"
+              />
+            </div>
+          ) : (
+            <div className="w-full h-40 overflow-hidden rounded-t">
+              <img
+                src={icon}
+                alt={title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
 
           {/* Card Body */}
           <div className="p-4">
@@ -48,9 +61,12 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
               <h3 className="text-base font-semibold text-[#212121] leading-6">
                 {title}
               </h3>
-              <p className="text-xs font-normal text-[#6E6B86]">
-                {subtitle}
-              </p>
+              {variant === "icon" && (
+                <p className="flex items-center gap-1 text-xs font-normal text-[#6E6B86]">
+                  <Layers className="w-3 h-3" />
+                  {subtitle}
+                </p>
+              )}
             </div>
 
             {/* Hover State */}

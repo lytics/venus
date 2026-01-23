@@ -452,7 +452,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <Button
               variant="ghost"
               size="small"
-              className="h-10 w-10 p-0"
+              className="h-10 w-10 p-0 focus:ring-0 focus:ring-offset-0"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-8">
                 <path d="M12.7 6.705c.285-.716 1.315-.716 1.599 0l.026.074 1.026 3.37 3.37 1.026c.815.248.815 1.402 0 1.65l-3.37 1.026-1.026 3.37c-.248.815-1.402.815-1.65 0l-1.027-3.37-3.369-1.026c-.815-.248-.815-1.402 0-1.65l3.37-1.027 1.026-3.369.026-.074zm-.015 3.905a.863.863 0 01-.575.575L9.433 12l2.678.815c.241.073.436.247.537.474l.038.1.815 2.679.815-2.679.037-.1a.863.863 0 01.537-.474L17.568 12l-2.679-.815a.863.863 0 01-.574-.575L13.5 7.933l-.815 2.678z" fill="url(#paint0_linear)"/>
@@ -482,7 +482,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <Button
               variant="ghost"
               size="small"
-              className="h-10 w-10 p-0"
+              className="h-10 w-10 p-0 focus:ring-0 focus:ring-offset-0"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
                 {/* TODO: Add --color-icon-muted token for #697B9B */}
@@ -494,7 +494,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <Button
               variant="ghost"
               size="small"
-              className="h-10 w-10 p-0"
+              className="h-10 w-10 p-0 focus:ring-0 focus:ring-offset-0"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
                 {/* TODO: Add --color-icon-muted token for #697B9B */}
@@ -511,7 +511,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="h-8 w-8 p-0 rounded-full cursor-pointer"
+                  className="h-8 w-8 p-0 rounded-full cursor-pointer focus:ring-0 focus:ring-offset-0"
                 >
                   <Avatar className="h-8 w-8 rounded-full">
                     <AvatarImage src={DUMMY_USER.avatar} alt={DUMMY_USER.name} />

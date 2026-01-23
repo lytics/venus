@@ -47,7 +47,7 @@ export function AppLauncher() {
           variant="ghost"
           size="small"
           className={cn(
-            "h-10 w-10 p-0 transition-colors text-[color:var(--color-heading)] cursor-pointer",
+            "h-10 w-10 p-0 transition-colors text-[color:var(--color-heading)] cursor-pointer focus:ring-0 focus:ring-offset-0",
             // TODO: Add --color-accent-blue and --color-surface-blue tokens for #6B7CF2
             open && "bg-[#6B7CF2]/10 text-[#6B7CF2]"
           )}
