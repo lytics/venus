@@ -1,7 +1,8 @@
 import * as React from "react";
+import { Search } from "lucide-react";
 import { cn } from "../lib/utils";
 
-export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
+export interface SidebarProps extends Omit<React.HTMLAttributes<HTMLElement>, 'onToggle'> {
   collapsed?: boolean;
   onToggle?: (collapsed: boolean) => void;
   children?: React.ReactNode;
@@ -139,3 +140,83 @@ export const SidebarNav = React.forwardRef<HTMLElement, SidebarNavProps>(
 );
 
 SidebarNav.displayName = "SidebarNav";
+
+export interface SidebarSearchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {}
+
+export const SidebarSearch = React.forwardRef<HTMLInputElement, SidebarSearchProps>(
+  ({ className, placeholder = "Search", ...props }, ref) => {
+    return (
+      <div className="relative px-2.5 mb-2">
+        <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A0AEC0]" />
+        <input
+          ref={ref}
+          type="text"
+          placeholder={placeholder}
+          className={cn(
+            "w-full h-[34px] pl-8 pr-2.5 rounded",
+            "text-sm font-normal text-[#2D3748]",
+            "placeholder:text-[#A0AEC0]",
+            "border border-[#DDE3EE] bg-white",
+            "focus:outline-none focus:border-[#6C5CE7]",
+            "transition-colors duration-150",
+            className
+          )}
+          {...props}
+        />
+      </div>
+    );
+  }
+);
+
+SidebarSearch.displayName = "SidebarSearch";
+
+export interface SidebarCheckboxItem {
+  id: string;
+  label: string;
+}
+
+export interface SidebarCheckboxListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  items: SidebarCheckboxItem[];
+  selected: string[];
+  onChange: (selected: string[]) => void;
+}
+
+export const SidebarCheckboxList = React.forwardRef<HTMLDivElement, SidebarCheckboxListProps>(
+  ({ className, items, selected, onChange, ...props }, ref) => {
+    const handleToggle = (id: string) => {
+      if (selected.includes(id)) {
+        onChange(selected.filter((s) => s !== id));
+      } else {
+        onChange([...selected, id]);
+      }
+    };
+
+    return (
+      <div ref={ref} className={cn("flex flex-col gap-1 px-2.5", className)} {...props}>
+        {items.map((item) => (
+          <label
+            key={item.id}
+            className="flex items-center gap-2 py-1 cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              checked={selected.includes(item.id)}
+              onChange={() => handleToggle(item.id)}
+              className={cn(
+                "w-[13px] h-[13px] rounded-sm cursor-pointer",
+                "border border-[#475161]",
+                "checked:bg-[#6C5CE7] checked:border-[#6C5CE7]",
+                "focus:outline-none focus:ring-2 focus:ring-[#6C5CE7]/20"
+              )}
+            />
+            <span className="text-base font-normal text-[#000000]">
+              {item.label}
+            </span>
+          </label>
+        ))}
+      </div>
+    );
+  }
+);
+
+SidebarCheckboxList.displayName = "SidebarCheckboxList";

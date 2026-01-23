@@ -140,6 +140,14 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
       };
     }
 
+    if (pathname.startsWith('/marketplace')) {
+      return {
+        iconPath: '/images/contentstack-marketplace.svg',
+        productName: 'Marketplace',
+        href: '/marketplace'
+      };
+    }
+
     return null;
   }, [pathname, productBrandingProp]);
 
@@ -344,6 +352,36 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                     >
                       <CMSSettingsIcon />
                       Settings
+                    </button>
+                  </>
+                ) : pathname.startsWith('/marketplace') ? (
+                  // Marketplace-specific navigation
+                  <>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button
+                          className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] rounded hover:bg-[color:var(--color-surface-gray)]"
+                        >
+                          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
+                            <path d="M14 5.25A2.75 2.75 0 0011.25 8v1.25H7A1.75 1.75 0 005.25 11v14c0 .966.784 1.75 1.75 1.75h18A1.75 1.75 0 0026.75 25V11A1.75 1.75 0 0025 9.25h-4.25V8A2.75 2.75 0 0018 5.25h-4zm5.25 4V8c0-.69-.56-1.25-1.25-1.25h-4c-.69 0-1.25.56-1.25 1.25v1.25h6.5zM7 10.75a.25.25 0 00-.25.25v4.813h18.5V11a.25.25 0 00-.25-.25H7zm18.25 6.563H6.75V25c0 .138.112.25.25.25h18a.25.25 0 00.25-.25v-7.688z" fill="currentColor"/>
+                          </svg>
+                          Manage Apps
+                          <ChevronDown className="w-3 h-3 ml-1" />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="start">
+                        <DropdownMenuItem>Installed Apps</DropdownMenuItem>
+                        <DropdownMenuItem>Private Apps</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                    <button
+                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] rounded hover:bg-[color:var(--color-surface-gray)]"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
+                        <path d="M10.25 10.049a.75.75 0 01.75-.75h10a.75.75 0 010 1.5H11a.75.75 0 01-.75-.75zM11 14.348a.75.75 0 000 1.5h10a.75.75 0 000-1.5H11z" fill="currentColor"/>
+                        <path d="M6.82 26.532a.5.5 0 01-.82-.384V6a1 1 0 011-1h18a1 1 0 011 1v20.049a.5.5 0 01-.845.362L22.5 23.883l-2.628 2.92a.5.5 0 01-.744 0l-2.628-2.92-3.128 2.978a.5.5 0 01-.716-.028L10 23.883l-3.18 2.649zm2.22-3.802a1.5 1.5 0 012.075.15l1.968 2.185 2.383-2.268a1.5 1.5 0 012.149.082l1.885 2.094 1.885-2.094a1.5 1.5 0 012.15-.082l.965.919V6.5h-17v17.513l1.54-1.283z" fill="currentColor"/>
+                      </svg>
+                      Audit Logs
                     </button>
                   </>
                 ) : (

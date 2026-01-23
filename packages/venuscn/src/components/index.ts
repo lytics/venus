@@ -62,3 +62,18 @@ export { Slider } from "./slider";
 export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectScrollUpButton, SelectScrollDownButton, SelectSeparator } from "./select";
 export { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter, DialogClose, DialogOverlay, DialogPortal } from "./dialog";
 export { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from "./sheet";
+export {
+  Sidebar,
+  SidebarSection,
+  SidebarNav,
+  SidebarSearch,
+  SidebarCheckboxList,
+  type SidebarProps,
+  type SidebarSectionProps,
+  type SidebarNavProps,
+  type SidebarNavItem,
+  type SidebarSearchProps,
+  type SidebarCheckboxListProps,
+  type SidebarCheckboxItem,
+} from "./sidebar";
+export { AppCard, type AppCardProps } from "./app-card";
