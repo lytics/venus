@@ -50,3 +50,55 @@ export const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
 );
 
 Sidebar.displayName = "Sidebar";
+
+export interface SidebarSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+  title: string;
+  collapsible?: boolean;
+  defaultOpen?: boolean;
+  children?: React.ReactNode;
+}
+
+export const SidebarSection = React.forwardRef<HTMLDivElement, SidebarSectionProps>(
+  ({ className, title, collapsible = false, defaultOpen = true, children, ...props }, ref) => {
+    const [isOpen, setIsOpen] = React.useState(defaultOpen);
+
+    return (
+      <div ref={ref} className={cn("px-2.5", className)} {...props}>
+        <button
+          type="button"
+          onClick={() => collapsible && setIsOpen(!isOpen)}
+          className={cn(
+            "flex items-center justify-between w-full py-2",
+            // Verified: 14px/600/#475161 (not 12px/700/#222222 as originally spec'd)
+            "text-sm font-semibold text-[#475161] capitalize",
+            collapsible && "cursor-pointer hover:text-[#6C5CE7]",
+            !collapsible && "cursor-default"
+          )}
+          disabled={!collapsible}
+        >
+          <span>{title}</span>
+          {collapsible && (
+            <svg
+              width="12"
+              height="8"
+              viewBox="0 0 12 8"
+              fill="none"
+              className={cn(
+                "transition-transform duration-200",
+                isOpen ? "rotate-0" : "-rotate-90"
+              )}
+            >
+              <path
+                d="M10.293 1.293L6 5.586 1.707 1.293A1 1 0 00.293 2.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z"
+                fill="#647696"
+              />
+            </svg>
+          )}
+        </button>
+        {isOpen && <div className="pb-2">{children}</div>}
+      </div>
+    );
+  }
+);
+
+SidebarSection.displayName = "SidebarSection";
