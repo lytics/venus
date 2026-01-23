@@ -7,5 +7,6 @@
     </linearGradient>
   </defs>
   <path d="M5.996 9.001V5.326h20.008v3.675H5.996zm-.01 17.675v-7H4.684v-3.675l1.312-5.833h20.008L27.317 16v3.675h-1.313v7H22.33v-7h-3.325v7H5.986zm3.685-3.675h5.658v-3.325H9.671v3.325z" fill="url(#mp-logo-grad)"/>
-  <text x="38" y="21" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#222222">Marketplace</text>
+  <text x="38" y="13" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#6C5CE7">Contentstack</text>
+  <text x="38" y="25" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="400" fill="#6C5CE7">Marketplace</text>
 </svg>
