@@ -110,6 +110,130 @@ interface NavItem {
   children?: NavItem[];
 }
 
+// Unified nav item configuration for section navigation
+interface NavItemConfig {
+  label: string;
+  href?: string;
+  icon: React.ComponentType;
+  disabled?: boolean;
+  isDropdown?: boolean;
+  dropdownItems?: { label: string; href: string }[];
+}
+
+// Marketplace-specific icons (extracted from production app)
+const ManageAppsIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
+    <path fillRule="evenodd" clipRule="evenodd" d="M14 5.25A2.75 2.75 0 0011.25 8v1.25H7A1.75 1.75 0 005.25 11v14c0 .966.784 1.75 1.75 1.75h18A1.75 1.75 0 0026.75 25V11A1.75 1.75 0 0025 9.25h-4.25V8A2.75 2.75 0 0018 5.25h-4zm5.25 4V8c0-.69-.56-1.25-1.25-1.25h-4c-.69 0-1.25.56-1.25 1.25v1.25h6.5zM7 10.75a.25.25 0 00-.25.25v4.813h18.5V11a.25.25 0 00-.25-.25H7zm18.25 6.563H6.75V25c0 .138.112.25.25.25h18a.25.25 0 00.25-.25v-7.688z" fill="currentColor"/>
+  </svg>
+);
+
+const AuditLogsIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
+    <path d="M10.25 10.049a.75.75 0 01.75-.75h10a.75.75 0 010 1.5H11a.75.75 0 01-.75-.75zM11 14.348a.75.75 0 000 1.5h10a.75.75 0 000-1.5H11z" fill="currentColor"/>
+    <path fillRule="evenodd" clipRule="evenodd" d="M6.82 26.532a.5.5 0 01-.82-.384V6a1 1 0 011-1h18a1 1 0 011 1v20.049a.5.5 0 01-.845.362L22.5 23.883l-2.628 2.92a.5.5 0 01-.744 0l-2.628-2.92-3.128 2.978a.5.5 0 01-.716-.028L10 23.883l-3.18 2.649zm2.22-3.802a1.5 1.5 0 012.075.15l1.968 2.185 2.383-2.268a1.5 1.5 0 012.149.082l1.885 2.094 1.885-2.094a1.5 1.5 0 012.15-.082l.965.919V6.5h-17v17.513l1.54-1.283z" fill="currentColor"/>
+  </svg>
+);
+
+// Section navigation configurations
+const PERSONALIZE_NAV: NavItemConfig[] = [
+  { label: 'Experiences', href: '/personalize/experiences', icon: ExperiencesIcon },
+  { label: 'Targets', href: '/personalize/targets', icon: AudiencesIcon },
+  { label: 'Attributes', href: '/personalize/attributes', icon: AttributesIcon },
+  { label: 'Events', icon: EventsIcon, disabled: true },
+  { label: 'Settings', icon: SettingsIcon, disabled: true },
+];
+
+const CMS_NAV: NavItemConfig[] = [
+  { label: 'Dashboard', href: '/stacks', icon: DashboardIcon },
+  { label: 'Entries', icon: EntriesIcon, disabled: true },
+  { label: 'Assets', icon: AssetsIcon, disabled: true },
+  { label: 'Content Models', icon: ContentModelsIcon, disabled: true },
+  { label: 'Publish Queue', icon: PublishQueueIcon, disabled: true },
+  { label: 'Releases', icon: ReleasesIcon, disabled: true },
+  { label: 'Settings', icon: CMSSettingsIcon, disabled: true },
+];
+
+const MARKETPLACE_NAV: NavItemConfig[] = [
+  {
+    label: 'Manage Apps',
+    icon: ManageAppsIcon,
+    isDropdown: true,
+    dropdownItems: [
+      { label: 'Installed Apps', href: '/marketplace/installed-apps' },
+      { label: 'Private Apps', href: '/marketplace/private-apps' }
+    ]
+  },
+  { label: 'Audit Logs', href: '/marketplace/audit-logs', icon: AuditLogsIcon },
+];
+
+// Unified NavItem component
+function NavItemComponent({ item, pathname }: { item: NavItemConfig; pathname: string }) {
+  const Icon = item.icon;
+  const isActive = item.href ? pathname.startsWith(item.href) : false;
+
+  // Handle dropdown items
+  if (item.isDropdown) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] rounded hover:bg-[color:var(--color-surface-gray)]"
+          >
+            <Icon />
+            {item.label}
+            <ChevronDown className="w-3 h-3 ml-1" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          {item.dropdownItems?.map(sub => (
+            <DropdownMenuItem key={sub.label}>{sub.label}</DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
+
+  // Handle disabled items
+  if (item.disabled) {
+    return (
+      <button
+        className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
+        disabled
+      >
+        <Icon />
+        {item.label}
+      </button>
+    );
+  }
+
+  // Handle regular links
+  return (
+    <Link
+      href={item.href!}
+      className={cn(
+        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
+        isActive
+          ? "text-[color:var(--color-primary)]"
+          : "text-[color:var(--color-heading)]"
+      )}
+    >
+      <Icon />
+      {item.label}
+    </Link>
+  );
+}
+
+// Unified SectionNav component
+function SectionNav({ items, pathname }: { items: NavItemConfig[]; pathname: string }) {
+  return (
+    <>
+      {items.map(item => (
+        <NavItemComponent key={item.label} item={item} pathname={pathname} />
+      ))}
+    </>
+  );
+}
+
 interface TopNavProps {
   productBranding?: ProductBranding;
 }
@@ -246,203 +370,74 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             {/* Center: Navigation */}
             <div className="flex-1 flex justify-center px-3">
               <div className="w-full flex items-center justify-between">
-                {/* Product-specific Navigation */}
+                {/* Product-specific Navigation - Unified using SectionNav */}
                 <nav className="flex items-center gap-1">
-                {pathname.startsWith('/personalize') && pathname !== '/personalize' ? (
-                  // Personalize-specific navigation
-                  <>
-                    <Link
-                      href="/personalize/experiences"
-                      className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
-                        pathname.startsWith('/personalize/experiences')
-                          ? "text-[color:var(--color-primary)]"
-                          : "text-[color:var(--color-heading)]"
-                      )}
-                    >
-                      <ExperiencesIcon />
-                      Experiences
-                    </Link>
-                    <Link
-                      href="/personalize/targets"
-                      className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
-                        pathname.startsWith('/personalize/targets')
-                          ? "text-[color:var(--color-primary)]"
-                          : "text-[color:var(--color-heading)]"
-                      )}
-                    >
-                      <AudiencesIcon />
-                      Targets
-                    </Link>
-                    <Link
-                      href="/personalize/attributes"
-                      className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
-                        pathname.startsWith('/personalize/attributes')
-                          ? "text-[color:var(--color-primary)]"
-                          : "text-[color:var(--color-heading)]"
-                      )}
-                    >
-                      <AttributesIcon />
-                      Attributes
-                    </Link>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <EventsIcon />
-                      Events
-                    </button>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <SettingsIcon />
-                      Settings
-                    </button>
-                  </>
-                ) : pathname.startsWith('/stacks/') && pathname.split('/').length > 2 ? (
-                  // CMS-specific navigation (when inside a stack)
-                  <>
-                    <span
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-primary)] rounded"
-                    >
-                      <DashboardIcon />
-                      Dashboard
-                    </span>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <EntriesIcon />
-                      Entries
-                    </button>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <AssetsIcon />
-                      Assets
-                    </button>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <ContentModelsIcon />
-                      Content Models
-                    </button>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <PublishQueueIcon />
-                      Publish Queue
-                    </button>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <ReleasesIcon />
-                      Releases
-                    </button>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <CMSSettingsIcon />
-                      Settings
-                    </button>
-                  </>
-                ) : pathname.startsWith('/marketplace') ? (
-                  // Marketplace-specific navigation
-                  <>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <button
-                          className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] rounded hover:bg-[color:var(--color-surface-gray)]"
-                        >
-                          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
-                            <path d="M14 5.25A2.75 2.75 0 0011.25 8v1.25H7A1.75 1.75 0 005.25 11v14c0 .966.784 1.75 1.75 1.75h18A1.75 1.75 0 0026.75 25V11A1.75 1.75 0 0025 9.25h-4.25V8A2.75 2.75 0 0018 5.25h-4zm5.25 4V8c0-.69-.56-1.25-1.25-1.25h-4c-.69 0-1.25.56-1.25 1.25v1.25h6.5zM7 10.75a.25.25 0 00-.25.25v4.813h18.5V11a.25.25 0 00-.25-.25H7zm18.25 6.563H6.75V25c0 .138.112.25.25.25h18a.25.25 0 00.25-.25v-7.688z" fill="currentColor"/>
-                          </svg>
-                          Manage Apps
-                          <ChevronDown className="w-3 h-3 ml-1" />
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start">
-                        <DropdownMenuItem>Installed Apps</DropdownMenuItem>
-                        <DropdownMenuItem>Private Apps</DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] rounded hover:bg-[color:var(--color-surface-gray)]"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
-                        <path d="M10.25 10.049a.75.75 0 01.75-.75h10a.75.75 0 010 1.5H11a.75.75 0 01-.75-.75zM11 14.348a.75.75 0 000 1.5h10a.75.75 0 000-1.5H11z" fill="currentColor"/>
-                        <path d="M6.82 26.532a.5.5 0 01-.82-.384V6a1 1 0 011-1h18a1 1 0 011 1v20.049a.5.5 0 01-.845.362L22.5 23.883l-2.628 2.92a.5.5 0 01-.744 0l-2.628-2.92-3.128 2.978a.5.5 0 01-.716-.028L10 23.883l-3.18 2.649zm2.22-3.802a1.5 1.5 0 012.075.15l1.968 2.185 2.383-2.268a1.5 1.5 0 012.149.082l1.885 2.094 1.885-2.094a1.5 1.5 0 012.15-.082l.965.919V6.5h-17v17.513l1.54-1.283z" fill="currentColor"/>
-                      </svg>
-                      Audit Logs
-                    </button>
-                  </>
-                ) : (
-                  // General navigation
-                  <>
-                  {navItems.map((item) => {
-                    const isActive = pathname === item.href;
+                  {pathname.startsWith('/personalize') && pathname !== '/personalize' && (
+                    <SectionNav items={PERSONALIZE_NAV} pathname={pathname} />
+                  )}
+                  {pathname.startsWith('/stacks/') && pathname.split('/').length > 2 && (
+                    <SectionNav items={CMS_NAV} pathname={pathname} />
+                  )}
+                  {pathname.startsWith('/marketplace') && (
+                    <SectionNav items={MARKETPLACE_NAV} pathname={pathname} />
+                  )}
+                  {/* General navigation for other pages */}
+                  {!pathname.startsWith('/personalize') && !pathname.startsWith('/stacks/') && !pathname.startsWith('/marketplace') && (
+                    <>
+                      {navItems.map((item) => {
+                        const isActive = pathname === item.href;
 
-                    // If item has children, render as dropdown
-                    if (item.children && item.children.length > 0) {
-                      return (
-                        <DropdownMenu key={item.label}>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="small"
-                              data-nav-item
-                              data-active={isActive}
-                              className={cn(
-                                "h-8 px-4 text-sm gap-1",
-                                "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
-                                isActive && "text-sidebar-active-foreground font-medium"
-                              )}
-                            >
-                              {item.label}
-                              <ChevronDown className="h-3 w-3 opacity-50" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="start">
-                            {item.children.map((child) => (
-                              <DropdownMenuItem key={child.href} asChild>
-                                <Link href={child.href}>
-                                  {child.label}
-                                </Link>
-                              </DropdownMenuItem>
-                            ))}
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      );
-                    }
+                        if (item.children && item.children.length > 0) {
+                          return (
+                            <DropdownMenu key={item.label}>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="small"
+                                  data-nav-item
+                                  data-active={isActive}
+                                  className={cn(
+                                    "h-8 px-4 text-sm gap-1",
+                                    "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
+                                    isActive && "text-sidebar-active-foreground font-medium"
+                                  )}
+                                >
+                                  {item.label}
+                                  <ChevronDown className="h-3 w-3 opacity-50" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="start">
+                                {item.children.map((child) => (
+                                  <DropdownMenuItem key={child.href} asChild>
+                                    <Link href={child.href}>
+                                      {child.label}
+                                    </Link>
+                                  </DropdownMenuItem>
+                                ))}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          );
+                        }
 
-                    // Simple link item
-                    return (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        data-nav-item
-                        data-active={isActive}
-                        className={cn(
-                          "inline-flex items-center justify-center h-8 px-4 text-sm rounded font-semibold transition-colors",
-                          "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
-                          isActive && "text-sidebar-active-foreground font-medium"
-                        )}
-                      >
-                        {item.label}
-                      </Link>
-                    );
-                  })}
-                  </>
-                )}
-              </nav>
+                        return (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            data-nav-item
+                            data-active={isActive}
+                            className={cn(
+                              "inline-flex items-center justify-center h-8 px-4 text-sm rounded font-semibold transition-colors",
+                              "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
+                              isActive && "text-sidebar-active-foreground font-medium"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        );
+                      })}
+                    </>
+                  )}
+                </nav>
             </div>
           </div>
 
