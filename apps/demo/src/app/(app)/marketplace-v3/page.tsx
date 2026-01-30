@@ -130,16 +130,18 @@ function SearchBar() {
         padding: 12,
         borderBottom: '1px solid #DDE3EE',
         fontFamily: 'Inter, sans-serif',
+        gap: 4,
       }}
     >
       <div
-        className="flex items-center flex-1"
+        className="flex items-center"
         style={{
+          width: 382,
           height: 40,
           backgroundColor: '#fff',
           border: '1px solid #DDE3EE',
           borderRadius: 4,
-          padding: '0 12px',
+          padding: '8px 16px',
         }}
       >
         <input
@@ -156,7 +158,7 @@ function SearchBar() {
           minWidth: 32,
           minHeight: 40,
           padding: '8px 16px',
-          marginLeft: 12,
+          marginLeft: 0,
           backgroundColor: '#6C5CE7',
           color: '#fff',
           fontSize: 16,
