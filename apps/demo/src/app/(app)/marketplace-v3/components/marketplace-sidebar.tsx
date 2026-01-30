@@ -1,170 +1,115 @@
 "use client"
 
-import { useState } from "react"
-import { ChevronUp, Search } from "lucide-react"
-
 const COLLECTIONS = [
-  "All Collections",
-  "Apps",
-  "Starters",
-  "Content Models",
-  "Recipes",
-] as const
+  { label: "All Collections", active: true },
+  { label: "Apps", active: false },
+  { label: "Starters", active: false },
+  { label: "Content Models", active: false },
+  { label: "Recipes", active: false },
+]
 
 const CATEGORIES = [
-  "A/B Testing",
-  "AI Assistance",
-  "Analytics",
-  "Artificial Intelligence",
-  "Automate",
-  "Automations",
-  "Commerce",
-  "Communication",
-  "Content Management",
-  "DAM",
-  "Data Integration",
-  "Developer Tools",
-  "E-Commerce",
-  "Email",
-  "Frontend Framework",
-  "Hosting",
-  "Localization",
-  "Marketing",
-  "Monitoring",
-  "Personalization",
-  "Project Management",
-  "Search",
-  "Security",
-  "SEO",
-] as const
+  "A/B Testing", "AI Assistance", "Analytics", "Artificial Intelligence",
+  "Automate", "Automations", "Commerce", "Communication",
+  "Content Management", "DAM", "Data Integration", "Developer Tools",
+  "E-Commerce", "Email", "Frontend Framework",
+]
 
-type Collection = (typeof COLLECTIONS)[number]
+function ChevronIcon({ className }: { className?: string }) {
+  return (
+    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M10.293 1.293L6 5.586 1.707 1.293A1 1 0 00.293 2.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z" fill="#647696" />
+    </svg>
+  )
+}
+
+function SearchIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" clipRule="evenodd" d="M14.5 4.75c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75-4.365-9.75-9.75-9.75zM3.25 14.5c0-6.213 5.037-11.25 11.25-11.25S25.75 8.287 25.75 14.5 20.713 25.75 14.5 25.75 3.25 20.713 3.25 14.5z" fill="#475161" />
+      <path fillRule="evenodd" clipRule="evenodd" d="M21.395 21.395a.75.75 0 011.06 0l6.075 6.075a.75.75 0 11-1.06 1.06l-6.075-6.075a.75.75 0 010-1.06z" fill="#475161" />
+    </svg>
+  )
+}
 
 export function MarketplaceSidebar() {
-  const [activeCollection, setActiveCollection] = useState<Collection>("All Collections")
-  const [collectionsOpen, setCollectionsOpen] = useState(true)
-  const [categoriesOpen, setCategoriesOpen] = useState(true)
-  const [categorySearch, setCategorySearch] = useState("")
-  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set())
-
-  const filteredCategories = CATEGORIES.filter((cat) =>
-    cat.toLowerCase().includes(categorySearch.toLowerCase())
-  )
-
-  function toggleCategory(category: string) {
-    setSelectedCategories((prev) => {
-      const next = new Set(prev)
-      if (next.has(category)) {
-        next.delete(category)
-      } else {
-        next.add(category)
-      }
-      return next
-    })
-  }
-
   return (
-    <aside className="w-[240px] shrink-0 bg-[#F7F9FC] border-r border-t border-[#DDE3EE] flex flex-col overflow-y-auto pt-5 pb-[15px]">
-      {/* Collections Section */}
-      <div className="px-4">
-        <button
-          onClick={() => setCollectionsOpen(!collectionsOpen)}
-          className="flex items-center justify-between w-full mb-2 cursor-pointer"
-        >
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#8E99A4]">
+    <aside
+      className="shrink-0 flex flex-col"
+      style={{
+        width: 240,
+        background: '#F7F9FC',
+        borderRight: '1px solid #DDE3EE',
+        borderTop: '1px solid #DDE3EE',
+        padding: '20px 0 15px',
+        fontFamily: 'Inter, sans-serif',
+      }}
+    >
+      {/* Collections */}
+      <div>
+        <div className="flex items-center justify-between cursor-pointer" style={{ padding: '0 15px', marginBottom: 8 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: '#475161', lineHeight: '14px', textTransform: 'capitalize' as const }}>
             Collections
           </span>
-          <ChevronUp
-            size={14}
-            className={`text-[#8E99A4] transition-transform duration-200 ${
-              collectionsOpen ? "" : "rotate-180"
-            }`}
-          />
-        </button>
-
-        {collectionsOpen && (
-          <ul className="flex flex-col gap-0.5">
-            {COLLECTIONS.map((collection) => {
-              const isActive = activeCollection === collection
-              return (
-                <li key={collection}>
-                  <button
-                    onClick={() => setActiveCollection(collection)}
-                    className={`w-full text-left text-[13px] leading-[20px] py-[6px] px-3 rounded-md cursor-pointer transition-colors duration-150 ${
-                      isActive
-                        ? "text-[#6C5CE7] font-medium bg-white border-l-2 border-[#6C5CE7]"
-                        : "text-[#475161] hover:bg-white/60"
-                    }`}
-                  >
-                    {collection}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-        )}
+          <ChevronIcon className="rotate-180" />
+        </div>
+        <div className="flex flex-col" style={{ gap: 0 }}>
+          {COLLECTIONS.map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center cursor-pointer"
+              style={{
+                height: 40,
+                margin: '5px 0',
+                color: item.active ? '#6C5CE7' : '#475161',
+                fontSize: 16,
+                fontWeight: 400,
+                lineHeight: '16px',
+              }}
+            >
+              {item.active && (
+                <div style={{ width: 2, height: 40, backgroundColor: '#6C5CE7', borderRadius: '0 2px 2px 0' }} />
+              )}
+              <div style={{ padding: 12, minHeight: 14 }}>{item.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Divider */}
-      <div className="border-t border-[#DDE3EE] my-4 mx-4" />
+      <div style={{ height: 1, margin: '16px 0', backgroundColor: '#DDE3EE' }} />
 
-      {/* Categories Section */}
-      <div className="px-4 flex flex-col min-h-0">
-        <button
-          onClick={() => setCategoriesOpen(!categoriesOpen)}
-          className="flex items-center justify-between w-full mb-2 cursor-pointer"
-        >
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#8E99A4]">
+      {/* Categories */}
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <div className="flex items-center justify-between cursor-pointer" style={{ padding: '0 15px', marginBottom: 8 }}>
+          <span style={{ fontSize: 14, fontWeight: 600, color: '#475161', lineHeight: '14px', textTransform: 'capitalize' as const }}>
             Categories
           </span>
-          <ChevronUp
-            size={14}
-            className={`text-[#8E99A4] transition-transform duration-200 ${
-              categoriesOpen ? "" : "rotate-180"
-            }`}
-          />
-        </button>
+          <ChevronIcon className="rotate-180" />
+        </div>
 
-        {categoriesOpen && (
-          <div className="flex flex-col gap-2 min-h-0">
-            {/* Search Input */}
-            <div className="relative">
-              <Search
-                size={14}
-                className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#8E99A4] pointer-events-none"
-              />
-              <input
-                type="text"
-                placeholder="Search Categories"
-                value={categorySearch}
-                onChange={(e) => setCategorySearch(e.target.value)}
-                className="w-full h-8 pl-8 pr-3 text-[13px] text-[#475161] placeholder-[#8E99A4] bg-white border border-[#DDE3EE] rounded-md outline-none focus:border-[#6C5CE7] transition-colors duration-150"
-              />
-            </div>
-
-            {/* Checkbox List */}
-            <ul className="flex flex-col gap-0.5 overflow-y-auto">
-              {filteredCategories.map((category) => (
-                <li key={category}>
-                  <label className="flex items-center gap-2 py-[5px] px-1 rounded cursor-pointer hover:bg-white/60 transition-colors duration-150">
-                    <input
-                      type="checkbox"
-                      checked={selectedCategories.has(category)}
-                      onChange={() => toggleCategory(category)}
-                      className="w-[15px] h-[15px] rounded border-[#DDE3EE] text-[#6C5CE7] accent-[#6C5CE7] cursor-pointer"
-                    />
-                    <span className="text-[13px] leading-[20px] text-[#475161] select-none">
-                      {category}
-                    </span>
-                  </label>
-                </li>
-              ))}
-              {filteredCategories.length === 0 && (
-                <li className="text-[13px] text-[#8E99A4] py-2 px-1">No categories found</li>
-              )}
-            </ul>
+        {/* Search */}
+        <div style={{ padding: '0 10px 15px' }}>
+          <div className="flex items-center" style={{ height: 40, border: '1px solid #DDE3EE', borderRadius: 4, padding: '2px 8px', backgroundColor: '#fff' }}>
+            <SearchIcon />
+            <input
+              type="text"
+              placeholder="Search Categories"
+              className="flex-1 outline-none border-none bg-transparent"
+              style={{ fontSize: 14, color: '#475161', marginLeft: 8, fontFamily: 'Inter, sans-serif' }}
+            />
           </div>
-        )}
+        </div>
+
+        {/* Checkbox list */}
+        <ul className="flex flex-col overflow-y-auto" style={{ gap: 0, padding: 0, margin: 0, listStyle: 'none' }}>
+          {CATEGORIES.map((cat) => (
+            <li key={cat} className="flex items-center cursor-pointer" style={{ height: 40, padding: '10px 14px', fontSize: 14, color: '#475161', lineHeight: '20px', fontFamily: 'Inter, sans-serif' }}>
+              <input type="checkbox" style={{ width: 16, height: 16, accentColor: '#6C5CE7', marginRight: 10, cursor: 'pointer' }} />
+              {cat}
+            </li>
+          ))}
+        </ul>
       </div>
     </aside>
   )

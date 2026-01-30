@@ -121,10 +121,69 @@ function AppIcon({
 /*  Page                                                                       */
 /* -------------------------------------------------------------------------- */
 
+function SearchBar() {
+  return (
+    <div
+      className="flex items-center"
+      style={{
+        height: 60,
+        padding: 12,
+        borderBottom: '1px solid #DDE3EE',
+        fontFamily: 'Inter, sans-serif',
+      }}
+    >
+      <div
+        className="flex items-center flex-1"
+        style={{
+          height: 40,
+          backgroundColor: '#fff',
+          border: '1px solid #DDE3EE',
+          borderRadius: 4,
+          padding: '0 12px',
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search in All Collections"
+          className="flex-1 outline-none border-none bg-transparent"
+          style={{ fontSize: 16, color: '#212121', lineHeight: '24px', letterSpacing: '0.16px', fontFamily: 'Inter, sans-serif' }}
+        />
+      </div>
+      <button
+        className="flex items-center justify-center cursor-pointer shrink-0"
+        style={{
+          height: 40,
+          minWidth: 32,
+          minHeight: 40,
+          padding: '8px 16px',
+          marginLeft: 12,
+          backgroundColor: '#6C5CE7',
+          color: '#fff',
+          fontSize: 16,
+          fontWeight: 600,
+          lineHeight: '16px',
+          letterSpacing: '0.16px',
+          borderRadius: 4,
+          border: '1px solid transparent',
+          gap: 8,
+          fontFamily: 'Inter, sans-serif',
+        }}
+      >
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fillRule="evenodd" clipRule="evenodd" d="M14.5 4.75c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75-4.365-9.75-9.75-9.75zM3.25 14.5c0-6.213 5.037-11.25 11.25-11.25S25.75 8.287 25.75 14.5 20.713 25.75 14.5 25.75 3.25 20.713 3.25 14.5z" fill="white" />
+          <path fillRule="evenodd" clipRule="evenodd" d="M21.395 21.395a.75.75 0 011.06 0l6.075 6.075a.75.75 0 11-1.06 1.06l-6.075-6.075a.75.75 0 010-1.06z" fill="white" />
+        </svg>
+        Search
+      </button>
+    </div>
+  )
+}
+
 export default function MarketplaceV3Page() {
   return (
     <div className="flex flex-col h-full overflow-y-auto">
       <ContentHeader />
+      <SearchBar />
 
       <div className="flex-1">
         {/* Hero */}

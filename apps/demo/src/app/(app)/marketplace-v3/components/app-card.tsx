@@ -19,18 +19,46 @@ interface IconCardProps {
 
 function IconCard({ title, icon, subtitle }: IconCardProps) {
   return (
-    <div className="flex flex-col w-[320px] h-[246px] m-[15px] border border-[#DDE3EE] rounded-[4px] overflow-hidden cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-shadow duration-200">
-      <div className="flex items-center justify-center h-[160px] rounded-[4px]">
-        {icon}
-      </div>
-      <div className="p-4 border-t border-[#DDE3EE]">
-        <p className="text-[16px] font-semibold text-[#212121] leading-[24px] truncate">{title}</p>
-        {subtitle && (
-          <span className="mt-1 flex items-center gap-1 text-[12px] text-[#8E96A3] leading-[16px]">
-            <LayersIcon />
-            {subtitle}
-          </span>
-        )}
+    <div
+      className="flex cursor-pointer"
+      style={{
+        width: 320,
+        height: 246,
+        minWidth: 320,
+        maxWidth: 320,
+        margin: 15,
+        border: '1px solid #DDE3EE',
+        borderRadius: 4,
+        backgroundColor: '#fff',
+        fontFamily: 'Inter, sans-serif',
+      }}
+    >
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+        <div
+          className="flex items-center justify-center"
+          style={{
+            width: '100%',
+            height: 160,
+            minWidth: 300,
+            minHeight: 160,
+            backgroundColor: '#F7F9FC',
+            borderBottom: '1px solid #DDE3EE',
+            borderRadius: 4,
+          }}
+        >
+          {icon}
+        </div>
+        <div style={{ padding: 16 }}>
+          <p style={{ fontSize: 16, fontWeight: 600, color: '#212121', lineHeight: '24px', letterSpacing: '0.16px', textTransform: 'capitalize' as const, marginRight: 4 }}>
+            {title}
+          </p>
+          {subtitle && (
+            <span className="flex items-center" style={{ marginTop: 4, gap: 4, fontSize: 12, color: '#8E96A3', lineHeight: '16px' }}>
+              <LayersIcon />
+              {subtitle}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   )
@@ -45,12 +73,29 @@ interface BannerCardProps {
 
 function BannerCard({ title, bannerSrc, bannerAlt }: BannerCardProps) {
   return (
-    <div className="flex flex-col w-[320px] h-[246px] m-[15px] border border-[#DDE3EE] rounded-[4px] overflow-hidden cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-shadow duration-200">
-      <div className="h-[160px] overflow-hidden">
-        <img src={bannerSrc} alt={bannerAlt ?? title} className="w-full h-full object-cover" />
-      </div>
-      <div className="p-4 border-t border-[#DDE3EE]">
-        <p className="text-[16px] font-semibold text-[#212121] leading-[24px] truncate">{title}</p>
+    <div
+      className="flex cursor-pointer"
+      style={{
+        width: 320,
+        height: 246,
+        minWidth: 320,
+        maxWidth: 320,
+        margin: 15,
+        border: '1px solid #DDE3EE',
+        borderRadius: 4,
+        backgroundColor: '#fff',
+        fontFamily: 'Inter, sans-serif',
+      }}
+    >
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ height: 160, overflow: 'hidden', borderRadius: 4 }}>
+          <img src={bannerSrc} alt={bannerAlt ?? title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+        <div style={{ padding: 16, borderTop: '1px solid #DDE3EE' }}>
+          <p style={{ fontSize: 16, fontWeight: 600, color: '#212121', lineHeight: '24px', letterSpacing: '0.16px', textTransform: 'capitalize' as const }}>
+            {title}
+          </p>
+        </div>
       </div>
     </div>
   )

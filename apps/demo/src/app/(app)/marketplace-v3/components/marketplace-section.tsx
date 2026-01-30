@@ -10,20 +10,20 @@ interface MarketplaceSectionProps {
 
 export function MarketplaceSection({ title, description, viewAllLabel, viewAllHref = "#", children }: MarketplaceSectionProps) {
   return (
-    <section className="mb-10 px-[15px]">
-      <div className="flex items-center gap-4">
-        <h3 className="text-[22px] font-semibold text-[#222] whitespace-nowrap leading-[33px]">
+    <section style={{ marginBottom: 40, padding: '0 15px', fontFamily: 'Inter, sans-serif' }}>
+      <div className="flex items-center">
+        <h4 style={{ fontSize: 22, fontWeight: 600, color: '#222', lineHeight: '33px', whiteSpace: 'nowrap' }}>
           {title}
-        </h3>
-        <div className="flex-1 border-t border-dashed border-[#DDE3EE]" />
-        <a href={viewAllHref} target="_blank" className="text-[14px] text-[#6C5CE7] hover:underline whitespace-nowrap shrink-0">
+        </h4>
+        <div style={{ height: 1, marginLeft: 15, borderTop: '1px dashed #DDE3EE', flex: 1 }} />
+        <a href={viewAllHref} target="_blank" style={{ fontSize: 14, color: '#6C5CE7', fontWeight: 400, whiteSpace: 'nowrap', marginLeft: 15, textDecoration: 'none' }}>
           {viewAllLabel}
         </a>
       </div>
-      <p className="mt-2 ml-[15px] text-[14px] font-normal leading-[25px] text-[#475161] max-w-[828px]">
+      <p style={{ fontSize: 14, fontWeight: 400, color: '#475161', lineHeight: '25px', marginLeft: 15, maxWidth: 828, marginTop: 8 }}>
         {description}
       </p>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap items-stretch">
         {children}
       </div>
     </section>

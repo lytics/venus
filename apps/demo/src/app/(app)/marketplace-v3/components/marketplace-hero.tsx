@@ -7,6 +7,7 @@ export function MarketplaceHero() {
       style={{
         height: 372,
         marginBottom: 15,
+        fontFamily: 'Inter, sans-serif',
         background: `url('https://eu-images.contentstack.com/v3/assets/blt8f94ebff857fe1ae/blte9d0c4604984a8a7/All%20collections%20page%20banner') no-repeat 100% 50%, linear-gradient(rgba(255,255,255,0.48), rgba(221,227,238,0.48))`,
       }}
     >
