@@ -120,15 +120,15 @@ interface NavItemConfig {
   dropdownItems?: { label: string; href: string }[];
 }
 
-// Marketplace-specific icons (extracted from production app)
+// Marketplace-specific icons (extracted from production app — 24x24, marginRight 4px)
 const ManageAppsIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
+  <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 4, flexShrink: 0 }}>
     <path fillRule="evenodd" clipRule="evenodd" d="M14 5.25A2.75 2.75 0 0011.25 8v1.25H7A1.75 1.75 0 005.25 11v14c0 .966.784 1.75 1.75 1.75h18A1.75 1.75 0 0026.75 25V11A1.75 1.75 0 0025 9.25h-4.25V8A2.75 2.75 0 0018 5.25h-4zm5.25 4V8c0-.69-.56-1.25-1.25-1.25h-4c-.69 0-1.25.56-1.25 1.25v1.25h6.5zM7 10.75a.25.25 0 00-.25.25v4.813h18.5V11a.25.25 0 00-.25-.25H7zm18.25 6.563H6.75V25c0 .138.112.25.25.25h18a.25.25 0 00.25-.25v-7.688z" fill="#475161"/>
   </svg>
 );
 
 const AuditLogsIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 32 32" fill="none" className="mr-1">
+  <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 4, flexShrink: 0 }}>
     <path d="M10.25 10.049a.75.75 0 01.75-.75h10a.75.75 0 010 1.5H11a.75.75 0 01-.75-.75zM11 14.348a.75.75 0 000 1.5h10a.75.75 0 000-1.5H11z" fill="#475161"/>
     <path fillRule="evenodd" clipRule="evenodd" d="M6.82 26.532a.5.5 0 01-.82-.384V6a1 1 0 011-1h18a1 1 0 011 1v20.049a.5.5 0 01-.845.362L22.5 23.883l-2.628 2.92a.5.5 0 01-.744 0l-2.628-2.92-3.128 2.978a.5.5 0 01-.716-.028L10 23.883l-3.18 2.649zm2.22-3.802a1.5 1.5 0 012.075.15l1.968 2.185 2.383-2.268a1.5 1.5 0 012.149.082l1.885 2.094 1.885-2.094a1.5 1.5 0 012.15-.082l.965.919V6.5h-17v17.513l1.54-1.283z" fill="#475161"/>
   </svg>
@@ -167,9 +167,17 @@ const MARKETPLACE_NAV: NavItemConfig[] = [
 ];
 
 // Unified NavItem component
-function NavItemComponent({ item, pathname }: { item: NavItemConfig; pathname: string }) {
+function NavItemComponent({ item, pathname, compact }: { item: NavItemConfig; pathname: string; compact?: boolean }) {
   const Icon = item.icon;
   const isActive = item.href ? pathname.startsWith(item.href) : false;
+
+  // Compact mode: production marketplace style — icons + text, exact production sizing
+  const baseClass = compact
+    ? "flex items-center rounded-[4px] hover:bg-[color:var(--color-surface-gray)]"
+    : "flex items-center px-2 py-1 text-xs font-medium h-8 min-h-8 tracking-[0.24px] leading-[18px] rounded-[4px]";
+  const compactStyle: React.CSSProperties | undefined = compact
+    ? { fontSize: 12, fontWeight: 500, color: 'rgb(71, 81, 97)', lineHeight: '18px', letterSpacing: '0.24px', padding: '4px 8px', height: 32, display: 'inline-flex', alignItems: 'center', backgroundColor: 'rgb(255, 255, 255)', borderRadius: 4, cursor: 'pointer' }
+    : undefined;
 
   // Handle dropdown items
   if (item.isDropdown) {
@@ -177,11 +185,18 @@ function NavItemComponent({ item, pathname }: { item: NavItemConfig; pathname: s
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
-            className="flex items-center px-2 py-1 text-xs font-medium h-8 min-h-8 tracking-[0.24px] leading-[18px] rounded-[4px] text-[color:var(--color-heading)] hover:bg-[color:var(--color-surface-gray)]"
+            className={cn(baseClass, !compact && "text-[color:var(--color-heading)] hover:bg-[color:var(--color-surface-gray)]")}
+            style={compactStyle}
           >
             <Icon />
             {item.label}
-            <ChevronDown className="w-3 h-3 ml-1" />
+            {compact ? (
+              <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: 8, flexShrink: 0 }}>
+                <path fillRule="evenodd" clipRule="evenodd" d="M5.47 11.47a.75.75 0 011.06 0L16 20.94l9.47-9.47a.75.75 0 111.06 1.06l-10 10a.75.75 0 01-1.06 0l-10-10a.75.75 0 010-1.06z" fill="#475161" />
+              </svg>
+            ) : (
+              <ChevronDown className="w-3 h-3 ml-1" />
+            )}
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
@@ -197,7 +212,8 @@ function NavItemComponent({ item, pathname }: { item: NavItemConfig; pathname: s
   if (item.disabled) {
     return (
       <button
-        className="flex items-center px-2 py-1 text-xs font-medium h-8 min-h-8 tracking-[0.24px] leading-[18px] rounded-[4px] text-[color:var(--color-heading)] cursor-not-allowed"
+        className={cn(baseClass, !compact && "text-[color:var(--color-heading)]", "cursor-not-allowed")}
+        style={compactStyle}
         disabled
       >
         <Icon />
@@ -211,11 +227,13 @@ function NavItemComponent({ item, pathname }: { item: NavItemConfig; pathname: s
     <Link
       href={item.href!}
       className={cn(
-        "flex items-center px-2 py-1 text-xs font-medium h-8 min-h-8 tracking-[0.24px] leading-[18px] rounded-[4px] transition-colors hover:bg-[color:var(--color-surface-gray)]",
+        baseClass,
+        !compact && "transition-colors hover:bg-[color:var(--color-surface-gray)]",
         isActive
           ? "text-[color:var(--color-primary)]"
-          : "text-[color:var(--color-heading)]"
+          : !compact ? "text-[color:var(--color-heading)]" : undefined
       )}
+      style={compactStyle}
     >
       <Icon />
       {item.label}
@@ -224,11 +242,11 @@ function NavItemComponent({ item, pathname }: { item: NavItemConfig; pathname: s
 }
 
 // Unified SectionNav component
-function SectionNav({ items, pathname }: { items: NavItemConfig[]; pathname: string }) {
+function SectionNav({ items, pathname, compact }: { items: NavItemConfig[]; pathname: string; compact?: boolean }) {
   return (
     <>
       {items.map(item => (
-        <NavItemComponent key={item.label} item={item} pathname={pathname} />
+        <NavItemComponent key={item.label} item={item} pathname={pathname} compact={compact} />
       ))}
     </>
   );
@@ -243,6 +261,8 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [navHeight, setNavHeight] = React.useState<string>("3.5rem");
   const [showBorder, setShowBorder] = React.useState<boolean>(true);
+
+  const isMarketplaceV3 = pathname.startsWith('/marketplace-v3');
 
   // Auto-detect product branding based on pathname
   const productBranding = React.useMemo(() => {
@@ -330,7 +350,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
   return (
     <>
       <div className={cn("bg-background/80 backdrop-blur-sm", sticky && "sticky top-0 z-50")} style={{ height: navHeight }}>
-        <div className="w-full pl-2 pr-4">
+        <div className={cn("w-full pr-4", isMarketplaceV3 ? "pl-0" : "pl-2")} style={isMarketplaceV3 ? { WebkitFontSmoothing: 'auto' } : undefined}>
           {/* Mobile Layout (< md) */}
           <div className="flex items-center justify-between md:hidden" style={{ height: navHeight }}>
             {/* Left: Menu button + Page title */}
@@ -351,21 +371,28 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
           {/* Desktop Layout (>= md) */}
           <div className="hidden md:flex items-center" style={{ height: navHeight }}>
             {/* Left: Logo or Product Branding */}
-            <div className={cn("flex items-center gap-3", !productBranding && "ml-4")}>
+            <div className={cn("flex items-center", isMarketplaceV3 ? "ml-3" : "gap-3", !productBranding && "ml-4")} style={isMarketplaceV3 ? { marginLeft: 12 } : undefined}>
               {productBranding ? (
                 <>
-                  <Link href={productBranding.href || '/'} className="flex items-center px-2 py-1 rounded transition-colors hover:bg-[color:var(--color-surface-gray)]">
+                  <Link
+                    href={productBranding.href || '/'}
+                    className={cn("flex items-center rounded transition-colors hover:bg-[color:var(--color-surface-gray)]", !isMarketplaceV3 && "px-2 py-1")}
+                    style={isMarketplaceV3 ? { padding: '0 8px 0 5px', height: 40, width: 128 } : undefined}
+                  >
                     <Image
                       src={productBranding.iconPath}
                       alt={productBranding.productName}
-                      width={160}
-                      height={32}
-                      className="h-8 w-auto"
+                      width={isMarketplaceV3 ? 128 : 160}
+                      height={isMarketplaceV3 ? 40 : 32}
+                      className={isMarketplaceV3 ? "h-10 w-auto" : "h-8 w-auto"}
                     />
                   </Link>
                   {/* Separator - hidden on landing pages */}
                   {pathname !== '/personalize' && pathname !== '/stacks' && (
-                    <div className="h-6 w-px bg-gray-200"></div>
+                    <div
+                      className={isMarketplaceV3 ? undefined : "h-6 w-px bg-gray-200"}
+                      style={isMarketplaceV3 ? { width: 1, height: 16, backgroundColor: 'rgb(182, 174, 243)', marginLeft: 4 } : undefined}
+                    />
                   )}
                 </>
               ) : (
@@ -379,7 +406,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <div className="flex-1 flex justify-center px-3">
               <div className="w-full flex items-center justify-between">
                 {/* Product-specific Navigation - Unified using SectionNav */}
-                <nav className="flex items-center gap-1">
+                <nav className="flex items-center gap-1" style={isMarketplaceV3 ? { gap: 4, margin: '0 8px' } : undefined}>
                   {pathname.startsWith('/personalize') && pathname !== '/personalize' && (
                     <SectionNav items={PERSONALIZE_NAV} pathname={pathname} />
                   )}
@@ -387,7 +414,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
                     <SectionNav items={CMS_NAV} pathname={pathname} />
                   )}
                   {pathname.startsWith('/marketplace-v3') && (
-                    <SectionNav items={MARKETPLACE_NAV} pathname={pathname} />
+                    <SectionNav items={MARKETPLACE_NAV} pathname={pathname} compact />
                   )}
                   {pathname.startsWith('/marketplace') && !pathname.startsWith('/marketplace-v3') && (
                     <SectionNav items={MARKETPLACE_NAV} pathname={pathname} />
