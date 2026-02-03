@@ -15,6 +15,7 @@
 import { MarketplaceBanner } from "./components/marketplace-banner"
 import { MarketplaceSection } from "./components/marketplace-section"
 import { AppCard, StarterCard, ContentModelCard, RecipeCard } from "./components/app-card"
+import { MarketplaceSidebar } from "./components/marketplace-sidebar"
 
 /* -------------------------------------------------------------------------- */
 /*  Content Header                                                              */
@@ -353,15 +354,37 @@ const RECIPES = [
 
 export default function MarketplaceV5Page() {
   return (
-    <div className="flex flex-col h-full overflow-y-auto">
-      <div style={{ position: 'sticky', top: 0, zIndex: 9, flexShrink: 0, backgroundColor: '#fff' }}>
-        <ContentHeader />
-        <div style={{ borderLeft: '1px solid rgb(221, 227, 238)' }}>
-          <SearchBar />
-        </div>
+    <div style={{ display: 'flex', height: 'calc(100vh - 64px)', WebkitFontSmoothing: 'auto', position: 'relative' as const }}>
+      {/* Sidebar with its own scroll */}
+      <MarketplaceSidebar />
+      {/* Collapse sidebar caret */}
+      <div
+        className="cursor-pointer"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 24,
+          height: 24,
+          border: '1px solid rgb(108, 92, 231)',
+          borderRadius: '50%',
+          backgroundColor: 'rgb(221, 227, 238)',
+          position: 'absolute' as const,
+          top: 33,
+          left: 228,
+          zIndex: 100,
+        }}
+        aria-label="Toggle sidebar"
+      >
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fillRule="evenodd" clipRule="evenodd" d="M20.53 5.47a.75.75 0 010 1.06L11.06 16l9.47 9.47a.75.75 0 11-1.06 1.06l-10-10a.75.75 0 010-1.06l10-10a.75.75 0 011.06 0z" fill="#475161" />
+        </svg>
       </div>
+      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        <ContentHeader />
+        <SearchBar />
 
-      <div className="flex-1" style={{ borderLeft: '1px solid rgb(221, 227, 238)' }}>
+        <div>
         {/* Banner */}
         <MarketplaceBanner />
 
@@ -492,6 +515,7 @@ export default function MarketplaceV5Page() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

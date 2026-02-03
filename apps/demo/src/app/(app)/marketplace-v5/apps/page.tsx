@@ -8,12 +8,13 @@
  *
  * Key differences from All Collections page:
  * - No banner/hero section - goes straight to card grid
- * - Uses AppsSidebar with App Type and App Features filters
  * - All cards are app cards in a grid (not sectioned by type)
+ *
+ * NOTE: Sidebar is provided by the parent layout.tsx
  */
 
-import { AppsSidebar } from "../components/apps-sidebar"
 import { AppCard } from "../components/app-card"
+import { AppsSidebar } from "../components/apps-sidebar"
 
 /* -------------------------------------------------------------------------- */
 /*  Content Header                                                              */
@@ -516,9 +517,10 @@ const APPS: AppData[] = [
 
 export default function AppsPage() {
   return (
-    <div className="flex h-full" style={{ WebkitFontSmoothing: 'auto', position: 'relative' as const }}>
+    <div style={{ display: 'flex', height: 'calc(100vh - 64px)', WebkitFontSmoothing: 'auto', position: 'relative' as const }}>
+      {/* Sidebar with its own scroll */}
       <AppsSidebar />
-      {/* Collapse sidebar caret - absolutely positioned on sidebar/content border */}
+      {/* Collapse sidebar caret */}
       <div
         className="cursor-pointer"
         style={{
@@ -542,97 +544,93 @@ export default function AppsPage() {
         </svg>
       </div>
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <div style={{ position: 'sticky', top: 0, zIndex: 9, flexShrink: 0, backgroundColor: '#fff' }}>
-          <ContentHeader />
-          <div style={{ borderLeft: '1px solid rgb(221, 227, 238)' }}>
-            <SearchBar />
-          </div>
+        <ContentHeader />
+        <SearchBar />
+
+        <div>
+        {/* Apps Grid */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap' as const,
+            padding: '5px 0',
+            fontFamily: 'Inter, sans-serif',
+          }}
+        >
+          {APPS.map((app) => (
+            <AppCard
+              key={app.title}
+              title={app.title}
+              subtitle={app.type}
+              description={app.description}
+              buttonLabel={app.buttonLabel === "Request Install" ? "Install" : app.buttonLabel}
+              icon={
+                <AppIcon
+                  src={app.iconSrc}
+                  title={app.title}
+                  initials={app.initials}
+                  bg={app.bg}
+                />
+              }
+            />
+          ))}
         </div>
 
-        <div className="flex-1" style={{ borderLeft: '1px solid rgb(221, 227, 238)' }}>
-          {/* Apps Grid */}
+        {/* Bottom "Can't find?" banner */}
+        <div style={{ margin: '15px 20px 15px 15px', fontFamily: 'Inter, sans-serif' }}>
           <div
             style={{
               display: 'flex',
-              flexWrap: 'wrap' as const,
-              padding: '5px 0',
-              fontFamily: 'Inter, sans-serif',
+              alignItems: 'stretch',
+              backgroundColor: 'rgb(245, 253, 255)',
+              borderRadius: 4,
+              padding: '0 20px',
+              margin: '0 0 20px',
             }}
           >
-            {APPS.map((app) => (
-              <AppCard
-                key={app.title}
-                title={app.title}
-                subtitle={app.type}
-                description={app.description}
-                buttonLabel={app.buttonLabel === "Request Install" ? "Install" : app.buttonLabel}
-                icon={
-                  <AppIcon
-                    src={app.iconSrc}
-                    title={app.title}
-                    initials={app.initials}
-                    bg={app.bg}
-                  />
-                }
-              />
-            ))}
-          </div>
-
-          {/* Bottom "Can't find?" banner */}
-          <div style={{ margin: '15px 20px 15px 15px', fontFamily: 'Inter, sans-serif' }}>
+            {/* Left blue border accent */}
             <div
               style={{
-                display: 'flex',
-                alignItems: 'stretch',
-                backgroundColor: 'rgb(245, 253, 255)',
-                borderRadius: 4,
-                padding: '0 20px',
-                margin: '0 0 20px',
+                borderLeft: '4px solid rgb(4, 105, 227)',
+                borderRadius: '4px 0 0 4px',
+                marginLeft: -20,
+                flexShrink: 0,
               }}
-            >
-              {/* Left blue border accent */}
-              <div
-                style={{
-                  borderLeft: '4px solid rgb(4, 105, 227)',
-                  borderRadius: '4px 0 0 4px',
-                  marginLeft: -20,
-                  flexShrink: 0,
-                }}
-              />
-              {/* Content wrapper */}
-              <div style={{ padding: '18px 0', marginLeft: 15, fontSize: 13, lineHeight: '20px', color: 'rgb(33, 33, 33)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <div>
-                    <b>Can&apos;t find what you&apos;re looking for?</b>{" "}
-                    Marketplace lists all your favorite apps and starters that are
-                    publicly available for use. If you can&apos;t find what you&apos;re
-                    looking for, you can send us a request mentioning what you&apos;re
-                    looking for by clicking on the button below.
-                  </div>
-                  <button
-                    className="cursor-pointer shrink-0"
-                    style={{
-                      backgroundColor: 'rgb(249, 248, 255)',
-                      border: '1px solid rgb(108, 92, 231)',
-                      borderRadius: 4,
-                      color: 'rgb(108, 92, 231)',
-                      fontSize: 14,
-                      fontWeight: 600,
-                      height: 32,
-                      minHeight: 32,
-                      minWidth: 32,
-                      padding: '5px 16px',
-                      lineHeight: '14px',
-                      fontFamily: 'Inter, sans-serif',
-                      marginTop: 4,
-                    }}
-                  >
-                    Submit Request
-                  </button>
+            />
+            {/* Content wrapper */}
+            <div style={{ padding: '18px 0', marginLeft: 15, fontSize: 13, lineHeight: '20px', color: 'rgb(33, 33, 33)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div>
+                  <b>Can&apos;t find what you&apos;re looking for?</b>{" "}
+                  Marketplace lists all your favorite apps and starters that are
+                  publicly available for use. If you can&apos;t find what you&apos;re
+                  looking for, you can send us a request mentioning what you&apos;re
+                  looking for by clicking on the button below.
                 </div>
+                <button
+                  className="cursor-pointer shrink-0"
+                  style={{
+                    backgroundColor: 'rgb(249, 248, 255)',
+                    border: '1px solid rgb(108, 92, 231)',
+                    borderRadius: 4,
+                    color: 'rgb(108, 92, 231)',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    height: 32,
+                    minHeight: 32,
+                    minWidth: 32,
+                    padding: '5px 16px',
+                    lineHeight: '14px',
+                    fontFamily: 'Inter, sans-serif',
+                    marginTop: 4,
+                  }}
+                >
+                  Submit Request
+                </button>
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
