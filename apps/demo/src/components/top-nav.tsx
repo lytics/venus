@@ -48,6 +48,50 @@ const SettingsIcon = () => (
   </svg>
 );
 
+// CMS Navigation Icons
+const DashboardIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
+    <path d="M4 13h6a1 1 0 001-1V4a1 1 0 00-1-1H4a1 1 0 00-1 1v8a1 1 0 001 1zm0 8h6a1 1 0 001-1v-4a1 1 0 00-1-1H4a1 1 0 00-1 1v4a1 1 0 001 1zm10 0h6a1 1 0 001-1v-8a1 1 0 00-1-1h-6a1 1 0 00-1 1v8a1 1 0 001 1zm0-18a1 1 0 00-1 1v4a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1h-6z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+  </svg>
+);
+
+const EntriesIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
+    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9h6m-6 4h6m-6-8h.01M9 12h.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+const AssetsIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
+    <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const ContentModelsIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
+    <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const PublishQueueIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
+    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const ReleasesIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
+    <path d="M7 7h.01M7 3h5a1.99 1.99 0 011.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const CMSSettingsIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
+    <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
 const DUMMY_USER = {
   name: "Human Being",
   email: "user@example.com",
@@ -57,12 +101,155 @@ const DUMMY_USER = {
 interface ProductBranding {
   iconPath: string;
   productName: string;
+  href?: string;
 }
 
 interface NavItem {
   label: string;
   href: string;
   children?: NavItem[];
+}
+
+// Unified nav item configuration for section navigation
+interface NavItemConfig {
+  label: string;
+  href?: string;
+  icon: React.ComponentType;
+  disabled?: boolean;
+  isDropdown?: boolean;
+  dropdownItems?: { label: string; href: string }[];
+}
+
+// Marketplace-specific icons (extracted from production app — 24x24, marginRight 4px)
+const ManageAppsIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 4, flexShrink: 0 }}>
+    <path fillRule="evenodd" clipRule="evenodd" d="M14 5.25A2.75 2.75 0 0011.25 8v1.25H7A1.75 1.75 0 005.25 11v14c0 .966.784 1.75 1.75 1.75h18A1.75 1.75 0 0026.75 25V11A1.75 1.75 0 0025 9.25h-4.25V8A2.75 2.75 0 0018 5.25h-4zm5.25 4V8c0-.69-.56-1.25-1.25-1.25h-4c-.69 0-1.25.56-1.25 1.25v1.25h6.5zM7 10.75a.25.25 0 00-.25.25v4.813h18.5V11a.25.25 0 00-.25-.25H7zm18.25 6.563H6.75V25c0 .138.112.25.25.25h18a.25.25 0 00.25-.25v-7.688z" fill="#475161"/>
+  </svg>
+);
+
+const AuditLogsIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: 4, flexShrink: 0 }}>
+    <path d="M10.25 10.049a.75.75 0 01.75-.75h10a.75.75 0 010 1.5H11a.75.75 0 01-.75-.75zM11 14.348a.75.75 0 000 1.5h10a.75.75 0 000-1.5H11z" fill="#475161"/>
+    <path fillRule="evenodd" clipRule="evenodd" d="M6.82 26.532a.5.5 0 01-.82-.384V6a1 1 0 011-1h18a1 1 0 011 1v20.049a.5.5 0 01-.845.362L22.5 23.883l-2.628 2.92a.5.5 0 01-.744 0l-2.628-2.92-3.128 2.978a.5.5 0 01-.716-.028L10 23.883l-3.18 2.649zm2.22-3.802a1.5 1.5 0 012.075.15l1.968 2.185 2.383-2.268a1.5 1.5 0 012.149.082l1.885 2.094 1.885-2.094a1.5 1.5 0 012.15-.082l.965.919V6.5h-17v17.513l1.54-1.283z" fill="#475161"/>
+  </svg>
+);
+
+// Section navigation configurations
+const PERSONALIZE_NAV: NavItemConfig[] = [
+  { label: 'Experiences', href: '/personalize/experiences', icon: ExperiencesIcon },
+  { label: 'Targets', href: '/personalize/targets', icon: AudiencesIcon },
+  { label: 'Attributes', href: '/personalize/attributes', icon: AttributesIcon },
+  { label: 'Events', icon: EventsIcon, disabled: true },
+  { label: 'Settings', icon: SettingsIcon, disabled: true },
+];
+
+const CMS_NAV: NavItemConfig[] = [
+  { label: 'Dashboard', href: '/stacks', icon: DashboardIcon },
+  { label: 'Entries', icon: EntriesIcon, disabled: true },
+  { label: 'Assets', icon: AssetsIcon, disabled: true },
+  { label: 'Content Models', icon: ContentModelsIcon, disabled: true },
+  { label: 'Publish Queue', icon: PublishQueueIcon, disabled: true },
+  { label: 'Releases', icon: ReleasesIcon, disabled: true },
+  { label: 'Settings', icon: CMSSettingsIcon, disabled: true },
+];
+
+const MARKETPLACE_NAV: NavItemConfig[] = [
+  {
+    label: 'Manage Apps',
+    icon: ManageAppsIcon,
+    isDropdown: true,
+    dropdownItems: [
+      { label: 'Installed Apps', href: '/marketplace/installed-apps' },
+      { label: 'Private Apps', href: '/marketplace/private-apps' }
+    ]
+  },
+  { label: 'Audit Logs', href: '/marketplace/audit-logs', icon: AuditLogsIcon },
+];
+
+// Unified NavItem component
+function NavItemComponent({ item, pathname, compact }: { item: NavItemConfig; pathname: string; compact?: boolean }) {
+  const Icon = item.icon;
+  const isActive = item.href ? pathname.startsWith(item.href) : false;
+
+  // Compact mode: production marketplace style — icons + text, exact production sizing
+  const baseClass = compact
+    ? "flex items-center rounded-[4px] hover:bg-[color:var(--color-surface-gray)]"
+    : "flex items-center px-2 py-1 text-xs font-medium h-8 min-h-8 tracking-[0.24px] leading-[18px] rounded-[4px]";
+  const compactStyle: React.CSSProperties | undefined = compact
+    ? { fontSize: 12, fontWeight: 500, color: 'rgb(71, 81, 97)', lineHeight: '18px', letterSpacing: '0.24px', padding: '4px 8px', height: 32, display: 'inline-flex', alignItems: 'center', backgroundColor: 'rgb(255, 255, 255)', borderRadius: 4, cursor: 'pointer' }
+    : undefined;
+
+  // Handle dropdown items
+  if (item.isDropdown) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            className={cn(baseClass, !compact && "text-[color:var(--color-heading)] hover:bg-[color:var(--color-surface-gray)]")}
+            style={compactStyle}
+          >
+            <Icon />
+            {item.label}
+            {compact ? (
+              <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: 8, flexShrink: 0 }}>
+                <path fillRule="evenodd" clipRule="evenodd" d="M5.47 11.47a.75.75 0 011.06 0L16 20.94l9.47-9.47a.75.75 0 111.06 1.06l-10 10a.75.75 0 01-1.06 0l-10-10a.75.75 0 010-1.06z" fill="#475161" />
+              </svg>
+            ) : (
+              <ChevronDown className="w-3 h-3 ml-1" />
+            )}
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          {item.dropdownItems?.map(sub => (
+            <DropdownMenuItem key={sub.label}>{sub.label}</DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
+
+  // Handle disabled items
+  if (item.disabled) {
+    return (
+      <button
+        className={cn(baseClass, !compact && "text-[color:var(--color-heading)]", "cursor-not-allowed")}
+        style={compactStyle}
+        disabled
+      >
+        <Icon />
+        {item.label}
+      </button>
+    );
+  }
+
+  // Handle regular links
+  return (
+    <Link
+      href={item.href!}
+      className={cn(
+        baseClass,
+        !compact && "transition-colors hover:bg-[color:var(--color-surface-gray)]",
+        isActive
+          ? "text-[color:var(--color-primary)]"
+          : !compact ? "text-[color:var(--color-heading)]" : undefined
+      )}
+      style={compactStyle}
+    >
+      <Icon />
+      {item.label}
+    </Link>
+  );
+}
+
+// Unified SectionNav component
+function SectionNav({ items, pathname, compact }: { items: NavItemConfig[]; pathname: string; compact?: boolean }) {
+  return (
+    <>
+      {items.map(item => (
+        <NavItemComponent key={item.label} item={item} pathname={pathname} compact={compact} />
+      ))}
+    </>
+  );
 }
 
 interface TopNavProps {
@@ -75,6 +262,8 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
   const [navHeight, setNavHeight] = React.useState<string>("3.5rem");
   const [showBorder, setShowBorder] = React.useState<boolean>(true);
 
+  const isMarketplaceV3 = pathname.startsWith('/marketplace-v3');
+
   // Auto-detect product branding based on pathname
   const productBranding = React.useMemo(() => {
     if (productBrandingProp) return productBrandingProp;
@@ -82,7 +271,32 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
     if (pathname.startsWith('/personalize')) {
       return {
         iconPath: '/images/contentstack-personalize.svg',
-        productName: 'Personalize'
+        productName: 'Personalize',
+        href: '/personalize'
+      };
+    }
+
+    if (pathname.startsWith('/stacks')) {
+      return {
+        iconPath: '/images/contentstack-headless-cms.svg',
+        productName: 'Headless CMS',
+        href: '/stacks'
+      };
+    }
+
+    if (pathname.startsWith('/marketplace-v3')) {
+      return {
+        iconPath: '/images/contentstack-marketplace.svg',
+        productName: 'Marketplace',
+        href: '/marketplace-v3'
+      };
+    }
+
+    if (pathname.startsWith('/marketplace')) {
+      return {
+        iconPath: '/images/contentstack-marketplace.svg',
+        productName: 'Marketplace',
+        href: '/marketplace'
       };
     }
 
@@ -136,7 +350,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
   return (
     <>
       <div className={cn("bg-background/80 backdrop-blur-sm", sticky && "sticky top-0 z-50")} style={{ height: navHeight }}>
-        <div className="w-full pl-2 pr-4">
+        <div className={cn("w-full pr-4", isMarketplaceV3 ? "pl-0" : "pl-2")} style={isMarketplaceV3 ? { WebkitFontSmoothing: 'auto' } : undefined}>
           {/* Mobile Layout (< md) */}
           <div className="flex items-center justify-between md:hidden" style={{ height: navHeight }}>
             {/* Left: Menu button + Page title */}
@@ -157,21 +371,28 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
           {/* Desktop Layout (>= md) */}
           <div className="hidden md:flex items-center" style={{ height: navHeight }}>
             {/* Left: Logo or Product Branding */}
-            <div className={cn("flex items-center gap-3", !productBranding && "ml-4")}>
+            <div className={cn("flex items-center", isMarketplaceV3 ? "ml-3" : "gap-3", !productBranding && "ml-4")} style={isMarketplaceV3 ? { marginLeft: 12 } : undefined}>
               {productBranding ? (
                 <>
-                  <Link href="/personalize" className="flex items-center px-2 py-1 rounded transition-colors hover:bg-[color:var(--color-surface-gray)]">
+                  <Link
+                    href={productBranding.href || '/'}
+                    className={cn("flex items-center rounded transition-colors hover:bg-[color:var(--color-surface-gray)]", !isMarketplaceV3 && "px-2 py-1")}
+                    style={isMarketplaceV3 ? { padding: '0 8px 0 5px', height: 40, width: 128 } : undefined}
+                  >
                     <Image
                       src={productBranding.iconPath}
                       alt={productBranding.productName}
-                      width={160}
-                      height={32}
-                      className="h-8 w-auto"
+                      width={isMarketplaceV3 ? 128 : 160}
+                      height={isMarketplaceV3 ? 40 : 32}
+                      className={isMarketplaceV3 ? "h-10 w-auto" : "h-8 w-auto"}
                     />
                   </Link>
-                  {/* Separator - hidden on personalize landing page */}
-                  {pathname !== '/personalize' && (
-                    <div className="h-6 w-px bg-gray-200"></div>
+                  {/* Separator - hidden on landing pages */}
+                  {pathname !== '/personalize' && pathname !== '/stacks' && (
+                    <div
+                      className={isMarketplaceV3 ? undefined : "h-6 w-px bg-gray-200"}
+                      style={isMarketplaceV3 ? { width: 1, height: 16, backgroundColor: 'rgb(182, 174, 243)', marginLeft: 4 } : undefined}
+                    />
                   )}
                 </>
               ) : (
@@ -184,121 +405,77 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             {/* Center: Navigation */}
             <div className="flex-1 flex justify-center px-3">
               <div className="w-full flex items-center justify-between">
-                {/* Personalize Navigation or General Navigation */}
-                <nav className="flex items-center gap-1">
-                {pathname.startsWith('/personalize') && pathname !== '/personalize' ? (
-                  // Personalize-specific navigation
-                  <>
-                    <Link
-                      href="/personalize/experiences"
-                      className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
-                        pathname.startsWith('/personalize/experiences')
-                          ? "text-[color:var(--color-primary)]"
-                          : "text-[color:var(--color-heading)]"
-                      )}
-                    >
-                      <ExperiencesIcon />
-                      Experiences
-                    </Link>
-                    <Link
-                      href="/personalize/targets"
-                      className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
-                        pathname.startsWith('/personalize/targets')
-                          ? "text-[color:var(--color-primary)]"
-                          : "text-[color:var(--color-heading)]"
-                      )}
-                    >
-                      <AudiencesIcon />
-                      Targets
-                    </Link>
-                    <Link
-                      href="/personalize/attributes"
-                      className={cn(
-                        "flex items-center px-2 py-1 text-xs font-semibold transition-colors rounded hover:bg-[color:var(--color-surface-gray)]",
-                        pathname.startsWith('/personalize/attributes')
-                          ? "text-[color:var(--color-primary)]"
-                          : "text-[color:var(--color-heading)]"
-                      )}
-                    >
-                      <AttributesIcon />
-                      Attributes
-                    </Link>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <EventsIcon />
-                      Events
-                    </button>
-                    <button
-                      className="flex items-center px-2 py-1 text-xs font-semibold text-[color:var(--color-heading)] cursor-not-allowed rounded"
-                      disabled
-                    >
-                      <SettingsIcon />
-                      Settings
-                    </button>
-                  </>
-                ) : (
-                  // General navigation
-                  <>
-                  {navItems.map((item) => {
-                    const isActive = pathname === item.href;
+                {/* Product-specific Navigation - Unified using SectionNav */}
+                <nav className="flex items-center gap-1" style={isMarketplaceV3 ? { gap: 4, margin: '0 8px' } : undefined}>
+                  {pathname.startsWith('/personalize') && pathname !== '/personalize' && (
+                    <SectionNav items={PERSONALIZE_NAV} pathname={pathname} />
+                  )}
+                  {pathname.startsWith('/stacks/') && pathname.split('/').length > 2 && (
+                    <SectionNav items={CMS_NAV} pathname={pathname} />
+                  )}
+                  {pathname.startsWith('/marketplace-v3') && (
+                    <SectionNav items={MARKETPLACE_NAV} pathname={pathname} compact />
+                  )}
+                  {pathname.startsWith('/marketplace') && !pathname.startsWith('/marketplace-v3') && (
+                    <SectionNav items={MARKETPLACE_NAV} pathname={pathname} />
+                  )}
+                  {/* General navigation for other pages */}
+                  {!pathname.startsWith('/personalize') && !pathname.startsWith('/stacks/') && !pathname.startsWith('/marketplace') && !pathname.startsWith('/marketplace-v3') && (
+                    <>
+                      {navItems.map((item) => {
+                        const isActive = pathname === item.href;
 
-                    // If item has children, render as dropdown
-                    if (item.children && item.children.length > 0) {
-                      return (
-                        <DropdownMenu key={item.label}>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="small"
-                              data-nav-item
-                              data-active={isActive}
-                              className={cn(
-                                "h-8 px-4 text-sm gap-1",
-                                "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
-                                isActive && "text-sidebar-active-foreground font-medium"
-                              )}
-                            >
-                              {item.label}
-                              <ChevronDown className="h-3 w-3 opacity-50" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="start">
-                            {item.children.map((child) => (
-                              <DropdownMenuItem key={child.href} asChild>
-                                <Link href={child.href}>
-                                  {child.label}
-                                </Link>
-                              </DropdownMenuItem>
-                            ))}
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      );
-                    }
+                        if (item.children && item.children.length > 0) {
+                          return (
+                            <DropdownMenu key={item.label}>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="small"
+                                  data-nav-item
+                                  data-active={isActive}
+                                  className={cn(
+                                    "h-8 px-4 text-sm gap-1",
+                                    "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
+                                    isActive && "text-sidebar-active-foreground font-medium"
+                                  )}
+                                >
+                                  {item.label}
+                                  <ChevronDown className="h-3 w-3 opacity-50" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="start">
+                                {item.children.map((child) => (
+                                  <DropdownMenuItem key={child.href} asChild>
+                                    <Link href={child.href}>
+                                      {child.label}
+                                    </Link>
+                                  </DropdownMenuItem>
+                                ))}
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          );
+                        }
 
-                    // Simple link item
-                    return (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        data-nav-item
-                        data-active={isActive}
-                        className={cn(
-                          "inline-flex items-center justify-center h-8 px-4 text-sm rounded font-semibold transition-colors",
-                          "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
-                          isActive && "text-sidebar-active-foreground font-medium"
-                        )}
-                      >
-                        {item.label}
-                      </Link>
-                    );
-                  })}
-                  </>
-                )}
-              </nav>
+                        return (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            data-nav-item
+                            data-active={isActive}
+                            className={cn(
+                              "inline-flex items-center justify-center h-8 px-4 text-sm rounded font-semibold transition-colors",
+                              "hover:bg-[color:var(--color-surface-gray)] hover:text-sidebar-accent-foreground",
+                              isActive && "text-sidebar-active-foreground font-medium"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        );
+                      })}
+                    </>
+                  )}
+                </nav>
             </div>
           </div>
 
@@ -308,7 +485,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <Button
               variant="ghost"
               size="small"
-              className="h-10 w-10 p-0"
+              className="h-10 w-10 p-0 focus:ring-0 focus:ring-offset-0"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-8">
                 <path d="M12.7 6.705c.285-.716 1.315-.716 1.599 0l.026.074 1.026 3.37 3.37 1.026c.815.248.815 1.402 0 1.65l-3.37 1.026-1.026 3.37c-.248.815-1.402.815-1.65 0l-1.027-3.37-3.369-1.026c-.815-.248-.815-1.402 0-1.65l3.37-1.027 1.026-3.369.026-.074zm-.015 3.905a.863.863 0 01-.575.575L9.433 12l2.678.815c.241.073.436.247.537.474l.038.1.815 2.679.815-2.679.037-.1a.863.863 0 01.537-.474L17.568 12l-2.679-.815a.863.863 0 01-.574-.575L13.5 7.933l-.815 2.678z" fill="url(#paint0_linear)"/>
@@ -338,7 +515,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <Button
               variant="ghost"
               size="small"
-              className="h-10 w-10 p-0"
+              className="h-10 w-10 p-0 focus:ring-0 focus:ring-offset-0"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
                 {/* TODO: Add --color-icon-muted token for #697B9B */}
@@ -350,7 +527,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
             <Button
               variant="ghost"
               size="small"
-              className="h-10 w-10 p-0"
+              className="h-10 w-10 p-0 focus:ring-0 focus:ring-offset-0"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
                 {/* TODO: Add --color-icon-muted token for #697B9B */}
@@ -367,7 +544,7 @@ export function TopNav({ productBranding: productBrandingProp }: TopNavProps = {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="h-8 w-8 p-0 rounded-full cursor-pointer"
+                  className="h-8 w-8 p-0 rounded-full cursor-pointer focus:ring-0 focus:ring-offset-0"
                 >
                   <Avatar className="h-8 w-8 rounded-full">
                     <AvatarImage src={DUMMY_USER.avatar} alt={DUMMY_USER.name} />

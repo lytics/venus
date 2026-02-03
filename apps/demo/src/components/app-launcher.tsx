@@ -17,7 +17,7 @@ interface App {
 
 const apps: App[] = [
   { id: "home", name: "Home", icon: "/images/icon-contentstack-home.svg", href: "/dashboard" },
-  { id: "cms", name: "CMS", icon: "/images/icon-headless-cms.svg", href: "/cms" },
+  { id: "cms", name: "CMS", icon: "/images/icon-headless-cms.svg", href: "/stacks" },
   { id: "personalize", name: "Personalize", icon: "/images/icon-personalize.svg", href: "/personalize" },
   { id: "data-insights", name: "Data & Insights", icon: "/images/dataandinsights.svg", href: "/insights" },
   { id: "automate", name: "Automate", icon: "/images/automate.svg", href: "/automate" },
@@ -47,7 +47,7 @@ export function AppLauncher() {
           variant="ghost"
           size="small"
           className={cn(
-            "h-10 w-10 p-0 transition-colors text-[color:var(--color-heading)] cursor-pointer",
+            "h-10 w-10 p-0 transition-colors text-[color:var(--color-heading)] cursor-pointer focus:ring-0 focus:ring-offset-0",
             // TODO: Add --color-accent-blue and --color-surface-blue tokens for #6B7CF2
             open && "bg-[#6B7CF2]/10 text-[#6B7CF2]"
           )}
