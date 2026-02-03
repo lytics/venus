@@ -223,32 +223,37 @@ export function AppsSidebar() {
         </div>
       </div>
 
-      {/* Divider */}
-      <div style={{ width: 239, height: 1, margin: '11px 0 16px', borderTop: '1px solid rgb(221, 227, 238)' }} />
+      {/* Divider - SOLID (Line Line--Solid) - after Collections */}
+      {/* Capture Style 20: width: 100%, height: 1px, margin: 16px/16px, borderTopStyle: solid */}
+      <div style={{ width: '100%', height: 1, margin: '16px 0', borderTop: '1px solid rgb(221, 227, 238)' }} />
 
       {/* Categories (collapsed with See More) */}
       <div style={{ padding: '0 15px' }}>
         <SectionHeader title="categories" collapsed />
         <div style={{ padding: '0 10px' }}>
           {/* Search Categories input */}
-          <div style={{ marginBottom: 12 }}>
+          {/* Capture Style 24 (FilterList__searchInput): wrapper with paddingBottom: 15px */}
+          {/* Capture Style 26 (Search-input-show): 189x40, padding: 2px 8px, border: 1px solid rgb(221, 227, 238), borderRadius: 4px */}
+          {/* Capture Style 29 (Search__input): height: 34px, fontSize: 14px, letterSpacing: 0.14px */}
+          <div style={{ paddingBottom: 15 }}>
             <div
               style={{
                 display: 'flex',
+                justifyContent: 'center',
                 alignItems: 'center',
-                width: '100%',
+                gap: 4,
+                width: 189,
                 height: 40,
-                border: '1px solid rgb(185, 178, 233)',
+                padding: '2px 8px',
+                border: '1px solid rgb(221, 227, 238)',
                 borderRadius: 4,
-                padding: '0 12px',
-                backgroundColor: '#fff',
               }}
             >
               <svg
                 viewBox="0 0 32 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                style={{ height: 16, width: 16, marginRight: 8, flexShrink: 0, color: 'rgb(100, 118, 150)' }}
+                style={{ height: 16, width: 16, flexShrink: 0, color: 'rgb(100, 118, 150)' }}
               >
                 <path fillRule="evenodd" clipRule="evenodd" d="M14.5 4.75c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75-4.365-9.75-9.75-9.75zM3.25 14.5c0-6.213 5.037-11.25 11.25-11.25S25.75 8.287 25.75 14.5 20.713 25.75 14.5 25.75 3.25 20.713 3.25 14.5z" fill="currentColor" />
                 <path fillRule="evenodd" clipRule="evenodd" d="M21.395 21.395a.75.75 0 011.06 0l6.075 6.075a.75.75 0 11-1.06 1.06l-6.075-6.075a.75.75 0 010-1.06z" fill="currentColor" />
@@ -261,10 +266,10 @@ export function AppsSidebar() {
                 style={{
                   backgroundColor: 'transparent',
                   color: 'rgb(33, 33, 33)',
-                  fontSize: 13,
-                  height: 22,
-                  letterSpacing: '0.13px',
-                  lineHeight: '22px',
+                  fontSize: 14,
+                  height: 34,
+                  letterSpacing: '0.14px',
+                  lineHeight: '21px',
                   fontFamily: 'Inter, sans-serif',
                 }}
               />
@@ -290,8 +295,9 @@ export function AppsSidebar() {
         </div>
       </div>
 
-      {/* Divider */}
-      <div style={{ width: 239, height: 1, margin: '11px 0 16px', borderTop: '1px solid rgb(221, 227, 238)' }} />
+      {/* Divider - DASHED (FilterList__section-divider) - after Categories */}
+      {/* Capture Style 47: width: 209px, height: 2px, margin: 20px/20px, borderTopStyle: dashed */}
+      <div style={{ width: 209, height: 2, margin: '20px 0', borderTop: '1px dashed rgb(221, 227, 238)' }} />
 
       {/* App Type */}
       <div style={{ padding: '0 15px' }}>
@@ -303,8 +309,9 @@ export function AppsSidebar() {
         </div>
       </div>
 
-      {/* Divider */}
-      <div style={{ width: 239, height: 1, margin: '11px 0 16px', borderTop: '1px solid rgb(221, 227, 238)' }} />
+      {/* Divider - DASHED (FilterList__section-divider) - after App Type */}
+      {/* Capture Style 47: width: 209px, height: 2px, margin: 20px/20px, borderTopStyle: dashed */}
+      <div style={{ width: 209, height: 2, margin: '20px 0', borderTop: '1px dashed rgb(221, 227, 238)' }} />
 
       {/* App Features */}
       <div style={{ padding: '0 15px' }}>
