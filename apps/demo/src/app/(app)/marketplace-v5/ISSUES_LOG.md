@@ -158,3 +158,28 @@ This document tracks discrepancies found between the vacuum capture data and the
 - Icon: 16px × 16px (close but different height)
 
 **Status:** Minor - needs verification if this causes visual difference
+
+---
+
+## Components Verified as Correct
+
+### App Cards (cap_1770096899203_ben3go)
+- Card dimensions: 320px × 246px ✅
+- Card margin: 15px (all sides) ✅
+- Card border: 1px solid rgb(221, 227, 238) ✅
+- Card borderRadius: 4px ✅
+- Icon area height: 160px ✅
+- App icon: 72px × 72px, borderRadius: 10px ✅
+
+### Page Header (cap_1770096848750_2uyx2p)
+- Height: 90px ✅
+- Padding: 0 20px 0 10px ✅
+- Background: rgb(247, 249, 252) ✅
+- Borders: 1px solid rgb(221, 227, 238) ✅
+- Title: fontSize 20px, fontWeight 600, letterSpacing 0.2px ✅
+
+### Sidebar Root (cap_1770096848167_d9hsbg)
+- Width: 240px ✅
+- Padding: 20px top, 15px bottom ✅
+- Background: rgb(247, 249, 252) ✅
+- Borders: 1px solid rgb(221, 227, 238) ✅
