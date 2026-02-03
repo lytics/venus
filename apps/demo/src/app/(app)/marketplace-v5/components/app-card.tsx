@@ -78,7 +78,7 @@ interface AppCardProps {
   icon: ReactNode
   subtitle?: string
   description?: string
-  buttonLabel?: "Install" | "Import"
+  buttonLabel?: "Install" | "Import" | "Request Install"
 }
 
 export function AppCard({ title, icon, subtitle, description, buttonLabel = "Install" }: AppCardProps) {
