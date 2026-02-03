@@ -230,6 +230,46 @@ export function AppsSidebar() {
       <div style={{ padding: '0 15px' }}>
         <SectionHeader title="categories" collapsed />
         <div style={{ padding: '0 10px' }}>
+          {/* Search Categories input */}
+          <div style={{ marginBottom: 12 }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                width: '100%',
+                height: 40,
+                border: '1px solid rgb(185, 178, 233)',
+                borderRadius: 4,
+                padding: '0 12px',
+                backgroundColor: '#fff',
+              }}
+            >
+              <svg
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ height: 16, width: 16, marginRight: 8, flexShrink: 0, color: 'rgb(100, 118, 150)' }}
+              >
+                <path fillRule="evenodd" clipRule="evenodd" d="M14.5 4.75c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75-4.365-9.75-9.75-9.75zM3.25 14.5c0-6.213 5.037-11.25 11.25-11.25S25.75 8.287 25.75 14.5 20.713 25.75 14.5 25.75 3.25 20.713 3.25 14.5z" fill="currentColor" />
+                <path fillRule="evenodd" clipRule="evenodd" d="M21.395 21.395a.75.75 0 011.06 0l6.075 6.075a.75.75 0 11-1.06 1.06l-6.075-6.075a.75.75 0 010-1.06z" fill="currentColor" />
+              </svg>
+              <style>{`.mp-cat-search::placeholder { color: rgb(100, 118, 150); opacity: 1; }`}</style>
+              <input
+                type="text"
+                placeholder="Search Categories"
+                className="flex-1 outline-none border-none mp-cat-search"
+                style={{
+                  backgroundColor: 'transparent',
+                  color: 'rgb(33, 33, 33)',
+                  fontSize: 13,
+                  height: 22,
+                  letterSpacing: '0.13px',
+                  lineHeight: '22px',
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              />
+            </div>
+          </div>
           {CATEGORIES_VISIBLE.map((cat) => (
             <CheckboxItem key={cat} label={cat} />
           ))}
