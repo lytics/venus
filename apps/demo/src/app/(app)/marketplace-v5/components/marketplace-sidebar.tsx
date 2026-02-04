@@ -1,5 +1,8 @@
 "use client"
 
+import { usePathname } from "next/navigation"
+import Link from "next/link"
+
 /**
  * Marketplace Sidebar - Built from verified vacuum capture data
  *
@@ -11,11 +14,11 @@
  */
 
 const COLLECTIONS = [
-  { label: "All Collections", active: true },
-  { label: "Apps", active: false },
-  { label: "Starters", active: false },
-  { label: "Content Models", active: false },
-  { label: "Recipes", active: false },
+  { label: "All Collections", href: "/marketplace-v5" },
+  { label: "Apps", href: "/marketplace-v5/apps" },
+  { label: "Starters", href: "/marketplace-v5/starters" },
+  { label: "Content Models", href: "/marketplace-v5/content-models" },
+  { label: "Recipes", href: "/marketplace-v5/recipes" },
 ]
 
 const CATEGORIES = [
@@ -86,6 +89,16 @@ function CustomCheckbox() {
 }
 
 export function MarketplaceSidebar() {
+  const pathname = usePathname()
+
+  // Determine which collection is active based on current route
+  const getIsActive = (href: string) => {
+    if (href === '/marketplace-v5') {
+      return pathname === '/marketplace-v5'
+    }
+    return pathname.startsWith(href)
+  }
+
   return (
     <>
     <style>{`.sidebar-search-placeholder::placeholder { color: rgb(100, 118, 150); opacity: 1; }`}</style>
@@ -135,37 +148,42 @@ export function MarketplaceSidebar() {
           <ChevronIcon />
         </div>
         <div>
-          {COLLECTIONS.map((item) => (
-            <div
-              key={item.label}
-              style={{
-                color: item.active ? 'rgb(108, 92, 231)' : 'rgb(71, 81, 97)',
-                display: 'flex',
-                height: 40,
-                margin: '5px 0',
-                whiteSpace: 'nowrap' as const,
-                cursor: 'pointer',
-                alignItems: 'center',
-              }}
-            >
-              {item.active && (
-                <div style={{ backgroundColor: 'rgb(108, 92, 231)', width: 2, height: 40, borderRadius: '0 2px 2px 0' }} />
-              )}
-              <div
+          {COLLECTIONS.map((item) => {
+            const isActive = getIsActive(item.href)
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
                 style={{
-                  padding: 12,
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
+                  color: isActive ? 'rgb(108, 92, 231)' : 'rgb(71, 81, 97)',
+                  display: 'flex',
+                  height: 40,
+                  margin: '5px 0',
                   whiteSpace: 'nowrap' as const,
-                  minHeight: 14,
-                  fontSize: 16,
-                  lineHeight: '16px',
+                  cursor: 'pointer',
+                  alignItems: 'center',
+                  textDecoration: 'none',
                 }}
               >
-                {item.label}
-              </div>
-            </div>
-          ))}
+                {isActive && (
+                  <div style={{ backgroundColor: 'rgb(108, 92, 231)', width: 2, height: 40, borderRadius: '0 2px 2px 0' }} />
+                )}
+                <div
+                  style={{
+                    padding: 12,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap' as const,
+                    minHeight: 14,
+                    fontSize: 16,
+                    lineHeight: '16px',
+                  }}
+                >
+                  {item.label}
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </div>
 
