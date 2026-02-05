@@ -213,3 +213,38 @@ If verification score is below 8:
 4. **Stop**: Missing data means stop and report, not proceed with placeholders
 
 Following this workflow ensures pixel-perfect reproduction of captured UI.
+
+---
+
+## Styling Workflow
+
+### PRIMARY: Token Pipeline
+1. Call `capture_get_tokens` with `captureId` and `namespace`
+2. Returns semantic tokens: `t.namespace.key` for every style
+3. Write code referencing tokens (e.g., `<div style={t.sidebar.root}>`)
+4. Call `capture_transform` with your code — validates all refs, outputs production code
+5. Supports formats: tailwind (default), css, inline, css-modules
+
+### FALLBACK: Direct Style Extraction
+Only use `capture_get_styles_for_classes` when tokens aren't suitable:
+- Very simple zones with few elements
+- Debugging specific style values
+- When capture_get_tokens returns errors
+
+## Verification Workflow
+
+ALL THREE tools are REQUIRED before moving to the next zone.
+Audits are auto-generated — no manual step needed.
+
+1. **capture_verify** → structural check (whitelist enforcement, tag counts, SVG presence)
+   - Auto-stores audit report with pass/fail results
+   - Target: score >= 8/10
+
+2. **capture_verify_styles** → CSS property comparison
+   - Returns matches, mismatches, missing properties
+   - Auto-appends CSS results to the audit
+   - Fix critical mismatches before continuing
+
+3. **audit_get** → read the combined audit
+   - Returns combined results from steps 1 + 2
+   - Review all diffs and apply remaining fixes
