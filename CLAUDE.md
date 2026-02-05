@@ -193,43 +193,9 @@ import { Field, FieldLabel, Input, Button, HelpText, ValidationMessage } from "@
 
 ---
 
-## 🔬 Vacuum Capture Workflow
+## Vacuum Captures
 
-When building UI from vacuum MCP captures, follow these rules:
-
-### Data Path
-The correct path is `capture.componentTree.nodes` — NOT top-level `componentTree`.
-
-### Pre-Build (REQUIRED)
-1. Call `capture_get_structure` with the capture ID
-2. Verify `capture.componentTree.nodes` has content
-3. If data is missing → **STOP and ask**, never invent
-
-### Post-Build (REQUIRED)
-1. Call `capture_verify` with the built HTML
-2. Score must be >= 8 out of 10
-3. If score < 8 → **Fix issues**, don't ship broken
-
-### Never Invent
-If capture data is missing:
-- ❌ DON'T make up placeholder content
-- ❌ DON'T guess at values
-- ✅ DO stop and report what's missing
-- ✅ DO ask for guidance (re-capture, use reference)
-
-### Styling: Token Pipeline (PRIMARY)
-- `capture_get_tokens` → returns `t.namespace.key` vocabulary
-- Write code with token refs
-- `capture_transform` → validates and outputs production code (tailwind/css/inline)
-- `capture_get_styles_for_classes` → FALLBACK only for simple zones
-
-### Verification (auto-generates audits)
-ALL THREE REQUIRED:
-1. `capture_verify` → structural check (auto-stores audit)
-2. `capture_verify_styles` → CSS check (appends to audit)
-3. `audit_get` → read combined audit, apply fixes
-
-See: `docs/vacuum-capture-workflow.md` for full guide.
+When building UI from vacuum MCP captures, use the `/vacuum-rebuild` command (global skill). It covers the full workflow: token-primary styling, verification trio, zone splitting, and anti-invention rules.
 
 ---
 
