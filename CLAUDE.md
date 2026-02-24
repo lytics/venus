@@ -195,7 +195,18 @@ import { Field, FieldLabel, Input, Button, HelpText, ValidationMessage } from "@
 
 ## Vacuum Captures
 
-When building UI from vacuum MCP captures, use the `/vacuum-rebuild` command (global skill). It covers the full workflow: token-primary styling, verification trio, zone splitting, and anti-invention rules.
+When rebuilding vacuum captures, the workflow will:
+1. **Survey** — Analyze zones, detect existing layout, ask what to skip/rebuild
+2. **Integrate** — Wire nav items to routes, set active states with `usePathname()`
+3. **Rebuild** — Generate only the content zones, using Venus components where possible
+4. **Verify** — Check structure and styles match capture
+
+**This app's layout context:**
+- Header → `TopNav` at `@/components/top-nav` (usually skip header zone)
+- Main wrapper → `layout-client.tsx` (pages render inside `{children}`)
+- Components → `@contentstack/venuscn` for Button, Input, Table, etc.
+
+**Typical rebuild target:** Main zone only → `apps/demo/src/app/(app)/{feature}/page.tsx`
 
 ---
 
