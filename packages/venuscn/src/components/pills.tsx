@@ -5,23 +5,33 @@ import { cn } from '../lib/utils';
 /** Venus Design System Pills Component */
 
 export interface PillProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Visual variant of the pill */
+  /** Visual variant of the pill.
+   * - `"label"` — Rounded rectangle (border-radius 6px), no border by default.
+   * - `"chip"` — Fully rounded (pill shape), with border when `shouldHaveBorder` is true.
+   * @default "label"
+   */
   variant?: "label" | "chip";
-  /** Status/semantic meaning of the pill */
+  /** Semantic status controlling background and text color.
+   * - `"default"` — Gray background, dark text.
+   * - `"warning"` — Yellow background, dark yellow text.
+   * - `"success"` — Green background, dark green text.
+   * - `"danger"` — Red background, dark red text.
+   * @default "default"
+   */
   status?: "default" | "warning" | "success" | "danger";
-  /** Optional icon to display before the text */
+  /** Optional icon to display before the text. */
   iconBefore?: React.ReactNode;
-  /** Optional icon to display after the text */
+  /** Optional icon to display after the text. Hidden when `removable` is true. */
   iconAfter?: React.ReactNode;
-  /** Whether the pill can be removed */
+  /** Whether the pill shows a remove (X) button. @default false */
   removable?: boolean;
-  /** Callback when remove button is clicked */
+  /** Callback fired when the remove button is clicked. */
   onRemove?: () => void;
-  /** Whether the pill is disabled */
+  /** Whether the pill is disabled (50% opacity). @default false */
   disabled?: boolean;
-  /** Whether the pill has a border */
+  /** Whether the chip variant renders a border. Only applies to `variant="chip"`. @default true */
   shouldHaveBorder?: boolean;
-  /** Pill text content */
+  /** Pill text content. */
   children: React.ReactNode;
 }
 
@@ -48,27 +58,27 @@ export const Pill = React.forwardRef<HTMLDivElement, PillProps>(
         // Chip variant has more subtle, rounded styling
         switch (status) {
           case "warning":
-            return "bg-[#FEF3C7] text-[#D97706] border-[#FDE68A]";
+            return "bg-warning-light text-warning-dark border-pill-warning-border";
           case "success":
-            return "bg-[#D1FAE5] text-[#047857] border-[#A7F3D0]";
+            return "bg-success-light text-success-dark border-pill-success-border";
           case "danger":
-            return "bg-[#FEE2E2] text-[#DC2626] border-[#FECACA]";
+            return "bg-danger-light text-danger-dark border-pill-danger-border";
           case "default":
           default:
-            return "bg-[#EFF2F7] text-[#475161] border-[#D1D5DB]";
+            return "bg-gray-200 text-heading border-pill-default-border";
         }
       } else {
         // Label variant (default) - similar to tags
         switch (status) {
           case "warning":
-            return "bg-[#FEF3C7] text-[#D97706]";
+            return "bg-warning-light text-warning-dark";
           case "success":
-            return "bg-[#D1FAE5] text-[#047857]";
+            return "bg-success-light text-success-dark";
           case "danger":
-            return "bg-[#FEE2E2] text-[#DC2626]";
+            return "bg-danger-light text-danger-dark";
           case "default":
           default:
-            return "bg-[#EFF2F7] text-[#475161]";
+            return "bg-gray-200 text-heading";
         }
       }
     };
@@ -150,25 +160,34 @@ export const Pill = React.forwardRef<HTMLDivElement, PillProps>(
 
 Pill.displayName = "Pill";
 
-/** Multiple Pills Container Component */
+/** Multiple Pills Container — renders a flex-wrap row of Pill components.
+ * Use `items` for data-driven rendering, or `children` for manual composition.
+ */
 export interface PillsProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Array of pill items to display */
+  /** Array of pill data objects. Each is rendered as a `<Pill>`. Ignored when `children` is provided. */
   items?: Array<{
+    /** Unique key for the pill. Falls back to array index. */
     id?: string;
+    /** Pill label text. */
     text: string;
+    /** Icon rendered before the label. */
     iconBefore?: React.ReactNode;
+    /** Icon rendered after the label (hidden if removable). */
     iconAfter?: React.ReactNode;
+    /** Whether this pill shows a remove button. */
     removable?: boolean;
+    /** Callback when this pill's remove button is clicked. */
     onRemove?: () => void;
+    /** Callback when this pill is clicked. */
     onClick?: () => void;
   }>;
-  /** Variant for all pills */
+  /** Visual variant applied to all pills. @default "label" */
   variant?: "label" | "chip";
-  /** Status for all pills */
+  /** Semantic status applied to all pills. @default "default" */
   status?: "default" | "warning" | "success" | "danger";
-  /** Whether pills have borders */
+  /** Whether chip-variant pills render borders. @default true */
   shouldHaveBorder?: boolean;
-  /** Whether pills are disabled */
+  /** Whether all pills are disabled. @default false */
   disabled?: boolean;
   /** Children for manual pill composition */
   children?: React.ReactNode;

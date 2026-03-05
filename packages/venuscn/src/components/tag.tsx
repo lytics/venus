@@ -4,13 +4,13 @@ import { cn } from '../lib/utils';
 /** Venus Design System Tag Component V2 */
 
 export interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Tag text content */
+  /** Tag text content. Rendered at 12px, medium weight, inside a 20px-tall gray pill. */
   children: React.ReactNode;
-  /** Whether the tag can be removed */
+  /** Whether the tag shows an X close button on the right. @default false */
   removable?: boolean;
-  /** Callback when tag is removed */
+  /** Callback fired when the remove (X) button is clicked. Only relevant when `removable` is true. */
   onRemove?: () => void;
-  /** Whether the tag is disabled */
+  /** Whether the tag is disabled (50% opacity, no interactions). @default false */
   disabled?: boolean;
 }
 
@@ -22,14 +22,14 @@ export const Tag = React.forwardRef<HTMLDivElement, TagProps>(
         className={cn(
           // Base wrapper styles - V2 specifications from Storybook
           "group inline-flex items-center h-5",
-          "bg-[#EDF1F7] rounded-[4px]",
+          "bg-gray-200 rounded-[4px]",
           // Border is transparent by default, shows on hover
           "border border-transparent",
-          "text-[12px] font-medium leading-[12px] text-[#475161]",
+          "text-[12px] font-medium leading-[12px] text-heading",
           "transition-all duration-150",
 
           // Wrapper hover state (entire tag)
-          !disabled && "hover:bg-[#647696] hover:border-[#647696] hover:text-white",
+          !disabled && "hover:bg-subtle hover:border-subtle hover:text-white",
 
           // Disabled state
           disabled && "opacity-50 cursor-not-allowed",
@@ -60,7 +60,7 @@ export const Tag = React.forwardRef<HTMLDivElement, TagProps>(
               "transition-colors duration-150",
               "focus:outline-none",
               // Close button specific hover state (darker than wrapper hover)
-              !disabled && "hover:!bg-[#475161]",
+              !disabled && "hover:!bg-heading",
               disabled && "cursor-not-allowed"
             )}
             aria-label="Remove tag"
@@ -77,7 +77,7 @@ export const Tag = React.forwardRef<HTMLDivElement, TagProps>(
                 className={cn(
                   "transition-colors duration-150",
                   // Default state - light gray
-                  "stroke-[#A9B6CB]",
+                  "stroke-placeholder",
                   // Parent wrapper hover makes it white
                   "group-hover:stroke-white"
                 )}

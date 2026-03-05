@@ -5,19 +5,24 @@ import { Button, type ButtonProps } from "./button";
 /** Venus Design System PageHeader Component */
 
 export interface PageHeaderAction {
+  /** Button label text. */
   label: string;
+  /** Click handler for the action button. */
   onClick: () => void;
+  /** Button variant — see ButtonProps. @default "primary" */
   variant?: ButtonProps["variant"];
+  /** Button size — see ButtonProps. @default "small" */
   size?: ButtonProps["size"];
+  /** Whether this action button is disabled. @default false */
   disabled?: boolean;
 }
 
 export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** The page title text */
+  /** Page title text. Rendered at 20px, semibold, black. */
   title: string;
-  /** Optional info icon element to display next to title */
+  /** Optional icon element (e.g. info tooltip) displayed to the right of the title. */
   infoIcon?: React.ReactNode;
-  /** Array of action buttons to display on the right */
+  /** Action buttons rendered on the right side of the header. Each renders as a Venus Button. */
   actions?: PageHeaderAction[];
 }
 

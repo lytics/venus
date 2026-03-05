@@ -84,17 +84,17 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         className={cn(
           'flex items-center gap-2',
           'h-[29px] px-2',
-          'border border-[rgb(93,80,190)] rounded-[4px]',
+          'border border-primary-active rounded-[4px]',
           'bg-transparent',
           'transition-colors',
-          'focus-within:border-[rgb(108,92,231)]',
-          'hover:border-[rgb(108,92,231)]',
+          'focus-within:border-primary',
+          'hover:border-primary',
           disabled && 'opacity-50 cursor-not-allowed',
           className
         )}
       >
         <SearchIcon
-          className="h-4 w-4 flex-shrink-0 text-[#475161]"
+          className="h-4 w-4 flex-shrink-0 text-heading"
           strokeWidth={1.5}
         />
 
@@ -110,8 +110,8 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           className={cn(
             'flex-1 min-w-0',
             'text-sm font-normal',
-            'text-[rgb(33,33,33)]',
-            'placeholder:text-[rgb(100,118,150)]',
+            'text-ink',
+            'placeholder:text-subtle',
             'bg-transparent',
             'border-0 outline-none',
             'disabled:cursor-not-allowed'
@@ -128,8 +128,8 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
             className={cn(
               'flex-shrink-0',
               'p-0 ml-2',
-              'text-[#475161]',
-              'hover:text-[rgb(108,92,231)]',
+              'text-heading',
+              'hover:text-primary',
               'transition-colors',
               'cursor-pointer',
               'bg-transparent border-0'

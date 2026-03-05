@@ -52,16 +52,16 @@ export { TargetingCategoryCard, type TargetingCategoryCardProps } from "./target
 export { RuleRow, type RuleRowProps } from "./rule-row";
 export { RuleGroup, type RuleGroupProps } from "./rule-group";
 export { TargetingRuleBuilder, type TargetingRuleBuilderProps } from "./targeting-rule-builder";
-export { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription, CardAction } from "./card";
-export { Badge, badgeVariants } from "./badge";
-export { Skeleton } from "./skeleton";
-export { Avatar, AvatarFallback, AvatarImage } from "./avatar";
-export { Alert, AlertTitle, AlertDescription } from "./alert";
-export { Progress } from "./progress";
-export { Slider } from "./slider";
-export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectScrollUpButton, SelectScrollDownButton, SelectSeparator } from "./select";
-export { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter, DialogClose, DialogOverlay, DialogPortal } from "./dialog";
-export { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from "./sheet";
+export { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription, CardAction, type CardProps, type CardHeaderProps, type CardTitleProps, type CardContentProps, type CardFooterProps, type CardDescriptionProps, type CardActionProps } from "./card";
+export { Badge, badgeVariants, type BadgeProps } from "./badge";
+export { Skeleton, type SkeletonProps } from "./skeleton";
+export { Avatar, AvatarFallback, AvatarImage, type AvatarProps, type AvatarImageProps, type AvatarFallbackProps } from "./avatar";
+export { Alert, AlertTitle, AlertDescription, type AlertProps, type AlertTitleProps, type AlertDescriptionProps } from "./alert";
+export { Progress, type ProgressProps } from "./progress";
+export { Slider, type SliderProps } from "./slider";
+export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectScrollUpButton, SelectScrollDownButton, SelectSeparator, type SelectProps, type SelectTriggerProps, type SelectContentProps, type SelectItemProps } from "./select";
+export { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter, DialogClose, DialogOverlay, DialogPortal, type DialogProps, type DialogContentProps, type DialogHeaderProps, type DialogTitleProps, type DialogFooterProps } from "./dialog";
+export { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose, type SheetProps, type SheetContentProps, type SheetHeaderProps, type SheetTitleProps, type SheetFooterProps } from "./sheet";
 export {
   Sidebar,
   SidebarSection,
@@ -77,3 +77,4 @@ export {
   type SidebarCheckboxItem,
 } from "./sidebar";
 export { AppCard, type AppCardProps } from "./app-card";
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./tooltip";

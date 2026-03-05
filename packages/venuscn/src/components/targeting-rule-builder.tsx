@@ -79,9 +79,9 @@ export const TargetingRuleBuilder = React.forwardRef<HTMLDivElement, TargetingRu
       <div ref={ref} className={cn('space-y-4', className)}>
         {/* Header */}
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-bold text-[#2D3748]">
+          <h2 className="text-lg font-bold text-gray-800">
             Target Conditions
-            <span className="text-[#767676] text-sm font-normal ml-2">(required)</span>
+            <span className="text-hint text-sm font-normal ml-2">(required)</span>
           </h2>
           <TooltipProvider>
             <Tooltip>

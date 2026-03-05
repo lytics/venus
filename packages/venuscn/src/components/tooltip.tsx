@@ -1,5 +1,27 @@
 'use client'
 
+/**
+ * Venus Design System Tooltip — compound component built on Radix UI Tooltip.
+ *
+ * Usage:
+ * ```tsx
+ * <TooltipProvider>
+ *   <Tooltip>
+ *     <TooltipTrigger>Hover me</TooltipTrigger>
+ *     <TooltipContent>Tooltip text</TooltipContent>
+ *   </Tooltip>
+ * </TooltipProvider>
+ * ```
+ *
+ * - `TooltipProvider` — Wrap your app or section once. Controls global delay settings.
+ * - `Tooltip` — Root for a single tooltip instance. Manages open/close state.
+ * - `TooltipTrigger` — The element that triggers the tooltip on hover/focus.
+ * - `TooltipContent` — The floating tooltip panel. Dark gray background, white text, 4px radius.
+ *   Accepts `side` ("top" | "right" | "bottom" | "left") and `sideOffset` (default 4px).
+ *
+ * Props are inherited from Radix UI `@radix-ui/react-tooltip` — see Radix docs for full API.
+ */
+
 import * as React from 'react'
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { cn } from '../lib/utils'
@@ -19,7 +41,7 @@ const TooltipContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        'z-50 overflow-hidden rounded bg-[#2D3748] px-3 py-1.5 text-sm text-white shadow-md',
+        'z-50 overflow-hidden rounded bg-gray-800 px-3 py-1.5 text-sm text-white shadow-md',
         'animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
         'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         className

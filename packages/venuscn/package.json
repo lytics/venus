@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Venus Design System - Tailwind/shadcn edition",
   "license": "MIT",
+  "sideEffects": false,
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

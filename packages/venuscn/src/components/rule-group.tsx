@@ -114,7 +114,7 @@ export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
                 ))}
               </div>
             ) : (
-              <div className="flex items-center justify-center h-[76px] text-[#A0AEC0] text-base">
+              <div className="flex items-center justify-center h-[76px] text-gray-500 text-base">
                 Add a target condition below
               </div>
             )}
@@ -128,8 +128,8 @@ export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
             onClick={() => onAddRule('audience')}
             className="!text-primary hover:!bg-gray-100"
           >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-[#EBF5FF]">
-              <Users className="h-4 w-4 text-[#4299E1]" />
+            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-audience-bg">
+              <Users className="h-4 w-4 text-category-audience" />
             </div>
             Add Audience Target
           </Button>
@@ -140,8 +140,8 @@ export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
             onClick={() => onAddRule('device')}
             className="!text-primary hover:!bg-gray-100"
           >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-[#ECFDF5]">
-              <Smartphone className="h-4 w-4 text-[#10B981]" />
+            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-device-bg">
+              <Smartphone className="h-4 w-4 text-success" />
             </div>
             Add Device Target
           </Button>
@@ -152,8 +152,8 @@ export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
             onClick={() => onAddRule('geographic')}
             className="!text-primary hover:!bg-gray-100"
           >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-[#FFF7ED]">
-              <MapPin className="h-4 w-4 text-[#F97316]" />
+            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-location-bg">
+              <MapPin className="h-4 w-4 text-orange" />
             </div>
             Add Geographic Target
           </Button>
@@ -164,8 +164,8 @@ export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
             onClick={() => onAddRule('temporal')}
             className="!text-primary hover:!bg-gray-100"
           >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-[#FAF5FF]">
-              <Clock className="h-4 w-4 text-[#A855F7]" />
+            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-time-bg">
+              <Clock className="h-4 w-4 text-purple" />
             </div>
             Add Time/Date Target
           </Button>

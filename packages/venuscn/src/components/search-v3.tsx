@@ -87,7 +87,7 @@ export const SearchV3 = React.forwardRef<HTMLInputElement, SearchV3Props>(
           // Height and padding - 10px vertical, 12px horizontal
           'h-10 px-3',
           // Border - matching dropdown (#DDE3EE)
-          'border border-[#DDE3EE]',
+          'border border-input-border',
           // Border radius - 4px
           'rounded-[4px]',
           // Background
@@ -95,11 +95,11 @@ export const SearchV3 = React.forwardRef<HTMLInputElement, SearchV3Props>(
           // Transitions
           'transition-all duration-150',
           // Hover state - matches input component
-          'hover:!border-[#6C5CE7] hover:shadow-[inset_0_0_0_1px_#6C5CE7]',
+          'hover:!border-primary hover:shadow-input-focus',
           // Focus state - matches input component
-          'focus-within:!border-[#6C5CE7] focus-within:shadow-[inset_0_0_0_1px_#6C5CE7]',
+          'focus-within:!border-primary focus-within:shadow-input-focus',
           // Disabled state
-          disabled && 'opacity-50 cursor-not-allowed hover:!border-[#DDE3EE] hover:shadow-none',
+          disabled && 'opacity-50 cursor-not-allowed hover:!border-input-border hover:shadow-none',
           className
         )}
       >
@@ -117,9 +117,9 @@ export const SearchV3 = React.forwardRef<HTMLInputElement, SearchV3Props>(
             // Typography - 16px
             'text-base font-medium',
             // Text color
-            'text-[#222222]',
+            'text-ink',
             // Placeholder color
-            'placeholder:text-[#697B9B]',
+            'placeholder:text-subtle',
             // Background
             'bg-transparent',
             // No border or outline
@@ -139,7 +139,7 @@ export const SearchV3 = React.forwardRef<HTMLInputElement, SearchV3Props>(
             className={cn(
               'flex-shrink-0',
               'p-0',
-              'text-[#475161]',
+              'text-heading',
               'hover:text-primary',
               'transition-colors',
               'cursor-pointer',

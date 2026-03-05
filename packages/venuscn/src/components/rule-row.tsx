@@ -6,7 +6,7 @@ import { cn } from '../lib/utils'
 import { CategoryPill } from './category-pill'
 import { Dropdown } from './dropdown'
 import { Input } from './input'
-import { Rule } from '../types/targeting-rules'
+import { Rule, Operator } from '../types/targeting-rules'
 import {
   getAttributesByCategory,
   getAttributeByValue,
@@ -64,7 +64,7 @@ export const RuleRow = React.forwardRef<HTMLDivElement, RuleRowProps>(
     const handleOperatorChange = (value: string) => {
       onUpdate({
         ...rule,
-        operator: value as any,
+        operator: value as Operator,
       })
     }
 

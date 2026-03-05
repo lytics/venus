@@ -4,7 +4,13 @@ import { cn } from '../lib/utils';
 /** Venus Design System Textarea Component */
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /** Displays a red error border. Mutually exclusive with `success`.
+   * @default false
+   */
   error?: boolean;
+  /** Displays a green success border. Mutually exclusive with `error`.
+   * @default false
+   */
   success?: boolean;
 }
 
@@ -17,38 +23,38 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         className={cn(
           // Base styles
           "w-full min-h-[80px] px-3 py-2 rounded-[4px]",
-          "text-base font-normal text-[#2D3748]",
-          "placeholder:text-[#A0AEC0]",
+          "text-base font-normal text-gray-800",
+          "placeholder:text-gray-500",
           "transition-all duration-150",
           "focus:outline-none",
           "resize-vertical",
 
           // Border and background
-          "border border-[#DDE3EE] bg-white",
+          "border border-input-border bg-white",
           "shadow-[inset_0_0_0_1px_#FFFFFF]",
 
           // Default state
           !error && !success && !disabled && [
-            "hover:!border-[#6C5CE7] hover:shadow-[inset_0_0_0_1px_#6C5CE7]",
-            "focus:!border-[#6C5CE7] focus:shadow-[inset_0_0_0_1px_#6C5CE7]"
+            "hover:!border-primary hover:shadow-input-focus",
+            "focus:!border-primary focus:shadow-input-focus"
           ],
 
           // Error state
           error && !disabled && [
-            "border-[#EF4444]",
-            "focus:border-[#EF4444] focus:ring-[3px] focus:ring-[#EF4444]/10"
+            "border-danger",
+            "focus:border-danger focus:ring-[3px] focus:ring-danger/10"
           ],
 
           // Success state
           success && !disabled && [
-            "border-[#10B981]",
-            "focus:border-[#10B981] focus:ring-[3px] focus:ring-[#10B981]/10"
+            "border-success",
+            "focus:border-success focus:ring-[3px] focus:ring-success/10"
           ],
 
           // Disabled state
           disabled && [
-            "bg-[#F7F9FC] text-[#A0AEC0] cursor-not-allowed",
-            "border-[#E3E8EF]"
+            "bg-surface-gray text-gray-500 cursor-not-allowed",
+            "border-gray-300"
           ],
 
           className

@@ -4,6 +4,9 @@ import { cn } from '../lib/utils';
 /** Venus Design System Radio Component */
 
 export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  /** Optional text label displayed to the right of the radio button. 16px, normal weight.
+   * Use the same `name` prop on multiple Radio components to group them.
+   */
   label?: string;
 }
 
@@ -29,26 +32,26 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
               "relative",
 
               // Default state
-              "border-[#475161] bg-white",
-              "hover:border-[#6C5CE7]",
+              "border-heading bg-white",
+              "hover:border-primary",
 
               // Checked state (border only)
-              "checked:border-[#6C5CE7]",
-              "checked:hover:border-[#5F51D8]",
+              "checked:border-primary",
+              "checked:hover:border-primary-hover",
 
               // Inner dot styles via pseudo-element
               "after:content-[''] after:absolute after:w-2 after:h-2 after:rounded-full",
-              "after:bg-[#6C5CE7] after:top-1/2 after:left-1/2",
+              "after:bg-primary after:top-1/2 after:left-1/2",
               "after:-translate-x-1/2 after:-translate-y-1/2",
               "after:scale-0 after:transition-transform after:duration-150",
               "checked:after:scale-100",
 
               // Focus state
-              "focus:ring-[3px] focus:ring-[#6C5CE7]/10",
+              "focus:ring-[3px] focus:ring-primary/10",
 
               // Disabled state
-              "disabled:bg-[#F7F9FC] disabled:border-[#E3E8EF] disabled:cursor-not-allowed",
-              "disabled:after:bg-[#CBD5E0]",
+              "disabled:bg-surface-gray disabled:border-gray-300 disabled:cursor-not-allowed",
+              "disabled:after:bg-gray-400",
 
               className
             )}
@@ -59,8 +62,8 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
           <label
             htmlFor={radioId}
             className={cn(
-              "text-base font-normal text-[#212121] cursor-pointer select-none",
-              disabled && "text-[#A0AEC0] cursor-not-allowed"
+              "text-base font-normal text-ink cursor-pointer select-none",
+              disabled && "text-gray-500 cursor-not-allowed"
             )}
           >
             {label}

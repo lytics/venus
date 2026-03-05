@@ -6,17 +6,17 @@ import { cn } from '../lib/utils'
 import { Button } from './button'
 
 export interface PageFormHeaderProps {
-  /** The page title text */
+  /** Page title text. Rendered at 20px, semibold. */
   title: string
-  /** Handler for back button click */
+  /** Callback for the back arrow button. If omitted, the back button is not rendered. */
   onBack?: () => void
-  /** Handler for cancel button click */
+  /** Callback for the "Cancel" ghost button. If omitted, the cancel button is not rendered. */
   onCancel?: () => void
-  /** Handler for save button click */
+  /** Callback for the "Save" primary button. If omitted, the save button is not rendered. */
   onSave?: () => void
-  /** Disable the save button */
+  /** Disables the save button. @default false */
   saveDisabled?: boolean
-  /** Additional className for the outer container */
+  /** Additional CSS class names for the 64px-tall sticky header container. */
   className?: string
 }
 
@@ -44,11 +44,11 @@ export const PageFormHeader = React.forwardRef<HTMLDivElement, PageFormHeaderPro
         ref={ref}
         className={cn(
           // Container with light blue background (matching production)
-          'bg-[#F7F9FC]',
+          'bg-surface-gray',
           // Height
           'h-16',
           // Bottom border only (no top border per production specs)
-          'border-b border-[#E5E7EB]',
+          'border-b border-border',
           // Flex container with horizontal padding
           'flex items-center justify-between',
           'px-4',
@@ -67,12 +67,12 @@ export const PageFormHeader = React.forwardRef<HTMLDivElement, PageFormHeaderPro
               className="flex items-center justify-center h-10 w-10 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
               aria-label="Go back"
             >
-              <ArrowLeft className="h-6 w-6 text-[#2D3748]" />
+              <ArrowLeft className="h-6 w-6 text-gray-800" />
             </button>
           )}
 
           {/* Page Title */}
-          <h1 className="text-xl font-semibold text-[#2D3748]">
+          <h1 className="text-xl font-semibold text-gray-800">
             {title}
           </h1>
         </div>

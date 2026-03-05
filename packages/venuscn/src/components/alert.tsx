@@ -19,48 +19,59 @@ const alertVariants = cva(
   }
 )
 
-function Alert({
-  className,
-  variant,
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
-  return (
-    <div
-      data-slot="alert"
-      role="alert"
-      className={cn(alertVariants({ variant }), className)}
-      {...props}
-    />
-  )
-}
+export interface AlertProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof alertVariants> {}
 
-function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-title"
-      className={cn(
-        "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
-        className
-      )}
-      {...props}
-    />
-  )
-}
+export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  ({ className, variant, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        data-slot="alert"
+        role="alert"
+        className={cn(alertVariants({ variant }), className)}
+        {...props}
+      />
+    )
+  }
+)
+Alert.displayName = "Alert"
 
-function AlertDescription({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-description"
-      className={cn(
-        "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
-        className
-      )}
-      {...props}
-    />
-  )
-}
+export interface AlertTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export { Alert, AlertTitle, AlertDescription }
+export const AlertTitle = React.forwardRef<HTMLDivElement, AlertTitleProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        data-slot="alert-title"
+        className={cn(
+          "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
+          className
+        )}
+        {...props}
+      />
+    )
+  }
+)
+AlertTitle.displayName = "AlertTitle"
+
+export interface AlertDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const AlertDescription = React.forwardRef<HTMLDivElement, AlertDescriptionProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        data-slot="alert-description"
+        className={cn(
+          "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
+          className
+        )}
+        {...props}
+      />
+    )
+  }
+)
+AlertDescription.displayName = "AlertDescription"

@@ -5,7 +5,9 @@ import { Info } from 'lucide-react'
 import { cn } from '../lib/utils'
 
 export interface FormSidebarProps {
-  /** Additional className for the container */
+  /** Additional CSS class names for the 72px-wide sidebar with white background and left border.
+   * Contains an info icon and separator by default.
+   */
   className?: string
 }
 
@@ -26,18 +28,18 @@ export const FormSidebar = React.forwardRef<HTMLDivElement, FormSidebarProps>(
           // Flex container
           'flex flex-col items-center',
           // White background with left border
-          'bg-white border-l border-[#E5E7EB]',
+          'bg-white border-l border-border',
           className
         )}
         {...props}
       >
         {/* Info Icon */}
         <div className="pt-4 pb-3 my-4">
-          <Info className="w-5 h-5 text-[#5F6368]" strokeWidth={2} />
+          <Info className="w-5 h-5 text-gray-600" strokeWidth={2} />
         </div>
 
         {/* Separator - 32px wide */}
-        <div className="w-8 border-t border-[#E5E7EB]" />
+        <div className="w-8 border-t border-border" />
       </div>
     )
   }

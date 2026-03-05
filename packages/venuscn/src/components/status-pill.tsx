@@ -14,9 +14,16 @@ import { cn } from '../lib/utils';
 export type StatusVariant = "active" | "inactive" | "draft" | "paused" | "error";
 
 export interface StatusPillProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Status variant determining color scheme */
+  /** Status variant determining the colored dot and background.
+   * - `"active"` — Green dot, light green background. Label: "Active".
+   * - `"inactive"` — Gray dot, gray background. Label: "Inactive".
+   * - `"draft"` — Yellow dot, light yellow background. Label: "Draft".
+   * - `"paused"` — Blue dot, light blue background. Label: "Paused".
+   * - `"error"` — Red dot, light red background. Label: "Error".
+   * @default "active"
+   */
   status?: StatusVariant;
-  /** Custom status text (overrides default status label) */
+  /** Custom status text. Overrides the default label derived from the `status` variant. */
   children?: React.ReactNode;
 }
 
@@ -27,38 +34,38 @@ export const StatusPill = React.forwardRef<HTMLDivElement, StatusPillProps>(
       switch (status) {
         case "active":
           return {
-            container: "bg-[#F5FFFC] border-[#DDE3EE]",
-            dot: "bg-[#007A52]",
+            container: "bg-status-live-bg border-input-border",
+            dot: "bg-status-live",
             text: "Active",
           };
         case "inactive":
           return {
-            container: "bg-[#F5F5F5] border-[#DDE3EE]",
-            dot: "bg-[#6B7280]",
+            container: "bg-surface-gray border-input-border",
+            dot: "bg-body",
             text: "Inactive",
           };
         case "draft":
           return {
-            container: "bg-[#FEF3C7] border-[#DDE3EE]",
-            dot: "bg-[#D97706]",
+            container: "bg-warning-light border-input-border",
+            dot: "bg-warning-dark",
             text: "Draft",
           };
         case "paused":
           return {
-            container: "bg-[#EFF6FF] border-[#DDE3EE]",
-            dot: "bg-[#3B82F6]",
+            container: "bg-info-light border-input-border",
+            dot: "bg-info",
             text: "Paused",
           };
         case "error":
           return {
-            container: "bg-[#FEE2E2] border-[#DDE3EE]",
-            dot: "bg-[#DC2626]",
+            container: "bg-danger-light border-input-border",
+            dot: "bg-danger-dark",
             text: "Error",
           };
         default:
           return {
-            container: "bg-[#F5FFFC] border-[#DDE3EE]",
-            dot: "bg-[#007A52]",
+            container: "bg-status-live-bg border-input-border",
+            dot: "bg-status-live",
             text: "Active",
           };
       }
@@ -104,7 +111,7 @@ export const StatusPill = React.forwardRef<HTMLDivElement, StatusPillProps>(
             "font-normal", // 400 weight
             "leading-[21px]",
             "tracking-[0.16px]",
-            "text-[#475161]" // Same text color for all statuses
+            "text-heading" // Same text color for all statuses
           )}
         >
           {displayText}

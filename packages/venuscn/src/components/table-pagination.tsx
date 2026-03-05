@@ -5,23 +5,23 @@ import { cn } from '../lib/utils'
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, ZoomIn, Maximize2 } from 'lucide-react'
 
 export interface TablePaginationProps {
-  /** Current page number (1-indexed) */
+  /** Current page number (1-indexed). @default 1 */
   currentPage?: number
-  /** Total number of records */
+  /** Total number of records across all pages. @default 0 */
   totalRecords?: number
-  /** Number of records per page */
+  /** Number of records displayed per page. @default 100 */
   recordsPerPage?: number
-  /** Start index of current page (1-indexed) */
+  /** Override for the first record index displayed (1-indexed). Auto-calculated if omitted. */
   startIndex?: number
-  /** End index of current page (1-indexed) */
+  /** Override for the last record index displayed (1-indexed). Auto-calculated if omitted. */
   endIndex?: number
-  /** Callback when page changes */
+  /** Callback fired with the new page number (1-indexed) when the user navigates. */
   onPageChange?: (page: number) => void
-  /** Callback when records per page changes */
+  /** Callback fired with the new page size when the user changes the records-per-page dropdown. */
   onRecordsPerPageChange?: (recordsPerPage: number) => void
-  /** Available options for records per page */
+  /** Options shown in the records-per-page dropdown. @default [10, 25, 50, 100] */
   recordsPerPageOptions?: number[]
-  /** Additional className */
+  /** Additional CSS class names for the pagination container. */
   className?: string
 }
 
@@ -97,7 +97,7 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
           <select
             value={recordsPerPage}
             onChange={(e) => onRecordsPerPageChange?.(Number(e.target.value))}
-            className="h-8 px-2 pr-8 rounded border border-gray-300 text-sm text-gray-700 bg-white cursor-pointer hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-venus-primary/20 focus:border-default-primary"
+            className="h-8 px-2 pr-8 rounded border border-gray-300 text-sm text-gray-700 bg-white cursor-pointer hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
           >
             {recordsPerPageOptions.map((option) => (
               <option key={option} value={option}>
@@ -156,7 +156,7 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
                   onPageChange(page)
                 }
               }}
-              className="w-16 h-8 px-2 text-center rounded border border-gray-300 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-venus-primary/20 focus:border-default-primary"
+              className="w-16 h-8 px-2 text-center rounded border border-gray-300 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             />
           </div>
 

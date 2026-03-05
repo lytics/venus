@@ -3,13 +3,25 @@ import { cn } from "../lib/utils";
 import { ExternalLink, Layers } from "lucide-react";
 
 export interface AppCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Image URL. For `"icon"` variant: centered 72x72 icon on gray background.
+   * For `"banner"` variant: full-width cover image.
+   */
   icon: string;
+  /** Card title. Rendered at 16px, semibold. */
   title: string;
+  /** Subtitle shown below the title (icon variant only). Rendered with a Layers icon at 12px. */
   subtitle: string;
+  /** Description text shown on hover, replacing the title/subtitle. 2-line clamp. */
   description?: string;
+  /** Optional URL. When provided, the entire card becomes an `<a>` link. */
   href?: string;
+  /** Callback for the "Install" button shown on hover. If omitted, no install button is rendered. */
   onInstall?: () => void;
-  /** Card variant: "icon" shows small centered icon, "banner" shows full-width image */
+  /** Card layout variant.
+   * - `"icon"` — 320x246px card with a centered 72px icon on gray background.
+   * - `"banner"` — 320px wide card with a full-width cover image.
+   * @default "icon"
+   */
   variant?: "icon" | "banner";
 }
 
@@ -24,7 +36,7 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
         className={cn(
           "group relative block w-80",
           variant === "icon" ? "h-[246px]" : "h-auto",
-          "border border-[#DDE3EE] rounded bg-white",
+          "border border-input-border rounded bg-white",
           "transition-shadow duration-150",
           "hover:shadow-[0_8px_20px_rgba(34,34,34,0.1)]",
           href && "cursor-pointer",
@@ -37,7 +49,7 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
         >
           {/* Image Area */}
           {variant === "icon" ? (
-            <div className="flex items-center justify-center h-40 bg-[#F7F9FC]">
+            <div className="flex items-center justify-center h-40 bg-surface-gray">
               <img
                 src={icon}
                 alt={title}
@@ -58,11 +70,11 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
           <div className="p-4">
             {/* Default State */}
             <div className="group-hover:hidden">
-              <h3 className="text-base font-semibold text-[#212121] leading-6">
+              <h3 className="text-base font-semibold text-ink leading-6">
                 {title}
               </h3>
               {variant === "icon" && (
-                <p className="flex items-center gap-1 text-xs font-normal text-[#6E6B86]">
+                <p className="flex items-center gap-1 text-xs font-normal text-subtle">
                   <Layers className="w-3 h-3" />
                   {subtitle}
                 </p>
@@ -72,7 +84,7 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
             {/* Hover State */}
             <div className="hidden group-hover:block">
               {description && (
-                <p className="text-sm font-normal text-[#475161] leading-[21px] mb-3 line-clamp-2">
+                <p className="text-sm font-normal text-heading leading-[21px] mb-3 line-clamp-2">
                   {description}
                 </p>
               )}
@@ -87,9 +99,9 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
                   className={cn(
                     "flex items-center gap-1",
                     "h-8 px-4 rounded",
-                    "bg-[#6C5CE7] text-white",
+                    "bg-primary text-white",
                     "text-sm font-semibold",
-                    "hover:bg-[#5F51D8] transition-colors"
+                    "hover:bg-primary-hover transition-colors"
                   )}
                 >
                   Install

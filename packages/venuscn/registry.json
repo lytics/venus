@@ -1,0 +1,374 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "@contentstack/venuscn",
+  "description": "Venus Design System — Contentstack production UI components built on Tailwind CSS v4 + Radix UI",
+  "homepage": "https://github.com/contentstack/venus",
+  "license": "MIT",
+  "style": "default",
+  "tailwind": {
+    "config": "packages/venuscn/src/styles/tokens.css"
+  },
+  "components": [
+    {
+      "name": "Button",
+      "description": "Primary action button with loading state and asChild support.",
+      "file": "src/components/button.tsx",
+      "props": {
+        "variant": { "type": "\"primary\" | \"secondary\" | \"ghost\" | \"danger\"", "default": "primary" },
+        "size": { "type": "\"sm\" | \"md\" | \"lg\"", "default": "md" },
+        "loading": { "type": "boolean", "default": false },
+        "asChild": { "type": "boolean", "default": false }
+      },
+      "dependencies": ["@radix-ui/react-slot"]
+    },
+    {
+      "name": "Input",
+      "description": "Text input with Venus styling. 40px height, 16px font, 4px radius.",
+      "file": "src/components/input.tsx",
+      "props": {
+        "error": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "Textarea",
+      "description": "Multi-line text input with Venus styling.",
+      "file": "src/components/textarea.tsx",
+      "props": {
+        "error": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "Checkbox",
+      "description": "Checkbox input with label support.",
+      "file": "src/components/checkbox.tsx",
+      "props": {
+        "label": { "type": "string" },
+        "checked": { "type": "boolean" },
+        "onChange": { "type": "(checked: boolean) => void" }
+      }
+    },
+    {
+      "name": "Radio",
+      "description": "Radio button input with label support.",
+      "file": "src/components/radio.tsx",
+      "props": {
+        "label": { "type": "string" },
+        "checked": { "type": "boolean" },
+        "onChange": { "type": "(checked: boolean) => void" }
+      }
+    },
+    {
+      "name": "Toggle",
+      "description": "On/off switch toggle control.",
+      "file": "src/components/toggle.tsx",
+      "props": {
+        "checked": { "type": "boolean", "default": false },
+        "onChange": { "type": "(checked: boolean) => void" },
+        "label": { "type": "string" },
+        "disabled": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "Field",
+      "description": "Form field wrapper. Compose with FieldLabel, HelpText, ValidationMessage.",
+      "file": "src/components/field.tsx",
+      "subcomponents": ["FieldLabel", "HelpText", "ValidationMessage"]
+    },
+    {
+      "name": "FieldLabel",
+      "description": "Label for form fields. 14px semibold.",
+      "file": "src/components/field.tsx",
+      "props": {
+        "required": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "HelpText",
+      "description": "Help text displayed below a form field.",
+      "file": "src/components/field.tsx"
+    },
+    {
+      "name": "ValidationMessage",
+      "description": "Validation error message for form fields.",
+      "file": "src/components/field.tsx",
+      "props": {
+        "type": { "type": "\"error\" | \"warning\" | \"success\"", "default": "error" }
+      }
+    },
+    {
+      "name": "Tag",
+      "description": "Removable tag/chip with optional close button.",
+      "file": "src/components/tag.tsx",
+      "props": {
+        "onRemove": { "type": "() => void" },
+        "disabled": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "Pill",
+      "description": "Status pill indicator with variant colors.",
+      "file": "src/components/pills.tsx",
+      "props": {
+        "variant": { "type": "\"default\" | \"success\" | \"warning\" | \"danger\" | \"info\"", "default": "default" },
+        "removable": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "Pills",
+      "description": "Container for multiple Pill components.",
+      "file": "src/components/pills.tsx",
+      "subcomponents": ["Pill"]
+    },
+    {
+      "name": "Divider",
+      "description": "Horizontal or vertical separator line.",
+      "file": "src/components/divider.tsx",
+      "props": {
+        "orientation": { "type": "\"horizontal\" | \"vertical\"", "default": "horizontal" }
+      }
+    },
+    {
+      "name": "Dropdown",
+      "description": "Custom dropdown select with search support. Two visual variants.",
+      "file": "src/components/dropdown.tsx",
+      "props": {
+        "items": { "type": "DropdownItem[]", "required": true },
+        "value": { "type": "string" },
+        "onChange": { "type": "(value: string) => void" },
+        "placeholder": { "type": "string", "default": "Select..." },
+        "icon": { "type": "ReactNode" },
+        "disabled": { "type": "boolean", "default": false },
+        "version": { "type": "\"v1\" | \"v2\"", "default": "v2" },
+        "withSearch": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "Select",
+      "description": "Radix-based select dropdown with Venus styling.",
+      "file": "src/components/select.tsx",
+      "subcomponents": ["SelectTrigger", "SelectValue", "SelectContent", "SelectItem", "SelectGroup", "SelectLabel", "SelectScrollUpButton", "SelectScrollDownButton", "SelectSeparator"],
+      "props": {
+        "size": { "type": "\"sm\" | \"md\"", "default": "md" }
+      },
+      "dependencies": ["@radix-ui/react-select"]
+    },
+    {
+      "name": "Table",
+      "description": "Data table compound component. Compose with TableHeader, TableBody, TableRow, TableHead, TableCell.",
+      "file": "src/components/table.tsx",
+      "subcomponents": ["TableHeader", "TableBody", "TableFooter", "TableHead", "TableRow", "TableCell", "TableCaption", "TableActionButton"],
+      "props": {
+        "bordered": { "type": "boolean", "default": false },
+        "full": { "type": "boolean", "default": false }
+      }
+    },
+    {
+      "name": "TablePagination",
+      "description": "Pagination controls for tables. Shows page numbers and prev/next buttons.",
+      "file": "src/components/table-pagination.tsx",
+      "props": {
+        "currentPage": { "type": "number", "required": true },
+        "totalPages": { "type": "number", "required": true },
+        "onPageChange": { "type": "(page: number) => void", "required": true },
+        "totalItems": { "type": "number" },
+        "itemsPerPage": { "type": "number" }
+      }
+    },
+    {
+      "name": "Search",
+      "description": "Search input with icon and clear button.",
+      "file": "src/components/search.tsx",
+      "props": {
+        "value": { "type": "string" },
+        "onChange": { "type": "(value: string) => void" },
+        "placeholder": { "type": "string", "default": "Search" }
+      }
+    },
+    {
+      "name": "SearchV3",
+      "description": "Enhanced search input matching Contentstack V3 style.",
+      "file": "src/components/search-v3.tsx",
+      "props": {
+        "value": { "type": "string" },
+        "onChange": { "type": "(value: string) => void" },
+        "placeholder": { "type": "string" }
+      }
+    },
+    {
+      "name": "Tabs",
+      "description": "Tab navigation with pill-shaped container. Built on Radix UI Tabs.",
+      "file": "src/components/tabs.tsx",
+      "subcomponents": ["TabsList", "TabsTrigger", "TabsContent"],
+      "dependencies": ["@radix-ui/react-tabs"]
+    },
+    {
+      "name": "PageHeader",
+      "description": "Page-level header with title and action buttons.",
+      "file": "src/components/page-header.tsx",
+      "props": {
+        "title": { "type": "string", "required": true },
+        "infoIcon": { "type": "ReactNode" },
+        "actions": { "type": "PageHeaderAction[]" }
+      }
+    },
+    {
+      "name": "PageSearchHeader",
+      "description": "Page header variant with integrated search input.",
+      "file": "src/components/page-search-header.tsx",
+      "props": {
+        "title": { "type": "string", "required": true },
+        "actions": { "type": "PageSearchHeaderAction[]" }
+      }
+    },
+    {
+      "name": "PageFormHeader",
+      "description": "Page header for form pages with back button and save/cancel actions.",
+      "file": "src/components/page-form-header.tsx",
+      "props": {
+        "title": { "type": "string", "required": true },
+        "onBack": { "type": "() => void" },
+        "onSave": { "type": "() => void" },
+        "onCancel": { "type": "() => void" }
+      }
+    },
+    {
+      "name": "FormSidebar",
+      "description": "Right-side form sidebar with title, description, and metadata sections.",
+      "file": "src/components/form-sidebar.tsx",
+      "props": {
+        "title": { "type": "string", "required": true }
+      }
+    },
+    {
+      "name": "CategoryPill",
+      "description": "Colored category indicator pill (audience, device, location, time).",
+      "file": "src/components/category-pill.tsx",
+      "props": {
+        "category": { "type": "\"audience\" | \"device\" | \"location\" | \"time\"", "required": true }
+      }
+    },
+    {
+      "name": "StatusPill",
+      "description": "Status indicator with colored dot and label.",
+      "file": "src/components/status-pill.tsx",
+      "props": {
+        "status": { "type": "\"active\" | \"inactive\" | \"draft\" | \"paused\" | \"error\"", "default": "active" }
+      }
+    },
+    {
+      "name": "TargetingCategoryCard",
+      "description": "Card for targeting rule categories with icon and count.",
+      "file": "src/components/targeting-category-card.tsx"
+    },
+    {
+      "name": "RuleRow",
+      "description": "Single targeting rule row with attribute, operator, and value dropdowns.",
+      "file": "src/components/rule-row.tsx"
+    },
+    {
+      "name": "RuleGroup",
+      "description": "Group of targeting rules connected by AND/OR logic.",
+      "file": "src/components/rule-group.tsx"
+    },
+    {
+      "name": "TargetingRuleBuilder",
+      "description": "Full targeting rule builder with groups, rules, and AND/OR connectors.",
+      "file": "src/components/targeting-rule-builder.tsx"
+    },
+    {
+      "name": "Card",
+      "description": "Flexible card container. Compose with CardHeader, CardTitle, CardContent, CardFooter.",
+      "file": "src/components/card.tsx",
+      "subcomponents": ["CardHeader", "CardTitle", "CardDescription", "CardContent", "CardFooter", "CardAction"]
+    },
+    {
+      "name": "Badge",
+      "description": "Small label badge with variant colors.",
+      "file": "src/components/badge.tsx",
+      "props": {
+        "variant": { "type": "\"default\" | \"secondary\" | \"destructive\" | \"outline\"", "default": "default" }
+      }
+    },
+    {
+      "name": "Skeleton",
+      "description": "Loading placeholder with pulse animation.",
+      "file": "src/components/skeleton.tsx"
+    },
+    {
+      "name": "Avatar",
+      "description": "User avatar with image and fallback support. Built on Radix UI Avatar.",
+      "file": "src/components/avatar.tsx",
+      "subcomponents": ["AvatarImage", "AvatarFallback"],
+      "dependencies": ["@radix-ui/react-avatar"]
+    },
+    {
+      "name": "Alert",
+      "description": "Alert banner with title and description.",
+      "file": "src/components/alert.tsx",
+      "subcomponents": ["AlertTitle", "AlertDescription"],
+      "props": {
+        "variant": { "type": "\"default\" | \"destructive\"", "default": "default" }
+      }
+    },
+    {
+      "name": "Progress",
+      "description": "Progress bar indicator. Built on Radix UI Progress.",
+      "file": "src/components/progress.tsx",
+      "props": {
+        "value": { "type": "number" }
+      },
+      "dependencies": ["@radix-ui/react-progress"]
+    },
+    {
+      "name": "Slider",
+      "description": "Range slider input. Built on Radix UI Slider.",
+      "file": "src/components/slider.tsx",
+      "dependencies": ["@radix-ui/react-slider"]
+    },
+    {
+      "name": "Dialog",
+      "description": "Modal dialog overlay. Built on Radix UI Dialog.",
+      "file": "src/components/dialog.tsx",
+      "subcomponents": ["DialogTrigger", "DialogContent", "DialogHeader", "DialogTitle", "DialogDescription", "DialogFooter", "DialogClose", "DialogOverlay", "DialogPortal"],
+      "dependencies": ["@radix-ui/react-dialog"]
+    },
+    {
+      "name": "Sheet",
+      "description": "Slide-out panel from screen edge. Built on Radix UI Dialog.",
+      "file": "src/components/sheet.tsx",
+      "subcomponents": ["SheetTrigger", "SheetContent", "SheetHeader", "SheetTitle", "SheetDescription", "SheetFooter", "SheetClose"],
+      "dependencies": ["@radix-ui/react-dialog"]
+    },
+    {
+      "name": "Sidebar",
+      "description": "Collapsible sidebar with sections, nav items, search, and checkbox filters.",
+      "file": "src/components/sidebar.tsx",
+      "subcomponents": ["SidebarSection", "SidebarNav", "SidebarSearch", "SidebarCheckboxList"],
+      "props": {
+        "collapsed": { "type": "boolean", "default": false },
+        "onToggle": { "type": "(collapsed: boolean) => void" }
+      }
+    },
+    {
+      "name": "AppCard",
+      "description": "Application/marketplace card with icon or banner variant and install action.",
+      "file": "src/components/app-card.tsx",
+      "props": {
+        "icon": { "type": "string", "required": true },
+        "title": { "type": "string", "required": true },
+        "subtitle": { "type": "string", "required": true },
+        "description": { "type": "string" },
+        "href": { "type": "string" },
+        "onInstall": { "type": "() => void" },
+        "variant": { "type": "\"icon\" | \"banner\"", "default": "icon" }
+      }
+    },
+    {
+      "name": "Tooltip",
+      "description": "Tooltip popup on hover. Built on Radix UI Tooltip.",
+      "file": "src/components/tooltip.tsx",
+      "subcomponents": ["TooltipTrigger", "TooltipContent", "TooltipProvider"],
+      "dependencies": ["@radix-ui/react-tooltip"]
+    }
+  ]
+}

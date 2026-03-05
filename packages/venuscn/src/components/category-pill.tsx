@@ -9,11 +9,16 @@ import { cn } from '../lib/utils'
 export type CategoryVariant = 'audience' | 'device' | 'geographic' | 'temporal'
 
 export interface CategoryPillProps {
-  /** The category variant which determines color and icon */
+  /** Category variant determining icon, color, and default label.
+   * - `"audience"` — Blue, Users icon. Label: "Audience".
+   * - `"device"` — Green, Smartphone icon. Label: "Device".
+   * - `"geographic"` — Orange, MapPin icon. Label: "Geographic".
+   * - `"temporal"` — Purple, Clock icon. Label: "Time/Date".
+   */
   variant: CategoryVariant
-  /** Optional custom className */
+  /** Additional CSS class names for the outer pill container. */
   className?: string
-  /** Optional children to override default label */
+  /** Custom label text. Overrides the default label derived from `variant`. */
   children?: React.ReactNode
 }
 

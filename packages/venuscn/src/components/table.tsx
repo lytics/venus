@@ -2,12 +2,23 @@ import * as React from "react";
 import { cn } from '../lib/utils';
 import { MoreVertical } from 'lucide-react';
 
-/** Venus Design System Table Component */
+/**
+ * Venus Design System Table — compound component.
+ *
+ * Usage: `<Table>` > `<TableHeader>` > `<TableRow>` > `<TableHead>` for headers,
+ * and `<TableBody>` > `<TableRow>` > `<TableCell>` for data rows.
+ * Optional: `<TableFooter>`, `<TableCaption>`, `<TableActionButton>`.
+ * Pair with `<TablePagination>` for pagination controls.
+ */
 
 export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
-  /** Adds border wrapper with rounded corners - for card-style tables */
+  /** Wraps the table in a bordered card with rounded corners. Use for card-style tables.
+   * @default false
+   */
   bordered?: boolean;
-  /** Full-page table with no wrapper, no rounded corners - for page-level tables */
+  /** Renders the table without any wrapper. Use for full-page tables.
+   * @default false
+   */
   full?: boolean;
 }
 
@@ -105,9 +116,12 @@ const TableRow = React.forwardRef<
 TableRow.displayName = "TableRow";
 
 export interface TableHeadProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
-  /** Makes column sticky to left or right edge. Right sticky includes shadow effect. */
+  /** Makes this header cell sticky to the left or right edge during horizontal scroll.
+   * - `"left"` — Sticks to left edge with solid background.
+   * - `"right"` — Sticks to right edge with an inset shadow separator.
+   */
   sticky?: "left" | "right";
-  /** Sets minimum width for the column (e.g. "300px") */
+  /** CSS min-width for the column (e.g. `"300px"`). Applied via inline style. */
   minWidth?: string;
 }
 
@@ -136,9 +150,11 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
 TableHead.displayName = "TableHead";
 
 export interface TableCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
-  /** Makes column sticky to left or right edge. Right sticky includes shadow effect. */
+  /** Makes this data cell sticky to the left or right edge during horizontal scroll.
+   * Inherits row hover background color. Must match the corresponding `TableHead` sticky prop.
+   */
   sticky?: "left" | "right";
-  /** Sets minimum width for the column (e.g. "300px") */
+  /** CSS min-width for the column (e.g. `"300px"`). Applied via inline style. */
   minWidth?: string;
 }
 
@@ -178,7 +194,7 @@ const TableCaption = React.forwardRef<
 TableCaption.displayName = "TableCaption";
 
 export interface TableActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Accessible label for the button */
+  /** Accessible aria-label for the action button. @default "Actions" */
   label?: string;
 }
 

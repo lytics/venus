@@ -4,7 +4,28 @@ import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cn } from '../lib/utils';
 
-/** Venus Design System Tabs Component (V2 Only) */
+/**
+ * Venus Design System Tabs — compound component built on Radix UI Tabs.
+ *
+ * Usage:
+ * ```tsx
+ * <Tabs defaultValue="tab1">
+ *   <TabsList>
+ *     <TabsTrigger value="tab1">Tab One</TabsTrigger>
+ *     <TabsTrigger value="tab2">Tab Two</TabsTrigger>
+ *   </TabsList>
+ *   <TabsContent value="tab1">Content for tab one</TabsContent>
+ *   <TabsContent value="tab2">Content for tab two</TabsContent>
+ * </Tabs>
+ * ```
+ *
+ * - `Tabs` — Root container. Accepts `defaultValue` or controlled `value` + `onValueChange`.
+ * - `TabsList` — Pill-shaped container (24px border-radius) with a purple outline border.
+ * - `TabsTrigger` — Individual tab button (34px height, 12px font). Active state: purple text on light purple bg.
+ * - `TabsContent` — Panel rendered when its `value` matches the active tab. Has 16px top margin.
+ *
+ * Props are inherited from Radix UI `@radix-ui/react-tabs` — see Radix docs for full API.
+ */
 
 const Tabs = TabsPrimitive.Root;
 
@@ -19,7 +40,7 @@ const TabsList = React.forwardRef<
       "inline-flex items-center gap-1",
       "p-1", // 4px padding inside the border
       "bg-white",
-      "border border-[rgb(186,186,251)] rounded-3xl", // 24px border radius
+      "border border-primary-muted rounded-3xl", // 24px border radius
       className
     )}
     {...props}
@@ -42,17 +63,17 @@ const TabsTrigger = React.forwardRef<
       "transition-all duration-150",
 
       // Focus outline - browser default blue outline on click (right against the element, extends beyond container)
-      "focus:outline focus:outline-2 focus:outline-[rgb(109,158,235)]",
-      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-[rgb(109,158,235)]",
+      "focus:outline focus:outline-2 focus:outline-primary/50",
+      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary/50",
 
       // Default (inactive) state - rgb(110, 107, 134)
-      "bg-transparent text-[rgb(110,107,134)]",
+      "bg-transparent text-subtle",
 
       // Hover state
-      "hover:bg-[#F8F6FF]/50",
+      "hover:bg-surface-purple/50",
 
       // Active/Selected state - rgb(248, 246, 255) bg, rgb(108, 92, 231) text
-      "data-[state=active]:bg-[rgb(248,246,255)] data-[state=active]:text-[rgb(108,92,231)]",
+      "data-[state=active]:bg-surface-purple data-[state=active]:text-primary",
 
       // Disabled state
       "disabled:pointer-events-none disabled:opacity-50",
@@ -72,7 +93,7 @@ const TabsContent = React.forwardRef<
     ref={ref}
     className={cn(
       "mt-4",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-venus-primary/50 focus-visible:ring-offset-2",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2",
       className
     )}
     {...props}

@@ -5,6 +5,7 @@ import { cn } from '../lib/utils';
 /** Venus Design System Checkbox Component */
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  /** Optional text label displayed to the right of the checkbox. 16px, normal weight. */
   label?: string;
 }
 
@@ -29,19 +30,19 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               "focus:outline-none",
 
               // Default state
-              "border-[#475161] bg-white",
-              "hover:border-[#6C5CE7]",
+              "border-heading bg-white",
+              "hover:border-primary",
 
               // Checked state
-              "checked:bg-[#6C5CE7] checked:border-[#6C5CE7]",
-              "checked:hover:bg-[#5F51D8]",
+              "checked:bg-primary checked:border-primary",
+              "checked:hover:bg-primary-hover",
 
               // Focus state
-              "focus:ring-[3px] focus:ring-[#6C5CE7]/10",
+              "focus:ring-[3px] focus:ring-primary/10",
 
               // Disabled state
-              "disabled:bg-[#F7F9FC] disabled:border-[#E3E8EF] disabled:cursor-not-allowed",
-              "disabled:checked:bg-[#CBD5E0] disabled:checked:border-[#CBD5E0]",
+              "disabled:bg-surface-gray disabled:border-gray-300 disabled:cursor-not-allowed",
+              "disabled:checked:bg-gray-400 disabled:checked:border-gray-400",
 
               className
             )}
@@ -59,8 +60,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           <label
             htmlFor={checkboxId}
             className={cn(
-              "text-base font-normal text-[#212121] cursor-pointer select-none",
-              disabled && "text-[#A0AEC0] cursor-not-allowed"
+              "text-base font-normal text-ink cursor-pointer select-none",
+              disabled && "text-gray-500 cursor-not-allowed"
             )}
           >
             {label}

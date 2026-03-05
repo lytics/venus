@@ -4,6 +4,9 @@ import { cn } from '../lib/utils';
 /** Venus Design System Toggle Component */
 
 export interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  /** Optional text label displayed to the right of the toggle switch. 16px, normal weight.
+   * Renders as a 34x18px track with a sliding 12px thumb. Gray when off, purple when on.
+   */
   label?: string;
 }
 
@@ -32,16 +35,16 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
               "transition-colors duration-150",
 
               // Default state - Storybook: #A9B6CB
-              "bg-[#A9B6CB]",
+              "bg-placeholder",
 
               // Checked state - Storybook: #6C5CE7
-              "peer-checked:bg-[#6C5CE7]",
+              "peer-checked:bg-primary",
 
               // Focus state
-              "peer-focus:ring-[3px] peer-focus:ring-[#6C5CE7]/10",
+              "peer-focus:ring-[3px] peer-focus:ring-primary/10",
 
               // Disabled state
-              "peer-disabled:bg-[#E3E8EF] peer-disabled:cursor-not-allowed",
+              "peer-disabled:bg-gray-300 peer-disabled:cursor-not-allowed",
 
               className
             )}
@@ -65,8 +68,8 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
           <label
             htmlFor={toggleId}
             className={cn(
-              "text-base font-normal text-[#212121] cursor-pointer select-none",
-              disabled && "text-[#A0AEC0] cursor-not-allowed"
+              "text-base font-normal text-ink cursor-pointer select-none",
+              disabled && "text-gray-500 cursor-not-allowed"
             )}
           >
             {label}
