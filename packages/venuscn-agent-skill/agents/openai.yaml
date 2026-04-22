@@ -1,0 +1,7 @@
+interface:
+  display_name: "VenusCN Repo"
+  short_description: "Fast repo orientation for VenusCN UI work"
+  default_prompt: "Use $venuscn-repo to understand this repo quickly and build a Venus-style interface with the right components and validation steps."
+
+policy:
+  allow_implicit_invocation: true

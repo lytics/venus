@@ -45,13 +45,14 @@ pnpm dev
 
 Open **http://localhost:3000** and explore the demo.
 
-**Questions?** Read the [Getting Started Guide](./GETTING_STARTED.md) for a detailed walkthrough. (Written by AI so hopefully not terrible)
+**Questions?** Read the [Getting Started Guide](./docs/guides/getting-started.md) for a detailed walkthrough. (Written by AI so hopefully not terrible)
 
 ## Documentation
 
 **Start Here:**
-- [Getting Started](./GETTING_STARTED.md) - Set up and run the demo (3 minutes)
-- [Design System Guide](./DESIGN_SYSTEM.md) - Learn about design tokens and consistency
+- [Getting Started](./docs/guides/getting-started.md) - Set up and run the demo (3 minutes)
+- [Design System Guide](./docs/guides/design-system.md) - Learn about design tokens and consistency
+- [Documentation Index](./docs/README.md) - Browse guides, plans, specs, and checklists
 
 **Learn More:**
 - [How the Demo Works](./apps/demo/HOW_THE_DEMO_WORKS.md) - Tour of the demo app
@@ -63,6 +64,7 @@ Open **http://localhost:3000** and explore the demo.
 | Package | Description | Status |
 |---------|-------------|--------|
 | [@contentstack/venuscn](./packages/venuscn) | Tailwind CSS v4 + shadcn/ui edition | Active |
+| [@contentstack/venuscn-agent-skill](./packages/venuscn-agent-skill) | Portable repo skill for coding agents and LLM tooling | Active |
 | [@contentstack/venusmui](./packages/venusmui) | Material-UI edition | Planned |
 
 | App | Description | Path |
@@ -97,6 +99,11 @@ venus_external/
 │   │   │   └── index.ts      # Package exports
 │   │   ├── package.json
 │   │   └── README.md
+│   │
+│   ├── venuscn-agent-skill/  # Downloadable agent skill for repo-aware coding assistants
+│   │   ├── SKILL.md
+│   │   ├── references/
+│   │   └── package.json
 │   │
 │   └── venusmui/             # Material-UI components (planned)
 │       └── package.json
@@ -167,7 +174,7 @@ pnpm --filter demo build                     # Build demo app
 ## Tech Stack
 
 ### Core Framework
-- **Next.js 15** with App Router and Turbopack
+- **Next.js 16** with App Router
 - **React 19** with TypeScript
 - **Tailwind CSS v4** with design tokens
 - **pnpm workspaces** for monorepo management
@@ -217,11 +224,10 @@ See [packages/venuscn/README.md](./packages/venuscn/README.md) for the complete 
 
 ## Documentation
 
+- [Docs Index](./docs/README.md)
 - [Venus Components (@contentstack/venuscn)](./packages/venuscn/README.md)
+- [VenusCN Agent Skill](./packages/venuscn-agent-skill/SKILL.md)
 - [Demo App Guide](./apps/demo/CLAUDE.md)
-- [Original Implementation Guide](./VENUS_IMPLEMENTATION_GUIDE.md)
-- [Production Specs](./VENUS_PRODUCTION_SPECS.md)
-- [Design Tokens](./VENUS_DESIGN_TOKENS.md)
 
 ## License
 

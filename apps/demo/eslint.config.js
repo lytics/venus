@@ -1,30 +1,21 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import path from "path";
-import { fileURLToPath } from "url";
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+import nextTypeScript from "eslint-config-next/typescript";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-});
-
-const eslintConfig = [
-  {
-    ignores: [
-      ".next/**",
-      "out/**",
-      "build/**",
-      "node_modules/**",
-      ".env",
-      ".env.*",
-      "public/sw.js",
-      "public/workbox-*.js",
-    ],
-  },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+const eslintConfig = defineConfig([
+  ...nextCoreWebVitals,
+  ...nextTypeScript,
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "node_modules/**",
+    "next-env.d.ts",
+    ".env",
+    ".env.*",
+    "public/sw.js",
+    "public/workbox-*.js",
+  ]),
   {
     rules: {
       // Relax rules for starter template
@@ -33,11 +24,12 @@ const eslintConfig = [
       "react/no-unescaped-entities": "warn",
       "prefer-const": "warn",
       "react-hooks/rules-of-hooks": "warn",
+      "react-hooks/set-state-in-effect": "warn",
       "@next/next/no-img-element": "warn",
       "react-hooks/exhaustive-deps": "warn",
       "@typescript-eslint/no-unused-expressions": "warn",
     },
   },
-];
+]);
 
 export default eslintConfig;

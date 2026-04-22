@@ -4,7 +4,7 @@ Welcome! This is a component library and demo app that helps you build interface
 
 ## What You'll Need
 
-- **Node.js 18+** - [Download here](https://nodejs.org/)
+- **Node.js 20.9+** - [Download here](https://nodejs.org/)
 - **pnpm** - A fast package manager
 
 Install pnpm if you don't have it:
@@ -64,9 +64,9 @@ Use it as:
 - Explore `/personalize` for complex feature examples
 
 **Read more documentation:**
-- [How the Demo Works](./apps/demo/HOW_THE_DEMO_WORKS.md) - Tour of the demo app
-- [Design System Guide](./DESIGN_SYSTEM.md) - Understanding design tokens
-- [Venus Components](./packages/venuscn/README.md) - Component API reference
+- [How the Demo Works](../../apps/demo/HOW_THE_DEMO_WORKS.md) - Tour of the demo app
+- [Design System Guide](./design-system.md) - Understanding design tokens
+- [Venus Components](../../packages/venuscn/README.md) - Component API reference
 
 **Start building:**
 - Components live in `packages/venuscn/src/components/`
@@ -91,10 +91,10 @@ cd packages/venuscn && pnpm dev
 
 ## Having Issues?
 
-The most common issue is using the wrong Node version. Make sure you're on Node 18 or higher:
+The most common issue is using the wrong Node version. Make sure you're on Node 20.9 or higher:
 
 ```bash
-node --version  # Should show v18.x.x or higher
+node --version  # Should show v20.9.x or higher
 ```
 
 If you see errors about missing dependencies, try:
@@ -114,4 +114,4 @@ venus_external/
 
 Changes to components automatically reflect in the demo app while running `pnpm dev`.
 
-Ready to dive deeper? Check out the [Design System Guide](./DESIGN_SYSTEM.md) next.
+Ready to dive deeper? Check out the [Design System Guide](./design-system.md) next.
