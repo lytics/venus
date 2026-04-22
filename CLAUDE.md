@@ -232,7 +232,7 @@ When building UI in this monorepo:
 [ ] Search the codebase for similar patterns
 [ ] Import from @contentstack/venuscn for consistency
 [ ] Reference the demo app for layout patterns
-[ ] Use design tokens when possible (see DESIGN_SYSTEM.md)
+[ ] Use design tokens when possible (see docs/guides/design-system.md)
 ```
 
 Common patterns from the demo:

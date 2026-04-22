@@ -253,7 +253,7 @@ When building UI in this demo app:
 [ ] Check @contentstack/venuscn for existing components
 [ ] Look at similar demo pages for patterns
 [ ] Import Venus components for consistency
-[ ] Use design tokens when possible (see ../../DESIGN_SYSTEM.md)
+[ ] Use design tokens when possible (see ../../docs/guides/design-system.md)
 [ ] Test with sidebar open/closed (container queries)
 ```
 
@@ -266,5 +266,5 @@ When building UI in this demo app:
 
 **Learn more:**
 - [How the Demo Works](./HOW_THE_DEMO_WORKS.md) - Tour of this app
-- [Design System Guide](../../DESIGN_SYSTEM.md) - Token reference
-- [Getting Started](../../GETTING_STARTED.md) - Setup guide
+- [Design System Guide](../../docs/guides/design-system.md) - Token reference
+- [Getting Started](../../docs/guides/getting-started.md) - Setup guide

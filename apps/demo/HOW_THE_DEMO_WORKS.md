@@ -206,7 +206,7 @@ This pattern ensures consistent spacing, label styling, and validation message p
 
 1. **Check design tokens** - See `/colors` and `/text` pages
 2. **Match spacing patterns** - Use same `gap-*`, `p-*` classes as demo
-3. **Use token values** - Reference `DESIGN_SYSTEM.md` guide
+3. **Use token values** - Reference `docs/guides/design-system.md`
 
 ## File Locations
 
@@ -261,13 +261,13 @@ The Venus components are pre-styled. For customization, you can:
 - Build custom component following similar patterns
 
 **Q: How do I match the spacing/colors?**
-Use the same Tailwind classes you see in the demo. Read the [Design System Guide](../../DESIGN_SYSTEM.md) for token reference.
+Use the same Tailwind classes you see in the demo. Read the [Design System Guide](../../docs/guides/design-system.md) for token reference.
 
 ## Next Steps
 
 - Browse the demo to see what's possible
-- Read [Getting Started](../../GETTING_STARTED.md) for setup
-- Read [Design System Guide](../../DESIGN_SYSTEM.md) for styling
+- Read [Getting Started](../../docs/guides/getting-started.md) for setup
+- Read [Design System Guide](../../docs/guides/design-system.md) for styling
 - Check [Component Docs](../../packages/venuscn/README.md) for API reference
 
 Remember: The demo is your source of truth. If it looks like the demo, you're doing it right.

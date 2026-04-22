@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Search as SearchIcon, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { cn } from '../lib/utils'
 
 export interface SearchV3Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {

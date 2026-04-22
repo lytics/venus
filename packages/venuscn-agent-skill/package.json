@@ -1,0 +1,27 @@
+{
+  "name": "@contentstack/venuscn-agent-skill",
+  "version": "0.1.0",
+  "description": "Portable skill for coding agents working with VenusCN design-system repositories",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "SKILL.md",
+    "agents",
+    "references"
+  ],
+  "keywords": [
+    "agent",
+    "ai",
+    "assistant",
+    "coding-agent",
+    "contentstack",
+    "design-system",
+    "llm",
+    "nextjs",
+    "skill",
+    "venuscn"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
