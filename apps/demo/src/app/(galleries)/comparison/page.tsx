@@ -193,9 +193,9 @@ function Section({ id, title, fileName, view, children }: { id: string; title: s
         <h2 className="text-xl font-semibold border-b border-border pb-2">{title}</h2>
         {fileName && <p className="text-xs text-gray-400 font-mono mt-1">{fileName}</p>}
       </div>
-      <div className="w-full">
-        {view === 'venuscn' ? childArray[0] : childArray[1]}
-      </div>
+      {/* Render both but hide inactive — prevents iframe reload on toggle */}
+      <div className={view === 'venuscn' ? 'block' : 'hidden'}>{childArray[0]}</div>
+      <div className={view === 'legacy' ? 'block' : 'hidden'}>{childArray[1]}</div>
     </section>
   );
 }
