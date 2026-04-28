@@ -111,7 +111,7 @@ function LineChart({
         viewBox={`0 0 ${svgWidth} ${svgHeight}`}
         className="w-full flex-1"
         aria-hidden="true"
-        preserveAspectRatio="none"
+        preserveAspectRatio="xMidYMid meet"
       >
         {/* Grid lines */}
         {[0, 0.25, 0.5, 0.75, 1].map((t, i) => {
