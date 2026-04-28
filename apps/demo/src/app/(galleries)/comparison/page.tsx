@@ -285,7 +285,7 @@ export default function ComparisonPage() {
               ))}
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="Legacy Notification is interactive — renders a trigger button, toast appears on click." />
+          <LegacyPane storyId="components-info--default" />
         </Section>
 
         {/* Popover */}
@@ -465,7 +465,7 @@ export default function ComparisonPage() {
           <VenusCNPane>
             <PaginationDemo />
           </VenusCNPane>
-          <LegacyPane fallbackText="Legacy pagination is coupled to Table — no standalone component." />
+          <LegacyPane storyId="components-table--default" />
         </Section>
 
         {/* Command */}
@@ -635,7 +635,7 @@ export default function ComparisonPage() {
               <Callout variant="danger" title="Error" description="Webhook delivery failed for 3 endpoints." dismissible />
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="Legacy Notification is interactive — can't embed statically." />
+          <LegacyPane storyId="components-info--default" />
         </Section>
 
         {/* CodeBlock */}
