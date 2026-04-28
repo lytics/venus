@@ -92,13 +92,24 @@ function VenusCNPane({ children }: { children: React.ReactNode }) {
   );
 }
 
-function LegacyPane({ description }: { description: string }) {
+function LegacyPane({ storyId, fallbackText }: { storyId?: string; fallbackText?: string }) {
   return (
     <div>
-      <h3 className="text-sm font-medium text-gray-500 mb-3">Legacy Venus</h3>
-      <div className="bg-gray-50 border border-border rounded-lg p-5 h-full min-h-[80px] flex items-start">
-        <p className="text-sm text-gray-400 italic">{description}</p>
-      </div>
+      <h3 className="text-sm font-medium text-gray-500 mb-2">Legacy Venus</h3>
+      {storyId ? (
+        <div className="border rounded-lg overflow-hidden bg-white">
+          <iframe
+            src={`https://venus-storybook.contentstack.com/iframe.html?id=${storyId}&viewMode=story`}
+            className="w-full border-0"
+            style={{ height: "300px" }}
+            title="Legacy Venus component"
+          />
+        </div>
+      ) : (
+        <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center">
+          <p className="text-sm text-gray-400 italic">{fallbackText || "No legacy equivalent"}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -196,7 +207,7 @@ export default function ComparisonPage() {
               <Typography variant="code">const value = &quot;hello&quot;;</Typography>
             </div>
           </VenusCNPane>
-          <LegacyPane description="Legacy Venus had no Typography component — headings and body text were raw HTML elements with ad-hoc Tailwind classes. No shared variant system, color tokens, or semantic wrappers." />
+          <LegacyPane fallbackText="No legacy Typography component — headings were raw HTML with ad-hoc Tailwind classes." />
         </Section>
 
         {/* Stack */}
@@ -221,7 +232,7 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane description="No Stack primitive — layout was handled via one-off flex divs with raw Tailwind. Inconsistent gap values and alignment patterns across the codebase." />
+          <LegacyPane fallbackText="No legacy equivalent — layout used one-off flex divs with raw Tailwind." />
         </Section>
 
         {/* Breadcrumb */}
@@ -245,7 +256,7 @@ export default function ComparisonPage() {
               </BreadcrumbItem>
             </Breadcrumb>
           </VenusCNPane>
-          <LegacyPane description="Legacy had no Breadcrumb component. Navigation context was either omitted or hand-built with raw anchor tags and slash separators — no accessibility markup, no active-page styling." />
+          <LegacyPane storyId="components-breadcrumb--default" />
         </Section>
 
         {/* Toast */}
@@ -271,7 +282,7 @@ export default function ComparisonPage() {
               ))}
             </div>
           </VenusCNPane>
-          <LegacyPane description="Venus used Sonner (third-party) for toasts — minimal styling control, no design system token alignment, no Venus variant styles (success/error/warning). Toasts were triggered via toast() calls with no component abstraction." />
+          <LegacyPane storyId="components-notification--default" />
         </Section>
 
         {/* Popover */}
@@ -290,7 +301,7 @@ export default function ComparisonPage() {
               </PopoverContent>
             </Popover>
           </VenusCNPane>
-          <LegacyPane description="No Popover component in legacy Venus. Floating panels were custom-positioned absolute divs with manual z-index management, no focus trapping, and no Radix primitives." />
+          <LegacyPane storyId="components-popover--default" />
         </Section>
 
         {/* Label */}
@@ -307,7 +318,7 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane description="Labels in legacy Venus were either FieldLabel (scoped to form fields) or raw <label> HTML. No standalone Label primitive with Venus token alignment." />
+          <LegacyPane fallbackText="No legacy equivalent — labels were raw <label> HTML or FieldLabel scoped to form fields only." />
         </Section>
 
         {/* Separator */}
@@ -327,7 +338,7 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane description="Legacy had Divider (horizontal-only). No vertical separator, no semantic role, no orientation prop." />
+          <LegacyPane fallbackText="No legacy equivalent — only a horizontal-only Divider with no orientation prop." />
         </Section>
 
         {/* Icon */}
@@ -352,7 +363,7 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane description="Legacy used raw Lucide imports (import { Bell } from 'lucide-react'). No abstracted Icon component, no named alias system, no centralized size tokens." />
+          <LegacyPane storyId="components-icon--default" />
         </Section>
 
         {/* ── Tier 2 ──────────────────────────────────────────────────────── */}
