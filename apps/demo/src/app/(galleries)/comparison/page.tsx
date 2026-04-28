@@ -378,7 +378,7 @@ export default function ComparisonPage() {
               action={<Button variant="primary" size="small">Create Entry</Button>}
             />
           </VenusCNPane>
-          <LegacyPane description="No EmptyState component in legacy Venus. Empty screens were hand-coded per-page — each with different spacing, icon treatment, and copy alignment. No shared pattern." />
+          <LegacyPane fallbackText="No EmptyState component in legacy Venus. Empty screens were hand-coded per-page — each with different spacing, icon treatment, and copy alignment. No shared pattern." />
         </Section>
 
         {/* Accordion */}
@@ -405,7 +405,7 @@ export default function ComparisonPage() {
               </AccordionItem>
             </Accordion>
           </VenusCNPane>
-          <LegacyPane description="Legacy Venus had no Accordion component. Expandable sections were custom implementations using local boolean state and conditionally-rendered divs — no animation, no keyboard nav, no ARIA." />
+          <LegacyPane storyId="components-accordion--default" />
         </Section>
 
         {/* Stat */}
@@ -418,7 +418,7 @@ export default function ComparisonPage() {
               <Stat value="342" label="Pending" change="0%" trend="neutral" icon={<Icon name="clock" size="md" />} />
             </div>
           </VenusCNPane>
-          <LegacyPane description="No Stat component in legacy. Dashboard metrics were raw HTML with inconsistent font sizes and no shared trend/change colour system." />
+          <LegacyPane fallbackText="No Stat component in legacy. Dashboard metrics were raw HTML with inconsistent font sizes and no shared trend/change colour system." />
         </Section>
 
         {/* AvatarGroup */}
@@ -454,7 +454,7 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane description="No AvatarGroup in legacy. Grouped user avatars were either absent or implemented with raw flex rows of Avatar components with no overlap, max-display, or overflow pill." />
+          <LegacyPane fallbackText="No AvatarGroup in legacy. Grouped user avatars were either absent or implemented with raw flex rows of Avatar components with no overlap, max-display, or overflow pill." />
         </Section>
 
         {/* Pagination */}
@@ -462,7 +462,7 @@ export default function ComparisonPage() {
           <VenusCNPane>
             <PaginationDemo />
           </VenusCNPane>
-          <LegacyPane description="Legacy had TablePagination (tightly coupled to Table). No standalone Pagination component, no smart ellipsis, and no accessible aria-label markup." />
+          <LegacyPane fallbackText="Legacy had TablePagination (tightly coupled to Table). No standalone Pagination component, no smart ellipsis, and no accessible aria-label markup." />
         </Section>
 
         {/* Command */}
@@ -486,7 +486,7 @@ export default function ComparisonPage() {
               </Command>
             </div>
           </VenusCNPane>
-          <LegacyPane description="No Command palette in legacy Venus. No keyboard-driven command interface anywhere in the platform." />
+          <LegacyPane fallbackText="No Command palette in legacy Venus. No keyboard-driven command interface anywhere in the platform." />
         </Section>
 
         {/* ContextMenu */}
@@ -508,7 +508,7 @@ export default function ComparisonPage() {
               </ContextMenuContent>
             </ContextMenu>
           </VenusCNPane>
-          <LegacyPane description="No ContextMenu component in legacy Venus. Right-click interactions were not present in the product." />
+          <LegacyPane fallbackText="No ContextMenu component in legacy Venus. Right-click interactions were not present in the product." />
         </Section>
 
         {/* DropdownMenu */}
@@ -530,7 +530,7 @@ export default function ComparisonPage() {
               </DropdownMenuContent>
             </DropdownMenu>
           </VenusCNPane>
-          <LegacyPane description="Legacy used a custom Dropdown component (select-style) for dropdowns. No action-menu DropdownMenu with labels, separators, and icons — different mental model entirely." />
+          <LegacyPane fallbackText="Legacy used a custom Dropdown component (select-style) for dropdowns. No action-menu DropdownMenu with labels, separators, and icons — different mental model entirely." />
         </Section>
 
         {/* DatePicker */}
@@ -544,7 +544,7 @@ export default function ComparisonPage() {
               </Field>
             </div>
           </VenusCNPane>
-          <LegacyPane description="No DatePicker component in legacy Venus. Date inputs were raw <input type='date'> elements with no Venus styling, token alignment, or field wrapper integration." />
+          <LegacyPane fallbackText="No DatePicker component in legacy Venus. Date inputs were raw <input type='date'> elements with no Venus styling, token alignment, or field wrapper integration." />
         </Section>
 
         {/* Collapsible */}
@@ -566,7 +566,7 @@ export default function ComparisonPage() {
               </CollapsibleContent>
             </Collapsible>
           </VenusCNPane>
-          <LegacyPane description="No Collapsible primitive in legacy. Expandable sections used local useState with conditional renders — no animation, no accessible trigger semantics." />
+          <LegacyPane fallbackText="No Collapsible primitive in legacy. Expandable sections used local useState with conditional renders — no animation, no accessible trigger semantics." />
         </Section>
 
         {/* ── Tier 3 ──────────────────────────────────────────────────────── */}
@@ -590,7 +590,7 @@ export default function ComparisonPage() {
               </div>
             </Form>
           </VenusCNPane>
-          <LegacyPane description="Legacy had Field + FieldLabel + HelpText individually but no Form wrapper component. No shared disabled-context propagation. Forms were plain <form> elements." />
+          <LegacyPane fallbackText="Legacy had Field + FieldLabel + HelpText individually but no Form wrapper component. No shared disabled-context propagation. Forms were plain <form> elements." />
         </Section>
 
         {/* List */}
@@ -619,7 +619,7 @@ export default function ComparisonPage() {
               </List>
             </div>
           </VenusCNPane>
-          <LegacyPane description="No List component in legacy Venus. Item lists were either Table rows or custom flex divs — no shared row height, separator, icon slot, or trailing action pattern." />
+          <LegacyPane fallbackText="No List component in legacy Venus. Item lists were either Table rows or custom flex divs — no shared row height, separator, icon slot, or trailing action pattern." />
         </Section>
 
         {/* Callout */}
@@ -632,7 +632,7 @@ export default function ComparisonPage() {
               <Callout variant="danger" title="Error" description="Webhook delivery failed for 3 endpoints." dismissible />
             </div>
           </VenusCNPane>
-          <LegacyPane description="Legacy used Alert (from shadcn) for informational banners. No Venus token styling, no dismissible prop, no left-border accent treatment, no danger/warning variants." />
+          <LegacyPane fallbackText="Legacy used Alert (from shadcn) for informational banners. No Venus token styling, no dismissible prop, no left-border accent treatment, no danger/warning variants." />
         </Section>
 
         {/* CodeBlock */}
@@ -652,7 +652,7 @@ function App() {
 }`}
             />
           </VenusCNPane>
-          <LegacyPane description="No CodeBlock component in legacy Venus. Code snippets in documentation or UI were raw <pre><code> elements — no dark theme, no language label, no line numbers." />
+          <LegacyPane fallbackText="No CodeBlock component in legacy Venus. Code snippets in documentation or UI were raw <pre><code> elements — no dark theme, no language label, no line numbers." />
         </Section>
 
         {/* Switch */}
@@ -660,7 +660,7 @@ function App() {
           <VenusCNPane>
             <SwitchDemo />
           </VenusCNPane>
-          <LegacyPane description="Legacy had Toggle (checkbox-based) for boolean switches. Toggle renders as a pill-style toggle input. Switch is a Radix-based primitive with cleaner semantics, better accessibility, and standard onCheckedChange API." />
+          <LegacyPane fallbackText="Legacy had Toggle (checkbox-based) for boolean switches. Toggle renders as a pill-style toggle input. Switch is a Radix-based primitive with cleaner semantics, better accessibility, and standard onCheckedChange API." />
         </Section>
 
         {/* DataTable */}
@@ -668,7 +668,7 @@ function App() {
           <VenusCNPane>
             <DataTableDemo />
           </VenusCNPane>
-          <LegacyPane description="Legacy had Table (raw table primitives) — no column definition system, no sortable headers, no DataTable abstraction. Sorting had to be wired manually per-page." />
+          <LegacyPane fallbackText="Legacy had Table (raw table primitives) — no column definition system, no sortable headers, no DataTable abstraction. Sorting had to be wired manually per-page." />
         </Section>
 
         {/* Chart */}
@@ -705,7 +705,7 @@ function App() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane description="No Chart component in legacy Venus. Charts were either absent or implemented via third-party libraries (Recharts, Chart.js) with no Venus design token integration." />
+          <LegacyPane fallbackText="No Chart component in legacy Venus. Charts were either absent or implemented via third-party libraries (Recharts, Chart.js) with no Venus design token integration." />
         </Section>
       </div>
     </div>
