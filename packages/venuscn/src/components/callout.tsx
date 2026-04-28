@@ -21,22 +21,22 @@ const variantIconBg: Record<CalloutVariant, string> = {
 /* Filled SVG icons matching legacy Venus — fill="#fff", NOT stroked outlines */
 const VariantIcon: Record<CalloutVariant, React.ReactNode> = {
   info: (
-    <svg width="14" height="14" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path fillRule="evenodd" clipRule="evenodd" d="M8.5 17a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17zm-.128-3.063A1.372 1.372 0 0 1 7 12.566V8.673a1.372 1.372 0 0 1 2.744 0v3.892c0 .758-.614 1.373-1.372 1.373zm1.352-8.684c0 .69-.606 1.253-1.352 1.253-.746 0-1.352-.562-1.352-1.253C7.02 4.562 7.626 4 8.372 4c.746 0 1.352.562 1.352 1.253z" fill="#fff" />
     </svg>
   ),
   success: (
-    <svg width="14" height="14" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path fillRule="evenodd" clipRule="evenodd" d="M8.5 17a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17zm3.854-10.354a.5.5 0 0 0-.708-.708L7.5 10.086 5.354 7.94a.5.5 0 1 0-.708.708l2.5 2.5a.5.5 0 0 0 .708 0l4.5-4.5z" fill="#fff" />
     </svg>
   ),
   warning: (
-    <svg width="14" height="14" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path fillRule="evenodd" clipRule="evenodd" d="M7.134 1.5a1.5 1.5 0 0 1 2.732 0l5.866 11a1.5 1.5 0 0 1-1.366 2.125H2.634A1.5 1.5 0 0 1 1.268 12.5l5.866-11zM8.5 5.5a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3a.75.75 0 0 1 .75-.75zm0 6.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5z" fill="#fff" />
     </svg>
   ),
   danger: (
-    <svg width="14" height="14" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path fillRule="evenodd" clipRule="evenodd" d="M8.5 17a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17zM6.354 5.646a.5.5 0 1 0-.708.708L7.793 8.5l-2.147 2.146a.5.5 0 0 0 .708.708L8.5 9.207l2.146 2.147a.5.5 0 0 0 .708-.708L9.207 8.5l2.147-2.146a.5.5 0 0 0-.708-.708L8.5 7.793 6.354 5.646z" fill="#fff" />
     </svg>
   ),
