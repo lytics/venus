@@ -46,12 +46,12 @@ export interface ToastProps {
 
 /* ─── Internal variant styles ──────────────────────────────────────────────── */
 
-const variantStyles: Record<ToastVariant, { border: string; iconColor: string; bg: string; ring: string }> = {
-  default: { border: "border-primary/30",   iconColor: "text-primary",   bg: "bg-[#f8f7fd]",  ring: "ring-primary/20" },
-  success: { border: "border-green-300",    iconColor: "text-success",   bg: "bg-[#f0fdf4]",  ring: "ring-green-200"  },
-  error:   { border: "border-red-300",      iconColor: "text-danger",    bg: "bg-[#fef2f2]",  ring: "ring-red-200"    },
-  warning: { border: "border-amber-300",    iconColor: "text-warning",   bg: "bg-[#fffbeb]",  ring: "ring-amber-200"  },
-  info:    { border: "border-blue-300",     iconColor: "text-info",      bg: "bg-[#eff6ff]",  ring: "ring-blue-200"   },
+const variantStyles: Record<ToastVariant, { border: string; iconColor: string; bg: string }> = {
+  default: { border: "border-[#6c5ce7]",   iconColor: "text-[#6c5ce7]",  bg: "bg-white"       },
+  success: { border: "border-[#90bba5]",   iconColor: "text-[#007a52]",  bg: "bg-[#f5fffc]"   },
+  error:   { border: "border-[#fdafa3]",   iconColor: "text-[#d62400]",  bg: "bg-[#ffeeeb]"   },
+  warning: { border: "border-[#ffce6c]",   iconColor: "text-[#ffae0a]",  bg: "bg-[#fff8eb]"   },
+  info:    { border: "border-[#43b7c2]",   iconColor: "text-[#43b7c2]",  bg: "bg-white"       },
 };
 
 const VariantIcon: Record<ToastVariant, React.ReactNode> = {

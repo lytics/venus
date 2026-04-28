@@ -267,11 +267,11 @@ export default function ComparisonPage() {
           <VenusCNPane>
             <div className="space-y-3">
               {([
-                { variant: "default", border: "border-[#6C5CE7]/30", bg: "bg-[#f8f7fd]" },
-                { variant: "success", border: "border-green-300", bg: "bg-[#f0fdf4]" },
-                { variant: "error", border: "border-red-300", bg: "bg-[#fef2f2]" },
-                { variant: "warning", border: "border-amber-300", bg: "bg-[#fffbeb]" },
-                { variant: "info", border: "border-blue-300", bg: "bg-[#eff6ff]" },
+                { variant: "default", border: "border-[#6c5ce7]", bg: "bg-white" },
+                { variant: "success", border: "border-[#90bba5]", bg: "bg-[#f5fffc]" },
+                { variant: "error", border: "border-[#fdafa3]", bg: "bg-[#ffeeeb]" },
+                { variant: "warning", border: "border-[#ffce6c]", bg: "bg-[#fff8eb]" },
+                { variant: "info", border: "border-[#43b7c2]", bg: "bg-white" },
               ] as const).map(({ variant, border, bg }) => (
                 <div
                   key={variant}
