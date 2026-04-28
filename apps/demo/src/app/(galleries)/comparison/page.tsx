@@ -70,10 +70,13 @@ import { AdminNav } from "@/components/admin-nav";
 
 // ── Layout helpers ────────────────────────────────────────────────────────────
 
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+function Section({ id, title, fileName, children }: { id: string; title: string; fileName?: string; children: React.ReactNode }) {
   return (
     <section id={id} className="space-y-4">
-      <h2 className="text-xl font-semibold border-b border-border pb-2">{title}</h2>
+      <div>
+        <h2 className="text-xl font-semibold border-b border-border pb-2">{title}</h2>
+        {fileName && <p className="text-xs text-gray-400 font-mono mt-1">{fileName}</p>}
+      </div>
       <div className="grid grid-cols-2 gap-8">
         {children}
       </div>
@@ -192,7 +195,7 @@ export default function ComparisonPage() {
         {/* ── Tier 1 ──────────────────────────────────────────────────────── */}
 
         {/* Typography */}
-        <Section id="typography" title="Typography">
+        <Section id="typography" title="Typography" fileName="typography.tsx">
           <VenusCNPane>
             <div className="space-y-2">
               <Typography variant="h1">Heading 1</Typography>
@@ -211,7 +214,7 @@ export default function ComparisonPage() {
         </Section>
 
         {/* Stack */}
-        <Section id="stack" title="Stack">
+        <Section id="stack" title="Stack" fileName="stack.tsx">
           <VenusCNPane>
             <div className="space-y-4">
               <div>
@@ -232,11 +235,11 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="No legacy equivalent — layout used one-off flex divs with raw Tailwind." />
+          <LegacyPane fallbackText="No legacy component — layout used one-off flex divs." />
         </Section>
 
         {/* Breadcrumb */}
-        <Section id="breadcrumb" title="Breadcrumb">
+        <Section id="breadcrumb" title="Breadcrumb" fileName="breadcrumb.tsx">
           <VenusCNPane>
             <Breadcrumb>
               <BreadcrumbItem>
@@ -256,11 +259,11 @@ export default function ComparisonPage() {
               </BreadcrumbItem>
             </Breadcrumb>
           </VenusCNPane>
-          <LegacyPane storyId="in-progress-breadcrumb--default" />
+          <LegacyPane fallbackText="Legacy story excluded from public Storybook build (in-progress category)." />
         </Section>
 
         {/* Toast */}
-        <Section id="toast" title="Toast">
+        <Section id="toast" title="Toast" fileName="toast.tsx">
           <VenusCNPane>
             <div className="space-y-3">
               {([
@@ -282,11 +285,11 @@ export default function ComparisonPage() {
               ))}
             </div>
           </VenusCNPane>
-          <LegacyPane storyId="components-notification--default" />
+          <LegacyPane fallbackText="Legacy Notification is interactive — renders a trigger button, toast appears on click." />
         </Section>
 
         {/* Popover */}
-        <Section id="popover" title="Popover">
+        <Section id="popover" title="Popover" fileName="popover.tsx">
           <VenusCNPane>
             <Popover>
               <PopoverTrigger asChild>
@@ -301,11 +304,11 @@ export default function ComparisonPage() {
               </PopoverContent>
             </Popover>
           </VenusCNPane>
-          <LegacyPane storyId="in-progress-popover--default" />
+          <LegacyPane fallbackText="Legacy story excluded from public Storybook build (in-progress category)." />
         </Section>
 
         {/* Label */}
-        <Section id="label" title="Label">
+        <Section id="label" title="Label" fileName="label.tsx">
           <VenusCNPane>
             <div className="space-y-4">
               <div className="space-y-1">
@@ -318,11 +321,11 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane storyId="components-fieldlabel--default" />
+          <LegacyPane storyId="components-fieldlabel--with-required" />
         </Section>
 
         {/* Separator */}
-        <Section id="separator" title="Separator">
+        <Section id="separator" title="Separator" fileName="separator.tsx">
           <VenusCNPane>
             <div className="space-y-4">
               <div>
@@ -342,7 +345,7 @@ export default function ComparisonPage() {
         </Section>
 
         {/* Icon */}
-        <Section id="icon" title="Icon">
+        <Section id="icon" title="Icon" fileName="icon.tsx">
           <VenusCNPane>
             <div className="space-y-4">
               <div>
@@ -363,13 +366,13 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="No legacy Icon stories — icons were imported directly from individual SVG files." />
+          <LegacyPane storyId="components-icon--default" />
         </Section>
 
         {/* ── Tier 2 ──────────────────────────────────────────────────────── */}
 
         {/* EmptyState */}
-        <Section id="empty-state" title="EmptyState">
+        <Section id="empty-state" title="EmptyState" fileName="empty-state.tsx">
           <VenusCNPane>
             <EmptyState
               icon={<Icon name="inbox" size="lg" className="text-gray-400" />}
@@ -382,7 +385,7 @@ export default function ComparisonPage() {
         </Section>
 
         {/* Accordion */}
-        <Section id="accordion" title="Accordion">
+        <Section id="accordion" title="Accordion" fileName="accordion.tsx">
           <VenusCNPane>
             <Accordion type="single" collapsible>
               <AccordionItem value="item-1">
@@ -409,7 +412,7 @@ export default function ComparisonPage() {
         </Section>
 
         {/* Stat */}
-        <Section id="stat" title="Stat">
+        <Section id="stat" title="Stat" fileName="stat.tsx">
           <VenusCNPane>
             <div className="grid grid-cols-2 gap-4">
               <Stat value="1,234" label="Total Users" change="+12%" trend="up" icon={<Icon name="users" size="md" />} />
@@ -418,11 +421,11 @@ export default function ComparisonPage() {
               <Stat value="342" label="Pending" change="0%" trend="neutral" icon={<Icon name="clock" size="md" />} />
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="No Stat component in legacy. Dashboard metrics were raw HTML with inconsistent font sizes and no shared trend/change colour system." />
+          <LegacyPane fallbackText="No legacy component — dashboard metrics were raw HTML." />
         </Section>
 
         {/* AvatarGroup */}
-        <Section id="avatar-group" title="AvatarGroup">
+        <Section id="avatar-group" title="AvatarGroup" fileName="avatar-group.tsx">
           <VenusCNPane>
             <div className="space-y-4">
               <div>
@@ -454,19 +457,19 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="No AvatarGroup in legacy. Grouped user avatars were either absent or implemented with raw flex rows of Avatar components with no overlap, max-display, or overflow pill." />
+          <LegacyPane fallbackText="No legacy component." />
         </Section>
 
         {/* Pagination */}
-        <Section id="pagination" title="Pagination">
+        <Section id="pagination" title="Pagination" fileName="pagination.tsx">
           <VenusCNPane>
             <PaginationDemo />
           </VenusCNPane>
-          <LegacyPane storyId="components-table--default" />
+          <LegacyPane fallbackText="Legacy pagination is coupled to Table — no standalone component." />
         </Section>
 
         {/* Command */}
-        <Section id="command" title="Command">
+        <Section id="command" title="Command" fileName="command.tsx">
           <VenusCNPane>
             <div className="border border-border rounded-lg overflow-hidden">
               <Command>
@@ -486,11 +489,11 @@ export default function ComparisonPage() {
               </Command>
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="No Command palette in legacy Venus. No keyboard-driven command interface anywhere in the platform." />
+          <LegacyPane fallbackText="No legacy component." />
         </Section>
 
         {/* ContextMenu */}
-        <Section id="context-menu" title="ContextMenu">
+        <Section id="context-menu" title="ContextMenu" fileName="context-menu.tsx">
           <VenusCNPane>
             <ContextMenu>
               <ContextMenuTrigger asChild>
@@ -508,11 +511,11 @@ export default function ComparisonPage() {
               </ContextMenuContent>
             </ContextMenu>
           </VenusCNPane>
-          <LegacyPane fallbackText="No ContextMenu component in legacy Venus. Right-click interactions were not present in the product." />
+          <LegacyPane fallbackText="No legacy component." />
         </Section>
 
         {/* DropdownMenu */}
-        <Section id="dropdown-menu" title="DropdownMenu">
+        <Section id="dropdown-menu" title="DropdownMenu" fileName="dropdown-menu.tsx">
           <VenusCNPane>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -534,7 +537,7 @@ export default function ComparisonPage() {
         </Section>
 
         {/* DatePicker */}
-        <Section id="date-picker" title="DatePicker">
+        <Section id="date-picker" title="DatePicker" fileName="date-picker.tsx">
           <VenusCNPane>
             <div className="space-y-3 max-w-xs">
               <Field>
@@ -548,7 +551,7 @@ export default function ComparisonPage() {
         </Section>
 
         {/* Collapsible */}
-        <Section id="collapsible" title="Collapsible">
+        <Section id="collapsible" title="Collapsible" fileName="collapsible.tsx">
           <VenusCNPane>
             <Collapsible>
               <CollapsibleTrigger asChild>
@@ -572,7 +575,7 @@ export default function ComparisonPage() {
         {/* ── Tier 3 ──────────────────────────────────────────────────────── */}
 
         {/* Form */}
-        <Section id="form" title="Form">
+        <Section id="form" title="Form" fileName="form.tsx">
           <VenusCNPane>
             <Form onSubmit={(e) => e.preventDefault()} className="max-w-sm">
               <Field>
@@ -594,7 +597,7 @@ export default function ComparisonPage() {
         </Section>
 
         {/* List */}
-        <Section id="list" title="List">
+        <Section id="list" title="List" fileName="list.tsx">
           <VenusCNPane>
             <div className="border border-border rounded-lg overflow-hidden">
               <List>
@@ -619,11 +622,11 @@ export default function ComparisonPage() {
               </List>
             </div>
           </VenusCNPane>
-          <LegacyPane storyId="components-listitem--default" />
+          <LegacyPane storyId="components-listrow--default" />
         </Section>
 
         {/* Callout */}
-        <Section id="callout" title="Callout">
+        <Section id="callout" title="Callout" fileName="callout.tsx">
           <VenusCNPane>
             <div className="space-y-3">
               <Callout variant="info" title="Info" description="Your workspace is syncing. Changes will appear shortly." />
@@ -632,11 +635,11 @@ export default function ComparisonPage() {
               <Callout variant="danger" title="Error" description="Webhook delivery failed for 3 endpoints." dismissible />
             </div>
           </VenusCNPane>
-          <LegacyPane storyId="components-notification--default" />
+          <LegacyPane fallbackText="Legacy Notification is interactive — can't embed statically." />
         </Section>
 
         {/* CodeBlock */}
-        <Section id="code-block" title="CodeBlock">
+        <Section id="code-block" title="CodeBlock" fileName="code-block.tsx">
           <VenusCNPane>
             <CodeBlock
               language="typescript"
@@ -652,19 +655,19 @@ function App() {
 }`}
             />
           </VenusCNPane>
-          <LegacyPane fallbackText="No CodeBlock component in legacy Venus. Code snippets in documentation or UI were raw <pre><code> elements — no dark theme, no language label, no line numbers." />
+          <LegacyPane fallbackText="No legacy component." />
         </Section>
 
         {/* Switch */}
-        <Section id="switch" title="Switch">
+        <Section id="switch" title="Switch" fileName="switch.tsx">
           <VenusCNPane>
             <SwitchDemo />
           </VenusCNPane>
-          <LegacyPane storyId="components-toggle-switch--default" />
+          <LegacyPane storyId="components-toggle-switch--with-label" />
         </Section>
 
         {/* DataTable */}
-        <Section id="data-table" title="DataTable">
+        <Section id="data-table" title="DataTable" fileName="data-table.tsx">
           <VenusCNPane>
             <DataTableDemo />
           </VenusCNPane>
@@ -672,7 +675,7 @@ function App() {
         </Section>
 
         {/* Chart */}
-        <Section id="chart" title="Chart">
+        <Section id="chart" title="Chart" fileName="chart.tsx">
           <VenusCNPane>
             <div className="space-y-6">
               <div>
@@ -705,7 +708,7 @@ function App() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane fallbackText="No Chart component in legacy Venus. Charts were either absent or implemented via third-party libraries (Recharts, Chart.js) with no Venus design token integration." />
+          <LegacyPane fallbackText="No legacy component." />
         </Section>
       </div>
     </div>
