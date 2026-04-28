@@ -256,7 +256,7 @@ export default function ComparisonPage() {
               </BreadcrumbItem>
             </Breadcrumb>
           </VenusCNPane>
-          <LegacyPane storyId="components-breadcrumb--default" />
+          <LegacyPane storyId="in-progress-breadcrumb--default" />
         </Section>
 
         {/* Toast */}
@@ -301,7 +301,7 @@ export default function ComparisonPage() {
               </PopoverContent>
             </Popover>
           </VenusCNPane>
-          <LegacyPane storyId="components-popover--default" />
+          <LegacyPane storyId="in-progress-popover--default" />
         </Section>
 
         {/* Label */}
@@ -363,7 +363,7 @@ export default function ComparisonPage() {
               </div>
             </div>
           </VenusCNPane>
-          <LegacyPane storyId="components-icon--default" />
+          <LegacyPane fallbackText="No legacy Icon stories — icons were imported directly from individual SVG files." />
         </Section>
 
         {/* ── Tier 2 ──────────────────────────────────────────────────────── */}
