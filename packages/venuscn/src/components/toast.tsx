@@ -46,12 +46,12 @@ export interface ToastProps {
 
 /* ─── Internal variant styles ──────────────────────────────────────────────── */
 
-const variantStyles: Record<ToastVariant, { border: string; iconColor: string; bg: string }> = {
-  default: { border: "border-l-primary",   iconColor: "text-primary",   bg: "bg-[#f8f7fd]" },
-  success: { border: "border-l-success",   iconColor: "text-success",   bg: "bg-[#f0fdf4]" },
-  error:   { border: "border-l-danger",    iconColor: "text-danger",    bg: "bg-[#fef2f2]" },
-  warning: { border: "border-l-warning",   iconColor: "text-warning",   bg: "bg-[#fffbeb]" },
-  info:    { border: "border-l-info",      iconColor: "text-info",      bg: "bg-[#eff6ff]" },
+const variantStyles: Record<ToastVariant, { border: string; iconColor: string; bg: string; ring: string }> = {
+  default: { border: "border-primary/30",   iconColor: "text-primary",   bg: "bg-[#f8f7fd]",  ring: "ring-primary/20" },
+  success: { border: "border-green-300",    iconColor: "text-success",   bg: "bg-[#f0fdf4]",  ring: "ring-green-200"  },
+  error:   { border: "border-red-300",      iconColor: "text-danger",    bg: "bg-[#fef2f2]",  ring: "ring-red-200"    },
+  warning: { border: "border-amber-300",    iconColor: "text-warning",   bg: "bg-[#fffbeb]",  ring: "ring-amber-200"  },
+  info:    { border: "border-blue-300",     iconColor: "text-info",      bg: "bg-[#eff6ff]",  ring: "ring-blue-200"   },
 };
 
 const VariantIcon: Record<ToastVariant, React.ReactNode> = {
@@ -89,10 +89,11 @@ export const ToastItem = React.forwardRef<
         onOpenChange={(open) => { if (!open) onClose?.(); }}
         className={cn(
           // Layout
-          "relative flex items-start gap-3 w-full max-w-sm p-4",
-          // Visual
+          "relative flex items-start gap-3 w-full max-w-sm",
+          "px-4 py-3",
+          // Visual — matches legacy Venus Notification: tinted bg, full border, 4px radius, shadow
           "rounded-[4px] shadow-md",
-          "border border-border border-l-4",
+          "border",
           border,
           bg,
           // Animation

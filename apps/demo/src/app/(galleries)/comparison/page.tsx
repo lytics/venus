@@ -267,15 +267,15 @@ export default function ComparisonPage() {
           <VenusCNPane>
             <div className="space-y-3">
               {([
-                { variant: "default", border: "border-l-[#6C5CE7]", bg: "bg-[#f8f7fd]" },
-                { variant: "success", border: "border-l-green-500", bg: "bg-[#f0fdf4]" },
-                { variant: "error", border: "border-l-red-500", bg: "bg-[#fef2f2]" },
-                { variant: "warning", border: "border-l-amber-500", bg: "bg-[#fffbeb]" },
-                { variant: "info", border: "border-l-blue-500", bg: "bg-[#eff6ff]" },
+                { variant: "default", border: "border-[#6C5CE7]/30", bg: "bg-[#f8f7fd]" },
+                { variant: "success", border: "border-green-300", bg: "bg-[#f0fdf4]" },
+                { variant: "error", border: "border-red-300", bg: "bg-[#fef2f2]" },
+                { variant: "warning", border: "border-amber-300", bg: "bg-[#fffbeb]" },
+                { variant: "info", border: "border-blue-300", bg: "bg-[#eff6ff]" },
               ] as const).map(({ variant, border, bg }) => (
                 <div
                   key={variant}
-                  className={`flex items-start gap-3 rounded-sm border-l-4 p-4 shadow-md ${border} ${bg}`}
+                  className={`flex items-start gap-3 rounded-[4px] border px-4 py-3 shadow-md ${border} ${bg}`}
                 >
                   <div className="flex-1">
                     <p className="text-sm font-semibold">{variant.charAt(0).toUpperCase() + variant.slice(1)} toast</p>
