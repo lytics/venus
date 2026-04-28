@@ -92,7 +92,7 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
         <div
           className={cn(
             "flex items-center justify-center shrink-0",
-            "w-10 self-stretch rounded-l-[8px]",
+            "w-10 self-stretch rounded-l-[9px]",
             variantIconBg[variant],
           )}
         >
@@ -110,15 +110,15 @@ export const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
           {children}
         </div>
 
-        {/* Dismiss */}
+        {/* Dismiss — positioned inside the padding-right area */}
         {dismissible && (
           <button
             type="button"
             aria-label="Dismiss"
             onClick={onDismiss}
-            className="shrink-0 self-start p-2 text-[#647696] hover:text-[#475161] transition-colors"
+            className="shrink-0 self-center ml-auto text-[#a9b6cb] hover:text-[#475161] transition-colors"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M18 6 6 18M6 6l12 12" />
             </svg>
           </button>
