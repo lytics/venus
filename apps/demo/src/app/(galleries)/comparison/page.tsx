@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import {
   // Form Inputs
@@ -154,6 +154,29 @@ import { AdminNav } from "@/components/admin-nav";
 
 // ── Layout helpers ────────────────────────────────────────────────────────────
 
+function ABToggle({ view, setView }: { view: 'venuscn' | 'legacy'; setView: (v: 'venuscn' | 'legacy') => void }) {
+  return (
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-0 bg-gray-900 rounded-full p-1 shadow-xl">
+      <button
+        onClick={() => setView('venuscn')}
+        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+          view === 'venuscn' ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-gray-200'
+        }`}
+      >
+        VenusCN
+      </button>
+      <button
+        onClick={() => setView('legacy')}
+        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+          view === 'legacy' ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-gray-200'
+        }`}
+      >
+        Legacy Venus
+      </button>
+    </div>
+  );
+}
+
 function CategoryHeader({ title }: { title: string }) {
   return (
     <div className="border-b-2 border-violet-200 pb-3 mb-2">
@@ -162,15 +185,16 @@ function CategoryHeader({ title }: { title: string }) {
   );
 }
 
-function Section({ id, title, fileName, children }: { id: string; title: string; fileName?: string; children: React.ReactNode }) {
+function Section({ id, title, fileName, view, children }: { id: string; title: string; fileName?: string; view: 'venuscn' | 'legacy'; children: React.ReactNode }) {
+  const childArray = React.Children.toArray(children);
   return (
     <section id={id} className="space-y-4">
       <div>
         <h2 className="text-xl font-semibold border-b border-border pb-2">{title}</h2>
         {fileName && <p className="text-xs text-gray-400 font-mono mt-1">{fileName}</p>}
       </div>
-      <div className="grid grid-cols-2 gap-8">
-        {children}
+      <div className="w-full">
+        {view === 'venuscn' ? childArray[0] : childArray[1]}
       </div>
     </section>
   );
@@ -178,11 +202,8 @@ function Section({ id, title, fileName, children }: { id: string; title: string;
 
 function VenusCNPane({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <h3 className="text-sm font-medium text-gray-500 mb-3">VenusCN</h3>
-      <div className="bg-white border border-border rounded-lg p-5">
-        {children}
-      </div>
+    <div className="bg-white border border-border rounded-lg p-5">
+      {children}
     </div>
   );
 }
@@ -190,7 +211,6 @@ function VenusCNPane({ children }: { children: React.ReactNode }) {
 function LegacyPane({ storyId, fallbackText }: { storyId?: string; fallbackText?: string }) {
   return (
     <div>
-      <h3 className="text-sm font-medium text-gray-500 mb-2">Legacy Venus</h3>
       {storyId ? (
         <div className="border rounded-lg overflow-hidden bg-white">
           <iframe
@@ -292,12 +312,15 @@ function TargetingRuleBuilderDemo() {
 // ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function ComparisonPage() {
+  const [view, setView] = useState<'venuscn' | 'legacy'>('venuscn');
+
   return (
     <div className="min-h-screen bg-background">
       <Toaster />
       <AdminNav />
+      <ABToggle view={view} setView={setView} />
 
-      <div className="max-w-6xl mx-auto p-8 space-y-16">
+      <div className="max-w-6xl mx-auto p-8 pb-20 space-y-16">
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold">VenusCN Component Comparison</h1>
@@ -309,7 +332,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Form Inputs" />
 
           {/* Button */}
-          <Section id="button" title="Button" fileName="button.tsx">
+          <Section id="button" title="Button" fileName="button.tsx" view={view}>
             <VenusCNPane>
               <div className="flex flex-wrap gap-3">
                 <Button variant="primary">Primary</Button>
@@ -322,7 +345,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Input */}
-          <Section id="input" title="Input" fileName="input.tsx">
+          <Section id="input" title="Input" fileName="input.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-3 max-w-sm">
                 <Input placeholder="Enter text..." />
@@ -334,7 +357,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Textarea */}
-          <Section id="textarea" title="Textarea" fileName="textarea.tsx">
+          <Section id="textarea" title="Textarea" fileName="textarea.tsx" view={view}>
             <VenusCNPane>
               <Textarea placeholder="Write a description..." rows={4} className="max-w-sm" />
             </VenusCNPane>
@@ -342,7 +365,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Checkbox */}
-          <Section id="checkbox" title="Checkbox" fileName="checkbox.tsx">
+          <Section id="checkbox" title="Checkbox" fileName="checkbox.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
@@ -363,7 +386,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Radio */}
-          <Section id="radio" title="Radio" fileName="radio.tsx">
+          <Section id="radio" title="Radio" fileName="radio.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
@@ -384,7 +407,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Toggle */}
-          <Section id="toggle" title="Toggle" fileName="toggle.tsx">
+          <Section id="toggle" title="Toggle" fileName="toggle.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
@@ -401,7 +424,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Switch */}
-          <Section id="switch" title="Switch" fileName="switch.tsx">
+          <Section id="switch" title="Switch" fileName="switch.tsx" view={view}>
             <VenusCNPane>
               <SwitchDemo />
             </VenusCNPane>
@@ -409,7 +432,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Select */}
-          <Section id="select" title="Select" fileName="select.tsx">
+          <Section id="select" title="Select" fileName="select.tsx" view={view}>
             <VenusCNPane>
               <Select>
                 <SelectTrigger className="max-w-xs">
@@ -427,7 +450,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Field */}
-          <Section id="field" title="Field" fileName="field.tsx">
+          <Section id="field" title="Field" fileName="field.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4 max-w-sm">
                 <Field>
@@ -445,7 +468,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Label */}
-          <Section id="label" title="Label" fileName="label.tsx">
+          <Section id="label" title="Label" fileName="label.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4">
                 <div className="space-y-1">
@@ -462,7 +485,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* DatePicker */}
-          <Section id="date-picker" title="DatePicker" fileName="date-picker.tsx">
+          <Section id="date-picker" title="DatePicker" fileName="date-picker.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-3 max-w-xs">
                 <Field>
@@ -481,7 +504,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Text & Typography" />
 
           {/* Typography */}
-          <Section id="typography" title="Typography" fileName="typography.tsx">
+          <Section id="typography" title="Typography" fileName="typography.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-2">
                 <Typography variant="h1">Heading 1</Typography>
@@ -500,7 +523,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Tag */}
-          <Section id="tag" title="Tag" fileName="tag.tsx">
+          <Section id="tag" title="Tag" fileName="tag.tsx" view={view}>
             <VenusCNPane>
               <div className="flex flex-wrap gap-2">
                 <Tag>Default</Tag>
@@ -513,7 +536,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Badge */}
-          <Section id="badge" title="Badge" fileName="badge.tsx">
+          <Section id="badge" title="Badge" fileName="badge.tsx" view={view}>
             <VenusCNPane>
               <div className="flex flex-wrap gap-2">
                 <Badge>Default</Badge>
@@ -526,7 +549,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Pills */}
-          <Section id="pills" title="Pills" fileName="pills.tsx">
+          <Section id="pills" title="Pills" fileName="pills.tsx" view={view}>
             <VenusCNPane>
               <Pills>
                 <Pill>All</Pill>
@@ -539,7 +562,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* StatusPill */}
-          <Section id="status-pill" title="StatusPill" fileName="status-pill.tsx">
+          <Section id="status-pill" title="StatusPill" fileName="status-pill.tsx" view={view}>
             <VenusCNPane>
               <div className="flex flex-wrap gap-2">
                 <StatusPill status="active" />
@@ -553,7 +576,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* CategoryPill */}
-          <Section id="category-pill" title="CategoryPill" fileName="category-pill.tsx">
+          <Section id="category-pill" title="CategoryPill" fileName="category-pill.tsx" view={view}>
             <VenusCNPane>
               <div className="flex flex-wrap gap-2">
                 <CategoryPill variant="audience" />
@@ -571,7 +594,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Layout" />
 
           {/* Stack */}
-          <Section id="stack" title="Stack" fileName="stack.tsx">
+          <Section id="stack" title="Stack" fileName="stack.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4">
                 <div>
@@ -596,7 +619,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Card */}
-          <Section id="card" title="Card" fileName="card.tsx">
+          <Section id="card" title="Card" fileName="card.tsx" view={view}>
             <VenusCNPane>
               <Card className="max-w-sm">
                 <CardHeader>
@@ -616,7 +639,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Divider */}
-          <Section id="divider" title="Divider" fileName="divider.tsx">
+          <Section id="divider" title="Divider" fileName="divider.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4">
                 <p className="text-sm text-gray-600">Section above</p>
@@ -630,7 +653,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Separator */}
-          <Section id="separator" title="Separator" fileName="separator.tsx">
+          <Section id="separator" title="Separator" fileName="separator.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4">
                 <div>
@@ -650,7 +673,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Skeleton */}
-          <Section id="skeleton" title="Skeleton" fileName="skeleton.tsx">
+          <Section id="skeleton" title="Skeleton" fileName="skeleton.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-3 max-w-sm">
                 <Skeleton className="h-6 w-3/4" />
@@ -675,7 +698,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Navigation" />
 
           {/* Tabs */}
-          <Section id="tabs" title="Tabs" fileName="tabs.tsx">
+          <Section id="tabs" title="Tabs" fileName="tabs.tsx" view={view}>
             <VenusCNPane>
               <Tabs defaultValue="overview">
                 <TabsList>
@@ -698,7 +721,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Breadcrumb */}
-          <Section id="breadcrumb" title="Breadcrumb" fileName="breadcrumb.tsx">
+          <Section id="breadcrumb" title="Breadcrumb" fileName="breadcrumb.tsx" view={view}>
             <VenusCNPane>
               <Breadcrumb>
                 <BreadcrumbItem>
@@ -722,7 +745,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Pagination */}
-          <Section id="pagination" title="Pagination" fileName="pagination.tsx">
+          <Section id="pagination" title="Pagination" fileName="pagination.tsx" view={view}>
             <VenusCNPane>
               <PaginationDemo />
             </VenusCNPane>
@@ -730,7 +753,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Sidebar */}
-          <Section id="sidebar" title="Sidebar" fileName="sidebar.tsx">
+          <Section id="sidebar" title="Sidebar" fileName="sidebar.tsx" view={view}>
             <VenusCNPane>
               <div className="h-64 overflow-hidden border border-border rounded-lg">
                 <Sidebar>
@@ -764,7 +787,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Data Display" />
 
           {/* Table */}
-          <Section id="table" title="Table" fileName="table.tsx">
+          <Section id="table" title="Table" fileName="table.tsx" view={view}>
             <VenusCNPane>
               <Table>
                 <TableHeader>
@@ -797,7 +820,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* TablePagination */}
-          <Section id="table-pagination" title="TablePagination" fileName="table-pagination.tsx">
+          <Section id="table-pagination" title="TablePagination" fileName="table-pagination.tsx" view={view}>
             <VenusCNPane>
               <TablePagination
                 currentPage={2}
@@ -809,7 +832,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* DataTable */}
-          <Section id="data-table" title="DataTable" fileName="data-table.tsx">
+          <Section id="data-table" title="DataTable" fileName="data-table.tsx" view={view}>
             <VenusCNPane>
               <DataTableDemo />
             </VenusCNPane>
@@ -817,7 +840,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* List */}
-          <Section id="list" title="List" fileName="list.tsx">
+          <Section id="list" title="List" fileName="list.tsx" view={view}>
             <VenusCNPane>
               <div className="border border-border rounded-lg overflow-hidden">
                 <List>
@@ -846,7 +869,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Accordion */}
-          <Section id="accordion" title="Accordion" fileName="accordion.tsx">
+          <Section id="accordion" title="Accordion" fileName="accordion.tsx" view={view}>
             <VenusCNPane>
               <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
@@ -873,7 +896,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Collapsible */}
-          <Section id="collapsible" title="Collapsible" fileName="collapsible.tsx">
+          <Section id="collapsible" title="Collapsible" fileName="collapsible.tsx" view={view}>
             <VenusCNPane>
               <Collapsible>
                 <CollapsibleTrigger asChild>
@@ -895,7 +918,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* EmptyState */}
-          <Section id="empty-state" title="EmptyState" fileName="empty-state.tsx">
+          <Section id="empty-state" title="EmptyState" fileName="empty-state.tsx" view={view}>
             <VenusCNPane>
               <EmptyState
                 icon={<Icon name="inbox" size="lg" className="text-gray-400" />}
@@ -908,7 +931,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Stat */}
-          <Section id="stat" title="Stat" fileName="stat.tsx">
+          <Section id="stat" title="Stat" fileName="stat.tsx" view={view}>
             <VenusCNPane>
               <div className="grid grid-cols-2 gap-4">
                 <Stat value="1,234" label="Total Users" change="+12%" trend="up" icon={<Icon name="users" size="md" />} />
@@ -921,7 +944,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Chart */}
-          <Section id="chart" title="Chart" fileName="chart.tsx">
+          <Section id="chart" title="Chart" fileName="chart.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-6">
                 <div>
@@ -958,7 +981,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Icon */}
-          <Section id="icon" title="Icon" fileName="icon.tsx">
+          <Section id="icon" title="Icon" fileName="icon.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4">
                 <div>
@@ -988,7 +1011,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Feedback" />
 
           {/* Alert */}
-          <Section id="alert" title="Alert" fileName="alert.tsx">
+          <Section id="alert" title="Alert" fileName="alert.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-3">
                 <Alert>
@@ -1005,7 +1028,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Callout */}
-          <Section id="callout" title="Callout" fileName="callout.tsx">
+          <Section id="callout" title="Callout" fileName="callout.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-3">
                 <Callout variant="info" title="Info" description="Your workspace is syncing. Changes will appear shortly." />
@@ -1018,7 +1041,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Toast */}
-          <Section id="toast" title="Toast" fileName="toast.tsx">
+          <Section id="toast" title="Toast" fileName="toast.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-3">
                 {([
@@ -1044,7 +1067,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Progress */}
-          <Section id="progress" title="Progress" fileName="progress.tsx">
+          <Section id="progress" title="Progress" fileName="progress.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4">
                 <div className="space-y-1">
@@ -1065,7 +1088,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Tooltip */}
-          <Section id="tooltip" title="Tooltip" fileName="tooltip.tsx">
+          <Section id="tooltip" title="Tooltip" fileName="tooltip.tsx" view={view}>
             <VenusCNPane>
               <TooltipProvider>
                 <div className="flex gap-4 flex-wrap">
@@ -1099,7 +1122,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Overlays" />
 
           {/* Dialog */}
-          <Section id="dialog" title="Dialog" fileName="dialog.tsx">
+          <Section id="dialog" title="Dialog" fileName="dialog.tsx" view={view}>
             <VenusCNPane>
               <Dialog>
                 <DialogTrigger asChild>
@@ -1123,7 +1146,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Sheet */}
-          <Section id="sheet" title="Sheet" fileName="sheet.tsx">
+          <Section id="sheet" title="Sheet" fileName="sheet.tsx" view={view}>
             <VenusCNPane>
               <Sheet>
                 <SheetTrigger asChild>
@@ -1150,7 +1173,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Popover */}
-          <Section id="popover" title="Popover" fileName="popover.tsx">
+          <Section id="popover" title="Popover" fileName="popover.tsx" view={view}>
             <VenusCNPane>
               <Popover>
                 <PopoverTrigger asChild>
@@ -1169,7 +1192,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Dropdown */}
-          <Section id="dropdown" title="Dropdown" fileName="dropdown.tsx">
+          <Section id="dropdown" title="Dropdown" fileName="dropdown.tsx" view={view}>
             <VenusCNPane>
               <Dropdown
                 items={[
@@ -1185,7 +1208,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* DropdownMenu */}
-          <Section id="dropdown-menu" title="DropdownMenu" fileName="dropdown-menu.tsx">
+          <Section id="dropdown-menu" title="DropdownMenu" fileName="dropdown-menu.tsx" view={view}>
             <VenusCNPane>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -1207,7 +1230,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* ContextMenu */}
-          <Section id="context-menu" title="ContextMenu" fileName="context-menu.tsx">
+          <Section id="context-menu" title="ContextMenu" fileName="context-menu.tsx" view={view}>
             <VenusCNPane>
               <ContextMenu>
                 <ContextMenuTrigger asChild>
@@ -1229,7 +1252,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Command */}
-          <Section id="command" title="Command" fileName="command.tsx">
+          <Section id="command" title="Command" fileName="command.tsx" view={view}>
             <VenusCNPane>
               <div className="border border-border rounded-lg overflow-hidden">
                 <Command>
@@ -1258,7 +1281,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Page Layout" />
 
           {/* PageHeader */}
-          <Section id="page-header" title="PageHeader" fileName="page-header.tsx">
+          <Section id="page-header" title="PageHeader" fileName="page-header.tsx" view={view}>
             <VenusCNPane>
               <div className="border border-border rounded-lg overflow-hidden">
                 <PageHeader
@@ -1273,7 +1296,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* PageSearchHeader */}
-          <Section id="page-search-header" title="PageSearchHeader" fileName="page-search-header.tsx">
+          <Section id="page-search-header" title="PageSearchHeader" fileName="page-search-header.tsx" view={view}>
             <VenusCNPane>
               <div className="border border-border rounded-lg overflow-hidden">
                 <PageSearchHeader
@@ -1289,7 +1312,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* PageFormHeader */}
-          <Section id="page-form-header" title="PageFormHeader" fileName="page-form-header.tsx">
+          <Section id="page-form-header" title="PageFormHeader" fileName="page-form-header.tsx" view={view}>
             <VenusCNPane>
               <div className="border border-border rounded-lg overflow-hidden">
                 <PageFormHeader
@@ -1304,7 +1327,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* FormSidebar */}
-          <Section id="form-sidebar" title="FormSidebar" fileName="form-sidebar.tsx">
+          <Section id="form-sidebar" title="FormSidebar" fileName="form-sidebar.tsx" view={view}>
             <VenusCNPane>
               <div className="flex gap-0 border border-border rounded-lg overflow-hidden h-32">
                 <div className="flex-1 bg-gray-50 flex items-center justify-center">
@@ -1317,7 +1340,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* AppCard */}
-          <Section id="app-card" title="AppCard" fileName="app-card.tsx">
+          <Section id="app-card" title="AppCard" fileName="app-card.tsx" view={view}>
             <VenusCNPane>
               <div className="flex gap-4 flex-wrap">
                 <AppCard
@@ -1333,7 +1356,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* Avatar */}
-          <Section id="avatar" title="Avatar" fileName="avatar.tsx">
+          <Section id="avatar" title="Avatar" fileName="avatar.tsx" view={view}>
             <VenusCNPane>
               <div className="flex items-center gap-4">
                 <Avatar>
@@ -1353,7 +1376,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* AvatarGroup */}
-          <Section id="avatar-group" title="AvatarGroup" fileName="avatar-group.tsx">
+          <Section id="avatar-group" title="AvatarGroup" fileName="avatar-group.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-4">
                 <div>
@@ -1394,7 +1417,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Targeting (Product-Specific)" />
 
           {/* TargetingCategoryCard */}
-          <Section id="targeting-category-card" title="TargetingCategoryCard" fileName="targeting-category-card.tsx">
+          <Section id="targeting-category-card" title="TargetingCategoryCard" fileName="targeting-category-card.tsx" view={view}>
             <VenusCNPane>
               <div className="grid grid-cols-2 gap-3">
                 <TargetingCategoryCard variant="audience" title="Who" subtitle="Audience" />
@@ -1407,7 +1430,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* RuleRow */}
-          <Section id="rule-row" title="RuleRow" fileName="rule-row.tsx">
+          <Section id="rule-row" title="RuleRow" fileName="rule-row.tsx" view={view}>
             <VenusCNPane>
               <RuleRow
                 rule={{ id: "r1", category: "audience", attribute: "user-segment", operator: "equals", value: "Premium" }}
@@ -1419,7 +1442,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* RuleGroup */}
-          <Section id="rule-group" title="RuleGroup" fileName="rule-group.tsx">
+          <Section id="rule-group" title="RuleGroup" fileName="rule-group.tsx" view={view}>
             <VenusCNPane>
               <RuleGroup
                 group={{
@@ -1440,7 +1463,7 @@ export default function ComparisonPage() {
           </Section>
 
           {/* TargetingRuleBuilder */}
-          <Section id="targeting-rule-builder" title="TargetingRuleBuilder" fileName="targeting-rule-builder.tsx">
+          <Section id="targeting-rule-builder" title="TargetingRuleBuilder" fileName="targeting-rule-builder.tsx" view={view}>
             <VenusCNPane>
               <TargetingRuleBuilderDemo />
             </VenusCNPane>
@@ -1453,7 +1476,7 @@ export default function ComparisonPage() {
           <CategoryHeader title="Code" />
 
           {/* CodeBlock */}
-          <Section id="code-block" title="CodeBlock" fileName="code-block.tsx">
+          <Section id="code-block" title="CodeBlock" fileName="code-block.tsx" view={view}>
             <VenusCNPane>
               <CodeBlock
                 language="typescript"
@@ -1478,7 +1501,7 @@ function App() {
           <CategoryHeader title="Search" />
 
           {/* Search */}
-          <Section id="search" title="Search" fileName="search.tsx">
+          <Section id="search" title="Search" fileName="search.tsx" view={view}>
             <VenusCNPane>
               <Search placeholder="Search entries..." className="max-w-sm" />
             </VenusCNPane>
@@ -1486,7 +1509,7 @@ function App() {
           </Section>
 
           {/* SearchV3 */}
-          <Section id="search-v3" title="SearchV3" fileName="search-v3.tsx">
+          <Section id="search-v3" title="SearchV3" fileName="search-v3.tsx" view={view}>
             <VenusCNPane>
               <SearchV3 placeholder="Search with filters..." className="max-w-sm" />
             </VenusCNPane>
@@ -1498,7 +1521,7 @@ function App() {
         <div className="space-y-12">
           <CategoryHeader title="Slider" />
 
-          <Section id="slider" title="Slider" fileName="slider.tsx">
+          <Section id="slider" title="Slider" fileName="slider.tsx" view={view}>
             <VenusCNPane>
               <div className="space-y-6 max-w-sm">
                 <div className="space-y-2">
@@ -1519,7 +1542,7 @@ function App() {
         <div className="space-y-12">
           <CategoryHeader title="Form (Compound)" />
 
-          <Section id="form" title="Form" fileName="form.tsx">
+          <Section id="form" title="Form" fileName="form.tsx" view={view}>
             <VenusCNPane>
               <Form onSubmit={(e) => e.preventDefault()} className="max-w-sm">
                 <Field>
