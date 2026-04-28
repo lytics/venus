@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import * as ToastPrimitive from "@radix-ui/react-toast";
 
 import {
   // Tier 1
@@ -252,21 +251,25 @@ export default function ComparisonPage() {
         {/* Toast */}
         <Section id="toast" title="Toast">
           <VenusCNPane>
-            <ToastPrimitive.Provider>
-              <div className="space-y-3">
-                {(["default", "success", "error", "warning", "info"] as const).map((variant) => (
-                  <ToastItem
-                    key={variant}
-                    variant={variant}
-                    title={`${variant.charAt(0).toUpperCase() + variant.slice(1)} toast`}
-                    description={`This is a ${variant} notification message.`}
-                    open
-                    className="relative static w-full max-w-full shadow-none"
-                  />
-                ))}
-              </div>
-              <ToastPrimitive.Viewport />
-            </ToastPrimitive.Provider>
+            <div className="space-y-3">
+              {([
+                { variant: "default", border: "border-l-[#6C5CE7]" },
+                { variant: "success", border: "border-l-green-500" },
+                { variant: "error", border: "border-l-red-500" },
+                { variant: "warning", border: "border-l-amber-500" },
+                { variant: "info", border: "border-l-blue-500" },
+              ] as const).map(({ variant, border }) => (
+                <div
+                  key={variant}
+                  className={`flex items-start gap-3 rounded-sm border-l-4 bg-white p-4 shadow-md ${border}`}
+                >
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold">{variant.charAt(0).toUpperCase() + variant.slice(1)} toast</p>
+                    <p className="text-sm text-gray-600">This is a {variant} notification message.</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </VenusCNPane>
           <LegacyPane description="Venus used Sonner (third-party) for toasts — minimal styling control, no design system token alignment, no Venus variant styles (success/error/warning). Toasts were triggered via toast() calls with no component abstraction." />
         </Section>
