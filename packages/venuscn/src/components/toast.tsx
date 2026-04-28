@@ -46,12 +46,12 @@ export interface ToastProps {
 
 /* ─── Internal variant styles ──────────────────────────────────────────────── */
 
-const variantStyles: Record<ToastVariant, { border: string; iconColor: string }> = {
-  default: { border: "border-l-primary",   iconColor: "text-primary"          },
-  success: { border: "border-l-success",   iconColor: "text-success"          },
-  error:   { border: "border-l-danger",    iconColor: "text-danger"           },
-  warning: { border: "border-l-warning",   iconColor: "text-warning"          },
-  info:    { border: "border-l-info",      iconColor: "text-info"             },
+const variantStyles: Record<ToastVariant, { border: string; iconColor: string; bg: string }> = {
+  default: { border: "border-l-primary",   iconColor: "text-primary",   bg: "bg-[#f8f7fd]" },
+  success: { border: "border-l-success",   iconColor: "text-success",   bg: "bg-[#f0fdf4]" },
+  error:   { border: "border-l-danger",    iconColor: "text-danger",    bg: "bg-[#fef2f2]" },
+  warning: { border: "border-l-warning",   iconColor: "text-warning",   bg: "bg-[#fffbeb]" },
+  info:    { border: "border-l-info",      iconColor: "text-info",      bg: "bg-[#eff6ff]" },
 };
 
 const VariantIcon: Record<ToastVariant, React.ReactNode> = {
@@ -80,7 +80,7 @@ export const ToastItem = React.forwardRef<
     },
     ref
   ) => {
-    const { border, iconColor } = variantStyles[variant];
+    const { border, iconColor, bg } = variantStyles[variant];
 
     return (
       <ToastPrimitive.Root
@@ -91,9 +91,10 @@ export const ToastItem = React.forwardRef<
           // Layout
           "relative flex items-start gap-3 w-full max-w-sm p-4",
           // Visual
-          "bg-white rounded-[4px] shadow-md",
+          "rounded-[4px] shadow-md",
           "border border-border border-l-4",
           border,
+          bg,
           // Animation
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-2",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-right-2",
