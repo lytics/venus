@@ -2,6 +2,15 @@
    Venus Design System — Token System
    ============================================================================== */
 
+/* --------------------------------------------------------------------------
+   :root CSS Variables — shadcn/Radix Compatibility Layer
+
+   These HSL-format variables are consumed by Radix UI primitives (Dialog
+   overlays, Sheet backdrops, etc.) and shadcn internals that expect
+   `hsl(var(--primary))` syntax. They are NOT the primary token source
+   for VenusCN components — that's the @theme block below.
+   -------------------------------------------------------------------------- */
+
 :root {
   /* ===== Brand Colors (Light Mode) ===== */
   --brand-1: #f8f7fd;
@@ -240,7 +249,16 @@
 }
 
 /* ==============================================================================
-   Tailwind @theme — Design Tokens → Utility Classes
+   Tailwind @theme — PRIMARY Token Source
+
+   This is the single source of truth for VenusCN component styling.
+   Tailwind v4 auto-generates utility classes from these definitions:
+     --color-primary: #6C5CE7  →  bg-primary, text-primary, border-primary
+     --color-heading: #475161  →  text-heading
+     --shadow-md: ...          →  shadow-md
+
+   All VenusCN components should use these Tailwind utilities, NOT the
+   :root HSL variables above (those are for Radix/shadcn internals only).
    ============================================================================== */
 
 @theme {
@@ -483,26 +501,14 @@
 }
 
 /* ==============================================================================
-   Utility Classes
+   Legacy Utility Classes
+
+   NOTE: Tailwind v4 @theme (above) auto-generates utility classes for all
+   defined tokens — e.g. `bg-primary`, `text-heading`, `border-input-border`.
+   The classes below are ONLY needed for non-Tailwind contexts (plain HTML,
+   third-party CSS). They duplicate what @theme already provides.
    ============================================================================== */
 
-/* Text colors */
-.text-title { color: var(--color-title); }
-.text-heading { color: var(--color-heading); }
-.text-body { color: var(--color-body); }
-.text-primary { color: var(--color-primary); }
-.text-accent-blue { color: var(--color-accent-blue); }
-
-/* Backgrounds */
-.bg-surface-purple { background-color: var(--color-surface-purple); }
-.bg-surface-blue { background-color: var(--color-surface-blue); }
-.bg-surface-gray { background-color: var(--color-surface-gray); }
-.hover\:bg-surface-gray:hover { background-color: var(--color-surface-gray); }
-.group:hover .group-hover\:bg-surface-gray { background-color: var(--color-surface-gray); }
-
-/* Borders */
 .border-default { border-color: var(--color-border); }
 .border-hover { border-color: var(--color-border-hover); }
-
-/* Transitions */
 .transition-default { transition: all var(--duration-150) var(--ease-out); }

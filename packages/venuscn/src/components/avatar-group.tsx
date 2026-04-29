@@ -62,7 +62,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
             )}
             <AvatarPrimitive.Fallback
               className={cn(
-                "flex h-full w-full items-center justify-center bg-[#EDE9FF] text-[#6C5CE7] font-semibold uppercase",
+                "flex h-full w-full items-center justify-center bg-[#EDE9FF] text-primary font-semibold uppercase",
                 s.text
               )}
             >
@@ -75,7 +75,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
             className={cn(
               "shrink-0 rounded-full border-2 border-white",
               "flex items-center justify-center",
-              "bg-[#F3F0FF] text-[#6C5CE7] font-semibold",
+              "bg-[#F3F0FF] text-primary font-semibold",
               overlap,
               s.overflow
             )}

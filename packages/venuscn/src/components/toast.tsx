@@ -147,7 +147,8 @@ export interface ToasterProps {
   maxToasts?: number;
 }
 
-export const Toaster: React.FC<ToasterProps> = ({ maxToasts: _ = 5 }) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Toaster: React.FC<ToasterProps> = ({ maxToasts = 5 }) => {
   const { toasts } = useToast();
 
   return (

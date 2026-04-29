@@ -27,7 +27,6 @@ import {
   Tag,
   Badge,
   Pill,
-  Pills,
   StatusPill,
   CategoryPill,
   // Layout
@@ -145,6 +144,7 @@ import {
   SearchV3,
   // Table-coupled
   TablePagination,
+  TableActionButton,
   // Slider
   Slider,
   // Skeleton
@@ -193,17 +193,21 @@ function Section({ id, title, fileName, view, children }: { id: string; title: s
         <h2 className="text-xl font-semibold border-b border-border pb-2">{title}</h2>
         {fileName && <p className="text-xs text-gray-400 font-mono mt-1">{fileName}</p>}
       </div>
-      {/* Render both but hide inactive — prevents iframe reload on toggle */}
-      <div className={view === 'venuscn' ? 'block' : 'hidden'}>{childArray[0]}</div>
-      <div className={view === 'legacy' ? 'block' : 'hidden'}>{childArray[1]}</div>
+      {/* Grid overlay: both views occupy same cell so height = max(both).
+          Inactive view is invisible (takes space) not hidden (no space),
+          keeping scroll positions stable across A/B toggle. */}
+      <div className="grid">
+        <div className={`col-start-1 row-start-1 ${view === 'venuscn' ? 'visible' : 'invisible pointer-events-none'}`}>{childArray[0]}</div>
+        <div className={`col-start-1 row-start-1 ${view === 'legacy' ? 'visible' : 'invisible pointer-events-none'}`}>{childArray[1]}</div>
+      </div>
     </section>
   );
 }
 
 function VenusCNPane({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-white border border-border rounded-lg p-5">
-      {children}
+    <div className="bg-white border border-border rounded-lg p-5 min-h-[300px] flex items-center justify-center">
+      <div>{children}</div>
     </div>
   );
 }
@@ -265,6 +269,19 @@ function DataTableDemo() {
       sortDirection={sortDir}
       onSort={handleSort}
     />
+  );
+}
+
+function ToggleDemo() {
+  const [toggle1, setToggle1] = useState(false);
+  const [toggle2, setToggle2] = useState(true);
+
+  return (
+    <div className="space-y-3">
+      <Toggle label="Enable notifications" checked={toggle1} onChange={(e) => setToggle1(e.target.checked)} />
+      <Toggle label="Auto-save enabled" checked={toggle2} onChange={(e) => setToggle2(e.target.checked)} />
+      <Toggle label="Disabled toggle" disabled />
+    </div>
   );
 }
 
@@ -334,11 +351,18 @@ export default function ComparisonPage() {
           {/* Button */}
           <Section id="button" title="Button" fileName="button.tsx" view={view}>
             <VenusCNPane>
-              <div className="flex flex-wrap gap-3">
-                <Button variant="primary">Primary</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="ghost">Ghost</Button>
-                <Button variant="danger">Danger</Button>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-3">
+                  <Button variant="primary">Primary</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="ghost">Ghost</Button>
+                  <Button variant="danger">Danger</Button>
+                </div>
+                <div className="flex flex-wrap gap-4 items-center">
+                  <Button size="small">Small</Button>
+                  <Button size="regular">Regular</Button>
+                  <Button size="large">Large</Button>
+                </div>
               </div>
             </VenusCNPane>
             <LegacyPane storyId="components-button--default" />
@@ -367,19 +391,10 @@ export default function ComparisonPage() {
           {/* Checkbox */}
           <Section id="checkbox" title="Checkbox" fileName="checkbox.tsx" view={view}>
             <VenusCNPane>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <Checkbox id="cb1" defaultChecked />
-                  <label htmlFor="cb1" className="text-sm">Accept terms and conditions</label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Checkbox id="cb2" />
-                  <label htmlFor="cb2" className="text-sm">Subscribe to newsletter</label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Checkbox id="cb3" disabled />
-                  <label htmlFor="cb3" className="text-sm text-gray-400">Disabled option</label>
-                </div>
+              <div className="space-y-3">
+                <Checkbox label="Accept terms" defaultChecked />
+                <Checkbox label="Subscribe to newsletter" />
+                <Checkbox label="Disabled option" disabled />
               </div>
             </VenusCNPane>
             <LegacyPane storyId="components-checkbox--default" />
@@ -388,19 +403,10 @@ export default function ComparisonPage() {
           {/* Radio */}
           <Section id="radio" title="Radio" fileName="radio.tsx" view={view}>
             <VenusCNPane>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <Radio id="r1" name="plan" value="free" defaultChecked />
-                  <label htmlFor="r1" className="text-sm">Free plan</label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Radio id="r2" name="plan" value="pro" />
-                  <label htmlFor="r2" className="text-sm">Pro plan</label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Radio id="r3" name="plan" value="enterprise" />
-                  <label htmlFor="r3" className="text-sm">Enterprise plan</label>
-                </div>
+              <div className="space-y-3">
+                <Radio name="plan" label="Free" defaultChecked />
+                <Radio name="plan" label="Pro" />
+                <Radio name="plan" label="Enterprise" />
               </div>
             </VenusCNPane>
             <LegacyPane storyId="components-radio--default" />
@@ -409,16 +415,7 @@ export default function ComparisonPage() {
           {/* Toggle */}
           <Section id="toggle" title="Toggle" fileName="toggle.tsx" view={view}>
             <VenusCNPane>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Toggle id="tog1" defaultChecked />
-                  <label htmlFor="tog1" className="text-sm">Feature enabled</label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Toggle id="tog2" />
-                  <label htmlFor="tog2" className="text-sm">Feature disabled</label>
-                </div>
-              </div>
+              <ToggleDemo />
             </VenusCNPane>
             <LegacyPane storyId="components-toggle-switch--default" />
           </Section>
@@ -525,11 +522,18 @@ export default function ComparisonPage() {
           {/* Tag */}
           <Section id="tag" title="Tag" fileName="tag.tsx" view={view}>
             <VenusCNPane>
-              <div className="flex flex-wrap gap-2">
-                <Tag>Default</Tag>
-                <Tag>Marketing</Tag>
-                <Tag>Published</Tag>
-                <Tag>Draft</Tag>
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  <Tag>Default</Tag>
+                  <Tag>Marketing</Tag>
+                  <Tag>Published</Tag>
+                  <Tag>Draft</Tag>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Tag removable onRemove={() => {}}>React</Tag>
+                  <Tag removable onRemove={() => {}}>TypeScript</Tag>
+                  <Tag removable onRemove={() => {}}>Next.js</Tag>
+                </div>
               </div>
             </VenusCNPane>
             <LegacyPane storyId="components-tag-tags--default" />
@@ -551,12 +555,25 @@ export default function ComparisonPage() {
           {/* Pills */}
           <Section id="pills" title="Pills" fileName="pills.tsx" view={view}>
             <VenusCNPane>
-              <Pills>
-                <Pill>All</Pill>
-                <Pill status="success">Active</Pill>
-                <Pill>Draft</Pill>
-                <Pill>Archived</Pill>
-              </Pills>
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  <Pill variant="label">Default</Pill>
+                  <Pill variant="label" status="success">Success</Pill>
+                  <Pill variant="label" status="warning">Warning</Pill>
+                  <Pill variant="label" status="danger">Danger</Pill>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Pill variant="chip">Default</Pill>
+                  <Pill variant="chip" status="success">Success</Pill>
+                  <Pill variant="chip" status="warning">Warning</Pill>
+                  <Pill variant="chip" status="danger">Danger</Pill>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Pill removable onRemove={() => {}}>React</Pill>
+                  <Pill removable onRemove={() => {}} status="success">Approved</Pill>
+                  <Pill removable onRemove={() => {}} variant="chip">Filter</Pill>
+                </div>
+              </div>
             </VenusCNPane>
             <LegacyPane storyId="components-pills--default" />
           </Section>
@@ -789,29 +806,39 @@ export default function ComparisonPage() {
           {/* Table */}
           <Section id="table" title="Table" fileName="table.tsx" view={view}>
             <VenusCNPane>
-              <Table>
+              <Table bordered>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
                     <TableHead>Role</TableHead>
                     <TableHead>Status</TableHead>
+                    <TableHead className="w-12 text-center">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell>Alice Nguyen</TableCell>
-                    <TableCell>Engineer</TableCell>
-                    <TableCell>Active</TableCell>
+                    <TableCell className="font-medium">Alice Nguyen</TableCell>
+                    <TableCell><Tag>Engineer</Tag></TableCell>
+                    <TableCell><StatusPill status="active">Active</StatusPill></TableCell>
+                    <TableCell className="text-center"><TableActionButton /></TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Bob Okafor</TableCell>
-                    <TableCell>Designer</TableCell>
-                    <TableCell>Active</TableCell>
+                    <TableCell className="font-medium">Bob Okafor</TableCell>
+                    <TableCell><Tag>Designer</Tag></TableCell>
+                    <TableCell><StatusPill status="active">Active</StatusPill></TableCell>
+                    <TableCell className="text-center"><TableActionButton /></TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Carol Singh</TableCell>
-                    <TableCell>Manager</TableCell>
-                    <TableCell>Away</TableCell>
+                    <TableCell className="font-medium">Carol Singh</TableCell>
+                    <TableCell><Tag>Manager</Tag></TableCell>
+                    <TableCell><StatusPill status="paused">Away</StatusPill></TableCell>
+                    <TableCell className="text-center"><TableActionButton /></TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">Dan Park</TableCell>
+                    <TableCell><Tag>Engineer</Tag></TableCell>
+                    <TableCell><StatusPill status="inactive">Inactive</StatusPill></TableCell>
+                    <TableCell className="text-center"><TableActionButton /></TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -1195,13 +1222,15 @@ export default function ComparisonPage() {
           <Section id="dropdown" title="Dropdown" fileName="dropdown.tsx" view={view}>
             <VenusCNPane>
               <Dropdown
+                version="v2"
                 items={[
                   { label: "Edit", value: "edit" },
                   { label: "Duplicate", value: "duplicate" },
                   { label: "Preview", value: "preview" },
                   { label: "Delete", value: "delete" },
                 ]}
-                placeholder="Select action..."
+                value="edit"
+                onChange={() => {}}
               />
             </VenusCNPane>
             <LegacyPane storyId="components-dropdown--default" />

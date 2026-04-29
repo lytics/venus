@@ -72,7 +72,7 @@ const colorClasses: Record<TypographyColor, string> = {
   title: "text-title",
   heading: "text-heading",
   body: "text-body",
-  subtle: "text-[#647696]",
+  subtle: "text-subtle",
   primary: "text-primary",
 };
 

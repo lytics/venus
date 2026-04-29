@@ -46,18 +46,18 @@ export const ListItem = React.forwardRef<HTMLLIElement, ListItemProps>(
       {...props}
     >
       {icon && (
-        <span className="shrink-0 flex items-center justify-center text-[#6B7280]">
+        <span className="shrink-0 flex items-center justify-center text-body">
           {icon}
         </span>
       )}
       <span className="flex-1 min-w-0">
         {itemTitle && (
-          <span className="block text-sm font-medium text-[#111827] truncate">
+          <span className="block text-sm font-medium text-title truncate">
             {itemTitle}
           </span>
         )}
         {description && (
-          <span className="block text-xs text-[#6B7280] truncate mt-0.5">
+          <span className="block text-xs text-body truncate mt-0.5">
             {description}
           </span>
         )}

@@ -31,7 +31,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
     const pages = buildPageRange(currentPage, totalPages);
 
     const btnBase =
-      "inline-flex h-8 min-w-[32px] items-center justify-center rounded-[4px] px-2 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6C5CE7]/50 disabled:cursor-not-allowed disabled:opacity-40";
+      "inline-flex h-8 min-w-[32px] items-center justify-center rounded-[4px] px-2 text-sm font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:cursor-not-allowed disabled:opacity-40";
 
     return (
       <nav
@@ -42,7 +42,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
         {...props}
       >
         <button
-          className={cn(btnBase, "text-[#374151] hover:bg-[#edf1f7]")}
+          className={cn(btnBase, "text-heading hover:bg-surface-gray")}
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
           aria-label="Previous page"
@@ -56,7 +56,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
           page === "..." ? (
             <span
               key={`ellipsis-${i}`}
-              className="inline-flex h-8 w-8 items-center justify-center text-sm text-[#6B7280]"
+              className="inline-flex h-8 w-8 items-center justify-center text-sm text-body"
               aria-hidden="true"
             >
               …
@@ -70,8 +70,8 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
               className={cn(
                 btnBase,
                 page === currentPage
-                  ? "bg-[#6C5CE7] text-white shadow-sm"
-                  : "text-[#374151] hover:bg-[#edf1f7]"
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-heading hover:bg-surface-gray"
               )}
             >
               {page}
@@ -80,7 +80,7 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
         )}
 
         <button
-          className={cn(btnBase, "text-[#374151] hover:bg-[#edf1f7]")}
+          className={cn(btnBase, "text-heading hover:bg-surface-gray")}
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
           aria-label="Next page"

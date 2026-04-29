@@ -27,15 +27,15 @@ export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
         {...props}
       >
         {icon && (
-          <div className="mb-4 flex items-center justify-center text-[#6B7280]">
+          <div className="mb-4 flex items-center justify-center text-body">
             {icon}
           </div>
         )}
-        <h3 className="text-2xl font-bold text-[#475161] leading-tight">
+        <h3 className="text-2xl font-bold text-heading leading-tight">
           {title}
         </h3>
         {description && (
-          <p className="mt-2 text-base font-normal text-[#6B7280] leading-relaxed">
+          <p className="mt-2 text-base font-normal text-body leading-relaxed">
             {description}
           </p>
         )}

@@ -66,7 +66,7 @@ export const CommandInput = React.forwardRef<HTMLInputElement, CommandInputProps
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="shrink-0 text-[#6B7280]"
+          className="shrink-0 text-body"
           aria-hidden="true"
         >
           <circle cx="11" cy="11" r="8" />
@@ -84,7 +84,7 @@ export const CommandInput = React.forwardRef<HTMLInputElement, CommandInputProps
             onValueChange?.(e.target.value);
           }}
           className={cn(
-            "flex-1 bg-transparent text-sm text-[#111827] placeholder:text-[#9CA3AF]",
+            "flex-1 bg-transparent text-sm text-title placeholder:text-placeholder",
             "focus:outline-none",
             className
           )}
@@ -95,7 +95,7 @@ export const CommandInput = React.forwardRef<HTMLInputElement, CommandInputProps
             type="button"
             aria-label="Clear search"
             onClick={() => { setQuery(""); onValueChange?.(""); }}
-            className="shrink-0 text-[#9CA3AF] hover:text-[#6B7280]"
+            className="shrink-0 text-placeholder hover:text-body"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M18 6 6 18M6 6l12 12" />
@@ -135,7 +135,7 @@ export const CommandEmpty = React.forwardRef<HTMLDivElement, CommandEmptyProps>(
     return (
       <div
         ref={ref}
-        className={cn("py-6 text-center text-sm text-[#6B7280]", className)}
+        className={cn("py-6 text-center text-sm text-body", className)}
         {...props}
       >
         {children ?? "No results found."}
@@ -155,7 +155,7 @@ export const CommandGroup = React.forwardRef<HTMLDivElement, CommandGroupProps>(
   ({ heading, className, children, ...props }, ref) => (
     <div ref={ref} role="group" aria-label={heading} className={cn("px-1 py-1", className)} {...props}>
       {heading && (
-        <div className="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-[#9CA3AF]">
+        <div className="px-2 py-1 text-xs font-semibold uppercase tracking-wider text-placeholder">
           {heading}
         </div>
       )}
@@ -190,9 +190,9 @@ export const CommandItem = React.forwardRef<HTMLDivElement, CommandItemProps>(
         aria-disabled={disabled}
         tabIndex={disabled ? undefined : 0}
         className={cn(
-          "flex cursor-pointer select-none items-center gap-2 rounded-[4px] px-3 py-2 text-sm text-[#111827]",
+          "flex cursor-pointer select-none items-center gap-2 rounded-[4px] px-3 py-2 text-sm text-title",
           "transition-colors duration-100",
-          "hover:bg-[#edf1f7] focus:bg-[#edf1f7] focus:outline-none",
+          "hover:bg-surface-gray focus:bg-surface-gray focus:outline-none",
           disabled && "pointer-events-none opacity-40",
           className
         )}

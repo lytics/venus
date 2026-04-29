@@ -10,12 +10,15 @@
     "typecheck": "pnpm --filter @contentstack/venuscn typecheck && pnpm --filter @contentstack/venusmui typecheck && pnpm --filter demo typecheck",
     "test": "pnpm --filter demo test",
     "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
-    "clean": "pnpm -r exec rm -rf node_modules .next dist"
+    "clean": "pnpm -r exec rm -rf node_modules .next dist",
+    "format": "prettier --write 'packages/*/src/**/*.{ts,tsx,css}' 'apps/*/src/**/*.{ts,tsx,css}'",
+    "format:check": "prettier --check 'packages/*/src/**/*.{ts,tsx,css}' 'apps/*/src/**/*.{ts,tsx,css}'"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.48.1",
     "@typescript-eslint/parser": "^8.48.1",
     "eslint": "^9.39.1",
+    "prettier": "^3.8.3",
     "typescript": "^5"
   },
   "packageManager": "pnpm@10.28.1",

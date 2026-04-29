@@ -113,7 +113,7 @@ export const BreadcrumbPage = React.forwardRef<HTMLSpanElement, BreadcrumbPagePr
       role="link"
       aria-current="page"
       aria-disabled="true"
-      className={cn("text-sm text-[#6B7280] cursor-default select-none", className)}
+      className={cn("text-sm text-body cursor-default select-none", className)}
       {...props}
     >
       {children}

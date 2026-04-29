@@ -59,7 +59,7 @@ const SortIcon = ({
     aria-hidden="true"
     className={cn(
       "inline-block ml-1 shrink-0 transition-colors",
-      active ? "text-[#6C5CE7]" : "text-[#9CA3AF]"
+      active ? "text-primary" : "text-placeholder"
     )}
   >
     {active && direction === "desc" ? (
@@ -90,7 +90,7 @@ export function DataTable<TData = Record<string, unknown>>({
                 key={col.key}
                 minWidth={col.minWidth}
                 onClick={col.sortable && onSort ? () => onSort(col.key) : undefined}
-                className={cn(col.sortable && onSort && "cursor-pointer select-none hover:bg-[#edf1f7]")}
+                className={cn(col.sortable && onSort && "cursor-pointer select-none hover:bg-surface-gray")}
               >
                 <span className="inline-flex items-center">
                   {col.header}
@@ -110,7 +110,7 @@ export function DataTable<TData = Record<string, unknown>>({
             <TableRow
               key={rowIdx}
               className={cn(
-                striped && rowIdx % 2 === 1 && "bg-[#F9FAFB]"
+                striped && rowIdx % 2 === 1 && "bg-gray-50"
               )}
             >
               {columns.map((col) => {
@@ -127,7 +127,7 @@ export function DataTable<TData = Record<string, unknown>>({
             <TableRow>
               <TableCell
                 colSpan={columns.length}
-                className="py-10 text-center text-sm text-[#6B7280]"
+                className="py-10 text-center text-sm text-body"
               >
                 No data available.
               </TableCell>

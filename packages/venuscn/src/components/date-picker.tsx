@@ -30,12 +30,12 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
         onChange={(e) => onChange?.(e.target.value)}
         className={cn(
           "h-10 w-full rounded-[4px] border border-[rgba(113,128,150,0.3)] bg-white",
-          "px-3 text-sm text-[#111827] font-normal",
+          "px-3 text-sm text-title font-normal",
           "transition-colors duration-150",
-          "hover:border-[#6C5CE7]",
-          "focus:outline-none focus:ring-2 focus:ring-[#6C5CE7]/50 focus:border-[#6C5CE7]",
-          "placeholder:text-[#9CA3AF]",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[#F9FAFB]",
+          "hover:border-primary",
+          "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
+          "placeholder:text-placeholder",
+          "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50",
           // Native date input calendar icon color (WebKit)
           "[&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 [&::-webkit-calendar-picker-indicator]:hover:opacity-100",
           className

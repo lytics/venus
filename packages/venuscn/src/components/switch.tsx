@@ -62,9 +62,9 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
             "relative inline-flex shrink-0 items-center",
             "h-5 w-9 rounded-full",
             "transition-colors duration-200",
-            "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#6C5CE7]/50",
+            "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50",
             "disabled:cursor-not-allowed disabled:opacity-50",
-            checked ? "bg-[#6C5CE7]" : "bg-gray-300"
+            checked ? "bg-primary" : "bg-gray-300"
           )}
           {...props}
         >
@@ -89,12 +89,12 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
             )}
           >
             {label && (
-              <span className="block text-sm font-medium text-[#111827]">
+              <span className="block text-sm font-medium text-title">
                 {label}
               </span>
             )}
             {description && (
-              <span className="block text-xs text-[#6B7280] mt-0.5">
+              <span className="block text-xs text-body mt-0.5">
                 {description}
               </span>
             )}

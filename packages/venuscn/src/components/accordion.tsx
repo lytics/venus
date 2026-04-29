@@ -38,10 +38,10 @@ const AccordionTrigger = React.forwardRef<
       ref={ref}
       className={cn(
         "flex flex-1 items-center justify-between",
-        "h-10 px-4 text-sm font-semibold text-[#111827]",
+        "h-10 px-4 text-sm font-semibold text-title",
         "bg-white transition-colors duration-150",
-        "hover:bg-[#edf1f7]",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6C5CE7]/50 focus-visible:ring-inset",
+        "hover:bg-surface-gray",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-inset",
         "[&[data-state=open]>svg]:rotate-180",
         className
       )}
@@ -58,7 +58,7 @@ const AccordionTrigger = React.forwardRef<
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="shrink-0 text-[#6B7280] transition-transform duration-200"
+        className="shrink-0 text-body transition-transform duration-200"
         aria-hidden="true"
       >
         <path d="m6 9 6 6 6-6" />
@@ -78,7 +78,7 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className={cn(
-      "overflow-hidden text-sm text-[#374151]",
+      "overflow-hidden text-sm text-heading",
       "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
       className
     )}

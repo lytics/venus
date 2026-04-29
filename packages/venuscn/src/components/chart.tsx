@@ -50,7 +50,7 @@ function BarChart({
         const color = point.color ?? CHART_COLORS[i % CHART_COLORS.length];
         return (
           <div key={i} className="flex flex-col items-center gap-1 flex-1 min-w-0 h-full justify-end">
-            <span className="text-xs font-medium text-[#374151] tabular-nums">
+            <span className="text-xs font-medium text-heading tabular-nums">
               {point.value}
             </span>
             <div
@@ -64,7 +64,7 @@ function BarChart({
               aria-label={`${point.label}: ${point.value}`}
             />
             <span
-              className="text-xs text-[#6B7280] truncate w-full text-center"
+              className="text-xs text-body truncate w-full text-center"
               title={point.label}
             >
               {point.label}
@@ -167,7 +167,7 @@ function LineChart({
         {data.map((d, i) => (
           <span
             key={i}
-            className="text-xs text-[#6B7280] truncate flex-1 text-center"
+            className="text-xs text-body truncate flex-1 text-center"
             title={d.label}
           >
             {d.label}

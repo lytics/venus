@@ -23,7 +23,7 @@ export const Stat = React.forwardRef<HTMLDivElement, StatProps>(
         ? "text-green-600"
         : trend === "down"
         ? "text-red-500"
-        : "text-[#6B7280]";
+        : "text-body";
 
     return (
       <div
@@ -35,12 +35,12 @@ export const Stat = React.forwardRef<HTMLDivElement, StatProps>(
         {...props}
       >
         {icon && (
-          <div className="absolute right-4 top-4 text-[#6B7280]">{icon}</div>
+          <div className="absolute right-4 top-4 text-body">{icon}</div>
         )}
-        <span className="text-[30px] font-bold leading-none text-[#111827]">
+        <span className="text-[30px] font-bold leading-none text-title">
           {value}
         </span>
-        <span className="text-sm font-normal text-[#6B7280]">{label}</span>
+        <span className="text-sm font-normal text-body">{label}</span>
         {change && (
           <span className={cn("text-sm font-medium", changeColor)}>{change}</span>
         )}
