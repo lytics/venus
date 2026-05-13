@@ -178,3 +178,5 @@ export { CodeBlock, type CodeBlockProps } from "./code-block";
 export { Switch, type SwitchProps } from "./switch";
 export { DataTable, type DataTableProps, type DataTableColumn } from "./data-table";
 export { Chart, type ChartProps, type ChartDataPoint } from "./chart";
+export { SimpleTabs, type SimpleTabsProps, type SimpleTabItem } from "./simple-tabs";
+export { SimpleAccordion, type SimpleAccordionProps, type SimpleAccordionItem } from "./simple-accordion";

@@ -11,7 +11,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         data-slot="card"
         className={cn(
-          "bg-white text-card-foreground flex flex-col gap-4 rounded-[var(--radius)] border py-4",
+          "bg-white text-card-foreground flex flex-col gap-4 rounded-[var(--radius)] py-4",
           className
         )}
         {...props}
