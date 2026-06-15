@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "Loading placeholder with pulse animation.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/skeleton.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {}\n\nexport const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        data-slot=\"skeleton\"\n        className={cn(\n          \"bg-muted-foreground/10 animate-pulse rounded-[calc(var(--radius)-2px)]\",\n          className,\n        )}\n        {...props}\n      />\n    );\n  },\n);\nSkeleton.displayName = \"Skeleton\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

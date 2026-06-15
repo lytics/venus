@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "title": "Avatar",
+  "description": "User avatar with image and fallback support. Built on Radix UI Avatar.",
+  "dependencies": [
+    "@radix-ui/react-avatar"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface AvatarProps extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> {}\n\nexport const Avatar = React.forwardRef<React.ElementRef<typeof AvatarPrimitive.Root>, AvatarProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <AvatarPrimitive.Root\n        ref={ref}\n        data-slot=\"avatar\"\n        className={cn(\"relative flex size-8 shrink-0 overflow-hidden rounded-full\", className)}\n        {...props}\n      />\n    );\n  },\n);\nAvatar.displayName = \"Avatar\";\n\nexport interface AvatarImageProps extends React.ComponentPropsWithoutRef<\n  typeof AvatarPrimitive.Image\n> {}\n\nexport const AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  AvatarImageProps\n>(({ className, ...props }, ref) => {\n  return (\n    <AvatarPrimitive.Image\n      ref={ref}\n      data-slot=\"avatar-image\"\n      className={cn(\"aspect-square size-full\", className)}\n      {...props}\n    />\n  );\n});\nAvatarImage.displayName = \"AvatarImage\";\n\nexport interface AvatarFallbackProps extends React.ComponentPropsWithoutRef<\n  typeof AvatarPrimitive.Fallback\n> {}\n\nexport const AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  AvatarFallbackProps\n>(({ className, ...props }, ref) => {\n  return (\n    <AvatarPrimitive.Fallback\n      ref={ref}\n      data-slot=\"avatar-fallback\"\n      className={cn(\"bg-muted flex size-full items-center justify-center rounded-full\", className)}\n      {...props}\n    />\n  );\n});\nAvatarFallback.displayName = \"AvatarFallback\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

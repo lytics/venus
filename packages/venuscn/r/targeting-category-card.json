@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "targeting-category-card",
+  "title": "Targeting Category Card",
+  "description": "Card for targeting rule categories with icon and count.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils",
+    "@venus/category-pill"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/targeting-category-card.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Users, Smartphone, MapPin, Clock, LucideIcon } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\nimport { CategoryVariant } from \"@/components/ui/category-pill\";\n\nexport interface TargetingCategoryCardProps {\n  /** The category variant which determines color and default icon */\n  variant: CategoryVariant;\n  /** The main title (e.g., \"Who\", \"How\", \"Where\", \"When\") */\n  title: string;\n  /** The subtitle (e.g., \"Audience\", \"Device & Context\") */\n  subtitle: string;\n  /** Optional custom icon to override default */\n  icon?: LucideIcon;\n  /** Optional custom className */\n  className?: string;\n}\n\nconst CATEGORY_CONFIG = {\n  audience: {\n    icon: Users,\n    iconBgColor: \"bg-blue-50\",\n    iconColor: \"text-blue-600\",\n    textColor: \"text-blue-600\",\n  },\n  device: {\n    icon: Smartphone,\n    iconBgColor: \"bg-green-50\",\n    iconColor: \"text-green-600\",\n    textColor: \"text-green-600\",\n  },\n  geographic: {\n    icon: MapPin,\n    iconBgColor: \"bg-orange-50\",\n    iconColor: \"text-orange-600\",\n    textColor: \"text-orange-600\",\n  },\n  temporal: {\n    icon: Clock,\n    iconBgColor: \"bg-purple-50\",\n    iconColor: \"text-purple-600\",\n    textColor: \"text-purple-600\",\n  },\n} as const;\n\nexport const TargetingCategoryCard = React.forwardRef<HTMLDivElement, TargetingCategoryCardProps>(\n  ({ variant, title, subtitle, icon, className }, ref) => {\n    const config = CATEGORY_CONFIG[variant];\n    const Icon = icon || config.icon;\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          // Base card styles\n          \"flex items-center gap-3\",\n          \"p-4\",\n          \"rounded-lg\",\n          \"border border-gray-200\",\n          \"bg-white\",\n          // Hover states\n          \"hover:border-gray-300 hover:shadow-sm\",\n          \"transition-all duration-150\",\n          className,\n        )}\n      >\n        {/* Icon Container */}\n        <div\n          className={cn(\n            \"flex-shrink-0\",\n            \"w-10 h-10\",\n            \"rounded-lg\",\n            \"flex items-center justify-center\",\n            \"ring-1 ring-black/5\",\n            config.iconBgColor,\n          )}\n        >\n          <Icon className={cn(\"h-5 w-5\", config.iconColor)} strokeWidth={2.5} />\n        </div>\n\n        {/* Text content */}\n        <div className=\"flex flex-col gap-0.5\">\n          <h3 className=\"text-base font-semibold text-gray-800\">{title}</h3>\n          <p className={cn(\"text-sm font-medium\", config.textColor)}>{subtitle}</p>\n        </div>\n      </div>\n    );\n  },\n);\n\nTargetingCategoryCard.displayName = \"TargetingCategoryCard\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "targeting-rules",
+  "title": "Targeting Rules",
+  "description": "Targeting Rules support module for Venus targeting components.",
+  "files": [
+    {
+      "path": "registry/lib/targeting-rules.ts",
+      "content": "/** Targeting Rules Type Definitions */\n\n/** Category types for targeting rules */\nexport type Category = \"audience\" | \"device\" | \"geographic\" | \"temporal\";\n\n/** Match type for rule groups */\nexport type MatchType = \"all\" | \"any\";\n\n/** Operator between rule groups */\nexport type GroupOperator = \"and\" | \"or\";\n\n/** Operator types for different attribute types */\nexport type Operator =\n  | \"equals\"\n  | \"not-equals\"\n  | \"contains\"\n  | \"not-contains\"\n  | \"starts-with\"\n  | \"ends-with\"\n  | \"in-list\"\n  | \"not-in-list\"\n  | \"greater-than\"\n  | \"less-than\"\n  | \"greater-than-or-equal\"\n  | \"less-than-or-equal\"\n  | \"between\"\n  | \"is-before\"\n  | \"is-after\"\n  | \"is-on\";\n\n/** Individual targeting rule */\nexport interface Rule {\n  /** Unique identifier for the rule */\n  id: string;\n  /** Category of the rule (audience, device, geographic, temporal) */\n  category: Category;\n  /** The attribute being evaluated (e.g., \"User Segment\", \"Operating System\") */\n  attribute: string;\n  /** The operator for comparison (e.g., \"equals\", \"contains\") */\n  operator: Operator;\n  /** The value to compare against */\n  value: string;\n}\n\n/** Group of rules with a match condition */\nexport interface RuleGroup {\n  /** Unique identifier for the group */\n  id: string;\n  /** Match type: 'all' means AND logic, 'any' means OR logic */\n  matchType: MatchType;\n  /** Array of rules in this group */\n  rules: Rule[];\n}\n\n/** Complete targeting rules configuration */\nexport interface TargetingRules {\n  /** Array of rule groups */\n  groups: RuleGroup[];\n}\n\n/** Attribute option for dropdowns */\nexport interface AttributeOption {\n  /** Display label */\n  label: string;\n  /** Value identifier */\n  value: string;\n  /** Category this attribute belongs to */\n  category: Category;\n  /** Allowed operators for this attribute */\n  allowedOperators: Operator[];\n  /** Type of input for values ('text', 'select', 'number', 'date', 'time') */\n  valueType: \"text\" | \"select\" | \"number\" | \"date\" | \"time\";\n  /** Predefined value options (if valueType is 'select') */\n  valueOptions?: Array<{ label: string; value: string }>;\n}\n\n/** Operator option for dropdowns */\nexport interface OperatorOption {\n  /** Display label */\n  label: string;\n  /** Value identifier */\n  value: Operator;\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-sidebar",
+  "title": "Form Sidebar",
+  "description": "Right-side form sidebar with title, description, and metadata sections.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/form-sidebar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Info } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface FormSidebarProps {\n  /** Additional CSS class names for the 72px-wide sidebar with white background and left border.\n   * Contains an info icon and separator by default.\n   */\n  className?: string;\n}\n\n/**\n * Venus Form Sidebar Component\n *\n * A fixed-width right sidebar with white background and info icon,\n * matching the Contentstack production app.\n */\nexport const FormSidebar = React.forwardRef<HTMLDivElement, FormSidebarProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          // Fixed width and full height\n          \"w-[72px] h-full\",\n          // Flex container\n          \"flex flex-col items-center\",\n          // White background with left border\n          \"bg-white border-l border-border\",\n          className,\n        )}\n        {...props}\n      >\n        {/* Info Icon */}\n        <div className=\"pt-4 pb-3 my-4\">\n          <Info className=\"w-5 h-5 text-gray-600\" strokeWidth={2} />\n        </div>\n\n        {/* Separator - 32px wide */}\n        <div className=\"w-8 border-t border-border\" />\n      </div>\n    );\n  },\n);\n\nFormSidebar.displayName = \"FormSidebar\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

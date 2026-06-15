@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "divider",
+  "title": "Divider",
+  "description": "Horizontal or vertical separator line.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/divider.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DividerProps extends React.HTMLAttributes<HTMLHRElement> {\n  /** Direction of the divider line.\n   * - `\"horizontal\"` — Full-width 1px gray line with vertical margin.\n   * - `\"vertical\"` — Full-height 1px gray line with horizontal margin.\n   * @default \"horizontal\"\n   */\n  orientation?: \"horizontal\" | \"vertical\";\n  /** Optional centered label text displayed within the horizontal divider. Only applies when `orientation` is `\"horizontal\"`. */\n  text?: string;\n}\n\nexport const Divider = React.forwardRef<HTMLHRElement, DividerProps>(\n  ({ className, orientation = \"horizontal\", text, ...props }, ref) => {\n    if (text && orientation === \"horizontal\") {\n      return (\n        <div className={cn(\"flex items-center gap-4 my-4\", className)}>\n          <hr className=\"flex-1 h-px bg-gray-300 border-0\" />\n          <span className=\"text-[13px] text-gray-500 whitespace-nowrap\">{text}</span>\n          <hr className=\"flex-1 h-px bg-gray-300 border-0\" />\n        </div>\n      );\n    }\n\n    if (orientation === \"vertical\") {\n      return (\n        <hr\n          ref={ref}\n          className={cn(\"w-px h-full bg-gray-300 border-0 mx-4\", className)}\n          {...props}\n        />\n      );\n    }\n\n    return <hr ref={ref} className={cn(\"h-px bg-gray-300 border-0 my-4\", className)} {...props} />;\n  },\n);\n\nDivider.displayName = \"Divider\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

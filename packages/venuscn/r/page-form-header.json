@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-form-header",
+  "title": "Page Form Header",
+  "description": "Page header for form pages with back button and save/cancel actions.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils",
+    "@venus/button"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/page-form-header.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { ArrowLeft } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\nimport { Button } from \"@/components/ui/button\";\n\nexport interface PageFormHeaderProps {\n  /** Page title text. Rendered at 20px, semibold. */\n  title: string;\n  /** Callback for the back arrow button. If omitted, the back button is not rendered. */\n  onBack?: () => void;\n  /** Callback for the \"Cancel\" ghost button. If omitted, the cancel button is not rendered. */\n  onCancel?: () => void;\n  /** Callback for the \"Save\" primary button. If omitted, the save button is not rendered. */\n  onSave?: () => void;\n  /** Disables the save button. @default false */\n  saveDisabled?: boolean;\n  /** Additional CSS class names for the 64px-tall sticky header container. */\n  className?: string;\n}\n\n/**\n * Venus Page Form Header Component\n *\n * A fixed-height header bar with light blue background, containing a back arrow,\n * title, and cancel/save action buttons.\n */\nexport const PageFormHeader = React.forwardRef<HTMLDivElement, PageFormHeaderProps>(\n  ({ title, onBack, onCancel, onSave, saveDisabled = false, className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          // Container with light blue background (matching production)\n          \"bg-surface-gray\",\n          // Height\n          \"h-16\",\n          // Bottom border only (no top border per production specs)\n          \"border-b border-border\",\n          // Flex container with horizontal padding\n          \"flex items-center justify-between\",\n          \"px-4\",\n          // Sticky positioning - sticks to top of scrollable area\n          \"sticky top-0 z-40\",\n          className,\n        )}\n        {...props}\n      >\n        {/* Left: Back arrow and title */}\n        <div className=\"flex items-center gap-4\">\n          {/* Back Button */}\n          {onBack && (\n            <button\n              onClick={onBack}\n              className=\"flex items-center justify-center h-10 w-10 hover:bg-gray-100 rounded-md transition-colors cursor-pointer\"\n              aria-label=\"Go back\"\n            >\n              <ArrowLeft className=\"h-6 w-6 text-gray-800\" />\n            </button>\n          )}\n\n          {/* Page Title */}\n          <h1 className=\"text-xl font-semibold text-gray-800\">{title}</h1>\n        </div>\n\n        {/* Right: Action buttons */}\n        <div className=\"flex items-center gap-3\">\n          {onCancel && (\n            <Button variant=\"ghost\" size=\"regular\" onClick={onCancel}>\n              Cancel\n            </Button>\n          )}\n          {onSave && (\n            <Button variant=\"primary\" size=\"regular\" onClick={onSave} disabled={saveDisabled}>\n              Save\n            </Button>\n          )}\n        </div>\n      </div>\n    );\n  },\n);\n\nPageFormHeader.displayName = \"PageFormHeader\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

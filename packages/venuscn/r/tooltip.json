@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "description": "Tooltip popup on hover. Built on Radix UI Tooltip.",
+  "dependencies": [
+    "@radix-ui/react-tooltip"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/tooltip.tsx",
+      "content": "\"use client\";\n\n/**\n * Venus Design System Tooltip — compound component built on Radix UI Tooltip.\n *\n * Usage:\n * ```tsx\n * <TooltipProvider>\n *   <Tooltip>\n *     <TooltipTrigger>Hover me</TooltipTrigger>\n *     <TooltipContent>Tooltip text</TooltipContent>\n *   </Tooltip>\n * </TooltipProvider>\n * ```\n *\n * - `TooltipProvider` — Wrap your app or section once. Controls global delay settings.\n * - `Tooltip` — Root for a single tooltip instance. Manages open/close state.\n * - `TooltipTrigger` — The element that triggers the tooltip on hover/focus.\n * - `TooltipContent` — The floating tooltip panel. Dark gray background, white text, 4px radius.\n *   Accepts `side` (\"top\" | \"right\" | \"bottom\" | \"left\") and `sideOffset` (default 4px).\n *\n * Props are inherited from Radix UI `@radix-ui/react-tooltip` — see Radix docs for full API.\n */\n\nimport * as React from \"react\";\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\nimport { cn } from \"@/lib/utils\";\n\nconst TooltipProvider = TooltipPrimitive.Provider;\n\nconst Tooltip = TooltipPrimitive.Root;\n\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nconst TooltipContent = React.forwardRef<\n  React.ElementRef<typeof TooltipPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\n>(({ className, sideOffset = 4, ...props }, ref) => (\n  <TooltipPrimitive.Portal>\n    <TooltipPrimitive.Content\n      ref={ref}\n      sideOffset={sideOffset}\n      className={cn(\n        \"z-50 overflow-hidden rounded bg-gray-800 px-3 py-1.5 text-sm text-white shadow-md\",\n        \"animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\n        \"data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n        className,\n      )}\n      {...props}\n    />\n  </TooltipPrimitive.Portal>\n));\nTooltipContent.displayName = TooltipPrimitive.Content.displayName;\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

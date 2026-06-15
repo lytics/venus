@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio",
+  "title": "Radio",
+  "description": "Radio button input with label support.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/radio.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, \"type\"> {\n  /** Optional text label displayed to the right of the radio button. 16px, normal weight.\n   * Use the same `name` prop on multiple Radio components to group them.\n   */\n  label?: string;\n}\n\nexport const Radio = React.forwardRef<HTMLInputElement, RadioProps>(\n  ({ className, label, disabled, id, ...props }, ref) => {\n    const generatedId = React.useId();\n    const radioId = id || `radio-${generatedId}`;\n\n    return (\n      <div className=\"flex items-center gap-2\">\n        <div className=\"relative inline-flex items-center justify-center\">\n          <input\n            ref={ref}\n            type=\"radio\"\n            id={radioId}\n            disabled={disabled}\n            className={cn(\n              // Base styles\n              \"peer w-4 h-4 rounded-full cursor-pointer\",\n              \"border transition-all duration-150\",\n              \"appearance-none\",\n              \"focus:outline-none\",\n              \"relative\",\n\n              // Default state\n              \"border-heading bg-white\",\n              \"hover:border-primary\",\n\n              // Checked state (border only)\n              \"checked:border-primary\",\n              \"checked:hover:border-primary-hover\",\n\n              // Inner dot styles via pseudo-element\n              \"after:content-[''] after:absolute after:w-2 after:h-2 after:rounded-full\",\n              \"after:bg-primary after:top-1/2 after:left-1/2\",\n              \"after:-translate-x-1/2 after:-translate-y-1/2\",\n              \"after:scale-0 after:transition-transform after:duration-150\",\n              \"checked:after:scale-100\",\n\n              // Focus state\n              \"focus:ring-[3px] focus:ring-primary/10\",\n\n              // Disabled state\n              \"disabled:bg-surface-gray disabled:border-gray-300 disabled:cursor-not-allowed\",\n              \"disabled:after:bg-gray-400\",\n\n              className,\n            )}\n            {...props}\n          />\n        </div>\n        {label && (\n          <label\n            htmlFor={radioId}\n            className={cn(\n              \"text-base font-normal text-ink cursor-pointer select-none\",\n              disabled && \"text-gray-500 cursor-not-allowed\",\n            )}\n          >\n            {label}\n          </label>\n        )}\n      </div>\n    );\n  },\n);\n\nRadio.displayName = \"Radio\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
