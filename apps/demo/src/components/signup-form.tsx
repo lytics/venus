@@ -1,35 +1,24 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
-import { Button, Input, FieldLabel } from "@contentstack/venuscn"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { useRouter } from "next/navigation"
+import { cn } from "@/lib/utils";
+import { Button, Input, FieldLabel } from "@contentstack/venuscn";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
-export function SignupForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  const router = useRouter()
+export function SignupForm({ className, ...props }: React.ComponentProps<"div">) {
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    router.push("/dashboard")
-  }
+    e.preventDefault();
+    router.push("/dashboard");
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Sign Up</CardTitle>
-          <CardDescription>
-            Enter your information to create an account
-          </CardDescription>
+          <CardDescription>Enter your information to create an account</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
@@ -44,12 +33,7 @@ export function SignupForm({
               </div>
               <div className="grid gap-2">
                 <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
+                <Input id="email" type="email" placeholder="m@example.com" required />
               </div>
               <div className="grid gap-2">
                 <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -72,5 +56,5 @@ export function SignupForm({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

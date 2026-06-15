@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ChevronsUpDown } from "lucide-react"
+import * as React from "react";
+import { ChevronsUpDown } from "lucide-react";
 
-import { Button } from "@contentstack/venuscn"
+import { Button } from "@contentstack/venuscn";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
 export function OrgSwitcher() {
-  const [activeOrg] = React.useState("Venus")
+  const [activeOrg] = React.useState("Venus");
 
   return (
     <DropdownMenu>
@@ -23,10 +23,8 @@ export function OrgSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-32">
-        <DropdownMenuItem className="font-medium">
-          {activeOrg}
-        </DropdownMenuItem>
+        <DropdownMenuItem className="font-medium">{activeOrg}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

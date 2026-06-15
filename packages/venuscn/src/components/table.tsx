@@ -1,6 +1,6 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
-import { MoreVertical } from 'lucide-react';
+import { cn } from "../lib/utils";
+import { MoreVertical } from "lucide-react";
 
 /**
  * Venus Design System Table — compound component.
@@ -41,16 +41,14 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
     if (bordered) {
       return (
         <div className="border border-border rounded-lg bg-background overflow-hidden">
-          <div className="overflow-auto relative">
-            {table}
-          </div>
+          <div className="overflow-auto relative">{table}</div>
         </div>
       );
     }
 
     // Default: simple overflow wrapper
     return <div className="w-full overflow-auto">{table}</div>;
-  }
+  },
 );
 Table.displayName = "Table";
 
@@ -64,7 +62,7 @@ const TableHeader = React.forwardRef<
       "bg-transparent",
       // Disable row hover in header
       "[&>tr]:hover:bg-transparent",
-      className
+      className,
     )}
     {...props}
   />
@@ -75,11 +73,7 @@ const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <tbody
-    ref={ref}
-    className={cn("bg-background", className)}
-    {...props}
-  />
+  <tbody ref={ref} className={cn("bg-background", className)} {...props} />
 ));
 TableBody.displayName = "TableBody";
 
@@ -87,32 +81,24 @@ const TableFooter = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <tfoot
-    ref={ref}
-    className={cn(
-      "bg-transparent font-medium",
-      className
-    )}
-    {...props}
-  />
+  <tfoot ref={ref} className={cn("bg-transparent font-medium", className)} {...props} />
 ));
 TableFooter.displayName = "TableFooter";
 
-const TableRow = React.forwardRef<
-  HTMLTableRowElement,
-  React.HTMLAttributes<HTMLTableRowElement>
->(({ className, ...props }, ref) => (
-  <tr
-    ref={ref}
-    className={cn(
-      "transition-colors group",
-      "hover:bg-surface-gray",
-      "data-[state=selected]:bg-muted",
-      className
-    )}
-    {...props}
-  />
-));
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => (
+    <tr
+      ref={ref}
+      className={cn(
+        "transition-colors group",
+        "hover:bg-surface-gray",
+        "data-[state=selected]:bg-muted",
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 TableRow.displayName = "TableRow";
 
 export interface TableHeadProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
@@ -140,12 +126,12 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
         sticky === "left" && "sticky left-0 bg-background z-10",
         // Sticky right with shadow
         sticky === "right" && "sticky right-0 bg-background z-10 venus-table-sticky-shadow",
-        className
+        className,
       )}
       style={{ minWidth, ...style }}
       {...props}
     />
-  )
+  ),
 );
 TableHead.displayName = "TableHead";
 
@@ -171,13 +157,14 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
         // Sticky left - inherits row hover via group
         sticky === "left" && "sticky left-0 bg-background group-hover:bg-surface-gray z-10",
         // Sticky right with shadow - inherits row hover via group
-        sticky === "right" && "sticky right-0 bg-background group-hover:bg-surface-gray z-10 venus-table-sticky-shadow",
-        className
+        sticky === "right" &&
+          "sticky right-0 bg-background group-hover:bg-surface-gray z-10 venus-table-sticky-shadow",
+        className,
       )}
       style={{ minWidth, ...style }}
       {...props}
     />
-  )
+  ),
 );
 TableCell.displayName = "TableCell";
 
@@ -185,11 +172,7 @@ const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,
   React.HTMLAttributes<HTMLTableCaptionElement>
 >(({ className, ...props }, ref) => (
-  <caption
-    ref={ref}
-    className={cn("mt-4 text-sm text-muted-foreground", className)}
-    {...props}
-  />
+  <caption ref={ref} className={cn("mt-4 text-sm text-muted-foreground", className)} {...props} />
 ));
 TableCaption.displayName = "TableCaption";
 
@@ -204,14 +187,14 @@ const TableActionButton = React.forwardRef<HTMLButtonElement, TableActionButtonP
       ref={ref}
       className={cn(
         "inline-flex items-center justify-center hover:bg-gray-100 rounded p-1 transition-colors",
-        className
+        className,
       )}
       aria-label={label}
       {...props}
     >
       <MoreVertical className="w-5 h-5 text-gray-600" strokeWidth={1.5} />
     </button>
-  )
+  ),
 );
 TableActionButton.displayName = "TableActionButton";
 

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { CMSTopNav } from "@/components/cms-top-nav"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import * as React from "react";
+import { CMSTopNav } from "@/components/cms-top-nav";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 export default function CMSNavigationDemo() {
   return (
@@ -50,16 +50,15 @@ export default function CMSNavigationDemo() {
         <CardHeader>
           <CardTitle>In Layout Context</CardTitle>
           <CardDescription>
-            Example of CMSTopNav in a typical CMS layout. The product logo and nav items are in the global TopNav.
+            Example of CMSTopNav in a typical CMS layout. The product logo and nav items are in the
+            global TopNav.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="border rounded-lg overflow-hidden">
             <CMSTopNav stackName="Compass Starter" branch="main" />
             <div className="p-6 bg-[#F5F6F8] min-h-[200px]">
-              <p className="text-sm text-body">
-                Page content would go here...
-              </p>
+              <p className="text-sm text-body">Page content would go here...</p>
             </div>
           </div>
         </CardContent>
@@ -69,23 +68,21 @@ export default function CMSNavigationDemo() {
       <Card>
         <CardHeader>
           <CardTitle>Usage</CardTitle>
-          <CardDescription>
-            Import and use these components in your CMS layouts
-          </CardDescription>
+          <CardDescription>Import and use these components in your CMS layouts</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div>
               <h3 className="font-semibold text-sm mb-2">Import:</h3>
               <pre className="bg-gray-100 p-4 rounded text-xs overflow-x-auto">
-{`import { CMSTopNav } from "@/components/cms-top-nav"`}
+                {`import { CMSTopNav } from "@/components/cms-top-nav"`}
               </pre>
             </div>
 
             <div>
               <h3 className="font-semibold text-sm mb-2">Basic Usage:</h3>
               <pre className="bg-gray-100 p-4 rounded text-xs overflow-x-auto">
-{`<CMSTopNav stackName="My Stack" branch="main" />`}
+                {`<CMSTopNav stackName="My Stack" branch="main" />`}
               </pre>
             </div>
 
@@ -95,8 +92,14 @@ export default function CMSNavigationDemo() {
                 <div>
                   <p className="font-mono text-xs font-semibold">CMSTopNav</p>
                   <ul className="text-xs text-body space-y-1 ml-4 mt-1">
-                    <li><code className="bg-gray-100 px-1">stackName</code> - Name of the current stack</li>
-                    <li><code className="bg-gray-100 px-1">branch</code> (optional) - Current branch name (default: main)</li>
+                    <li>
+                      <code className="bg-gray-100 px-1">stackName</code> - Name of the current
+                      stack
+                    </li>
+                    <li>
+                      <code className="bg-gray-100 px-1">branch</code> (optional) - Current branch
+                      name (default: main)
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -105,5 +108,5 @@ export default function CMSNavigationDemo() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -11,23 +11,23 @@
  * 2. Customize the welcome message, cards, and sidebar content
  */
 
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@contentstack/venuscn"
-import { LucideIcon, Boxes, Settings, BarChart3, Users } from "lucide-react"
+import * as React from "react";
+import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@contentstack/venuscn";
+import { LucideIcon, Boxes, Settings, BarChart3, Users } from "lucide-react";
 
 // =============================================================================
 // CUSTOMIZE: Your app cards data
 // =============================================================================
 interface AppCardData {
-  title: string
-  description: string
-  icon: LucideIcon
-  href?: string
-  disabled?: boolean
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  href?: string;
+  disabled?: boolean;
 }
 
 const appCards: AppCardData[] = [
@@ -54,7 +54,7 @@ const appCards: AppCardData[] = [
     icon: Users,
     disabled: true,
   },
-]
+];
 
 // =============================================================================
 // CUSTOMIZE: Your quick links
@@ -63,25 +63,21 @@ const quickLinks = [
   { label: "Documentation", href: "#" },
   { label: "Getting Started", href: "#" },
   { label: "Community", href: "#" },
-]
+];
 
 // =============================================================================
 // Components (you can keep these as-is)
 // =============================================================================
 
-function AppCard({
-  title,
-  description,
-  icon: Icon,
-  href,
-  disabled
-}: AppCardData) {
-  const [isHovered, setIsHovered] = React.useState(false)
+function AppCard({ title, description, icon: Icon, href, disabled }: AppCardData) {
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const cardContent = (
     <Card
-      className={`border transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-      style={{ borderColor: (!disabled && isHovered) ? 'var(--color-primary)' : 'var(--color-border)' }}
+      className={`border transition-all ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+      style={{
+        borderColor: !disabled && isHovered ? "var(--color-primary)" : "var(--color-border)",
+      }}
       onMouseEnter={() => !disabled && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -95,13 +91,13 @@ function AppCard({
         <p className="text-sm font-medium text-body leading-snug">{description}</p>
       </CardContent>
     </Card>
-  )
+  );
 
   if (href && !disabled) {
-    return <Link href={href}>{cardContent}</Link>
+    return <Link href={href}>{cardContent}</Link>;
   }
 
-  return cardContent
+  return cardContent;
 }
 
 // =============================================================================
@@ -113,20 +109,14 @@ export default function DashboardTemplate() {
     <div className="min-h-screen bg-[#F7F9FC]">
       <div className="@container">
         <div className="flex flex-col gap-6 px-8 pt-8 pb-8">
-
           {/* Welcome Header - CUSTOMIZE */}
           <div className="mb-3">
-            <h1 className="text-28 font-bold text-title leading-[42px]">
-              Welcome, User
-            </h1>
-            <p className="text-base font-bold text-[#6e6b86] mt-1">
-              Your Organization Name
-            </p>
+            <h1 className="text-28 font-bold text-title leading-[42px]">Welcome, User</h1>
+            <p className="text-base font-bold text-[#6e6b86] mt-1">Your Organization Name</p>
           </div>
 
           {/* Main Layout - Two Columns */}
           <div className="grid grid-cols-1 @4xl:grid-cols-[2.2fr_1fr] gap-6">
-
             {/* Left Column - Main Content */}
             <div className="space-y-6">
               <div>
@@ -151,7 +141,6 @@ export default function DashboardTemplate() {
 
             {/* Right Column - Sidebar */}
             <div className="space-y-8 px-2">
-
               {/* Quick Links */}
               <div>
                 <h2 className="text-xl font-bold text-heading mb-4">Quick Links</h2>
@@ -195,5 +184,5 @@ export default function DashboardTemplate() {
         </div>
       </div>
     </div>
-  )
+  );
 }

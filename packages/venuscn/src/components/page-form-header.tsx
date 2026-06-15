@@ -1,23 +1,23 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { ArrowLeft } from 'lucide-react'
-import { cn } from '../lib/utils'
-import { Button } from './button'
+import * as React from "react";
+import { ArrowLeft } from "lucide-react";
+import { cn } from "../lib/utils";
+import { Button } from "./button";
 
 export interface PageFormHeaderProps {
   /** Page title text. Rendered at 20px, semibold. */
-  title: string
+  title: string;
   /** Callback for the back arrow button. If omitted, the back button is not rendered. */
-  onBack?: () => void
+  onBack?: () => void;
   /** Callback for the "Cancel" ghost button. If omitted, the cancel button is not rendered. */
-  onCancel?: () => void
+  onCancel?: () => void;
   /** Callback for the "Save" primary button. If omitted, the save button is not rendered. */
-  onSave?: () => void
+  onSave?: () => void;
   /** Disables the save button. @default false */
-  saveDisabled?: boolean
+  saveDisabled?: boolean;
   /** Additional CSS class names for the 64px-tall sticky header container. */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -27,34 +27,23 @@ export interface PageFormHeaderProps {
  * title, and cancel/save action buttons.
  */
 export const PageFormHeader = React.forwardRef<HTMLDivElement, PageFormHeaderProps>(
-  (
-    {
-      title,
-      onBack,
-      onCancel,
-      onSave,
-      saveDisabled = false,
-      className,
-      ...props
-    },
-    ref
-  ) => {
+  ({ title, onBack, onCancel, onSave, saveDisabled = false, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(
           // Container with light blue background (matching production)
-          'bg-surface-gray',
+          "bg-surface-gray",
           // Height
-          'h-16',
+          "h-16",
           // Bottom border only (no top border per production specs)
-          'border-b border-border',
+          "border-b border-border",
           // Flex container with horizontal padding
-          'flex items-center justify-between',
-          'px-4',
+          "flex items-center justify-between",
+          "px-4",
           // Sticky positioning - sticks to top of scrollable area
-          'sticky top-0 z-40',
-          className
+          "sticky top-0 z-40",
+          className,
         )}
         {...props}
       >
@@ -72,9 +61,7 @@ export const PageFormHeader = React.forwardRef<HTMLDivElement, PageFormHeaderPro
           )}
 
           {/* Page Title */}
-          <h1 className="text-xl font-semibold text-gray-800">
-            {title}
-          </h1>
+          <h1 className="text-xl font-semibold text-gray-800">{title}</h1>
         </div>
 
         {/* Right: Action buttons */}
@@ -85,19 +72,14 @@ export const PageFormHeader = React.forwardRef<HTMLDivElement, PageFormHeaderPro
             </Button>
           )}
           {onSave && (
-            <Button
-              variant="primary"
-              size="regular"
-              onClick={onSave}
-              disabled={saveDisabled}
-            >
+            <Button variant="primary" size="regular" onClick={onSave} disabled={saveDisabled}>
               Save
             </Button>
           )}
         </div>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-PageFormHeader.displayName = 'PageFormHeader'
+PageFormHeader.displayName = "PageFormHeader";

@@ -1,7 +1,5 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
-
-/** Venus Design System Divider Component */
+import { cn } from "../lib/utils";
 
 export interface DividerProps extends React.HTMLAttributes<HTMLHRElement> {
   /** Direction of the divider line.
@@ -30,26 +28,14 @@ export const Divider = React.forwardRef<HTMLHRElement, DividerProps>(
       return (
         <hr
           ref={ref}
-          className={cn(
-            "w-px h-full bg-gray-300 border-0 mx-4",
-            className
-          )}
+          className={cn("w-px h-full bg-gray-300 border-0 mx-4", className)}
           {...props}
         />
       );
     }
 
-    return (
-      <hr
-        ref={ref}
-        className={cn(
-          "h-px bg-gray-300 border-0 my-4",
-          className
-        )}
-        {...props}
-      />
-    );
-  }
+    return <hr ref={ref} className={cn("h-px bg-gray-300 border-0 my-4", className)} {...props} />;
+  },
 );
 
 Divider.displayName = "Divider";

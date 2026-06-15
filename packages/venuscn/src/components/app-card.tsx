@@ -26,8 +26,11 @@ export interface AppCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
-  ({ className, icon, title, subtitle, description, href, onInstall, variant = "icon", ...props }, ref) => {
-    const CardWrapper = href ? 'a' : 'div';
+  (
+    { className, icon, title, subtitle, description, href, onInstall, variant = "icon", ...props },
+    ref,
+  ) => {
+    const CardWrapper = href ? "a" : "div";
     const wrapperProps = href ? { href } : {};
 
     return (
@@ -40,29 +43,18 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
           "transition-shadow duration-150",
           "hover:shadow-[0_8px_20px_rgba(34,34,34,0.1)]",
           href && "cursor-pointer",
-          className
+          className,
         )}
       >
-        <div
-          ref={ref}
-          {...props}
-        >
+        <div ref={ref} {...props}>
           {/* Image Area */}
           {variant === "icon" ? (
             <div className="flex items-center justify-center h-40 bg-surface-gray">
-              <img
-                src={icon}
-                alt={title}
-                className="w-[72px] h-[72px] object-contain"
-              />
+              <img src={icon} alt={title} className="w-[72px] h-[72px] object-contain" />
             </div>
           ) : (
             <div className="w-full h-40 overflow-hidden rounded-t">
-              <img
-                src={icon}
-                alt={title}
-                className="w-full h-full object-cover"
-              />
+              <img src={icon} alt={title} className="w-full h-full object-cover" />
             </div>
           )}
 
@@ -70,9 +62,7 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
           <div className="p-4">
             {/* Default State */}
             <div className="group-hover:hidden">
-              <h3 className="text-base font-semibold text-ink leading-6">
-                {title}
-              </h3>
+              <h3 className="text-base font-semibold text-ink leading-6">{title}</h3>
               {variant === "icon" && (
                 <p className="flex items-center gap-1 text-xs font-normal text-subtle">
                   <Layers className="w-3 h-3" />
@@ -101,7 +91,7 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
                     "h-8 px-4 rounded",
                     "bg-primary text-white",
                     "text-sm font-semibold",
-                    "hover:bg-primary-hover transition-colors"
+                    "hover:bg-primary-hover transition-colors",
                   )}
                 >
                   Install
@@ -113,7 +103,7 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
         </div>
       </CardWrapper>
     );
-  }
+  },
 );
 
 AppCard.displayName = "AppCard";

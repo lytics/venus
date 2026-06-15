@@ -43,9 +43,7 @@ export default function HomePage() {
           <AppLogo size={64} className="text-primary" collapsed={true} />
         </div>
         <h1 className="text-4xl font-bold tracking-tight mb-2">VenusCN</h1>
-        <p className="text-[color:var(--color-body)]">
-          ShadCN/UI-based Contentstack Venus Clone
-        </p>
+        <p className="text-[color:var(--color-body)]">ShadCN/UI-based Contentstack Venus Clone</p>
       </div>
 
       {/* Action Cards */}
@@ -61,9 +59,7 @@ export default function HomePage() {
             </div>
             <h2 className="font-semibold text-lg">Components</h2>
           </div>
-          <p className="text-[color:var(--color-body)] text-sm">
-            Browse cloned components
-          </p>
+          <p className="text-[color:var(--color-body)] text-sm">Browse cloned components</p>
         </Link>
 
         {/* Page Templates */}
@@ -131,26 +127,24 @@ export default function HomePage() {
             {"\n"}pnpm dev
           </CodeBlock>
 
-          <CodeBlock
-            copyText={`import { Button, Input, Field } from "@contentstack/venuscn"`}
-          >
+          <CodeBlock copyText={`import { Button, Input, Field } from "@contentstack/venuscn"`}>
             <span className="text-gray-500">{"// Import Venus components"}</span>
             {"\n"}
             <span className="text-purple-400">import</span>
             {" { Button, Input, Field } "}
-            <span className="text-purple-400">from</span>
-            {" "}
+            <span className="text-purple-400">from</span>{" "}
             <span className="text-green-400">&quot;@contentstack/venuscn&quot;</span>
           </CodeBlock>
         </div>
 
         <p className="text-xs text-[color:var(--color-body)] mt-3">
           See the{" "}
-          <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">packages/venuscn/README.md</code>
-          {" "}for full component documentation
+          <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">
+            packages/venuscn/README.md
+          </code>{" "}
+          for full component documentation
         </p>
       </div>
-
     </div>
   );
 }

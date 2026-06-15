@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import {
   PageFormHeader,
   FormSidebar,
@@ -10,53 +10,53 @@ import {
   Field,
   FieldLabel,
   Input,
-  Textarea
-} from '@contentstack/venuscn'
-import { RuleGroup, GroupOperator } from '@/types/targeting-rules'
+  Textarea,
+} from "@contentstack/venuscn";
+import { RuleGroup, GroupOperator } from "@/types/targeting-rules";
 
 export default function NewTargetPage() {
-  const router = useRouter()
+  const router = useRouter();
 
   // Form state
-  const [name, setName] = React.useState('')
-  const [description, setDescription] = React.useState('')
-  const [groupOperator, setGroupOperator] = React.useState<GroupOperator>('and')
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [groupOperator, setGroupOperator] = React.useState<GroupOperator>("and");
   const [ruleGroups, setRuleGroups] = React.useState<RuleGroup[]>([
     {
-      id: '1',
-      matchType: 'all',
+      id: "1",
+      matchType: "all",
       rules: [],
     },
-  ])
+  ]);
 
   // Validation
-  const isValid = name.trim().length > 0 && ruleGroups.some(group => group.rules.length > 0)
+  const isValid = name.trim().length > 0 && ruleGroups.some((group) => group.rules.length > 0);
 
   // Handlers
   const handleBack = () => {
-    router.push('/personalize/targets')
-  }
+    router.push("/personalize/targets");
+  };
 
   const handleCancel = () => {
-    router.push('/personalize/targets')
-  }
+    router.push("/personalize/targets");
+  };
 
   const handleSave = () => {
     if (!isValid) {
-      toast.error('Please fill in all required fields and add at least one rule')
-      return
+      toast.error("Please fill in all required fields and add at least one rule");
+      return;
     }
 
     // TODO: Save to backend
-    toast.success('Target saved successfully')
-    router.push('/personalize/targets')
-  }
+    toast.success("Target saved successfully");
+    router.push("/personalize/targets");
+  };
 
   return (
     <>
       {/* Page Form Header - Sticky */}
       <PageFormHeader
-        title={name || 'Untitled'}
+        title={name || "Untitled"}
         onBack={handleBack}
         onCancel={handleCancel}
         onSave={handleSave}
@@ -103,5 +103,5 @@ export default function NewTargetPage() {
         <FormSidebar />
       </div>
     </>
-  )
+  );
 }

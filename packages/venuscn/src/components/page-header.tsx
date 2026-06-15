@@ -1,8 +1,6 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 import { Button, type ButtonProps } from "./button";
-
-/** Venus Design System PageHeader Component */
 
 export interface PageHeaderAction {
   /** Button label text. */
@@ -39,7 +37,7 @@ export const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           "h-8",
           // No padding or border by default
           "p-0",
-          className
+          className,
         )}
         {...props}
       >
@@ -53,16 +51,12 @@ export const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
               // Color - black
               "text-black",
               // Font family
-              "font-sans"
+              "font-sans",
             )}
           >
             {title}
           </div>
-          {infoIcon && (
-            <div className="flex items-center">
-              {infoIcon}
-            </div>
-          )}
+          {infoIcon && <div className="flex items-center">{infoIcon}</div>}
         </div>
 
         {/* Actions Section */}
@@ -84,7 +78,7 @@ export const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 PageHeader.displayName = "PageHeader";

@@ -12,10 +12,10 @@
  * 2. Customize the columns, data type, and mock data
  */
 
-"use client"
+"use client";
 
-import * as React from "react"
-import { Plus, HelpCircle, Search as SearchIcon, RefreshCw, Settings2 } from "lucide-react"
+import * as React from "react";
+import { Plus, HelpCircle, Search as SearchIcon, RefreshCw, Settings2 } from "lucide-react";
 import {
   SearchV3,
   Table,
@@ -28,19 +28,19 @@ import {
   Button,
   Dropdown,
   StatusPill,
-} from "@contentstack/venuscn"
-import { cn } from "@/lib/utils"
+} from "@contentstack/venuscn";
+import { cn } from "@/lib/utils";
 
 // =============================================================================
 // CUSTOMIZE: Your data type
 // =============================================================================
 interface DataItem {
-  id: string
-  name: string
-  status: "active" | "inactive" | "draft" | "paused"
-  type: string
-  createdAt: string
-  createdBy: string
+  id: string;
+  name: string;
+  status: "active" | "inactive" | "draft" | "paused";
+  type: string;
+  createdAt: string;
+  createdBy: string;
 }
 
 // =============================================================================
@@ -71,44 +71,42 @@ const mockData: DataItem[] = [
     createdAt: "Nov 25, 2025 9:00 AM",
     createdBy: "Bob Wilson",
   },
-]
+];
 
 // =============================================================================
 // Page Component
 // =============================================================================
 
 export default function TablePageTemplate() {
-  const [searchValue, setSearchValue] = React.useState("")
-  const [currentPage, setCurrentPage] = React.useState(1)
-  const [recordsPerPage, setRecordsPerPage] = React.useState(25)
+  const [searchValue, setSearchValue] = React.useState("");
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [recordsPerPage, setRecordsPerPage] = React.useState(25);
 
   // Pagination calculations
-  const totalRecords = mockData.length
-  const totalPages = Math.ceil(totalRecords / recordsPerPage)
-  const startRecord = (currentPage - 1) * recordsPerPage + 1
-  const endRecord = Math.min(currentPage * recordsPerPage, totalRecords)
+  const totalRecords = mockData.length;
+  const totalPages = Math.ceil(totalRecords / recordsPerPage);
+  const startRecord = (currentPage - 1) * recordsPerPage + 1;
+  const endRecord = Math.min(currentPage * recordsPerPage, totalRecords);
 
   // CUSTOMIZE: Your action handlers
   const handlePrimaryAction = () => {
-    console.log("Primary action clicked")
-  }
+    console.log("Primary action clicked");
+  };
 
   const handleSecondaryAction = () => {
-    console.log("Secondary action clicked")
-  }
+    console.log("Secondary action clicked");
+  };
 
   const handleSearch = () => {
-    console.log("Search:", searchValue)
-  }
+    console.log("Search:", searchValue);
+  };
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Page Header */}
       <div className="bg-[#F7F9FC] h-[90px] border-b border-gray-200 flex items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-xl font-semibold text-black">
-            Page Title {/* CUSTOMIZE */}
-          </h1>
+          <h1 className="text-xl font-semibold text-black">Page Title {/* CUSTOMIZE */}</h1>
           <HelpCircle className="w-5 h-5 text-[#697B9B]" strokeWidth={1.5} />
         </div>
         <div className="flex items-center gap-4">
@@ -274,5 +272,5 @@ export default function TablePageTemplate() {
         </div>
       </div>
     </div>
-  )
+  );
 }

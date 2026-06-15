@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /**
  * Venus Design System Dialog — compound component built on Radix UI Dialog.
@@ -30,41 +30,34 @@
  * - `DialogClose` — Renders a close button or wraps a custom close trigger.
  */
 
-import * as React from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { X } from "lucide-react"
+import * as React from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 
-import { cn } from "../lib/utils"
+import { cn } from "../lib/utils";
 
 /** Root dialog component. Use `open` + `onOpenChange` for controlled mode, or `defaultOpen` for uncontrolled. */
-export interface DialogProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root> {}
+export interface DialogProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root> {}
 
 function Dialog({ ...props }: DialogProps) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />
+  return <DialogPrimitive.Root data-slot="dialog" {...props} />;
 }
-Dialog.displayName = "Dialog"
+Dialog.displayName = "Dialog";
 
-function DialogTrigger({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
+function DialogTrigger({ ...props }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
+  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
 }
-DialogTrigger.displayName = "DialogTrigger"
+DialogTrigger.displayName = "DialogTrigger";
 
-function DialogPortal({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
-  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
+function DialogPortal({ ...props }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />;
 }
-DialogPortal.displayName = "DialogPortal"
+DialogPortal.displayName = "DialogPortal";
 
-function DialogClose({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
+function DialogClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.Close>) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
 }
-DialogClose.displayName = "DialogClose"
+DialogClose.displayName = "DialogClose";
 
 export const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
@@ -76,18 +69,19 @@ export const DialogOverlay = React.forwardRef<
       data-slot="dialog-overlay"
       className={cn(
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
-        className
+        className,
       )}
       {...props}
     />
-  )
-})
-DialogOverlay.displayName = "DialogOverlay"
+  );
+});
+DialogOverlay.displayName = "DialogOverlay";
 
-export interface DialogContentProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+export interface DialogContentProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Content
+> {
   /** Whether to show the X close button in the top-right corner. @default true */
-  showCloseButton?: boolean
+  showCloseButton?: boolean;
 }
 
 export const DialogContent = React.forwardRef<
@@ -102,7 +96,7 @@ export const DialogContent = React.forwardRef<
         data-slot="dialog-content"
         className={cn(
           "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-[var(--radius)] border p-6 shadow-lg duration-200 sm:max-w-lg",
-          className
+          className,
         )}
         {...props}
       >
@@ -118,9 +112,9 @@ export const DialogContent = React.forwardRef<
         )}
       </DialogPrimitive.Content>
     </DialogPortal>
-  )
-})
-DialogContent.displayName = "DialogContent"
+  );
+});
+DialogContent.displayName = "DialogContent";
 
 export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -133,10 +127,10 @@ export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
         className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
         {...props}
       />
-    )
-  }
-)
-DialogHeader.displayName = "DialogHeader"
+    );
+  },
+);
+DialogHeader.displayName = "DialogHeader";
 
 export interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -146,19 +140,17 @@ export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
       <div
         ref={ref}
         data-slot="dialog-footer"
-        className={cn(
-          "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-          className
-        )}
+        className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)}
         {...props}
       />
-    )
-  }
-)
-DialogFooter.displayName = "DialogFooter"
+    );
+  },
+);
+DialogFooter.displayName = "DialogFooter";
 
-export interface DialogTitleProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {}
+export interface DialogTitleProps extends React.ComponentPropsWithoutRef<
+  typeof DialogPrimitive.Title
+> {}
 
 export const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
@@ -171,9 +163,9 @@ export const DialogTitle = React.forwardRef<
       className={cn("text-lg leading-none font-semibold", className)}
       {...props}
     />
-  )
-})
-DialogTitle.displayName = "DialogTitle"
+  );
+});
+DialogTitle.displayName = "DialogTitle";
 
 export const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
@@ -186,13 +178,8 @@ export const DialogDescription = React.forwardRef<
       className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
-  )
-})
-DialogDescription.displayName = "DialogDescription"
+  );
+});
+DialogDescription.displayName = "DialogDescription";
 
-export {
-  Dialog,
-  DialogClose,
-  DialogPortal,
-  DialogTrigger,
-}
+export { Dialog, DialogClose, DialogPortal, DialogTrigger };

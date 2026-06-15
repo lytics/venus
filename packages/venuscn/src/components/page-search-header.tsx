@@ -1,40 +1,40 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { cn } from '../lib/utils'
-import { SearchV3 } from './search-v3'
-import { Button } from './button'
+import * as React from "react";
+import { cn } from "../lib/utils";
+import { SearchV3 } from "./search-v3";
+import { Button } from "./button";
 
 export interface PageSearchHeaderAction {
   /** Button label text. */
-  label: string
+  label: string;
   /** Optional icon rendered before the label inside the button. */
-  icon?: React.ReactNode
+  icon?: React.ReactNode;
   /** Click handler for the action button. */
-  onClick: () => void
+  onClick: () => void;
   /** Button variant. @default "primary" */
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
+  variant?: "primary" | "secondary" | "ghost" | "danger";
 }
 
 export interface PageSearchHeaderProps {
   /** Page title text. Rendered at 20px, semibold, black. */
-  title: string
+  title: string;
   /** Optional help icon component displayed next to the title (e.g. a Tooltip trigger). */
-  helpIcon?: React.ReactNode
+  helpIcon?: React.ReactNode;
   /** Placeholder text for the SearchV3 input. @default "Search..." */
-  searchPlaceholder?: string
+  searchPlaceholder?: string;
   /** Controlled value for the search input. */
-  searchValue?: string
+  searchValue?: string;
   /** Callback fired when the search input value changes. */
-  onSearchChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onSearchChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /** Callback fired when the search input is cleared. */
-  onSearchClear?: () => void
+  onSearchClear?: () => void;
   /** Legacy single action button. Use `actions` array for multiple buttons. */
-  action?: PageSearchHeaderAction
+  action?: PageSearchHeaderAction;
   /** Array of action buttons rendered on the right. Overrides `action` if provided. */
-  actions?: PageSearchHeaderAction[]
+  actions?: PageSearchHeaderAction[];
   /** Additional CSS class names for the outer 90px-tall header container. */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -48,7 +48,7 @@ export const PageSearchHeader = React.forwardRef<HTMLDivElement, PageSearchHeade
     {
       title,
       helpIcon,
-      searchPlaceholder = 'Search...',
+      searchPlaceholder = "Search...",
       searchValue,
       onSearchChange,
       onSearchClear,
@@ -57,26 +57,26 @@ export const PageSearchHeader = React.forwardRef<HTMLDivElement, PageSearchHeade
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Use actions array if provided, otherwise fallback to single action
-    const actionButtons = actions || (action ? [action] : [])
+    const actionButtons = actions || (action ? [action] : []);
 
     return (
       <div
         ref={ref}
         className={cn(
           // Container with light blue background
-          'bg-surface-gray',
+          "bg-surface-gray",
           // 90px height
-          'h-[90px]',
+          "h-[90px]",
           // Borders top and bottom
-          'border-t border-b border-gray-200',
+          "border-t border-b border-gray-200",
           // Flex container with horizontal padding
-          'flex items-center justify-between',
+          "flex items-center justify-between",
           // 48px horizontal inset (24px outer + 24px inner = px-12)
-          'px-12',
-          className
+          "px-12",
+          className,
         )}
         {...props}
       >
@@ -84,9 +84,7 @@ export const PageSearchHeader = React.forwardRef<HTMLDivElement, PageSearchHeade
         <div className="flex items-center gap-4">
           {/* Page Title */}
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-semibold text-black">
-              {title}
-            </h1>
+            <h1 className="text-xl font-semibold text-black">{title}</h1>
             {helpIcon && helpIcon}
           </div>
 
@@ -107,7 +105,7 @@ export const PageSearchHeader = React.forwardRef<HTMLDivElement, PageSearchHeade
             {actionButtons.map((btn, idx) => (
               <Button
                 key={idx}
-                variant={btn.variant || 'primary'}
+                variant={btn.variant || "primary"}
                 size="regular"
                 onClick={btn.onClick}
               >
@@ -118,8 +116,8 @@ export const PageSearchHeader = React.forwardRef<HTMLDivElement, PageSearchHeade
           </div>
         )}
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-PageSearchHeader.displayName = 'PageSearchHeader'
+PageSearchHeader.displayName = "PageSearchHeader";

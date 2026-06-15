@@ -15,11 +15,7 @@ import { AppLayoutClient } from "./layout-client";
  * - No mismatch between server HTML and client hydration
  * - Sidebar state persists across navigation (client component doesn't remount)
  */
-export default async function AppLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default async function AppLayout({ children }: { children: ReactNode }) {
   const cookieStore = await cookies();
   const sidebarCookie = cookieStore.get("sidebar_state");
   const defaultOpen = sidebarCookie?.value === "true";

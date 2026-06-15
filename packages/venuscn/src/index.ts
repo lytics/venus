@@ -3,4 +3,4 @@
  * @contentstack/venuscn - Tailwind/shadcn edition
  */
 
-export * from './components'
+export * from "./components";

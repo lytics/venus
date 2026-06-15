@@ -11,6 +11,6 @@ export function useQueryBuilder() {
   return {
     isOpen,
     openBuilder,
-    closeBuilder
+    closeBuilder,
   };
 }

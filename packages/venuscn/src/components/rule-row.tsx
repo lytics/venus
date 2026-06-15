@@ -1,89 +1,90 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { Trash2 } from 'lucide-react'
-import { cn } from '../lib/utils'
-import { CategoryPill } from './category-pill'
-import { Dropdown } from './dropdown'
-import { Input } from './input'
-import { Rule, Operator } from '../types/targeting-rules'
+import * as React from "react";
+import { Trash2 } from "lucide-react";
+import { cn } from "../lib/utils";
+import { CategoryPill } from "./category-pill";
+import { Dropdown } from "./dropdown";
+import { Input } from "./input";
+import { Rule, Operator } from "../types/targeting-rules";
 import {
   getAttributesByCategory,
   getAttributeByValue,
   getOperatorsForAttribute,
-} from '../data/targeting-options'
+} from "../data/targeting-options";
 
 export interface RuleRowProps {
   /** The rule data */
-  rule: Rule
+  rule: Rule;
   /** Handler when rule is updated */
-  onUpdate: (rule: Rule) => void
+  onUpdate: (rule: Rule) => void;
   /** Handler when rule is deleted */
-  onDelete: () => void
+  onDelete: () => void;
   /** Optional custom className */
-  className?: string
+  className?: string;
 }
 
 export const RuleRow = React.forwardRef<HTMLDivElement, RuleRowProps>(
   ({ rule, onUpdate, onDelete, className }, ref) => {
     // Get category-specific attributes
-    const attributes = getAttributesByCategory(rule.category)
-    const attributeItems = attributes.map(attr => ({
+    const attributes = getAttributesByCategory(rule.category);
+    const attributeItems = attributes.map((attr) => ({
       label: attr.label,
       value: attr.value,
-    }))
+    }));
 
     // Get selected attribute details
-    const selectedAttribute = getAttributeByValue(rule.attribute)
+    const selectedAttribute = getAttributeByValue(rule.attribute);
 
     // Get operators for selected attribute
-    const operators = getOperatorsForAttribute(rule.attribute)
-    const operatorItems = operators.map(op => ({
+    const operators = getOperatorsForAttribute(rule.attribute);
+    const operatorItems = operators.map((op) => ({
       label: op.label,
       value: op.value,
-    }))
+    }));
 
     // Get value options if attribute has predefined values
-    const valueOptions = selectedAttribute?.valueOptions?.map(opt => ({
-      label: opt.label,
-      value: opt.value,
-    })) || []
+    const valueOptions =
+      selectedAttribute?.valueOptions?.map((opt) => ({
+        label: opt.label,
+        value: opt.value,
+      })) || [];
 
     // Handler for attribute change
     const handleAttributeChange = (value: string) => {
-      const newAttribute = getAttributeByValue(value)
+      const newAttribute = getAttributeByValue(value);
       onUpdate({
         ...rule,
         attribute: value,
-        operator: newAttribute?.allowedOperators[0] || 'equals',
-        value: '',
-      })
-    }
+        operator: newAttribute?.allowedOperators[0] || "equals",
+        value: "",
+      });
+    };
 
     // Handler for operator change
     const handleOperatorChange = (value: string) => {
       onUpdate({
         ...rule,
         operator: value as Operator,
-      })
-    }
+      });
+    };
 
     // Handler for value change
     const handleValueChange = (value: string) => {
       onUpdate({
         ...rule,
         value,
-      })
-    }
+      });
+    };
 
     return (
       <div
         ref={ref}
         className={cn(
           // Base container styles
-          'flex items-center',
-          'py-4',
-          className
+          "flex items-center",
+          "py-4",
+          className,
         )}
       >
         {/* Category Pill - fixed width container */}
@@ -118,7 +119,7 @@ export const RuleRow = React.forwardRef<HTMLDivElement, RuleRowProps>(
 
         {/* Value Input/Dropdown */}
         <div className="w-96 flex-shrink-0 ml-3">
-          {selectedAttribute?.valueType === 'select' && valueOptions.length > 0 ? (
+          {selectedAttribute?.valueType === "select" && valueOptions.length > 0 ? (
             <Dropdown
               items={valueOptions}
               value={rule.value}
@@ -131,7 +132,7 @@ export const RuleRow = React.forwardRef<HTMLDivElement, RuleRowProps>(
             />
           ) : (
             <Input
-              type={selectedAttribute?.valueType === 'number' ? 'number' : 'text'}
+              type={selectedAttribute?.valueType === "number" ? "number" : "text"}
               value={rule.value}
               onChange={(e) => handleValueChange(e.target.value)}
               placeholder="Enter value..."
@@ -153,8 +154,8 @@ export const RuleRow = React.forwardRef<HTMLDivElement, RuleRowProps>(
           <Trash2 className="h-5 w-5 text-gray-600" />
         </button>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-RuleRow.displayName = 'RuleRow'
+RuleRow.displayName = "RuleRow";

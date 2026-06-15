@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { Button, Search } from '@contentstack/venuscn'
-import { HelpCircle, Pencil, Plus, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
+import { Button, Search } from "@contentstack/venuscn";
+import { HelpCircle, Pencil, Plus, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
 export default function StackDashboardPage() {
   return (
@@ -52,7 +52,8 @@ export default function StackDashboardPage() {
             <div className="flex-1">
               <h4 className="font-semibold mb-2">Updated App Experience</h4>
               <p className="text-sm text-white/90">
-                Discover the latest features and improvements to enhance your content management workflow.
+                Discover the latest features and improvements to enhance your content management
+                workflow.
               </p>
             </div>
             <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/20">
@@ -75,11 +76,10 @@ export default function StackDashboardPage() {
               <h3 className="text-lg font-semibold text-[--color-title]">Contentstack Academy</h3>
             </div>
             <div className="flex-1">
-              <h4 className="font-semibold text-[--color-heading] mb-2">
-                Omni-Channel Demo
-              </h4>
+              <h4 className="font-semibold text-[--color-heading] mb-2">Omni-Channel Demo</h4>
               <p className="text-sm text-[--color-body]">
-                Learn how to build powerful omni-channel experiences with our comprehensive tutorials.
+                Learn how to build powerful omni-channel experiences with our comprehensive
+                tutorials.
               </p>
             </div>
             <div className="flex items-center justify-between mt-4 pt-4 border-t border-[--color-border]">
@@ -104,10 +104,7 @@ export default function StackDashboardPage() {
       {/* Help Section */}
       <div className="bg-white rounded border border-[--color-border] p-6">
         <div className="mb-4">
-          <Search
-            placeholder="Search help content"
-            className="w-full"
-          />
+          <Search placeholder="Search help content" className="w-full" />
         </div>
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -131,5 +128,5 @@ export default function StackDashboardPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

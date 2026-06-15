@@ -1,28 +1,35 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { cn } from '../lib/utils'
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, ZoomIn, Maximize2 } from 'lucide-react'
+import * as React from "react";
+import { cn } from "../lib/utils";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  ZoomIn,
+  Maximize2,
+} from "lucide-react";
 
 export interface TablePaginationProps {
   /** Current page number (1-indexed). @default 1 */
-  currentPage?: number
+  currentPage?: number;
   /** Total number of records across all pages. @default 0 */
-  totalRecords?: number
+  totalRecords?: number;
   /** Number of records displayed per page. @default 100 */
-  recordsPerPage?: number
+  recordsPerPage?: number;
   /** Override for the first record index displayed (1-indexed). Auto-calculated if omitted. */
-  startIndex?: number
+  startIndex?: number;
   /** Override for the last record index displayed (1-indexed). Auto-calculated if omitted. */
-  endIndex?: number
+  endIndex?: number;
   /** Callback fired with the new page number (1-indexed) when the user navigates. */
-  onPageChange?: (page: number) => void
+  onPageChange?: (page: number) => void;
   /** Callback fired with the new page size when the user changes the records-per-page dropdown. */
-  onRecordsPerPageChange?: (recordsPerPage: number) => void
+  onRecordsPerPageChange?: (recordsPerPage: number) => void;
   /** Options shown in the records-per-page dropdown. @default [10, 25, 50, 100] */
-  recordsPerPageOptions?: number[]
+  recordsPerPageOptions?: number[];
   /** Additional CSS class names for the pagination container. */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -45,47 +52,47 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Calculate start and end indices if not provided
-    const calculatedStartIndex = startIndex ?? (currentPage - 1) * recordsPerPage + 1
-    const calculatedEndIndex = endIndex ?? Math.min(currentPage * recordsPerPage, totalRecords)
-    const totalPages = Math.ceil(totalRecords / recordsPerPage)
+    const calculatedStartIndex = startIndex ?? (currentPage - 1) * recordsPerPage + 1;
+    const calculatedEndIndex = endIndex ?? Math.min(currentPage * recordsPerPage, totalRecords);
+    const totalPages = Math.ceil(totalRecords / recordsPerPage);
 
     const handleFirstPage = () => {
       if (currentPage > 1 && onPageChange) {
-        onPageChange(1)
+        onPageChange(1);
       }
-    }
+    };
 
     const handlePrevPage = () => {
       if (currentPage > 1 && onPageChange) {
-        onPageChange(currentPage - 1)
+        onPageChange(currentPage - 1);
       }
-    }
+    };
 
     const handleNextPage = () => {
       if (currentPage < totalPages && onPageChange) {
-        onPageChange(currentPage + 1)
+        onPageChange(currentPage + 1);
       }
-    }
+    };
 
     const handleLastPage = () => {
       if (currentPage < totalPages && onPageChange) {
-        onPageChange(totalPages)
+        onPageChange(totalPages);
       }
-    }
+    };
 
     return (
       <div
         ref={ref}
         className={cn(
           // Container styles
-          'flex items-center justify-between',
-          'h-14 px-4',
-          'bg-white',
-          'border-t border-gray-200',
-          className
+          "flex items-center justify-between",
+          "h-14 px-4",
+          "bg-white",
+          "border-t border-gray-200",
+          className,
         )}
         {...props}
       >
@@ -107,7 +114,8 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
           </select>
 
           <span className="text-sm text-gray-600">
-            | {calculatedStartIndex} to {calculatedEndIndex} of {totalRecords} {totalRecords === 1 ? 'record' : 'records'}
+            | {calculatedStartIndex} to {calculatedEndIndex} of {totalRecords}{" "}
+            {totalRecords === 1 ? "record" : "records"}
           </span>
         </div>
 
@@ -118,10 +126,10 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
             onClick={handleFirstPage}
             disabled={currentPage === 1}
             className={cn(
-              'w-9 h-9 rounded-full flex items-center justify-center',
-              'text-gray-600 hover:bg-gray-100',
-              'disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent',
-              'transition-colors'
+              "w-9 h-9 rounded-full flex items-center justify-center",
+              "text-gray-600 hover:bg-gray-100",
+              "disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent",
+              "transition-colors",
             )}
             aria-label="First page"
           >
@@ -133,10 +141,10 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
             onClick={handlePrevPage}
             disabled={currentPage === 1}
             className={cn(
-              'w-9 h-9 rounded-full flex items-center justify-center',
-              'text-gray-600 hover:bg-gray-100',
-              'disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent',
-              'transition-colors'
+              "w-9 h-9 rounded-full flex items-center justify-center",
+              "text-gray-600 hover:bg-gray-100",
+              "disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent",
+              "transition-colors",
             )}
             aria-label="Previous page"
           >
@@ -151,9 +159,9 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
               max={totalPages}
               value={currentPage}
               onChange={(e) => {
-                const page = Number(e.target.value)
+                const page = Number(e.target.value);
                 if (page >= 1 && page <= totalPages && onPageChange) {
-                  onPageChange(page)
+                  onPageChange(page);
                 }
               }}
               className="w-16 h-8 px-2 text-center rounded border border-gray-300 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
@@ -165,10 +173,10 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
             className={cn(
-              'w-9 h-9 rounded-full flex items-center justify-center',
-              'text-gray-600 hover:bg-gray-100',
-              'disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent',
-              'transition-colors'
+              "w-9 h-9 rounded-full flex items-center justify-center",
+              "text-gray-600 hover:bg-gray-100",
+              "disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent",
+              "transition-colors",
             )}
             aria-label="Next page"
           >
@@ -180,10 +188,10 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
             onClick={handleLastPage}
             disabled={currentPage === totalPages}
             className={cn(
-              'w-9 h-9 rounded-full flex items-center justify-center',
-              'text-gray-600 hover:bg-gray-100',
-              'disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent',
-              'transition-colors'
+              "w-9 h-9 rounded-full flex items-center justify-center",
+              "text-gray-600 hover:bg-gray-100",
+              "disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent",
+              "transition-colors",
             )}
             aria-label="Last page"
           >
@@ -193,9 +201,9 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
           {/* Zoom button */}
           <button
             className={cn(
-              'w-9 h-9 rounded-full flex items-center justify-center',
-              'text-white bg-gray-600 hover:bg-gray-700',
-              'transition-colors'
+              "w-9 h-9 rounded-full flex items-center justify-center",
+              "text-white bg-gray-600 hover:bg-gray-700",
+              "transition-colors",
             )}
             aria-label="Zoom"
           >
@@ -205,9 +213,9 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
           {/* Maximize button */}
           <button
             className={cn(
-              'w-9 h-9 rounded-full flex items-center justify-center',
-              'text-white bg-gray-600 hover:bg-gray-700',
-              'transition-colors'
+              "w-9 h-9 rounded-full flex items-center justify-center",
+              "text-white bg-gray-600 hover:bg-gray-700",
+              "transition-colors",
             )}
             aria-label="Maximize"
           >
@@ -215,8 +223,8 @@ export const TablePagination = React.forwardRef<HTMLDivElement, TablePaginationP
           </button>
         </div>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-TablePagination.displayName = 'TablePagination'
+TablePagination.displayName = "TablePagination";

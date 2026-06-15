@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { HelpCircle } from 'lucide-react'
-import Image from 'next/image'
+import * as React from "react";
+import { HelpCircle } from "lucide-react";
+import Image from "next/image";
 import {
   SearchV3,
   Table,
@@ -14,31 +14,31 @@ import {
   TableActionButton,
   Button,
   Dropdown,
-  StatusPill
-} from '@contentstack/venuscn'
-import { mockExperiences, type Experience } from '@/data/experiences'
-import { cn } from '@/lib/utils'
+  StatusPill,
+} from "@contentstack/venuscn";
+import { mockExperiences, type Experience } from "@/data/experiences";
+import { cn } from "@/lib/utils";
 
 export default function ExperiencesPage() {
-  const [searchValue, setSearchValue] = React.useState('')
-  const [currentPage, setCurrentPage] = React.useState(1)
-  const [recordsPerPage, setRecordsPerPage] = React.useState(100)
+  const [searchValue, setSearchValue] = React.useState("");
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [recordsPerPage, setRecordsPerPage] = React.useState(100);
 
-  const totalRecords = mockExperiences.length
-  const startRecord = (currentPage - 1) * recordsPerPage + 1
-  const endRecord = Math.min(currentPage * recordsPerPage, totalRecords)
+  const totalRecords = mockExperiences.length;
+  const startRecord = (currentPage - 1) * recordsPerPage + 1;
+  const endRecord = Math.min(currentPage * recordsPerPage, totalRecords);
 
   const handlePrioritizeExperiences = () => {
     // TODO: Implement experience prioritization
-  }
+  };
 
   const handleNewExperience = () => {
     // TODO: Implement new experience creation
-  }
+  };
 
   const handleCopyUid = (uid: string) => {
-    navigator.clipboard.writeText(uid)
-  }
+    navigator.clipboard.writeText(uid);
+  };
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
@@ -53,7 +53,13 @@ export default function ExperiencesPage() {
             Prioritize Experiences
           </Button>
           <Button variant="primary" size="regular" onClick={handleNewExperience} className="h-10">
-            <Image src="/images/plus.svg" alt="" width={24} height={24} className="invert brightness-0" />
+            <Image
+              src="/images/plus.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="invert brightness-0"
+            />
             New Experience
           </Button>
         </div>
@@ -67,11 +73,17 @@ export default function ExperiencesPage() {
               placeholder="Search experiences"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              onClear={() => setSearchValue('')}
+              onClear={() => setSearchValue("")}
               className="w-[535px]"
             />
             <Button variant="primary" size="regular" className="h-10">
-              <Image src="/images/search.svg" alt="" width={24} height={24} className="invert brightness-0" />
+              <Image
+                src="/images/search.svg"
+                alt=""
+                width={24}
+                height={24}
+                className="invert brightness-0"
+              />
               Search
             </Button>
           </div>
@@ -142,10 +154,13 @@ export default function ExperiencesPage() {
                   <TableCell>
                     <StatusPill
                       status={
-                        experience.status === 'Active' ? 'active' :
-                        experience.status === 'Inactive' ? 'inactive' :
-                        experience.status === 'Draft' ? 'draft' :
-                        'inactive'
+                        experience.status === "Active"
+                          ? "active"
+                          : experience.status === "Inactive"
+                            ? "inactive"
+                            : experience.status === "Draft"
+                              ? "draft"
+                              : "inactive"
                       }
                     >
                       {experience.status}
@@ -158,7 +173,10 @@ export default function ExperiencesPage() {
                   {/* Audiences */}
                   <TableCell>
                     <div className="flex items-center justify-between gap-2">
-                      <span>{experience.audiences} {experience.audiences === 1 ? 'Audience' : 'Audiences'}</span>
+                      <span>
+                        {experience.audiences}{" "}
+                        {experience.audiences === 1 ? "Audience" : "Audiences"}
+                      </span>
                       <button
                         className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0"
                         aria-label="Audience info"
@@ -236,105 +254,112 @@ export default function ExperiencesPage() {
 
         {/* Pagination Footer */}
         <div className="border-t border-gray-200 bg-[#F5F6F8] px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Left: Records per page and count */}
-              <div className="flex items-center gap-4 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium">Showing</span>
-                  <div className="w-28 relative z-10">
-                    <Dropdown
-                      items={[
-                        { label: '25', value: '25' },
-                        { label: '50', value: '50' },
-                        { label: '100', value: '100' }
-                      ]}
-                      value={String(recordsPerPage)}
-                      onChange={(value) => setRecordsPerPage(Number(value))}
-                      version="v2"
-                    />
-                  </div>
-                </div>
-                <div className="h-4 w-px bg-gray-300" />
-                <span className="font-medium">
-                  {startRecord} to {endRecord} of {totalRecords} records
-                </span>
-              </div>
-
-              {/* Right: Pagination controls */}
-              <div className="flex items-center gap-1.5">
-                {/* Previous buttons */}
-                <button
-                  onClick={() => setCurrentPage(1)}
-                  disabled={currentPage === 1}
-                  className={cn(
-                    'w-10 h-10 flex items-center justify-center rounded transition-colors p-2',
-                    currentPage === 1
-                      ? 'text-gray-400 cursor-not-allowed opacity-40'
-                      : 'text-[#475161] hover:bg-gray-100'
-                  )}
-                  aria-label="First page"
-                >
-                  <Image src="/images/pagination-first.svg" alt="" width={32} height={32} />
-                </button>
-                <button
-                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                  disabled={currentPage === 1}
-                  className={cn(
-                    'w-10 h-10 flex items-center justify-center rounded transition-colors p-2',
-                    currentPage === 1
-                      ? 'text-gray-400 cursor-not-allowed opacity-40'
-                      : 'text-[#475161] hover:bg-gray-100'
-                  )}
-                  aria-label="Previous page"
-                >
-                  <Image src="/images/pagination-previous.svg" alt="" width={32} height={32} />
-                </button>
-
-                {/* Page number dropdown */}
-                <div className="w-[105px]">
+          <div className="flex items-center justify-between">
+            {/* Left: Records per page and count */}
+            <div className="flex items-center gap-4 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Showing</span>
+                <div className="w-28 relative z-10">
                   <Dropdown
-                    items={Array.from({ length: Math.ceil(totalRecords / recordsPerPage) }, (_, i) => ({
-                      label: String(i + 1),
-                      value: String(i + 1)
-                    }))}
-                    value={String(currentPage)}
-                    onChange={(value) => setCurrentPage(Number(value))}
+                    items={[
+                      { label: "25", value: "25" },
+                      { label: "50", value: "50" },
+                      { label: "100", value: "100" },
+                    ]}
+                    value={String(recordsPerPage)}
+                    onChange={(value) => setRecordsPerPage(Number(value))}
                     version="v2"
-                    disabled={Math.ceil(totalRecords / recordsPerPage) === 1}
                   />
                 </div>
-
-                {/* Next buttons */}
-                <button
-                  onClick={() => setCurrentPage(Math.min(Math.ceil(totalRecords / recordsPerPage), currentPage + 1))}
-                  disabled={currentPage >= Math.ceil(totalRecords / recordsPerPage)}
-                  className={cn(
-                    'w-10 h-10 flex items-center justify-center rounded transition-colors p-2',
-                    currentPage >= Math.ceil(totalRecords / recordsPerPage)
-                      ? 'text-gray-400 cursor-not-allowed opacity-40'
-                      : 'text-[#475161] hover:bg-gray-100'
-                  )}
-                  aria-label="Next page"
-                >
-                  <Image src="/images/pagination-next.svg" alt="" width={32} height={32} />
-                </button>
-                <button
-                  onClick={() => setCurrentPage(Math.ceil(totalRecords / recordsPerPage))}
-                  disabled={currentPage >= Math.ceil(totalRecords / recordsPerPage)}
-                  className={cn(
-                    'w-10 h-10 flex items-center justify-center rounded transition-colors p-2',
-                    currentPage >= Math.ceil(totalRecords / recordsPerPage)
-                      ? 'text-gray-400 cursor-not-allowed opacity-40'
-                      : 'text-[#475161] hover:bg-gray-100'
-                  )}
-                  aria-label="Last page"
-                >
-                  <Image src="/images/pagination-last.svg" alt="" width={32} height={32} />
-                </button>
               </div>
+              <div className="h-4 w-px bg-gray-300" />
+              <span className="font-medium">
+                {startRecord} to {endRecord} of {totalRecords} records
+              </span>
+            </div>
+
+            {/* Right: Pagination controls */}
+            <div className="flex items-center gap-1.5">
+              {/* Previous buttons */}
+              <button
+                onClick={() => setCurrentPage(1)}
+                disabled={currentPage === 1}
+                className={cn(
+                  "w-10 h-10 flex items-center justify-center rounded transition-colors p-2",
+                  currentPage === 1
+                    ? "text-gray-400 cursor-not-allowed opacity-40"
+                    : "text-[#475161] hover:bg-gray-100",
+                )}
+                aria-label="First page"
+              >
+                <Image src="/images/pagination-first.svg" alt="" width={32} height={32} />
+              </button>
+              <button
+                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className={cn(
+                  "w-10 h-10 flex items-center justify-center rounded transition-colors p-2",
+                  currentPage === 1
+                    ? "text-gray-400 cursor-not-allowed opacity-40"
+                    : "text-[#475161] hover:bg-gray-100",
+                )}
+                aria-label="Previous page"
+              >
+                <Image src="/images/pagination-previous.svg" alt="" width={32} height={32} />
+              </button>
+
+              {/* Page number dropdown */}
+              <div className="w-[105px]">
+                <Dropdown
+                  items={Array.from(
+                    { length: Math.ceil(totalRecords / recordsPerPage) },
+                    (_, i) => ({
+                      label: String(i + 1),
+                      value: String(i + 1),
+                    }),
+                  )}
+                  value={String(currentPage)}
+                  onChange={(value) => setCurrentPage(Number(value))}
+                  version="v2"
+                  disabled={Math.ceil(totalRecords / recordsPerPage) === 1}
+                />
+              </div>
+
+              {/* Next buttons */}
+              <button
+                onClick={() =>
+                  setCurrentPage(
+                    Math.min(Math.ceil(totalRecords / recordsPerPage), currentPage + 1),
+                  )
+                }
+                disabled={currentPage >= Math.ceil(totalRecords / recordsPerPage)}
+                className={cn(
+                  "w-10 h-10 flex items-center justify-center rounded transition-colors p-2",
+                  currentPage >= Math.ceil(totalRecords / recordsPerPage)
+                    ? "text-gray-400 cursor-not-allowed opacity-40"
+                    : "text-[#475161] hover:bg-gray-100",
+                )}
+                aria-label="Next page"
+              >
+                <Image src="/images/pagination-next.svg" alt="" width={32} height={32} />
+              </button>
+              <button
+                onClick={() => setCurrentPage(Math.ceil(totalRecords / recordsPerPage))}
+                disabled={currentPage >= Math.ceil(totalRecords / recordsPerPage)}
+                className={cn(
+                  "w-10 h-10 flex items-center justify-center rounded transition-colors p-2",
+                  currentPage >= Math.ceil(totalRecords / recordsPerPage)
+                    ? "text-gray-400 cursor-not-allowed opacity-40"
+                    : "text-[#475161] hover:bg-gray-100",
+                )}
+                aria-label="Last page"
+              >
+                <Image src="/images/pagination-last.svg" alt="" width={32} height={32} />
+              </button>
             </div>
           </div>
         </div>
+      </div>
     </div>
-  )
+  );
 }

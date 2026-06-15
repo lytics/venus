@@ -2,7 +2,15 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command";
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from "@/components/ui/command";
 import { Badge } from "@/components/ui/badge";
 import {
   LineChart,
@@ -20,7 +28,7 @@ import {
   Code,
   Bug,
   Atom,
-  LayoutDashboard
+  LayoutDashboard,
 } from "lucide-react";
 
 interface CommandPaletteContextType {
@@ -46,7 +54,7 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
   const router = useRouter();
 
   const toggle = React.useCallback(() => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
   }, []);
 
   const setTableBuilderHandlerCallback = React.useCallback((handler: () => void) => {
@@ -67,21 +75,26 @@ export function CommandPaletteProvider({ children }: { children: React.ReactNode
     return () => document.removeEventListener("keydown", down);
   }, [toggle]);
 
-  const handleSelect = React.useCallback((href?: string) => {
-    setIsOpen(false);
-    if (href) {
-      router.push(href);
-    }
-  }, [router]);
+  const handleSelect = React.useCallback(
+    (href?: string) => {
+      setIsOpen(false);
+      if (href) {
+        router.push(href);
+      }
+    },
+    [router],
+  );
 
   return (
-    <CommandPaletteContext.Provider value={{
-      isOpen,
-      setIsOpen,
-      toggle,
-      onTableBuilderRequest: tableBuilderHandler,
-      setTableBuilderHandler: setTableBuilderHandlerCallback
-    }}>
+    <CommandPaletteContext.Provider
+      value={{
+        isOpen,
+        setIsOpen,
+        toggle,
+        onTableBuilderRequest: tableBuilderHandler,
+        setTableBuilderHandler: setTableBuilderHandlerCallback,
+      }}
+    >
       {children}
 
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>

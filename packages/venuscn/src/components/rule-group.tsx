@@ -1,63 +1,63 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { Users, Smartphone, MapPin, Clock, Trash2 } from 'lucide-react'
-import { cn } from '../lib/utils'
-import { RuleRow } from './rule-row'
-import { Dropdown } from './dropdown'
-import { Button } from './button'
-import { Pill } from './pills'
-import { RuleGroup as RuleGroupType, Rule, Category } from '../types/targeting-rules'
+import * as React from "react";
+import { Users, Smartphone, MapPin, Clock, Trash2 } from "lucide-react";
+import { cn } from "../lib/utils";
+import { RuleRow } from "./rule-row";
+import { Dropdown } from "./dropdown";
+import { Button } from "./button";
+import { Pill } from "./pills";
+import { RuleGroup as RuleGroupType, Rule, Category } from "../types/targeting-rules";
 
 export interface RuleGroupProps {
   /** The rule group data */
-  group: RuleGroupType
+  group: RuleGroupType;
   /** Group number for display (1, 2, 3, etc.) */
-  groupNumber: number
+  groupNumber: number;
   /** Handler when group is updated */
-  onUpdate: (group: RuleGroupType) => void
+  onUpdate: (group: RuleGroupType) => void;
   /** Handler when group is deleted */
-  onDelete: () => void
+  onDelete: () => void;
   /** Handler when a rule is added with specific category */
-  onAddRule: (category: Category) => void
+  onAddRule: (category: Category) => void;
   /** Optional custom className */
-  className?: string
+  className?: string;
 }
 
 export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
   ({ group, groupNumber, onUpdate, onDelete, onAddRule, className }, ref) => {
     // Match type dropdown items
     const matchTypeItems = [
-      { label: 'Match ALL conditions', value: 'all' },
-      { label: 'Match ANY condition', value: 'any' },
-    ]
+      { label: "Match ALL conditions", value: "all" },
+      { label: "Match ANY condition", value: "any" },
+    ];
 
     // Handler for match type change
     const handleMatchTypeChange = (value: string) => {
       onUpdate({
         ...group,
-        matchType: value as 'all' | 'any',
-      })
-    }
+        matchType: value as "all" | "any",
+      });
+    };
 
     // Handler for rule update
     const handleRuleUpdate = (ruleId: string, updatedRule: Rule) => {
       onUpdate({
         ...group,
-        rules: group.rules.map(r => r.id === ruleId ? updatedRule : r),
-      })
-    }
+        rules: group.rules.map((r) => (r.id === ruleId ? updatedRule : r)),
+      });
+    };
 
     // Handler for rule deletion
     const handleRuleDelete = (ruleId: string) => {
       onUpdate({
         ...group,
-        rules: group.rules.filter(r => r.id !== ruleId),
-      })
-    }
+        rules: group.rules.filter((r) => r.id !== ruleId),
+      });
+    };
 
     return (
-      <div ref={ref} className={cn('space-y-3', className)}>
+      <div ref={ref} className={cn("space-y-3", className)}>
         {/* Header: Group Label + Delete - Outside the card */}
         <div className="flex items-center gap-2">
           {/* Group Label */}
@@ -79,13 +79,13 @@ export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
         <div
           className={cn(
             // Border container
-            'border border-gray-200',
-            'rounded-lg',
-            'p-6',
-            'bg-white',
+            "border border-gray-200",
+            "rounded-lg",
+            "p-6",
+            "bg-white",
             // Focus-within state - shows shadow when any child element is focused
-            'focus-within:shadow-lg',
-            'transition-shadow duration-150'
+            "focus-within:shadow-lg",
+            "transition-shadow duration-150",
           )}
         >
           {/* Match Type Dropdown */}
@@ -120,60 +120,60 @@ export const RuleGroup = React.forwardRef<HTMLDivElement, RuleGroupProps>(
             )}
           </div>
 
-        {/* Add Rule Buttons */}
-        <div className="flex items-center gap-3 flex-wrap">
-          <Button
-            variant="ghost"
-            size="regular"
-            onClick={() => onAddRule('audience')}
-            className="!text-primary hover:!bg-gray-100"
-          >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-audience-bg">
-              <Users className="h-4 w-4 text-category-audience" />
-            </div>
-            Add Audience Target
-          </Button>
+          {/* Add Rule Buttons */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <Button
+              variant="ghost"
+              size="regular"
+              onClick={() => onAddRule("audience")}
+              className="!text-primary hover:!bg-gray-100"
+            >
+              <div className="flex items-center justify-center w-6 h-6 rounded bg-category-audience-bg">
+                <Users className="h-4 w-4 text-category-audience" />
+              </div>
+              Add Audience Target
+            </Button>
 
-          <Button
-            variant="ghost"
-            size="regular"
-            onClick={() => onAddRule('device')}
-            className="!text-primary hover:!bg-gray-100"
-          >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-device-bg">
-              <Smartphone className="h-4 w-4 text-success" />
-            </div>
-            Add Device Target
-          </Button>
+            <Button
+              variant="ghost"
+              size="regular"
+              onClick={() => onAddRule("device")}
+              className="!text-primary hover:!bg-gray-100"
+            >
+              <div className="flex items-center justify-center w-6 h-6 rounded bg-category-device-bg">
+                <Smartphone className="h-4 w-4 text-success" />
+              </div>
+              Add Device Target
+            </Button>
 
-          <Button
-            variant="ghost"
-            size="regular"
-            onClick={() => onAddRule('geographic')}
-            className="!text-primary hover:!bg-gray-100"
-          >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-location-bg">
-              <MapPin className="h-4 w-4 text-orange" />
-            </div>
-            Add Geographic Target
-          </Button>
+            <Button
+              variant="ghost"
+              size="regular"
+              onClick={() => onAddRule("geographic")}
+              className="!text-primary hover:!bg-gray-100"
+            >
+              <div className="flex items-center justify-center w-6 h-6 rounded bg-category-location-bg">
+                <MapPin className="h-4 w-4 text-orange" />
+              </div>
+              Add Geographic Target
+            </Button>
 
-          <Button
-            variant="ghost"
-            size="regular"
-            onClick={() => onAddRule('temporal')}
-            className="!text-primary hover:!bg-gray-100"
-          >
-            <div className="flex items-center justify-center w-6 h-6 rounded bg-category-time-bg">
-              <Clock className="h-4 w-4 text-purple" />
-            </div>
-            Add Time/Date Target
-          </Button>
-        </div>
+            <Button
+              variant="ghost"
+              size="regular"
+              onClick={() => onAddRule("temporal")}
+              className="!text-primary hover:!bg-gray-100"
+            >
+              <div className="flex items-center justify-center w-6 h-6 rounded bg-category-time-bg">
+                <Clock className="h-4 w-4 text-purple" />
+              </div>
+              Add Time/Date Target
+            </Button>
+          </div>
         </div>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-RuleGroup.displayName = 'RuleGroup'
+RuleGroup.displayName = "RuleGroup";
