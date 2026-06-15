@@ -1,6 +1,6 @@
 # @contentstack/venuscn
 
-Production-ready Venus Design System components built with Tailwind CSS v4 and shadcn/ui, matching Contentstack's app.contentstack.com design specifications.
+Venus Design System components built with Tailwind CSS v4 and shadcn/ui, matching Contentstack's app.contentstack.com design specifications.
 
 ## Installation
 

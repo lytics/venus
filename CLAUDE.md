@@ -37,7 +37,7 @@ git add 'apps/demo/src/app/(app)/page.tsx'
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 venus_external/
@@ -62,7 +62,7 @@ venus_external/
 
 ---
 
-## 🛠️ Commands
+## Commands
 
 Run from the **root directory**:
 
@@ -86,9 +86,9 @@ pnpm lint       # Run ESLint
 
 ---
 
-## 📦 Venus Component Library
+## Venus Component Library
 
-The `@contentstack/venuscn` package contains **27 production-ready components** matching app.contentstack.com.
+The `@contentstack/venuscn` package contains **27 components** matching app.contentstack.com.
 
 ### Available Components
 
@@ -119,7 +119,7 @@ For complete API documentation, see: `packages/venuscn/README.md`
 
 ---
 
-## 🎨 Design Tokens
+## Design Tokens
 
 Import Venus styles in your CSS:
 
@@ -136,7 +136,7 @@ Key tokens available:
 
 ---
 
-## ⚡ Working in the Demo App
+## Working in the Demo App
 
 When adding pages or features to `apps/demo/`:
 
@@ -210,7 +210,7 @@ When rebuilding vacuum captures, the workflow will:
 
 ---
 
-## 🔗 Quick Reference
+## Quick Reference
 
 | What | Where |
 |------|-------|
@@ -223,7 +223,7 @@ When rebuilding vacuum captures, the workflow will:
 
 ---
 
-## 📋 Building UI - Quick Checklist
+## Building UI - Quick Checklist
 
 When building UI in this monorepo:
 

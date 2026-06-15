@@ -28,7 +28,7 @@ For the full component list: `packages/venuscn/README.md`
 
 ---
 
-## 🛠️ Commands
+## Commands
 
 ```bash
 pnpm dev        # Start dev server (Turbopack) on localhost:3000
@@ -38,7 +38,7 @@ pnpm lint       # Run ESLint
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 apps/demo/src/
@@ -66,7 +66,7 @@ apps/demo/src/
 
 ---
 
-## 🎯 When to Use What
+## When to Use What
 
 | Need | Use | Import From |
 |------|-----|-------------|
@@ -79,7 +79,7 @@ apps/demo/src/
 
 ---
 
-## 📝 Common Patterns
+## Common Patterns
 
 ### Creating a New Page
 
@@ -207,7 +207,7 @@ export function TabbedContent() {
 
 ---
 
-## 🎨 Styling Guidelines
+## Styling Guidelines
 
 ### Design Tokens
 Venus tokens are imported via `globals.css`. Use them for consistency:
@@ -234,7 +234,7 @@ Venus tokens are imported via `globals.css`. Use them for consistency:
 
 ---
 
-## ⚙️ Path Aliases
+## Path Aliases
 
 ```tsx
 @/components  → src/components
@@ -245,7 +245,7 @@ Venus tokens are imported via `globals.css`. Use them for consistency:
 
 ---
 
-## 📋 Building UI - Quick Reference
+## Building UI - Quick Reference
 
 When building UI in this demo app:
 

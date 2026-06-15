@@ -191,7 +191,7 @@ pnpm --filter demo build                     # Build demo app
 
 ## What You Get
 
-**Production-Ready Components:**
+**Components:**
 - Form controls (Button, Input, Checkbox, Radio, Toggle, Dropdown)
 - Data display (Table, Search, Tags, Pills)
 - Navigation (Tabs, PageHeader variants)

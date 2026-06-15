@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "@contentstack/venuscn",
-  "description": "Venus Design System — Contentstack production UI components built on Tailwind CSS v4 + Radix UI",
+  "description": "Venus Design System components built with Tailwind CSS v4 and Radix UI",
   "homepage": "https://github.com/contentstack/venus",
   "license": "MIT",
   "style": "default",
