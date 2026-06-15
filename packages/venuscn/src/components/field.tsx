@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AlertCircle, CheckCircle, AlertTriangle } from "lucide-react";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 
 /**
  * Venus Design System Field Components
@@ -23,22 +23,15 @@ export const FieldLabel = React.forwardRef<HTMLLabelElement, FieldLabelProps>(
     return (
       <label
         ref={ref}
-        className={cn(
-          "text-sm font-semibold text-gray-800 leading-normal pl-1",
-          className
-        )}
+        className={cn("text-sm font-semibold text-gray-800 leading-normal pl-1", className)}
         {...props}
       >
         {children}
-        {required && (
-          <span className="text-hint text-sm font-normal ml-2">(required)</span>
-        )}
-        {optional && (
-          <span className="text-hint text-sm font-normal ml-2">(optional)</span>
-        )}
+        {required && <span className="text-hint text-sm font-normal ml-2">(required)</span>}
+        {optional && <span className="text-hint text-sm font-normal ml-2">(optional)</span>}
       </label>
     );
-  }
+  },
 );
 
 FieldLabel.displayName = "FieldLabel";
@@ -53,16 +46,13 @@ export const HelpText = React.forwardRef<HTMLParagraphElement, HelpTextProps>(
     return (
       <p
         ref={ref}
-        className={cn(
-          "text-[13px] font-normal text-gray-600 leading-normal mt-1",
-          className
-        )}
+        className={cn("text-[13px] font-normal text-gray-600 leading-normal mt-1", className)}
         {...props}
       >
         {children}
       </p>
     );
-  }
+  },
 );
 
 HelpText.displayName = "HelpText";
@@ -92,7 +82,7 @@ export const ValidationMessage = React.forwardRef<HTMLDivElement, ValidationMess
           type === "error" && "text-danger",
           type === "success" && "text-success",
           type === "warning" && "text-warning",
-          className
+          className,
         )}
         {...props}
       >
@@ -100,7 +90,7 @@ export const ValidationMessage = React.forwardRef<HTMLDivElement, ValidationMess
         <span>{children}</span>
       </div>
     );
-  }
+  },
 );
 
 ValidationMessage.displayName = "ValidationMessage";
@@ -113,15 +103,11 @@ export interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("flex flex-col gap-1.5 w-full mb-4", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("flex flex-col gap-1.5 w-full mb-4", className)} {...props}>
         {children}
       </div>
     );
-  }
+  },
 );
 
 Field.displayName = "Field";

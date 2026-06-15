@@ -1,9 +1,7 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 
-/** Venus Design System Radio Component */
-
-export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   /** Optional text label displayed to the right of the radio button. 16px, normal weight.
    * Use the same `name` prop on multiple Radio components to group them.
    */
@@ -53,7 +51,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
               "disabled:bg-surface-gray disabled:border-gray-300 disabled:cursor-not-allowed",
               "disabled:after:bg-gray-400",
 
-              className
+              className,
             )}
             {...props}
           />
@@ -63,7 +61,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
             htmlFor={radioId}
             className={cn(
               "text-base font-normal text-ink cursor-pointer select-none",
-              disabled && "text-gray-500 cursor-not-allowed"
+              disabled && "text-gray-500 cursor-not-allowed",
             )}
           >
             {label}
@@ -71,7 +69,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Radio.displayName = "Radio";

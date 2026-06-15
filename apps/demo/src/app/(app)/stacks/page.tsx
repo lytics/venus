@@ -1,47 +1,47 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { useRouter } from 'next/navigation'
-import { Plus } from 'lucide-react'
-import { PageSearchHeader } from '@contentstack/venuscn'
-import { StackCard } from '@/components/stack-card'
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { Plus } from "lucide-react";
+import { PageSearchHeader } from "@contentstack/venuscn";
+import { StackCard } from "@/components/stack-card";
 
 // Helper function to slugify stack names
 function slugify(text: string): string {
   return text
     .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "");
 }
 
 export default function StacksPage() {
-  const router = useRouter()
-  const [searchValue, setSearchValue] = React.useState('')
+  const router = useRouter();
+  const [searchValue, setSearchValue] = React.useState("");
 
   const handleNewStack = () => {
     // TODO: Implement stack creation
-  }
+  };
 
   const handleStackClick = (stackName: string) => {
-    const slug = slugify(stackName)
-    router.push(`/stacks/${slug}`)
-  }
+    const slug = slugify(stackName);
+    router.push(`/stacks/${slug}`);
+  };
 
   // Sample stack data
   const stacks = [
     {
-      name: 'Compass Starter',
-      branch: 'main',
+      name: "Compass Starter",
+      branch: "main",
       envCount: 2,
-      modifiedDate: 'Dec 09, 2024'
+      modifiedDate: "Dec 09, 2024",
     },
     {
-      name: 'Ford Pro',
-      branch: 'main',
+      name: "Ford Pro",
+      branch: "main",
       envCount: 3,
-      modifiedDate: 'Nov 15, 2024'
-    }
-  ]
+      modifiedDate: "Nov 15, 2024",
+    },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -51,11 +51,11 @@ export default function StacksPage() {
         searchPlaceholder="Search stacks"
         searchValue={searchValue}
         onSearchChange={(e) => setSearchValue(e.target.value)}
-        onSearchClear={() => setSearchValue('')}
+        onSearchClear={() => setSearchValue("")}
         action={{
-          label: 'New Stack',
+          label: "New Stack",
           icon: <Plus className="h-5 w-5" />,
-          onClick: handleNewStack
+          onClick: handleNewStack,
         }}
       />
 
@@ -76,5 +76,5 @@ export default function StacksPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

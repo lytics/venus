@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 
 /** Venus Design System Tag Component V2 */
 
@@ -34,17 +34,12 @@ export const Tag = React.forwardRef<HTMLDivElement, TagProps>(
           // Disabled state
           disabled && "opacity-50 cursor-not-allowed",
 
-          className
+          className,
         )}
         {...props}
       >
         {/* Text content with padding */}
-        <span className={cn(
-          "px-[5px]",
-          disabled && "pointer-events-none"
-        )}>
-          {children}
-        </span>
+        <span className={cn("px-[5px]", disabled && "pointer-events-none")}>{children}</span>
 
         {/* Close button - only shown when removable */}
         {removable && (
@@ -61,7 +56,7 @@ export const Tag = React.forwardRef<HTMLDivElement, TagProps>(
               "focus:outline-none",
               // Close button specific hover state (darker than wrapper hover)
               !disabled && "hover:!bg-heading",
-              disabled && "cursor-not-allowed"
+              disabled && "cursor-not-allowed",
             )}
             aria-label="Remove tag"
           >
@@ -79,7 +74,7 @@ export const Tag = React.forwardRef<HTMLDivElement, TagProps>(
                   // Default state - light gray
                   "stroke-placeholder",
                   // Parent wrapper hover makes it white
-                  "group-hover:stroke-white"
+                  "group-hover:stroke-white",
                 )}
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -89,7 +84,7 @@ export const Tag = React.forwardRef<HTMLDivElement, TagProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Tag.displayName = "Tag";

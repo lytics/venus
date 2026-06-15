@@ -1,23 +1,23 @@
-import * as React from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Layers3, Clock } from "lucide-react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Layers3, Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface ProjectCardProps {
   /** Project title */
-  title: string
+  title: string;
   /** Stack name (e.g., "Ford Pro") */
-  stackName: string
+  stackName: string;
   /** Number of active experiences */
-  activeExperiences: number
+  activeExperiences: number;
   /** Number of audiences */
-  audiences: number
+  audiences: number;
   /** Project date */
-  date: string
+  date: string;
   /** Optional click handler */
-  onClick?: () => void
+  onClick?: () => void;
   /** Optional className */
-  className?: string
+  className?: string;
 }
 
 export function ProjectCard({
@@ -27,21 +27,19 @@ export function ProjectCard({
   audiences,
   date,
   onClick,
-  className
+  className,
 }: ProjectCardProps) {
   return (
     <Card
       className={cn(
         "border-default hover:border-hover transition-default cursor-pointer w-80 overflow-hidden p-0 gap-0 hover:shadow-lg",
-        className
+        className,
       )}
       onClick={onClick}
     >
       <div className="px-4 pt-4 pb-3">
         {/* Title */}
-        <h3 className="text-base font-semibold text-title mb-6">
-          {title}
-        </h3>
+        <h3 className="text-base font-semibold text-title mb-6">{title}</h3>
 
         {/* Stack label */}
         <div className="flex items-center gap-1.5 mb-8">
@@ -57,16 +55,12 @@ export function ProjectCard({
         {/* Stats section */}
         <div className="flex items-center divide-x divide-gray-200 mb-1.5">
           <div className="flex-1 pr-4 text-center">
-            <p className="text-sm font-bold text-title mb-1">
-              {activeExperiences}
-            </p>
+            <p className="text-sm font-bold text-title mb-1">{activeExperiences}</p>
             {/* TODO: Add --color-icon-muted token for #697B9B */}
             <p className="text-xs text-[#697B9B] font-medium">Active Experiences</p>
           </div>
           <div className="flex-1 pl-4 text-center">
-            <p className="text-sm font-bold text-title mb-1">
-              {audiences}
-            </p>
+            <p className="text-sm font-bold text-title mb-1">{audiences}</p>
             {/* TODO: Add --color-icon-muted token for #697B9B */}
             <p className="text-xs text-[#697B9B] font-medium">Audiences</p>
           </div>
@@ -80,5 +74,5 @@ export function ProjectCard({
         <span className="text-xs text-[color:var(--color-heading)] font-medium">{date}</span>
       </div>
     </Card>
-  )
+  );
 }

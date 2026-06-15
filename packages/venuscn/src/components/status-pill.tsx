@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 
 /**
  * Venus Design System Status Pill Component
@@ -87,7 +87,7 @@ export const StatusPill = React.forwardRef<HTMLDivElement, StatusPillProps>(
           "rounded-lg", // 8px border radius
           "border",
           styles.container,
-          className
+          className,
         )}
         {...props}
       >
@@ -98,7 +98,7 @@ export const StatusPill = React.forwardRef<HTMLDivElement, StatusPillProps>(
             "w-3 h-3", // 12px x 12px
             "rounded-full",
             "shrink-0",
-            styles.dot
+            styles.dot,
           )}
           aria-hidden="true"
         />
@@ -111,14 +111,14 @@ export const StatusPill = React.forwardRef<HTMLDivElement, StatusPillProps>(
             "font-normal", // 400 weight
             "leading-[21px]",
             "tracking-[0.16px]",
-            "text-heading" // Same text color for all statuses
+            "text-heading", // Same text color for all statuses
           )}
         >
           {displayText}
         </p>
       </div>
     );
-  }
+  },
 );
 
 StatusPill.displayName = "StatusPill";

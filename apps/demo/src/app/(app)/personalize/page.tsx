@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { useRouter } from 'next/navigation'
-import { Plus } from 'lucide-react'
-import { PageSearchHeader } from '@contentstack/venuscn'
-import { ProjectCard } from '@/components/project-card'
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { Plus } from "lucide-react";
+import { PageSearchHeader } from "@contentstack/venuscn";
+import { ProjectCard } from "@/components/project-card";
 
 export default function PersonalizeProjectsPage() {
-  const router = useRouter()
-  const [searchValue, setSearchValue] = React.useState('')
+  const router = useRouter();
+  const [searchValue, setSearchValue] = React.useState("");
 
   const handleNewProject = () => {
     // TODO: Implement project creation
-  }
+  };
 
   const handleProjectClick = () => {
-    router.push('/personalize/experiences')
-  }
+    router.push("/personalize/experiences");
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -26,11 +26,11 @@ export default function PersonalizeProjectsPage() {
         searchPlaceholder="Search projects"
         searchValue={searchValue}
         onSearchChange={(e) => setSearchValue(e.target.value)}
-        onSearchClear={() => setSearchValue('')}
+        onSearchClear={() => setSearchValue("")}
         action={{
-          label: 'New Personalize Project',
+          label: "New Personalize Project",
           icon: <Plus className="h-5 w-5" />,
-          onClick: handleNewProject
+          onClick: handleNewProject,
         }}
       />
 
@@ -49,5 +49,5 @@ export default function PersonalizeProjectsPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

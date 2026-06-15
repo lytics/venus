@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { Info } from 'lucide-react'
-import { cn } from '../lib/utils'
+import * as React from "react";
+import { Info } from "lucide-react";
+import { cn } from "../lib/utils";
 
 export interface FormSidebarProps {
   /** Additional CSS class names for the 72px-wide sidebar with white background and left border.
    * Contains an info icon and separator by default.
    */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -24,12 +24,12 @@ export const FormSidebar = React.forwardRef<HTMLDivElement, FormSidebarProps>(
         ref={ref}
         className={cn(
           // Fixed width and full height
-          'w-[72px] h-full',
+          "w-[72px] h-full",
           // Flex container
-          'flex flex-col items-center',
+          "flex flex-col items-center",
           // White background with left border
-          'bg-white border-l border-border',
-          className
+          "bg-white border-l border-border",
+          className,
         )}
         {...props}
       >
@@ -41,8 +41,8 @@ export const FormSidebar = React.forwardRef<HTMLDivElement, FormSidebarProps>(
         {/* Separator - 32px wide */}
         <div className="w-8 border-t border-border" />
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-FormSidebar.displayName = 'FormSidebar'
+FormSidebar.displayName = "FormSidebar";

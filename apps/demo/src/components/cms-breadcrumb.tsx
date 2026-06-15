@@ -1,16 +1,16 @@
-import * as React from "react"
-import { Building2, GitBranch } from "lucide-react"
+import * as React from "react";
+import { Building2, GitBranch } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
 
 interface CMSBreadcrumbProps {
-  stackName: string
-  branch?: string
+  stackName: string;
+  branch?: string;
 }
 
 export function CMSBreadcrumb({ stackName, branch = "main" }: CMSBreadcrumbProps) {
@@ -34,5 +34,5 @@ export function CMSBreadcrumb({ stackName, branch = "main" }: CMSBreadcrumbProps
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-  )
+  );
 }

@@ -1,10 +1,8 @@
 import * as React from "react";
 import { Check } from "lucide-react";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 
-/** Venus Design System Checkbox Component */
-
-export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   /** Optional text label displayed to the right of the checkbox. 16px, normal weight. */
   label?: string;
 }
@@ -44,7 +42,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               "disabled:bg-surface-gray disabled:border-gray-300 disabled:cursor-not-allowed",
               "disabled:checked:bg-gray-400 disabled:checked:border-gray-400",
 
-              className
+              className,
             )}
             {...props}
           />
@@ -52,7 +50,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             className={cn(
               "absolute w-3 h-3 text-white pointer-events-none",
               "opacity-0 peer-checked:opacity-100",
-              "transition-opacity duration-150"
+              "transition-opacity duration-150",
             )}
           />
         </div>
@@ -61,7 +59,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             htmlFor={checkboxId}
             className={cn(
               "text-base font-normal text-ink cursor-pointer select-none",
-              disabled && "text-gray-500 cursor-not-allowed"
+              disabled && "text-gray-500 cursor-not-allowed",
             )}
           >
             {label}
@@ -69,7 +67,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Checkbox.displayName = "Checkbox";

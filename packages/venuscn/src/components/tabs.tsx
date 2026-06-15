@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 
 /**
  * Venus Design System Tabs — compound component built on Radix UI Tabs.
@@ -41,7 +41,7 @@ const TabsList = React.forwardRef<
       "p-1", // 4px padding inside the border
       "bg-white",
       "border border-primary-muted rounded-3xl", // 24px border radius
-      className
+      className,
     )}
     {...props}
   />
@@ -78,7 +78,7 @@ const TabsTrigger = React.forwardRef<
       // Disabled state
       "disabled:pointer-events-none disabled:opacity-50",
 
-      className
+      className,
     )}
     {...props}
   />
@@ -94,7 +94,7 @@ const TabsContent = React.forwardRef<
     className={cn(
       "mt-4",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2",
-      className
+      className,
     )}
     {...props}
   />

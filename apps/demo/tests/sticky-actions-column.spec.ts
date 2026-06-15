@@ -1,13 +1,15 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('Table sticky Actions column', () => {
-  test('Actions column should stick to right edge when scrolling horizontally - experiences page', async ({ page }) => {
+test.describe("Table sticky Actions column", () => {
+  test("Actions column should stick to right edge when scrolling horizontally - experiences page", async ({
+    page,
+  }) => {
     // Navigate to experiences page
-    await page.goto('http://localhost:3000/personalize/experiences');
-    await page.waitForLoadState('networkidle');
+    await page.goto("http://localhost:3000/personalize/experiences");
+    await page.waitForLoadState("networkidle");
 
     // Find the table container
-    const tableContainer = page.locator('div.overflow-auto').first();
+    const tableContainer = page.locator("div.overflow-auto").first();
 
     // Find the Actions column header
     const actionsHeader = page.locator('th:has-text("Actions")');
@@ -22,9 +24,9 @@ test.describe('Table sticky Actions column', () => {
       };
     });
 
-    console.log('Actions Header Styles:', headerStyles);
-    expect(headerStyles.position).toBe('sticky');
-    expect(headerStyles.right).toBe('0px');
+    console.log("Actions Header Styles:", headerStyles);
+    expect(headerStyles.position).toBe("sticky");
+    expect(headerStyles.right).toBe("0px");
     expect(parseInt(headerStyles.zIndex)).toBeGreaterThanOrEqual(10);
 
     // Get initial position of Actions header
@@ -32,7 +34,7 @@ test.describe('Table sticky Actions column', () => {
     expect(initialHeaderBox).not.toBeNull();
 
     // Screenshot before scroll
-    await page.screenshot({ path: 'tests/screenshots/actions-before-scroll.png' });
+    await page.screenshot({ path: "tests/screenshots/actions-before-scroll.png" });
 
     // Scroll the table container to the right (simulate horizontal scroll)
     await tableContainer.evaluate((el) => {
@@ -47,7 +49,7 @@ test.describe('Table sticky Actions column', () => {
     expect(afterScrollHeaderBox).not.toBeNull();
 
     // Screenshot after scroll
-    await page.screenshot({ path: 'tests/screenshots/actions-after-scroll.png' });
+    await page.screenshot({ path: "tests/screenshots/actions-after-scroll.png" });
 
     // The Actions column should NOT have moved horizontally
     // If sticky is working, the right edge should remain in the same position relative to viewport
@@ -55,9 +57,9 @@ test.describe('Table sticky Actions column', () => {
     const headerRightEdgeInitial = initialHeaderBox!.x + initialHeaderBox!.width;
     const headerRightEdgeAfterScroll = afterScrollHeaderBox!.x + afterScrollHeaderBox!.width;
 
-    console.log('Viewport width:', viewportWidth);
-    console.log('Initial right edge:', headerRightEdgeInitial);
-    console.log('After scroll right edge:', headerRightEdgeAfterScroll);
+    console.log("Viewport width:", viewportWidth);
+    console.log("Initial right edge:", headerRightEdgeInitial);
+    console.log("After scroll right edge:", headerRightEdgeAfterScroll);
 
     // The right edge should stay in roughly the same position (within a few pixels)
     expect(Math.abs(headerRightEdgeInitial - headerRightEdgeAfterScroll)).toBeLessThan(5);
@@ -79,23 +81,25 @@ test.describe('Table sticky Actions column', () => {
     await page.waitForTimeout(300);
     const nameAtStartBox = await nameHeader.boundingBox();
 
-    console.log('Name column at scroll end x:', nameAtEndBox!.x);
-    console.log('Name column at scroll start x:', nameAtStartBox!.x);
+    console.log("Name column at scroll end x:", nameAtEndBox!.x);
+    console.log("Name column at scroll start x:", nameAtStartBox!.x);
 
     // Name column should be more to the right when scrolled to start (higher x value)
     expect(nameAtStartBox!.x).toBeGreaterThan(nameAtEndBox!.x);
   });
 
-  test('Actions column should stick to right edge when scrolling horizontally - primitives page', async ({ page }) => {
+  test("Actions column should stick to right edge when scrolling horizontally - primitives page", async ({
+    page,
+  }) => {
     // Navigate to primitives gallery page
-    await page.goto('http://localhost:3000/primitives');
-    await page.waitForLoadState('networkidle');
+    await page.goto("http://localhost:3000/primitives");
+    await page.waitForLoadState("networkidle");
 
     // Find the table with sticky Actions column
     const actionsHeader = page.locator('th:has-text("Actions")');
 
-    if (await actionsHeader.count() === 0) {
-      console.log('No Actions column found on primitives page - skipping test');
+    if ((await actionsHeader.count()) === 0) {
+      console.log("No Actions column found on primitives page - skipping test");
       test.skip();
       return;
     }
@@ -110,27 +114,27 @@ test.describe('Table sticky Actions column', () => {
       };
     });
 
-    console.log('Primitives Actions Header Styles:', headerStyles);
-    expect(headerStyles.position).toBe('sticky');
-    expect(headerStyles.right).toBe('0px');
+    console.log("Primitives Actions Header Styles:", headerStyles);
+    expect(headerStyles.position).toBe("sticky");
+    expect(headerStyles.right).toBe("0px");
   });
 
-  test('Verify CSS shadow class is applied', async ({ page }) => {
-    await page.goto('http://localhost:3000/personalize/experiences');
-    await page.waitForLoadState('networkidle');
+  test("Verify CSS shadow class is applied", async ({ page }) => {
+    await page.goto("http://localhost:3000/personalize/experiences");
+    await page.waitForLoadState("networkidle");
 
     const actionsHeader = page.locator('th:has-text("Actions")');
 
     // Check if the venus-table-sticky-shadow class is applied
     const hasClass = await actionsHeader.evaluate((el) => {
-      return el.classList.contains('venus-table-sticky-shadow');
+      return el.classList.contains("venus-table-sticky-shadow");
     });
 
     expect(hasClass).toBe(true);
 
     // Check if the pseudo-element shadow is rendering
     const pseudoStyles = await actionsHeader.evaluate((el) => {
-      const computed = window.getComputedStyle(el, '::before');
+      const computed = window.getComputedStyle(el, "::before");
       return {
         content: computed.content,
         position: computed.position,
@@ -140,8 +144,8 @@ test.describe('Table sticky Actions column', () => {
       };
     });
 
-    console.log('Pseudo-element styles:', pseudoStyles);
+    console.log("Pseudo-element styles:", pseudoStyles);
     expect(pseudoStyles.content).toBe('""');
-    expect(pseudoStyles.position).toBe('absolute');
+    expect(pseudoStyles.position).toBe("absolute");
   });
 });

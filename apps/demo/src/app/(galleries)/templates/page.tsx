@@ -1,41 +1,59 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { Copy, Check, ExternalLink, Layout, LayoutGrid, Table2 } from "lucide-react"
-import { Button } from "@contentstack/venuscn"
-import { AdminNav } from "@/components/admin-nav"
+import * as React from "react";
+import Link from "next/link";
+import { Copy, Check, ExternalLink, Layout, LayoutGrid, Table2 } from "lucide-react";
+import { Button } from "@contentstack/venuscn";
+import { AdminNav } from "@/components/admin-nav";
 
 // Template metadata
 const templates = [
   {
     id: "dashboard",
     title: "Dashboard",
-    description: "Hub page with app cards grid, sidebar with quick links and featured content. Good for home pages and app launchers.",
+    description:
+      "Hub page with app cards grid, sidebar with quick links and featured content. Good for home pages and app launchers.",
     icon: Layout,
     previewUrl: "/dashboard",
     fileName: "dashboard-template.tsx",
-    features: ["Welcome header", "App cards grid", "Sidebar with quick links", "Container queries for responsive layout"],
+    features: [
+      "Welcome header",
+      "App cards grid",
+      "Sidebar with quick links",
+      "Container queries for responsive layout",
+    ],
   },
   {
     id: "cards",
     title: "Cards Page",
-    description: "Project listing page with PageSearchHeader and card grid. Good for displaying collections of items.",
+    description:
+      "Project listing page with PageSearchHeader and card grid. Good for displaying collections of items.",
     icon: LayoutGrid,
     previewUrl: "/personalize",
     fileName: "cards-page-template.tsx",
-    features: ["PageSearchHeader component", "Search with filtering", "Action button", "Responsive card grid"],
+    features: [
+      "PageSearchHeader component",
+      "Search with filtering",
+      "Action button",
+      "Responsive card grid",
+    ],
   },
   {
     id: "table",
     title: "Table Page",
-    description: "Data table page with search, filters, and pagination. Good for listing and managing records.",
+    description:
+      "Data table page with search, filters, and pagination. Good for listing and managing records.",
     icon: Table2,
     previewUrl: "/personalize/experiences",
     fileName: "table-page-template.tsx",
-    features: ["Page header with actions", "Search bar", "Full-width table with sticky column", "Pagination controls"],
+    features: [
+      "Page header with actions",
+      "Search bar",
+      "Full-width table with sticky column",
+      "Pagination controls",
+    ],
   },
-]
+];
 
 // Template source code (simplified for display)
 const templateCode: Record<string, string> = {
@@ -169,28 +187,28 @@ export default function YourTablePage() {
     </div>
   )
 }`,
-}
+};
 
 function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = React.useState(false)
+  const [copied, setCopied] = React.useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <Button variant="secondary" size="small" onClick={handleCopy}>
       {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
       {copied ? "Copied!" : "Copy Code"}
     </Button>
-  )
+  );
 }
 
-function TemplateCard({ template }: { template: typeof templates[0] }) {
-  const [showCode, setShowCode] = React.useState(false)
-  const Icon = template.icon
+function TemplateCard({ template }: { template: (typeof templates)[0] }) {
+  const [showCode, setShowCode] = React.useState(false);
+  const Icon = template.icon;
 
   return (
     <div className="border border-border rounded-lg bg-card overflow-hidden">
@@ -209,10 +227,7 @@ function TemplateCard({ template }: { template: typeof templates[0] }) {
         {/* Features */}
         <div className="mt-4 flex flex-wrap gap-2">
           {template.features.map((feature) => (
-            <span
-              key={feature}
-              className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded"
-            >
+            <span key={feature} className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">
               {feature}
             </span>
           ))}
@@ -248,7 +263,7 @@ function TemplateCard({ template }: { template: typeof templates[0] }) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default function TemplatesPage() {
@@ -284,8 +299,13 @@ export default function TemplatesPage() {
             <ol className="list-decimal list-inside space-y-2 text-sm text-body">
               <li>Choose a template that matches your page layout needs</li>
               <li>Click &quot;Copy Code&quot; to copy the starter code</li>
-              <li>Create a new folder in <code className="bg-gray-100 px-1 rounded">src/app/(app)/your-page/</code></li>
-              <li>Create <code className="bg-gray-100 px-1 rounded">page.tsx</code> and paste the code</li>
+              <li>
+                Create a new folder in{" "}
+                <code className="bg-gray-100 px-1 rounded">src/app/(app)/your-page/</code>
+              </li>
+              <li>
+                Create <code className="bg-gray-100 px-1 rounded">page.tsx</code> and paste the code
+              </li>
               <li>Customize the data, columns, and styling as needed</li>
             </ol>
             <p className="mt-4 text-sm text-muted-foreground">
@@ -296,5 +316,5 @@ export default function TemplatesPage() {
         </main>
       </div>
     </div>
-  )
+  );
 }

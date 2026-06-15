@@ -10,25 +10,25 @@
  * 2. Customize the page title, search placeholder, and card content
  */
 
-"use client"
+"use client";
 
-import * as React from "react"
-import { Plus } from "lucide-react"
-import { PageSearchHeader } from "@contentstack/venuscn"
-import { Card, CardContent } from "@/components/ui/card"
+import * as React from "react";
+import { Plus } from "lucide-react";
+import { PageSearchHeader } from "@contentstack/venuscn";
+import { Card, CardContent } from "@/components/ui/card";
 
 // =============================================================================
 // CUSTOMIZE: Your card data type
 // =============================================================================
 interface ItemCard {
-  id: string
-  title: string
-  subtitle: string
-  stat1Label: string
-  stat1Value: number
-  stat2Label: string
-  stat2Value: number
-  date: string
+  id: string;
+  title: string;
+  subtitle: string;
+  stat1Label: string;
+  stat1Value: number;
+  stat2Label: string;
+  stat2Value: number;
+  date: string;
 }
 
 // =============================================================================
@@ -55,19 +55,19 @@ const mockItems: ItemCard[] = [
     stat2Value: 8,
     date: "Nov 28, 2025",
   },
-]
+];
 
 // =============================================================================
 // Card Component (customize the layout as needed)
 // =============================================================================
 
 function ItemCardComponent({ item, onClick }: { item: ItemCard; onClick?: () => void }) {
-  const [isHovered, setIsHovered] = React.useState(false)
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <Card
       className="w-[300px] cursor-pointer transition-all"
-      style={{ borderColor: isHovered ? 'var(--color-primary)' : 'var(--color-border)' }}
+      style={{ borderColor: isHovered ? "var(--color-primary)" : "var(--color-border)" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
@@ -97,7 +97,7 @@ function ItemCardComponent({ item, onClick }: { item: ItemCard; onClick?: () => 
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 // =============================================================================
@@ -105,34 +105,34 @@ function ItemCardComponent({ item, onClick }: { item: ItemCard; onClick?: () => 
 // =============================================================================
 
 export default function CardsPageTemplate() {
-  const [searchValue, setSearchValue] = React.useState("")
+  const [searchValue, setSearchValue] = React.useState("");
 
   // CUSTOMIZE: Your action handler
   const handleNewItem = () => {
-    console.log("Create new item")
-  }
+    console.log("Create new item");
+  };
 
   // CUSTOMIZE: Your card click handler
   const handleCardClick = (item: ItemCard) => {
-    console.log("Clicked:", item.title)
-  }
+    console.log("Clicked:", item.title);
+  };
 
   // Filter items based on search
   const filteredItems = mockItems.filter((item) =>
-    item.title.toLowerCase().includes(searchValue.toLowerCase())
-  )
+    item.title.toLowerCase().includes(searchValue.toLowerCase()),
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Page Search Header */}
       <PageSearchHeader
-        title="Your Page Title"                    // CUSTOMIZE
-        searchPlaceholder="Search items..."        // CUSTOMIZE
+        title="Your Page Title" // CUSTOMIZE
+        searchPlaceholder="Search items..." // CUSTOMIZE
         searchValue={searchValue}
         onSearchChange={(e) => setSearchValue(e.target.value)}
         onSearchClear={() => setSearchValue("")}
         action={{
-          label: "New Item",                       // CUSTOMIZE
+          label: "New Item", // CUSTOMIZE
           icon: <Plus className="h-5 w-5" />,
           onClick: handleNewItem,
         }}
@@ -143,11 +143,7 @@ export default function CardsPageTemplate() {
         {/* Cards Grid */}
         <div className="flex flex-wrap gap-4">
           {filteredItems.map((item) => (
-            <ItemCardComponent
-              key={item.id}
-              item={item}
-              onClick={() => handleCardClick(item)}
-            />
+            <ItemCardComponent key={item.id} item={item} onClick={() => handleCardClick(item)} />
           ))}
         </div>
 
@@ -159,5 +155,5 @@ export default function CardsPageTemplate() {
         )}
       </div>
     </div>
-  )
+  );
 }

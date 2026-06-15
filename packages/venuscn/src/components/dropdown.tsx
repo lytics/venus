@@ -2,9 +2,7 @@
 
 import * as React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { cn } from '../lib/utils';
-
-/** Venus Design System Dropdown Component */
+import { cn } from "../lib/utils";
 
 export interface DropdownItem {
   /** Display text shown in the dropdown list and when selected. */
@@ -13,7 +11,7 @@ export interface DropdownItem {
   value: string;
 }
 
-export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   /** Array of selectable options. */
   items: DropdownItem[];
   /** Currently selected value (controlled). */
@@ -43,7 +41,21 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
 }
 
 export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
-  ({ items, value, onChange, placeholder, icon, className, disabled = false, version = "v2", withSearch = false, ...props }, ref) => {
+  (
+    {
+      items,
+      value,
+      onChange,
+      placeholder,
+      icon,
+      className,
+      disabled = false,
+      version = "v2",
+      withSearch = false,
+      ...props
+    },
+    ref,
+  ) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [selectedValue, setSelectedValue] = React.useState<string | undefined>(value);
     React.useEffect(() => {
@@ -71,9 +83,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       if (!withSearch || !searchQuery.trim()) {
         return items;
       }
-      return items.filter((item) =>
-        item.label.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      return items.filter((item) => item.label.toLowerCase().includes(searchQuery.toLowerCase()));
     }, [items, searchQuery, withSearch]);
 
     // Handle click outside
@@ -157,7 +167,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               "text-[13px] font-semibold leading-[13px]",
               "text-subtle", // Default gray
               "hover:text-heading", // Darker gray on hover
-              disabled && "opacity-50 cursor-not-allowed"
+              disabled && "opacity-50 cursor-not-allowed",
             ],
 
             // V2 specific styles (bordered dropdown)
@@ -174,8 +184,9 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               // Focus/Active styles
               "focus:outline-none focus:!border-primary focus:shadow-input-focus",
               // Disabled styles
-              disabled && "opacity-50 cursor-not-allowed hover:!border-input-border hover:shadow-none"
-            ]
+              disabled &&
+                "opacity-50 cursor-not-allowed hover:!border-input-border hover:shadow-none",
+            ],
           )}
         >
           {/* Icon */}
@@ -183,12 +194,14 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
           {/* Label - show selected item label or placeholder */}
           {!icon && (
-            <span className={cn(
-              version === "v1" && "text-[13px] font-semibold leading-[13px]",
-              version === "v2" && "text-base font-normal text-ink",
-              // Allow parent className to override font-weight
-              className?.includes("font-bold") && "!font-bold"
-            )}>
+            <span
+              className={cn(
+                version === "v1" && "text-[13px] font-semibold leading-[13px]",
+                version === "v2" && "text-base font-normal text-ink",
+                // Allow parent className to override font-weight
+                className?.includes("font-bold") && "!font-bold",
+              )}
+            >
               {selectedItem?.label || placeholder || "Select..."}
             </span>
           )}
@@ -236,7 +249,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 "top-[15px]", // 1px gap from trigger (14px trigger + 1px)
                 "min-w-[180px] w-[180px] max-w-[300px]",
                 "rounded-[8px]",
-                "shadow-[0_4px_30px_0_rgba(0,0,0,0.25)]"
+                "shadow-[0_4px_30px_0_rgba(0,0,0,0.25)]",
               ],
 
               // V2 specific menu styles
@@ -245,8 +258,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 "w-full",
                 "border border-input-border",
                 "rounded-[4px]",
-                "shadow-[0_8px_10px_1px_rgba(0,0,0,0.14),0_3px_14px_3px_rgba(0,0,0,0.12),0_4px_15px_0_rgba(108,92,231,0.2)]"
-              ]
+                "shadow-[0_8px_10px_1px_rgba(0,0,0,0.14),0_3px_14px_3px_rgba(0,0,0,0.12),0_4px_15px_0_rgba(108,92,231,0.2)]",
+              ],
             )}
           >
             {/* Search Input - V2 only - EXACT Storybook specs */}
@@ -284,7 +297,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                     "focus:outline-none placeholder:text-placeholder",
                     "transition-all duration-150",
                     "hover:!border-primary hover:shadow-input-focus",
-                    "focus:!border-primary focus:shadow-input-focus"
+                    "focus:!border-primary focus:shadow-input-focus",
                   )}
                 />
 
@@ -294,7 +307,13 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                     onClick={() => setSearchQuery("")}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-placeholder hover:text-gray-600"
                   >
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg
+                      className="w-3.5 h-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
@@ -307,7 +326,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               aria-activedescendant={selectedValue}
               className={cn(
                 "list-none m-0 max-h-[240px] overflow-y-auto",
-                version === "v1" ? "py-1" : "py-1"
+                version === "v1" ? "py-1" : "py-1",
               )}
             >
               {filteredItems.length === 0 && withSearch ? (
@@ -316,55 +335,55 @@ export const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 </li>
               ) : (
                 filteredItems.map((item) => {
-                const isActive = item.value === selectedValue;
+                  const isActive = item.value === selectedValue;
 
-                return (
-                  <li
-                    key={item.value}
-                    role="option"
-                    aria-selected={isActive}
-                    onClick={() => handleItemClick(item)}
-                    className={cn(
-                      "cursor-pointer",
-                      "transition-colors duration-150",
+                  return (
+                    <li
+                      key={item.value}
+                      role="option"
+                      aria-selected={isActive}
+                      onClick={() => handleItemClick(item)}
+                      className={cn(
+                        "cursor-pointer",
+                        "transition-colors duration-150",
 
-                      // V1 specific item styles - EXACT Storybook specs
-                      version === "v1" && [
-                        "py-[10px] px-5",
-                        "h-10",
-                        "text-[13px] leading-5",
-                        // Active state
-                        isActive && "font-bold text-primary",
-                        // Normal state
-                        !isActive && "font-normal text-ink",
-                        // Hover state
-                        !isActive && "hover:text-primary hover:bg-surface-gray"
-                      ],
+                        // V1 specific item styles - EXACT Storybook specs
+                        version === "v1" && [
+                          "py-[10px] px-5",
+                          "h-10",
+                          "text-[13px] leading-5",
+                          // Active state
+                          isActive && "font-bold text-primary",
+                          // Normal state
+                          !isActive && "font-normal text-ink",
+                          // Hover state
+                          !isActive && "hover:text-primary hover:bg-surface-gray",
+                        ],
 
-                      // V2 specific item styles
-                      version === "v2" && [
-                        "py-4 px-[18px]",
-                        "text-base font-normal",
-                        // Active state
-                        isActive && "text-primary",
-                        // Normal state
-                        !isActive && "text-ink",
-                        // Hover state
-                        !isActive && "hover:text-primary-active hover:bg-surface-gray"
-                      ]
-                    )}
-                  >
-                    {item.label}
-                  </li>
-                );
-              })
+                        // V2 specific item styles
+                        version === "v2" && [
+                          "py-4 px-[18px]",
+                          "text-base font-normal",
+                          // Active state
+                          isActive && "text-primary",
+                          // Normal state
+                          !isActive && "text-ink",
+                          // Hover state
+                          !isActive && "hover:text-primary-active hover:bg-surface-gray",
+                        ],
+                      )}
+                    >
+                      {item.label}
+                    </li>
+                  );
+                })
               )}
             </ul>
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
 Dropdown.displayName = "Dropdown";

@@ -1,42 +1,43 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { useRouter, usePathname } from 'next/navigation'
-import Image from 'next/image'
+import * as React from "react";
+import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 import {
   Breadcrumb,
   BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
-  BreadcrumbPage
-} from '@/components/ui/breadcrumb'
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 
 export function PersonalizeTopNav() {
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleOrgClick = () => {
-    router.push('/personalize')
-  }
+    router.push("/personalize");
+  };
 
   // Determine the parent section (one level back) based on pathname
   const getParentSection = () => {
     // Only show parent section if we're on a detail/form page (deeper than the listing page)
-    const pathParts = pathname.split('/').filter(Boolean)
+    const pathParts = pathname.split("/").filter(Boolean);
 
     // If we're at /personalize/[section]/[something], show the section
     if (pathParts.length > 2) {
-      const section = pathParts[1]
-      if (section === 'attributes') return { label: 'Attributes', href: '/personalize/attributes' }
-      if (section === 'experiences') return { label: 'Experiences', href: '/personalize/experiences' }
-      if (section === 'targets') return { label: 'Targets', href: '/personalize/targets' }
+      const section = pathParts[1];
+      if (section === "attributes") return { label: "Attributes", href: "/personalize/attributes" };
+      if (section === "experiences")
+        return { label: "Experiences", href: "/personalize/experiences" };
+      if (section === "targets") return { label: "Targets", href: "/personalize/targets" };
     }
 
-    return null
-  }
+    return null;
+  };
 
-  const parentSection = getParentSection()
+  const parentSection = getParentSection();
 
   return (
     // TODO: Add --color-surface-blue token for #F1F6FF
@@ -49,12 +50,7 @@ export function PersonalizeTopNav() {
                 onClick={handleOrgClick}
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity text-[color:var(--color-heading)]"
               >
-                <Image
-                  src="/images/organization.svg"
-                  alt="Organization"
-                  width={16}
-                  height={16}
-                />
+                <Image src="/images/organization.svg" alt="Organization" width={16} height={16} />
                 <span>Ford</span>
               </button>
             </BreadcrumbLink>
@@ -77,5 +73,5 @@ export function PersonalizeTopNav() {
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-  )
+  );
 }

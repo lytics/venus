@@ -1,7 +1,5 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
-
-/** Venus Design System Input Component */
+import { cn } from "../lib/utils";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Displays a red error border. Mutually exclusive with `success`.
@@ -33,35 +31,36 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           "shadow-[inset_0_0_0_1px_#FFFFFF]",
 
           // Default state
-          !error && !success && !disabled && [
-            "hover:!border-primary hover:shadow-input-focus",
-            "focus:!border-primary focus:shadow-input-focus"
-          ],
+          !error &&
+            !success &&
+            !disabled && [
+              "hover:!border-primary hover:shadow-input-focus",
+              "focus:!border-primary focus:shadow-input-focus",
+            ],
 
           // Error state
-          error && !disabled && [
-            "border-danger",
-            "focus:border-danger focus:ring-[3px] focus:ring-danger/10"
-          ],
+          error &&
+            !disabled && [
+              "border-danger",
+              "focus:border-danger focus:ring-[3px] focus:ring-danger/10",
+            ],
 
           // Success state
-          success && !disabled && [
-            "border-success",
-            "focus:border-success focus:ring-[3px] focus:ring-success/10"
-          ],
+          success &&
+            !disabled && [
+              "border-success",
+              "focus:border-success focus:ring-[3px] focus:ring-success/10",
+            ],
 
           // Disabled state
-          disabled && [
-            "bg-surface-gray text-gray-500 cursor-not-allowed",
-            "border-gray-300"
-          ],
+          disabled && ["bg-surface-gray text-gray-500 cursor-not-allowed", "border-gray-300"],
 
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Input.displayName = "Input";

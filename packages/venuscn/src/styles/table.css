@@ -2,11 +2,11 @@
 
 /* Sticky column shadow effect - borders handled by normal Tailwind classes */
 .venus-table-sticky-shadow {
-  position: sticky;  /* Maintain sticky behavior while creating positioning context */
+  position: sticky; /* Maintain sticky behavior while creating positioning context */
 }
 
 .venus-table-sticky-shadow::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -10px;
   top: 0;

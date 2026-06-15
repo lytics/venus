@@ -1,8 +1,6 @@
 import * as React from "react";
 import { X } from "lucide-react";
-import { cn } from '../lib/utils';
-
-/** Venus Design System Pills Component */
+import { cn } from "../lib/utils";
 
 export interface PillProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Visual variant of the pill.
@@ -51,7 +49,7 @@ export const Pill = React.forwardRef<HTMLDivElement, PillProps>(
       onClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const getStatusStyles = () => {
       if (variant === "chip") {
@@ -104,32 +102,24 @@ export const Pill = React.forwardRef<HTMLDivElement, PillProps>(
           getStatusStyles(),
 
           // Interactive states
-          onClick && !disabled && [
-            "cursor-pointer",
-            "hover:opacity-80",
-            "active:opacity-90"
-          ],
+          onClick && !disabled && ["cursor-pointer", "hover:opacity-80", "active:opacity-90"],
 
           // Disabled state
           disabled && "opacity-50 cursor-not-allowed",
 
-          className
+          className,
         )}
         onClick={disabled ? undefined : onClick}
         {...props}
       >
         {iconBefore && (
-          <span className="inline-flex items-center justify-center w-4 h-4">
-            {iconBefore}
-          </span>
+          <span className="inline-flex items-center justify-center w-4 h-4">{iconBefore}</span>
         )}
 
         <span>{children}</span>
 
         {iconAfter && !removable && (
-          <span className="inline-flex items-center justify-center w-4 h-4">
-            {iconAfter}
-          </span>
+          <span className="inline-flex items-center justify-center w-4 h-4">{iconAfter}</span>
         )}
 
         {removable && (
@@ -146,7 +136,7 @@ export const Pill = React.forwardRef<HTMLDivElement, PillProps>(
               "bg-transparent hover:bg-black/10",
               "transition-colors duration-150",
               "focus:outline-none",
-              disabled && "cursor-not-allowed hover:bg-transparent"
+              disabled && "cursor-not-allowed hover:bg-transparent",
             )}
             aria-label="Remove pill"
           >
@@ -155,7 +145,7 @@ export const Pill = React.forwardRef<HTMLDivElement, PillProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Pill.displayName = "Pill";
@@ -205,7 +195,7 @@ export const Pills = React.forwardRef<HTMLDivElement, PillsProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -233,7 +223,7 @@ export const Pills = React.forwardRef<HTMLDivElement, PillsProps>(
             ))}
       </div>
     );
-  }
+  },
 );
 
 Pills.displayName = "Pills";

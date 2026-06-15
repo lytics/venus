@@ -1,31 +1,41 @@
 "use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { VenusLogo } from "@/components/venus-logo"
-import { Button } from "@contentstack/venuscn"
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
-import { Menu, Sun, Moon } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Switch } from "@/components/ui/switch"
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { VenusLogo } from "@/components/venus-logo";
+import { Button } from "@contentstack/venuscn";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
+import { Menu, Sun, Moon } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Switch } from "@/components/ui/switch";
 
 const adminNavigationTabs = [
   { id: "primitives", label: "Primitives", href: "/primitives" },
   { id: "templates", label: "Templates", href: "/templates" },
   { id: "colors", label: "Colors", href: "/colors" },
   { id: "text", label: "Text", href: "/text" },
-]
+];
 
 const extrasItems: Array<{ id: string; label: string; href: string; isDivider?: boolean }> = [
   { id: "app", label: "App", href: "/dashboard" },
-]
+];
 
 export function AdminNav() {
   const pathname = usePathname();
-  const [navHeight, setNavHeight] = React.useState<string>("3.5rem")
-  const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
+  const [navHeight, setNavHeight] = React.useState<string>("3.5rem");
+  const [theme, setTheme] = React.useState<"light" | "dark">("light");
 
   // Read configuration
   const sticky = true;
@@ -33,25 +43,25 @@ export function AdminNav() {
 
   // Load theme from localStorage on mount
   React.useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
     setTheme(initialTheme);
-    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+    document.documentElement.classList.toggle("dark", initialTheme === "dark");
   }, []);
 
   // Toggle theme function
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
 
   // Load height from localStorage and listen for changes
   React.useEffect(() => {
     // Load from localStorage on mount
-    const savedHeight = localStorage.getItem('topnav-height');
+    const savedHeight = localStorage.getItem("topnav-height");
     if (savedHeight) {
       setNavHeight(savedHeight);
     }
@@ -61,19 +71,15 @@ export function AdminNav() {
       setNavHeight(event.detail.height);
     };
 
-    window.addEventListener('topnav-height-changed', handleHeightChange as EventListener);
+    window.addEventListener("topnav-height-changed", handleHeightChange as EventListener);
 
     return () => {
-      window.removeEventListener('topnav-height-changed', handleHeightChange as EventListener);
+      window.removeEventListener("topnav-height-changed", handleHeightChange as EventListener);
     };
   }, []);
 
   return (
-    <div className={cn(
-      "bg-background",
-      showBorder && "border-b",
-      sticky && "sticky top-0 z-50"
-    )}>
+    <div className={cn("bg-background", showBorder && "border-b", sticky && "sticky top-0 z-50")}>
       <div className="w-full px-6">
         <div className="flex items-center" style={{ height: navHeight }}>
           {/* Left: Logo (edge to edge) */}
@@ -97,7 +103,7 @@ export function AdminNav() {
                       className={cn(
                         "inline-flex items-center justify-center h-8 px-4 text-sm rounded font-semibold transition-colors",
                         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                        isActive && "bg-sidebar-active text-sidebar-active-foreground font-medium"
+                        isActive && "bg-sidebar-active text-sidebar-active-foreground font-medium",
                       )}
                     >
                       {tab.label}
@@ -114,22 +120,14 @@ export function AdminNav() {
                   size="small"
                   className="h-8 w-8 p-0"
                   onClick={toggleTheme}
-                  title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                  title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
                 >
-                  {theme === 'light' ? (
-                    <Moon className="h-4 w-4" />
-                  ) : (
-                    <Sun className="h-4 w-4" />
-                  )}
+                  {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                 </Button>
                 {/* Extras menu */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="small"
-                      className="h-8 w-8 p-0"
-                    >
+                    <Button variant="ghost" size="small" className="h-8 w-8 p-0">
                       <Menu className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -140,9 +138,7 @@ export function AdminNav() {
                       }
                       return (
                         <DropdownMenuItem key={item.id} asChild>
-                          <Link href={item.href}>
-                            {item.label}
-                          </Link>
+                          <Link href={item.href}>{item.label}</Link>
                         </DropdownMenuItem>
                       );
                     })}
@@ -154,5 +150,5 @@ export function AdminNav() {
         </div>
       </div>
     </div>
-  )
+  );
 }

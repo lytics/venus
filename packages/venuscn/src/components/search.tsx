@@ -1,38 +1,41 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { Search as SearchIcon, X } from 'lucide-react'
-import { cn } from '../lib/utils'
+import * as React from "react";
+import { Search as SearchIcon, X } from "lucide-react";
+import { cn } from "../lib/utils";
 
-export interface SearchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+export interface SearchProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "type" | "size"
+> {
   /**
    * Placeholder text for the search input
    */
-  placeholder?: string
+  placeholder?: string;
   /**
    * Current value of the search input
    */
-  value?: string
+  value?: string;
   /**
    * Callback when the input value changes
    */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * Callback when the clear button is clicked
    */
-  onClear?: () => void
+  onClear?: () => void;
   /**
    * Whether the input is disabled
    */
-  disabled?: boolean
+  disabled?: boolean;
   /**
    * Additional CSS classes for the wrapper
    */
-  className?: string
+  className?: string;
   /**
    * Reference to the input element
    */
-  inputRef?: React.RefObject<HTMLInputElement>
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 /**
@@ -44,7 +47,7 @@ export interface SearchProps extends Omit<React.InputHTMLAttributes<HTMLInputEle
 export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
   (
     {
-      placeholder = 'Search...',
+      placeholder = "Search...",
       value,
       onChange,
       onClear,
@@ -53,50 +56,47 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       inputRef,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const [internalValue, setInternalValue] = React.useState(value || '')
-    const isControlled = value !== undefined
-    const currentValue = isControlled ? value : internalValue
-    const inputElement = inputRef || ref
+    const [internalValue, setInternalValue] = React.useState(value || "");
+    const isControlled = value !== undefined;
+    const currentValue = isControlled ? value : internalValue;
+    const inputElement = inputRef || ref;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (!isControlled) {
-        setInternalValue(event.target.value)
+        setInternalValue(event.target.value);
       }
-      onChange?.(event)
-    }
+      onChange?.(event);
+    };
 
     const handleClear = () => {
       if (!isControlled) {
-        setInternalValue('')
+        setInternalValue("");
       }
-      onClear?.()
+      onClear?.();
 
       // Focus the input after clearing
-      if (inputElement && 'current' in inputElement && inputElement.current) {
-        inputElement.current.focus()
+      if (inputElement && "current" in inputElement && inputElement.current) {
+        inputElement.current.focus();
       }
-    }
+    };
 
     return (
       <div
         className={cn(
-          'flex items-center gap-2',
-          'h-[29px] px-2',
-          'border border-primary-active rounded-[4px]',
-          'bg-transparent',
-          'transition-colors',
-          'focus-within:border-primary',
-          'hover:border-primary',
-          disabled && 'opacity-50 cursor-not-allowed',
-          className
+          "flex items-center gap-2",
+          "h-[29px] px-2",
+          "border border-primary-active rounded-[4px]",
+          "bg-transparent",
+          "transition-colors",
+          "focus-within:border-primary",
+          "hover:border-primary",
+          disabled && "opacity-50 cursor-not-allowed",
+          className,
         )}
       >
-        <SearchIcon
-          className="h-4 w-4 flex-shrink-0 text-heading"
-          strokeWidth={1.5}
-        />
+        <SearchIcon className="h-4 w-4 flex-shrink-0 text-heading" strokeWidth={1.5} />
 
         <input
           ref={inputElement as React.RefObject<HTMLInputElement>}
@@ -108,13 +108,13 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           aria-label="Search"
           data-test-id="cs-search-input-field"
           className={cn(
-            'flex-1 min-w-0',
-            'text-sm font-normal',
-            'text-ink',
-            'placeholder:text-subtle',
-            'bg-transparent',
-            'border-0 outline-none',
-            'disabled:cursor-not-allowed'
+            "flex-1 min-w-0",
+            "text-sm font-normal",
+            "text-ink",
+            "placeholder:text-subtle",
+            "bg-transparent",
+            "border-0 outline-none",
+            "disabled:cursor-not-allowed",
           )}
           {...props}
         />
@@ -126,21 +126,21 @@ export const Search = React.forwardRef<HTMLInputElement, SearchProps>(
             aria-label="Clear search"
             data-test-id="cs-search-input-field-cancel-icon"
             className={cn(
-              'flex-shrink-0',
-              'p-0 ml-2',
-              'text-heading',
-              'hover:text-primary',
-              'transition-colors',
-              'cursor-pointer',
-              'bg-transparent border-0'
+              "flex-shrink-0",
+              "p-0 ml-2",
+              "text-heading",
+              "hover:text-primary",
+              "transition-colors",
+              "cursor-pointer",
+              "bg-transparent border-0",
             )}
           >
             <X className="h-4 w-4" strokeWidth={1.5} />
           </button>
         )}
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-Search.displayName = 'Search'
+Search.displayName = "Search";

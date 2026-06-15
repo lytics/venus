@@ -10,19 +10,22 @@
  */
 function hexToRgb(hex: string): { r: number; g: number; b: number } {
   // Remove # if present
-  hex = hex.replace(/^#/, '')
+  hex = hex.replace(/^#/, "");
 
   // Handle 3-digit hex
   if (hex.length === 3) {
-    hex = hex.split('').map(c => c + c).join('')
+    hex = hex
+      .split("")
+      .map((c) => c + c)
+      .join("");
   }
 
-  const num = parseInt(hex, 16)
+  const num = parseInt(hex, 16);
   return {
     r: (num >> 16) & 255,
     g: (num >> 8) & 255,
     b: num & 255,
-  }
+  };
 }
 
 /**
@@ -32,20 +35,17 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
  * @see https://www.w3.org/TR/WCAG20/#relativeluminancedef
  */
 export function calculateLuminosity(hexColor: string): number {
-  const rgb = hexToRgb(hexColor)
+  const rgb = hexToRgb(hexColor);
 
   // Convert to linear RGB
-  const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(val => {
-    val /= 255
-    return val <= 0.03928
-      ? val / 12.92
-      : Math.pow((val + 0.055) / 1.055, 2.4)
-  })
+  const [r, g, b] = [rgb.r, rgb.g, rgb.b].map((val) => {
+    val /= 255;
+    return val <= 0.03928 ? val / 12.92 : Math.pow((val + 0.055) / 1.055, 2.4);
+  });
 
   // Calculate relative luminosity
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
-
 
 /**
  * Get optimal navigation hover color based on brand-4 analysis
@@ -60,13 +60,13 @@ export function calculateLuminosity(hexColor: string): number {
 export function getOptimalNavHoverColor(
   brand4Hex: string,
   isDarkMode: boolean,
-  lightOpacity: number = 0.30,
-  darkOpacity: number = 0.30
+  lightOpacity: number = 0.3,
+  darkOpacity: number = 0.3,
 ): string {
-  const rgb = hexToRgb(brand4Hex)
-  const opacity = isDarkMode ? darkOpacity : lightOpacity
+  const rgb = hexToRgb(brand4Hex);
+  const opacity = isDarkMode ? darkOpacity : lightOpacity;
 
-  return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity.toFixed(2)})`
+  return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity.toFixed(2)})`;
 }
 
 /**
@@ -81,11 +81,11 @@ export function getOptimalNavHoverColor(
 export function getOptimalNavActiveColor(
   brand4Hex: string,
   isDarkMode: boolean,
-  lightOpacity: number = 0.50,
-  darkOpacity: number = 0.50
+  lightOpacity: number = 0.5,
+  darkOpacity: number = 0.5,
 ): string {
-  const rgb = hexToRgb(brand4Hex)
-  const opacity = isDarkMode ? darkOpacity : lightOpacity
+  const rgb = hexToRgb(brand4Hex);
+  const opacity = isDarkMode ? darkOpacity : lightOpacity;
 
-  return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity.toFixed(2)})`
+  return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity.toFixed(2)})`;
 }

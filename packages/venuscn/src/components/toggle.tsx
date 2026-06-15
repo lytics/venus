@@ -1,9 +1,7 @@
 import * as React from "react";
-import { cn } from '../lib/utils';
+import { cn } from "../lib/utils";
 
-/** Venus Design System Toggle Component */
-
-export interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   /** Optional text label displayed to the right of the toggle switch. 16px, normal weight.
    * Renders as a 34x18px track with a sliding 12px thumb. Gray when off, purple when on.
    */
@@ -46,7 +44,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
               // Disabled state
               "peer-disabled:bg-gray-300 peer-disabled:cursor-not-allowed",
 
-              className
+              className,
             )}
           />
           {/* Thumb */}
@@ -60,7 +58,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
               "peer-checked:translate-x-[16px]",
               // Hover shadow - Storybook specs
               "group-hover:shadow-[0.1825rem_0_0.25rem_rgba(34,34,34,0.3)]",
-              "peer-checked:group-hover:shadow-[0.1825rem_0_0.25rem_rgba(34,34,34,0.6)]"
+              "peer-checked:group-hover:shadow-[0.1825rem_0_0.25rem_rgba(34,34,34,0.6)]",
             )}
           />
         </label>
@@ -69,7 +67,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
             htmlFor={toggleId}
             className={cn(
               "text-base font-normal text-ink cursor-pointer select-none",
-              disabled && "text-gray-500 cursor-not-allowed"
+              disabled && "text-gray-500 cursor-not-allowed",
             )}
           >
             {label}
@@ -77,7 +75,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Toggle.displayName = "Toggle";
