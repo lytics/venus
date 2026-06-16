@@ -16,11 +16,6 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.js",
-      "require": "./dist/*.cjs"
-    },
     "./styles": "./src/styles/tokens.css",
     "./styles/table.css": "./src/styles/table.css"
   },
