@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "simple-tabs",
+  "title": "Simple Tabs",
+  "description": "Data-driven Tabs wrapper for quick tab sets.",
+  "registryDependencies": [
+    "utils",
+    "@venus/tabs"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/simple-tabs.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Tabs, TabsList, TabsTrigger, TabsContent } from \"@/components/ui/tabs\";\n\nexport interface SimpleTabItem {\n  label: string;\n  value: string;\n  content?: React.ReactNode;\n}\n\nexport interface SimpleTabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"onChange\"> {\n  items: SimpleTabItem[];\n  value?: string;\n  defaultValue?: string;\n  onChange?: (value: string) => void;\n}\n\nexport const SimpleTabs = React.forwardRef<HTMLDivElement, SimpleTabsProps>(\n  ({ items, value, defaultValue, onChange, className, ...props }, ref) => {\n    const resolvedDefault = defaultValue || items[0]?.value;\n\n    return (\n      <div ref={ref} className={className} {...props}>\n        <Tabs value={value} defaultValue={resolvedDefault} onValueChange={onChange}>\n          <TabsList>\n            {items.map((item) => (\n              <TabsTrigger key={item.value} value={item.value}>\n                {item.label}\n              </TabsTrigger>\n            ))}\n          </TabsList>\n          {items.map((item) => (\n            <TabsContent key={item.value} value={item.value}>\n              {item.content}\n            </TabsContent>\n          ))}\n        </Tabs>\n      </div>\n    );\n  },\n);\nSimpleTabs.displayName = \"SimpleTabs\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

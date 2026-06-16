@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "title": "Input",
+  "description": "Text input with Venus styling. 40px height, 16px font, 4px radius.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/input.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  /** Displays a red error border. Mutually exclusive with `success`.\n   * @default false\n   */\n  error?: boolean;\n  /** Displays a green success border. Mutually exclusive with `error`.\n   * @default false\n   */\n  success?: boolean;\n}\n\nexport const Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, error, success, disabled, ...props }, ref) => {\n    return (\n      <input\n        ref={ref}\n        disabled={disabled}\n        className={cn(\n          // Base styles\n          \"w-full h-10 px-2.5 py-1 rounded-[4px]\",\n          \"text-base font-normal text-gray-800\",\n          \"placeholder:text-gray-500\",\n          \"transition-all duration-150\",\n          \"focus:outline-none\",\n\n          // Border and background\n          \"border border-input-border bg-white\",\n          \"shadow-[inset_0_0_0_1px_#FFFFFF]\",\n\n          // Default state\n          !error &&\n            !success &&\n            !disabled && [\n              \"hover:!border-primary hover:shadow-input-focus\",\n              \"focus:!border-primary focus:shadow-input-focus\",\n            ],\n\n          // Error state\n          error &&\n            !disabled && [\n              \"border-danger\",\n              \"focus:border-danger focus:ring-[3px] focus:ring-danger/10\",\n            ],\n\n          // Success state\n          success &&\n            !disabled && [\n              \"border-success\",\n              \"focus:border-success focus:ring-[3px] focus:ring-success/10\",\n            ],\n\n          // Disabled state\n          disabled && [\"bg-surface-gray text-gray-500 cursor-not-allowed\", \"border-gray-300\"],\n\n          className,\n        )}\n        {...props}\n      />\n    );\n  },\n);\n\nInput.displayName = \"Input\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

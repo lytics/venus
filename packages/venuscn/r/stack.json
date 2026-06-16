@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stack",
+  "title": "Stack",
+  "description": "Flex layout with direction, gap, align, and justify.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/stack.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface StackProps extends React.HTMLAttributes<HTMLDivElement> {\n  /**\n   * Main axis direction.\n   * - `\"vertical\"` – `flex-col` (default)\n   * - `\"horizontal\"` – `flex-row`\n   * @default \"vertical\"\n   */\n  direction?: \"horizontal\" | \"vertical\";\n  /**\n   * Gap between children, mapped to Tailwind gap scale (gap-1 … gap-12).\n   * @default 4\n   */\n  gap?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;\n  /**\n   * Cross-axis alignment (`align-items`).\n   * Accepts any Tailwind `items-*` value without the prefix, e.g. `\"center\"`.\n   */\n  align?: \"start\" | \"end\" | \"center\" | \"baseline\" | \"stretch\";\n  /**\n   * Main-axis justification (`justify-content`).\n   * Accepts any Tailwind `justify-*` value without the prefix.\n   */\n  justify?: \"start\" | \"end\" | \"center\" | \"between\" | \"around\" | \"evenly\";\n  /**\n   * Whether children should wrap onto multiple lines.\n   * @default false\n   */\n  wrap?: boolean;\n  /** Content to arrange. */\n  children: React.ReactNode;\n}\n\nconst gapClasses: Record<number, string> = {\n  0: \"gap-0\",\n  1: \"gap-1\",\n  2: \"gap-2\",\n  3: \"gap-3\",\n  4: \"gap-4\",\n  5: \"gap-5\",\n  6: \"gap-6\",\n  7: \"gap-7\",\n  8: \"gap-8\",\n  9: \"gap-9\",\n  10: \"gap-10\",\n  11: \"gap-11\",\n  12: \"gap-12\",\n};\n\nconst alignClasses: Record<string, string> = {\n  start: \"items-start\",\n  end: \"items-end\",\n  center: \"items-center\",\n  baseline: \"items-baseline\",\n  stretch: \"items-stretch\",\n};\n\nconst justifyClasses: Record<string, string> = {\n  start: \"justify-start\",\n  end: \"justify-end\",\n  center: \"justify-center\",\n  between: \"justify-between\",\n  around: \"justify-around\",\n  evenly: \"justify-evenly\",\n};\n\nexport const Stack = React.forwardRef<HTMLDivElement, StackProps>(\n  (\n    {\n      direction = \"vertical\",\n      gap = 4,\n      align,\n      justify,\n      wrap = false,\n      className,\n      children,\n      ...props\n    },\n    ref,\n  ) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex\",\n          direction === \"horizontal\" ? \"flex-row\" : \"flex-col\",\n          gapClasses[gap],\n          align && alignClasses[align],\n          justify && justifyClasses[justify],\n          wrap && \"flex-wrap\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </div>\n    );\n  },\n);\n\nStack.displayName = \"Stack\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar-group",
+  "title": "Avatar Group",
+  "description": "Stacked avatars with an overflow count.",
+  "dependencies": [
+    "@radix-ui/react-avatar"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/avatar-group.tsx",
+      "content": "import * as React from \"react\";\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AvatarItem {\n  src?: string;\n  alt?: string;\n  fallback?: string;\n}\n\nexport interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Array of avatar data objects. */\n  avatars: AvatarItem[];\n  /** Maximum number of avatars to show before the overflow pill. @default 3 */\n  max?: number;\n  /** Size variant for all avatars. @default \"md\" */\n  size?: \"sm\" | \"md\" | \"lg\";\n}\n\nconst sizeMap = {\n  sm: { outer: \"h-7 w-7\", text: \"text-xs\", overflow: \"h-7 px-2 text-xs\" },\n  md: { outer: \"h-9 w-9\", text: \"text-sm\", overflow: \"h-9 px-2.5 text-sm\" },\n  lg: { outer: \"h-11 w-11\", text: \"text-base\", overflow: \"h-11 px-3 text-base\" },\n};\n\nconst overlapMap = {\n  sm: \"-ml-2\",\n  md: \"-ml-2.5\",\n  lg: \"-ml-3\",\n};\n\nexport const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(\n  ({ avatars, max = 3, size = \"md\", className, ...props }, ref) => {\n    const shown = avatars.slice(0, max);\n    const overflow = avatars.length - shown.length;\n    const s = sizeMap[size];\n    const overlap = overlapMap[size];\n\n    return (\n      <div ref={ref} className={cn(\"flex items-center\", className)} {...props}>\n        {shown.map((avatar, i) => (\n          <AvatarPrimitive.Root\n            key={i}\n            className={cn(\n              s.outer,\n              \"shrink-0 rounded-full border-2 border-white overflow-hidden\",\n              i !== 0 && overlap,\n            )}\n          >\n            {avatar.src && (\n              <AvatarPrimitive.Image\n                src={avatar.src}\n                alt={avatar.alt ?? \"\"}\n                className=\"h-full w-full object-cover\"\n              />\n            )}\n            <AvatarPrimitive.Fallback\n              className={cn(\n                \"flex h-full w-full items-center justify-center bg-[#EDE9FF] text-primary font-semibold uppercase\",\n                s.text,\n              )}\n            >\n              {avatar.fallback ?? (avatar.alt ? avatar.alt.charAt(0) : \"?\")}\n            </AvatarPrimitive.Fallback>\n          </AvatarPrimitive.Root>\n        ))}\n        {overflow > 0 && (\n          <div\n            className={cn(\n              \"shrink-0 rounded-full border-2 border-white\",\n              \"flex items-center justify-center\",\n              \"bg-[#F3F0FF] text-primary font-semibold\",\n              overlap,\n              s.overflow,\n            )}\n            aria-label={`${overflow} more`}\n          >\n            +{overflow}\n          </div>\n        )}\n      </div>\n    );\n  },\n);\n\nAvatarGroup.displayName = \"AvatarGroup\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

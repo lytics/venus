@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "simple-accordion",
+  "title": "Simple Accordion",
+  "description": "Data-driven Accordion wrapper for quick lists.",
+  "registryDependencies": [
+    "utils",
+    "@venus/accordion"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/simple-accordion.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from \"@/components/ui/accordion\";\n\nexport interface SimpleAccordionItem {\n  label: string;\n  value: string;\n  content?: React.ReactNode;\n}\n\nexport interface SimpleAccordionProps extends Omit<\n  React.HTMLAttributes<HTMLDivElement>,\n  \"onChange\"\n> {\n  items: SimpleAccordionItem[];\n  type?: \"single\" | \"multiple\";\n  defaultValue?: string | string[];\n  collapsible?: boolean;\n}\n\nexport const SimpleAccordion = React.forwardRef<HTMLDivElement, SimpleAccordionProps>(\n  ({ items, type = \"single\", defaultValue, collapsible = true, className, ...props }, ref) => {\n    const accordionProps =\n      type === \"single\"\n        ? { type: \"single\" as const, collapsible, defaultValue: defaultValue as string | undefined }\n        : { type: \"multiple\" as const, defaultValue: defaultValue as string[] | undefined };\n\n    return (\n      <div ref={ref} className={className} {...props}>\n        <Accordion {...accordionProps}>\n          {items.map((item) => (\n            <AccordionItem key={item.value} value={item.value}>\n              <AccordionTrigger>{item.label}</AccordionTrigger>\n              <AccordionContent>{item.content}</AccordionContent>\n            </AccordionItem>\n          ))}\n        </Accordion>\n      </div>\n    );\n  },\n);\nSimpleAccordion.displayName = \"SimpleAccordion\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "title": "Collapsible",
+  "description": "Show/hide toggle built on Radix UI Collapsible.",
+  "dependencies": [
+    "@radix-ui/react-collapsible"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/collapsible.tsx",
+      "content": "import * as React from \"react\";\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\nimport { cn } from \"@/lib/utils\";\n\n/** Wraps @radix-ui/react-collapsible */\n\nconst Collapsible = CollapsiblePrimitive.Root;\nCollapsible.displayName = \"Collapsible\";\n\nconst CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;\nCollapsibleTrigger.displayName = \"CollapsibleTrigger\";\n\nexport interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<\n  typeof CollapsiblePrimitive.CollapsibleContent\n> {}\n\nconst CollapsibleContent = React.forwardRef<\n  React.ElementRef<typeof CollapsiblePrimitive.CollapsibleContent>,\n  CollapsibleContentProps\n>(({ className, ...props }, ref) => (\n  <CollapsiblePrimitive.CollapsibleContent\n    ref={ref}\n    className={cn(\n      \"overflow-hidden\",\n      \"data-[state=open]:animate-in data-[state=open]:fade-in-0\",\n      \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0\",\n      className,\n    )}\n    {...props}\n  />\n));\nCollapsibleContent.displayName = \"CollapsibleContent\";\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

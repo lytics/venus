@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "title": "Accordion",
+  "description": "Expandable sections built on Radix UI Accordion.",
+  "dependencies": [
+    "@radix-ui/react-accordion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/accordion.tsx",
+      "content": "import * as React from \"react\";\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\";\nimport { cn } from \"@/lib/utils\";\n\n/** Wraps @radix-ui/react-accordion */\n\nconst Accordion = AccordionPrimitive.Root;\nAccordion.displayName = \"Accordion\";\n\nexport interface AccordionItemProps extends React.ComponentPropsWithoutRef<\n  typeof AccordionPrimitive.Item\n> {}\n\nconst AccordionItem = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Item>,\n  AccordionItemProps\n>(({ className, ...props }, ref) => (\n  <AccordionPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"border border-[rgba(113,128,150,0.3)] rounded-[4px] overflow-hidden\",\n      \"first:mt-0 [&+&]:mt-2\",\n      className,\n    )}\n    {...props}\n  />\n));\nAccordionItem.displayName = \"AccordionItem\";\n\nexport interface AccordionTriggerProps extends React.ComponentPropsWithoutRef<\n  typeof AccordionPrimitive.Trigger\n> {}\n\nconst AccordionTrigger = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Trigger>,\n  AccordionTriggerProps\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      className={cn(\n        \"flex flex-1 items-center justify-between\",\n        \"h-10 px-4 text-sm font-semibold text-title\",\n        \"bg-white transition-colors duration-150\",\n        \"hover:bg-surface-gray\",\n        \"focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-inset\",\n        \"[&[data-state=open]>svg]:rotate-180\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <svg\n        xmlns=\"http://www.w3.org/2000/svg\"\n        width=\"16\"\n        height=\"16\"\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        strokeWidth=\"2\"\n        strokeLinecap=\"round\"\n        strokeLinejoin=\"round\"\n        className=\"shrink-0 text-body transition-transform duration-200\"\n        aria-hidden=\"true\"\n      >\n        <path d=\"m6 9 6 6 6-6\" />\n      </svg>\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n));\nAccordionTrigger.displayName = \"AccordionTrigger\";\n\nexport interface AccordionContentProps extends React.ComponentPropsWithoutRef<\n  typeof AccordionPrimitive.Content\n> {}\n\nconst AccordionContent = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Content>,\n  AccordionContentProps\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Content\n    ref={ref}\n    className={cn(\n      \"overflow-hidden text-sm text-heading\",\n      \"data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down\",\n      className,\n    )}\n    {...props}\n  >\n    <div className=\"px-4 pb-4 pt-2\">{children}</div>\n  </AccordionPrimitive.Content>\n));\nAccordionContent.displayName = \"AccordionContent\";\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

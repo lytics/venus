@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stat",
+  "title": "Stat",
+  "description": "Metric display with value, label, and trend.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/stat.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Metric display for dashboards */\n\nexport interface StatProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** The primary metric value displayed in large text. */\n  value: string | number;\n  /** Label describing what the metric measures. */\n  label: string;\n  /** Change string e.g. \"+12%\" or \"-3.4%\". */\n  change?: string;\n  /** Trend direction — controls change text color. */\n  trend?: \"up\" | \"down\" | \"neutral\";\n  /** Optional icon rendered in the top-right area. */\n  icon?: React.ReactNode;\n}\n\nexport const Stat = React.forwardRef<HTMLDivElement, StatProps>(\n  ({ value, label, change, trend = \"neutral\", icon, className, ...props }, ref) => {\n    const changeColor =\n      trend === \"up\" ? \"text-green-600\" : trend === \"down\" ? \"text-red-500\" : \"text-body\";\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"relative flex flex-col gap-1 rounded-[4px] border border-[rgba(113,128,150,0.2)] bg-white p-4\",\n          className,\n        )}\n        {...props}\n      >\n        {icon && <div className=\"absolute right-4 top-4 text-body\">{icon}</div>}\n        <span className=\"text-[30px] font-bold leading-none text-title\">{value}</span>\n        <span className=\"text-sm font-normal text-body\">{label}</span>\n        {change && <span className={cn(\"text-sm font-medium\", changeColor)}>{change}</span>}\n      </div>\n    );\n  },\n);\n\nStat.displayName = \"Stat\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

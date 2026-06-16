@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "title": "Empty State",
+  "description": "Centered placeholder with icon, title, description, and action.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/empty-state.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** Optional icon or illustration rendered above the title. */\n  icon?: React.ReactNode;\n  /** Primary heading text. */\n  title: string;\n  /** Supporting description text. */\n  description?: string;\n  /** Call-to-action element rendered below the description. */\n  action?: React.ReactNode;\n}\n\nexport const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  ({ icon, title, description, action, className, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          \"flex flex-col items-center justify-center text-center\",\n          \"mx-auto w-full max-w-[400px] px-4 py-10\",\n          className,\n        )}\n        {...props}\n      >\n        {icon && <div className=\"mb-4 flex items-center justify-center text-body\">{icon}</div>}\n        <h3 className=\"text-2xl font-bold text-heading leading-tight\">{title}</h3>\n        {description && (\n          <p className=\"mt-2 text-base font-normal text-body leading-relaxed\">{description}</p>\n        )}\n        {action && <div className=\"mt-5\">{action}</div>}\n      </div>\n    );\n  },\n);\n\nEmptyState.displayName = \"EmptyState\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

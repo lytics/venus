@@ -16,11 +16,6 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "import": "./dist/*.js",
-      "require": "./dist/*.cjs"
-    },
     "./styles": "./src/styles/tokens.css",
     "./styles/table.css": "./src/styles/table.css"
   },
@@ -31,6 +26,8 @@
   ],
   "scripts": {
     "build": "tsup",
+    "build:registry": "node scripts/build-registry.mjs && npx shadcn@latest build registry.json --output r",
+    "build:tokens": "node scripts/build-tokens.mjs",
     "dev": "tsup --watch",
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",

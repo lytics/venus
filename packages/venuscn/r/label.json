@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "title": "Label",
+  "description": "Form label with optional required asterisk.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/label.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {\n  /** The id of the form control this label describes. */\n  htmlFor?: string;\n  /**\n   * When true, appends a red asterisk to indicate the associated field is required.\n   * @default false\n   */\n  required?: boolean;\n  /** Label text content. */\n  children: React.ReactNode;\n}\n\nexport const Label = React.forwardRef<HTMLLabelElement, LabelProps>(\n  ({ htmlFor, required = false, className, children, ...props }, ref) => (\n    <label\n      ref={ref}\n      htmlFor={htmlFor}\n      className={cn(\n        \"inline-flex items-center gap-1\",\n        \"text-sm font-semibold text-heading\",\n        \"cursor-default select-none\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      {required && (\n        <span aria-hidden=\"true\" className=\"text-danger leading-none\">\n          *\n        </span>\n      )}\n    </label>\n  ),\n);\n\nLabel.displayName = \"Label\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

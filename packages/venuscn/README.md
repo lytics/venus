@@ -55,6 +55,38 @@ export default function MyForm() {
 }
 ```
 
+## Installing components (shadcn registry)
+
+The components also ship as an installable shadcn registry, so you can pull individual components (and their dependencies) straight into your project with the shadcn CLI.
+
+**Quickest** — grab one component, no config needed:
+
+```bash
+npx shadcn@latest add "https://cdn.jsdelivr.net/gh/lytics/venus@main/packages/venuscn/r/button.json"
+```
+
+**Recommended** — register the `@venus` namespace once in your project's `components.json`:
+
+```json
+{
+  "registries": {
+    "@venus": "https://cdn.jsdelivr.net/gh/lytics/venus@main/packages/venuscn/r/{name}.json"
+  }
+}
+```
+
+then add components by name:
+
+```bash
+npx shadcn@latest add @venus/theme       # Venus design tokens — install first
+npx shadcn@latest add @venus/button @venus/dialog @venus/data-table
+```
+
+A couple of notes:
+
+- `@venus/theme` ships the token stylesheet and must be imported in your `globals.css` — the CLI prints the exact `@import` line when it installs.
+- jsDelivr caches `@main` for about 12 hours. For reproducible installs, pin a tag or commit SHA in the URL instead of `@main`.
+
 ## Components
 
 ### Form Controls
@@ -101,8 +133,12 @@ export default function MyForm() {
 | `EmptyState` | Placeholder for empty lists/tables with icon, title, action |
 | `List` / `ListItem` | Structured list with icon, title, description, action slots |
 | `Accordion` | Expandable/collapsible content sections (Radix) |
+| `SimpleAccordion` | Data-driven accordion from an items array (no compound parts) |
 | `Collapsible` | Single collapsible section (Radix) |
 | `CodeBlock` | Syntax-highlighted code display with line numbers and copy |
+| `Progress` | Progress bar with determinate value |
+| `Slider` | Range slider input (Radix) |
+| `Skeleton` | Loading placeholder shimmer |
 | `Search` | Search input component |
 | `SearchV3` | Enhanced search with filters |
 
@@ -121,6 +157,7 @@ export default function MyForm() {
 | `Dialog` | Modal dialog with header, body, footer (Radix) |
 | `Sheet` | Slide-out panel from screen edge (Radix) |
 | `Popover` | Floating content panel (Radix) |
+| `Select` | Styled select menu with grouped items (Radix) |
 | `DropdownMenu` | Context-triggered menu with items, labels, separators (Radix) |
 | `ContextMenu` | Right-click menu (Radix) |
 | `Command` | Command palette with search and grouped items |
@@ -131,6 +168,7 @@ export default function MyForm() {
 | Component | Description |
 |-----------|-------------|
 | `Tabs` | Tabbed navigation interface |
+| `SimpleTabs` | Data-driven tabs from an items array (no compound parts) |
 | `PageHeader` | Standard page header with actions |
 | `PageSearchHeader` | Page header with integrated search |
 | `PageFormHeader` | Form-specific page header |
@@ -147,10 +185,14 @@ export default function MyForm() {
 | Component | Description |
 |-----------|-------------|
 | `Tag` | Removable tag/badge component |
+| `Badge` | Small status/count label with variants |
 | `Pill` | Selectable pill component |
 | `CategoryPill` | Category indicator pill |
 | `StatusPill` | Status indicator (published, draft, etc.) |
 | `Divider` | Horizontal/vertical divider |
+| `Card` | Container with header, title, content, footer slots |
+| `AppCard` | Marketplace-style app card |
+| `Avatar` | User avatar with image and fallback initials |
 
 ### Advanced Components
 

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "title": "Popover",
+  "description": "Contextual overlay built on Radix UI Popover.",
+  "dependencies": [
+    "@radix-ui/react-popover"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/popover.tsx",
+      "content": "import * as React from \"react\";\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\";\nimport { cn } from \"@/lib/utils\";\n\n/* ─────────────────────────────────────────────────────────────────────────────\n   Popover — Contextual overlay built on @radix-ui/react-popover\n\n   Usage:\n     <Popover>\n       <PopoverTrigger asChild><Button>Open</Button></PopoverTrigger>\n       <PopoverContent>Content here</PopoverContent>\n     </Popover>\n───────────────────────────────────────────────────────────────────────────── */\n\n/** Root Popover controller — manages open/close state. */\nexport const Popover = PopoverPrimitive.Root;\nPopover.displayName = \"Popover\";\n\n/* ─── PopoverTrigger ──────────────────────────────────────────────────────── */\n\n/** The element that opens the popover when interacted with. */\nexport const PopoverTrigger = PopoverPrimitive.Trigger;\nPopoverTrigger.displayName = \"PopoverTrigger\";\n\n/* ─── PopoverContent ──────────────────────────────────────────────────────── */\n\nexport interface PopoverContentProps extends React.ComponentPropsWithoutRef<\n  typeof PopoverPrimitive.Content\n> {\n  /**\n   * Preferred side for the floating panel.\n   * @default \"bottom\"\n   */\n  side?: \"top\" | \"right\" | \"bottom\" | \"left\";\n  /**\n   * Alignment relative to the trigger.\n   * @default \"center\"\n   */\n  align?: \"start\" | \"center\" | \"end\";\n  /**\n   * Distance in pixels between the trigger and the popover.\n   * @default 8\n   */\n  sideOffset?: number;\n  /** Content to render inside the popover panel. */\n  children: React.ReactNode;\n}\n\nexport const PopoverContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  PopoverContentProps\n>(({ className, side = \"bottom\", align = \"center\", sideOffset = 8, children, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      side={side}\n      align={align}\n      sideOffset={sideOffset}\n      className={cn(\n        // Layout\n        \"z-50 w-72 p-4\",\n        // Visual — white bg, 6px radius, custom shadow\n        \"bg-white rounded-md border border-border\",\n        \"shadow-[0_4px_12px_rgba(0,0,0,0.15)]\",\n        // Animation — fade + translateY\n        \"origin-[var(--radix-popover-transform-origin)]\",\n        \"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95\",\n        \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\n        \"data-[side=bottom]:translate-y-0 data-[state=open]:data-[side=bottom]:slide-in-from-top-2\",\n        \"data-[side=top]:data-[state=open]:slide-in-from-bottom-2\",\n        \"data-[side=left]:data-[state=open]:slide-in-from-right-2\",\n        \"data-[side=right]:data-[state=open]:slide-in-from-left-2\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </PopoverPrimitive.Content>\n  </PopoverPrimitive.Portal>\n));\nPopoverContent.displayName = \"PopoverContent\";\n\n/* ─── PopoverClose ────────────────────────────────────────────────────────── */\n\n/** Button that closes the enclosing popover when clicked. */\nexport const PopoverClose = PopoverPrimitive.Close;\nPopoverClose.displayName = \"PopoverClose\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

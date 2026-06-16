@@ -191,11 +191,14 @@ pnpm --filter demo build                     # Build demo app
 
 ## What You Get
 
-**Components:**
-- Form controls (Button, Input, Checkbox, Radio, Toggle, Dropdown)
-- Data display (Table, Search, Tags, Pills)
-- Navigation (Tabs, PageHeader variants)
+**66 components**, covering:
+- Form controls (Button, Input, Checkbox, Radio, Toggle, Switch, Select, Slider, DatePicker, Form)
+- Data display (Table, DataTable, Chart, Stat, List, Accordion, CodeBlock, EmptyState, Search)
+- Overlays & feedback (Dialog, Sheet, Popover, DropdownMenu, Command, Tooltip, Toast, Callout, Alert)
+- Navigation & layout (Tabs, Breadcrumb, Pagination, Sidebar, PageHeader variants, Stack, Typography)
 - Advanced features (TargetingRuleBuilder, FormSidebar)
+
+Full list and API reference: [packages/venuscn/README.md](./packages/venuscn/README.md).
 
 **Design System:**
 - Complete design token system for colors, spacing, typography
