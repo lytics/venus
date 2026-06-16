@@ -21,6 +21,8 @@ This file contains:
 - Shadows, borders, transitions
 - Dark mode variants
 
+**`tokens.css` is the canonical source.** It's also exported in two machine-readable forms — `packages/venuscn/tokens.json` (DTCG format) and `packages/venuscn/design.md` (human-readable reference). Regenerate both from `tokens.css` with `pnpm build:tokens`.
+
 ## Key Concepts
 
 ### 1. Consistency Over Perfection

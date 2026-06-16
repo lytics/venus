@@ -88,19 +88,19 @@ pnpm lint       # Run ESLint
 
 ## Venus Component Library
 
-The `@contentstack/venuscn` package contains **27 components** matching app.contentstack.com.
+The `@contentstack/venuscn` package contains **66 components** matching app.contentstack.com.
 
 ### Available Components
 
-**Form Controls:** Button, Input, Textarea, Checkbox, Radio, Toggle, Dropdown
+**Form Controls:** Button, Input, Textarea, Checkbox, Radio, Toggle, Switch, Dropdown, Select, Slider, DatePicker, Label, Form
 
 **Form Architecture:** Field, FieldLabel, HelpText, ValidationMessage
 
-**Data Display:** Table (+ Header/Body/Row/Cell), TablePagination, Search, SearchV3
+**Data Display:** Table (+ Header/Body/Row/Cell), TablePagination, DataTable, Chart, Stat, EmptyState, List, Accordion, SimpleAccordion, Collapsible, CodeBlock, Progress, Skeleton, Badge, Search, SearchV3
 
-**Navigation/Layout:** Tabs, PageHeader, PageSearchHeader, PageFormHeader, FormSidebar, Divider
+**Navigation/Layout:** Tabs, SimpleTabs, PageHeader, PageSearchHeader, PageFormHeader, FormSidebar, Sidebar, Breadcrumb, Pagination, Divider, Separator, Stack, Typography, Icon, Card, AppCard, Avatar, AvatarGroup
 
-**UI Elements:** Tag, Pill, Pills, CategoryPill, StatusPill, Tooltip
+**UI Elements:** Tag, Pill, Pills, CategoryPill, StatusPill, Callout, Toast, Alert, Tooltip, Dialog, Sheet, Popover, DropdownMenu, ContextMenu, Command
 
 **Advanced:** TargetingRuleBuilder, TargetingCategoryCard, RuleRow, RuleGroup
 
