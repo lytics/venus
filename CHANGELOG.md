@@ -21,3 +21,4 @@ The format is loosely based on [Keep a Changelog](https://keepachangelog.com/en/
 ### Removed
 
 - De-AI cleanup: removed internal work-logs and placeholder tests, and split out the formatting config from component source.
+- Removed the orphaned `/comparison` gallery (it embedded internal Storybook iframes that don't render outside the Contentstack network) and dead marketplace navigation code in the demo (its `/marketplace` routes were deleted long ago).
