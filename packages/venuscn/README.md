@@ -67,7 +67,11 @@ export default function MyForm() {
 | `Checkbox` | Checkbox with label support |
 | `Radio` | Radio button with label |
 | `Toggle` | Toggle switch component |
+| `Switch` | Toggle switch (Radix-based alternative to Toggle) |
 | `Dropdown` | Dropdown select component |
+| `DatePicker` | Date input with native picker |
+| `Label` | Standalone label element |
+| `Form` | Form wrapper with context provider |
 
 ### Form Architecture
 
@@ -78,14 +82,49 @@ export default function MyForm() {
 | `HelpText` | Descriptive help text |
 | `ValidationMessage` | Error/success validation messages |
 
+### Typography & Text
+
+| Component | Description |
+|-----------|-------------|
+| `Typography` | Heading and text variants (h1-h6, p, small, label, code) |
+| `Stack` | Flexbox layout helper with direction and gap props |
+
 ### Data Display
 
 | Component | Description |
 |-----------|-------------|
 | `Table` | Complete table component with header, body, footer |
 | `TablePagination` | Pagination controls for tables |
+| `DataTable` | Full-featured table with sorting, striping, empty state |
+| `Chart` | Lightweight CSS/SVG bar and line charts |
+| `Stat` | Metric card with value, label, trend indicator |
+| `EmptyState` | Placeholder for empty lists/tables with icon, title, action |
+| `List` / `ListItem` | Structured list with icon, title, description, action slots |
+| `Accordion` | Expandable/collapsible content sections (Radix) |
+| `Collapsible` | Single collapsible section (Radix) |
+| `CodeBlock` | Syntax-highlighted code display with line numbers and copy |
 | `Search` | Search input component |
 | `SearchV3` | Enhanced search with filters |
+
+### Feedback
+
+| Component | Description |
+|-----------|-------------|
+| `Callout` | Inline notification banner (info/success/warning/danger) |
+| `Toast` / `Toaster` | Floating notification system with variants |
+| `Alert` | Static alert banner with title and description |
+
+### Overlays
+
+| Component | Description |
+|-----------|-------------|
+| `Dialog` | Modal dialog with header, body, footer (Radix) |
+| `Sheet` | Slide-out panel from screen edge (Radix) |
+| `Popover` | Floating content panel (Radix) |
+| `DropdownMenu` | Context-triggered menu with items, labels, separators (Radix) |
+| `ContextMenu` | Right-click menu (Radix) |
+| `Command` | Command palette with search and grouped items |
+| `Tooltip` | Tooltip component with Radix UI |
 
 ### Navigation & Layout
 
@@ -96,6 +135,12 @@ export default function MyForm() {
 | `PageSearchHeader` | Page header with integrated search |
 | `PageFormHeader` | Form-specific page header |
 | `FormSidebar` | Sidebar for forms |
+| `Sidebar` | Collapsible sidebar with nav, search, checkbox list |
+| `Breadcrumb` | Navigation breadcrumb trail |
+| `Pagination` | Page navigation with prev/next and page numbers |
+| `AvatarGroup` | Stacked avatar display with overflow count |
+| `Icon` | Lucide icon wrapper with size variants |
+| `Separator` | Horizontal or vertical divider (Radix) |
 
 ### UI Elements
 
@@ -106,7 +151,6 @@ export default function MyForm() {
 | `CategoryPill` | Category indicator pill |
 | `StatusPill` | Status indicator (published, draft, etc.) |
 | `Divider` | Horizontal/vertical divider |
-| `Tooltip` | Tooltip component with Radix UI |
 
 ### Advanced Components
 
@@ -116,6 +160,17 @@ export default function MyForm() {
 | `TargetingCategoryCard` | Category card for targeting rules |
 | `RuleRow` | Individual rule row in builder |
 | `RuleGroup` | Group of rules with logic |
+
+### Component Variants
+
+Some components have multiple versions for different use cases:
+
+| Components | Guidance |
+|-----------|----------|
+| `Dropdown` v1 / v2 | Use `version="v2"` for new code. v1 is legacy compatibility only. |
+| `Search` / `SearchV3` | SearchV3 is the current standard with full-width styling. Search is the compact variant for tight spaces (e.g., sidebars). |
+| `Toggle` / `Switch` | Toggle is the Venus-native toggle with built-in label. Switch is the shadcn/Radix-based alternative. Both work — use whichever fits your component tree. |
+| `Divider` / `Separator` | Divider is a simple horizontal rule. Separator supports both horizontal and vertical orientations via Radix. |
 
 ## Production Specifications
 
@@ -187,6 +242,18 @@ All components use the Venus design token system. Key tokens are available in `t
 ```
 
 For the complete token reference, see the [full tokens.css file](./src/styles/tokens.css).
+
+## Dark Mode
+
+VenusCN supports dark mode via the `.dark` class on a parent element (typically `<html>` or `<body>`):
+
+```html
+<html class="dark">
+  <!-- All VenusCN components automatically adapt -->
+</html>
+```
+
+All semantic tokens (colors, backgrounds, borders) have dark mode variants defined in `tokens.css`. Components using the token system adapt automatically.
 
 ## Usage Examples
 

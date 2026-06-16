@@ -143,9 +143,9 @@ export const SidebarNav = React.forwardRef<HTMLElement, SidebarNavProps>(
   ({ className, items, ...props }, ref) => {
     return (
       <nav ref={ref} className={cn("flex flex-col", className)} {...props}>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <a
-            key={item.href}
+            key={`${item.href}-${index}`}
             href={item.href}
             className={cn(
               "flex items-center h-10 px-2.5",

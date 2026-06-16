@@ -1,8 +1,6 @@
 import * as React from "react";
 import { cn } from "../lib/utils";
 
-/** Venus Design System Tag Component V2 */
-
 export interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Tag text content. Rendered at 12px, medium weight, inside a 20px-tall gray pill. */
   children: React.ReactNode;
