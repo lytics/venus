@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form",
+  "title": "Form",
+  "description": "Form wrapper providing a disabled-state context.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/form.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Wrapper with context */\n\ninterface FormContextValue {\n  disabled: boolean;\n}\n\nconst FormContext = React.createContext<FormContextValue>({ disabled: false });\n\n/** Access form-level state (e.g., disabled) from within a Form. */\nexport function useFormContext(): FormContextValue {\n  return React.useContext(FormContext);\n}\n\nexport interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {\n  /** When true, all form controls inside inherit a disabled state via context. @default false */\n  disabled?: boolean;\n}\n\n/**\n * Venus Form — wraps a `<form>` element and provides a FormContext.\n * Use alongside Field, Input, Select, etc. for consistent layout and spacing.\n */\nexport const Form = React.forwardRef<HTMLFormElement, FormProps>(\n  ({ disabled = false, className, children, onSubmit, ...props }, ref) => {\n    return (\n      <FormContext.Provider value={{ disabled }}>\n        <form\n          ref={ref}\n          onSubmit={(e) => {\n            if (disabled) {\n              e.preventDefault();\n              return;\n            }\n            onSubmit?.(e);\n          }}\n          className={cn(\"flex flex-col gap-4\", className)}\n          {...props}\n        >\n          {children}\n        </form>\n      </FormContext.Provider>\n    );\n  },\n);\n\nForm.displayName = \"Form\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

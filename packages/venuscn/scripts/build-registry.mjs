@@ -58,6 +58,33 @@ const COMPONENTS = {
   textarea: { npm: [] },
   toggle: { npm: [] },
   tooltip: { npm: ["@radix-ui/react-tooltip"] },
+  accordion: { npm: ["@radix-ui/react-accordion"], desc: "Expandable sections built on Radix UI Accordion." },
+  "avatar-group": { npm: ["@radix-ui/react-avatar"], desc: "Stacked avatars with an overflow count." },
+  breadcrumb: { npm: ["lucide-react"], desc: "Navigation hierarchy with separators." },
+  callout: { npm: [], desc: "Full-width banner with variant colors and a left accent." },
+  chart: { npm: [], desc: "Lightweight CSS/SVG bar and line charts." },
+  "code-block": { npm: [], desc: "Code display with optional line numbers." },
+  collapsible: { npm: ["@radix-ui/react-collapsible"], desc: "Show/hide toggle built on Radix UI Collapsible." },
+  command: { npm: [], desc: "Searchable command palette." },
+  "context-menu": { npm: ["@radix-ui/react-context-menu"], desc: "Right-click menu built on Radix UI Context Menu." },
+  "data-table": { npm: [], reg: ["table"], desc: "Table with sorting and column definitions." },
+  "date-picker": { npm: [], desc: "Styled native date input." },
+  "dropdown-menu": { npm: ["@radix-ui/react-dropdown-menu"], desc: "Action menu built on Radix UI Dropdown Menu." },
+  "empty-state": { npm: [], desc: "Centered placeholder with icon, title, description, and action." },
+  form: { npm: [], desc: "Form wrapper providing a disabled-state context." },
+  icon: { npm: ["lucide-react"], desc: "Lucide icon wrapper with sm/md/lg sizes." },
+  label: { npm: [], desc: "Form label with optional required asterisk." },
+  list: { npm: [], desc: "Structured list with icon/title/description/action slots." },
+  pagination: { npm: [], desc: "Page navigation with previous/next controls." },
+  popover: { npm: ["@radix-ui/react-popover"], desc: "Contextual overlay built on Radix UI Popover." },
+  separator: { npm: [], desc: "Horizontal or vertical divider." },
+  "simple-accordion": { npm: [], reg: ["accordion"], desc: "Data-driven Accordion wrapper for quick lists." },
+  "simple-tabs": { npm: [], reg: ["tabs"], desc: "Data-driven Tabs wrapper for quick tab sets." },
+  stack: { npm: [], desc: "Flex layout with direction, gap, align, and justify." },
+  stat: { npm: [], desc: "Metric display with value, label, and trend." },
+  switch: { npm: [], desc: "Accessible on/off toggle with label." },
+  toast: { npm: ["@radix-ui/react-toast", "lucide-react"], desc: "Notification with variant and progress, built on Radix UI Toast." },
+  typography: { npm: [], desc: "Heading, paragraph, and text variants." },
 };
 
 // Support files shipped as registry:lib (consumers place them under @/lib).
@@ -83,6 +110,11 @@ const catalogPath = join(PKG, "registry.json");
 if (existsSync(catalogPath)) {
   try {
     const cat = JSON.parse(readFileSync(catalogPath, "utf8"));
+    // shadcn registry format (current) — preserve existing item descriptions on regen
+    for (const it of cat.items ?? []) {
+      if (it.name && it.description) descByName[it.name] = it.description;
+    }
+    // old catalog format — fallback for the first generation
     for (const c of cat.components ?? []) {
       if (c.file) descByName[c.file.split("/").pop().replace(/\.tsx?$/, "")] = c.description;
     }
@@ -109,7 +141,7 @@ for (const [name, meta] of Object.entries(COMPONENTS)) {
     name,
     type: "registry:ui",
     title: titleCase(name),
-    description: descByName[name] ?? `${titleCase(name)} component.`,
+    description: meta.desc ?? descByName[name] ?? `${titleCase(name)} component.`,
     ...(meta.npm.length ? { dependencies: meta.npm } : {}),
     registryDependencies,
     files: [{ path: `registry/ui/${name}.tsx`, type: "registry:ui" }],
@@ -129,6 +161,21 @@ for (const [name, meta] of Object.entries(LIB)) {
     files: [{ path: `registry/lib/${name}.ts`, type: "registry:lib" }],
   });
 }
+
+// Theme item — ships the complete canonical token stylesheet so installed
+// components render with the Venus look.
+items.push({
+  name: "theme",
+  type: "registry:theme",
+  title: "Venus Theme",
+  description:
+    "The complete Venus design-token stylesheet — Tailwind v4 @theme (colors, spacing, typography, radius, shadows) plus the shadcn semantic-var bridge and table styles.",
+  files: [
+    { path: "src/styles/tokens.css", type: "registry:file", target: "styles/venus.css" },
+    { path: "src/styles/table.css", type: "registry:file", target: "styles/venus-table.css" },
+  ],
+  docs: 'Add these to the top of your globals.css, before `@import "tailwindcss";`:\n@import "./styles/venus.css";\n@import "./styles/venus-table.css";',
+});
 
 items.sort((a, b) => a.name.localeCompare(b.name));
 

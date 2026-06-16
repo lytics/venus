@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "context-menu",
+  "title": "Context Menu",
+  "description": "Right-click menu built on Radix UI Context Menu.",
+  "dependencies": [
+    "@radix-ui/react-context-menu"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/context-menu.tsx",
+      "content": "import * as React from \"react\";\nimport * as ContextMenuPrimitive from \"@radix-ui/react-context-menu\";\nimport { cn } from \"@/lib/utils\";\n\n/** Wraps @radix-ui/react-context-menu */\n\nconst ContextMenu = ContextMenuPrimitive.Root;\nContextMenu.displayName = \"ContextMenu\";\n\nconst ContextMenuTrigger = ContextMenuPrimitive.Trigger;\nContextMenuTrigger.displayName = \"ContextMenuTrigger\";\n\nconst ContextMenuPortal = ContextMenuPrimitive.Portal;\n\nexport interface ContextMenuContentProps extends React.ComponentPropsWithoutRef<\n  typeof ContextMenuPrimitive.Content\n> {}\n\nconst ContextMenuContent = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Content>,\n  ContextMenuContentProps\n>(({ className, ...props }, ref) => (\n  <ContextMenuPortal>\n    <ContextMenuPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"z-50 min-w-[160px] overflow-hidden rounded-[4px]\",\n        \"border border-[rgba(113,128,150,0.2)] bg-white shadow-lg\",\n        \"p-1\",\n        \"data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95\",\n        \"data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\n        className,\n      )}\n      {...props}\n    />\n  </ContextMenuPortal>\n));\nContextMenuContent.displayName = \"ContextMenuContent\";\n\nexport interface ContextMenuItemProps extends React.ComponentPropsWithoutRef<\n  typeof ContextMenuPrimitive.Item\n> {\n  inset?: boolean;\n}\n\nconst ContextMenuItem = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Item>,\n  ContextMenuItemProps\n>(({ className, inset, ...props }, ref) => (\n  <ContextMenuPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-pointer select-none items-center gap-2\",\n      \"rounded-[4px] px-3 py-2 text-sm text-title\",\n      \"transition-colors duration-100\",\n      \"focus:bg-surface-gray focus:outline-none\",\n      \"data-[disabled]:pointer-events-none data-[disabled]:opacity-40\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  />\n));\nContextMenuItem.displayName = \"ContextMenuItem\";\n\nexport interface ContextMenuSeparatorProps extends React.ComponentPropsWithoutRef<\n  typeof ContextMenuPrimitive.Separator\n> {}\n\nconst ContextMenuSeparator = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Separator>,\n  ContextMenuSeparatorProps\n>(({ className, ...props }, ref) => (\n  <ContextMenuPrimitive.Separator\n    ref={ref}\n    className={cn(\"my-1 h-px bg-[rgba(113,128,150,0.2)]\", className)}\n    {...props}\n  />\n));\nContextMenuSeparator.displayName = \"ContextMenuSeparator\";\n\nexport interface ContextMenuLabelProps extends React.ComponentPropsWithoutRef<\n  typeof ContextMenuPrimitive.Label\n> {\n  inset?: boolean;\n}\n\nconst ContextMenuLabel = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Label>,\n  ContextMenuLabelProps\n>(({ className, inset, ...props }, ref) => (\n  <ContextMenuPrimitive.Label\n    ref={ref}\n    className={cn(\n      \"px-3 py-1 text-xs font-semibold uppercase tracking-wider text-placeholder\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  />\n));\nContextMenuLabel.displayName = \"ContextMenuLabel\";\n\nexport {\n  ContextMenu,\n  ContextMenuTrigger,\n  ContextMenuContent,\n  ContextMenuItem,\n  ContextMenuSeparator,\n  ContextMenuLabel,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

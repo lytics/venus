@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "title": "Switch",
+  "description": "Accessible on/off toggle with label.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/switch.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Accessible toggle with label */\n\nexport interface SwitchProps extends Omit<\n  React.ButtonHTMLAttributes<HTMLButtonElement>,\n  \"onChange\" | \"onClick\"\n> {\n  /** Whether the switch is on. */\n  checked?: boolean;\n  /** Callback fired when the switch state changes. */\n  onCheckedChange?: (checked: boolean) => void;\n  /** Label text displayed beside the toggle. */\n  label?: string;\n  /** Supporting description shown below the label. */\n  description?: string;\n  /** When true, the switch cannot be interacted with. @default false */\n  disabled?: boolean;\n}\n\nexport const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(\n  (\n    {\n      checked = false,\n      onCheckedChange,\n      label,\n      description,\n      disabled = false,\n      className,\n      id,\n      ...props\n    },\n    ref,\n  ) => {\n    const uid = React.useId();\n    const switchId = id ?? uid;\n\n    const handleClick = () => {\n      if (!disabled) onCheckedChange?.(!checked);\n    };\n\n    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {\n      if (e.key === \" \" || e.key === \"Enter\") {\n        e.preventDefault();\n        if (!disabled) onCheckedChange?.(!checked);\n      }\n    };\n\n    return (\n      <div className={cn(\"flex items-start gap-3\", className)}>\n        {/* Track */}\n        <button\n          ref={ref}\n          id={switchId}\n          role=\"switch\"\n          type=\"button\"\n          aria-checked={checked}\n          aria-disabled={disabled}\n          disabled={disabled}\n          onClick={handleClick}\n          onKeyDown={handleKeyDown}\n          className={cn(\n            // Track\n            \"relative inline-flex shrink-0 items-center\",\n            \"h-5 w-9 rounded-full\",\n            \"transition-colors duration-200\",\n            \"focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50\",\n            \"disabled:cursor-not-allowed disabled:opacity-50\",\n            checked ? \"bg-primary\" : \"bg-gray-300\",\n          )}\n          {...props}\n        >\n          {/* Thumb */}\n          <span\n            aria-hidden=\"true\"\n            className={cn(\n              \"pointer-events-none block h-4 w-4 rounded-full bg-white shadow-sm\",\n              \"transition-transform duration-200\",\n              checked ? \"translate-x-[18px]\" : \"translate-x-[2px]\",\n            )}\n          />\n        </button>\n\n        {/* Label + description */}\n        {(label || description) && (\n          <label\n            htmlFor={switchId}\n            className={cn(\"cursor-pointer\", disabled && \"cursor-not-allowed opacity-50\")}\n          >\n            {label && <span className=\"block text-sm font-medium text-title\">{label}</span>}\n            {description && <span className=\"block text-xs text-body mt-0.5\">{description}</span>}\n          </label>\n        )}\n      </div>\n    );\n  },\n);\n\nSwitch.displayName = \"Switch\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

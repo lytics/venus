@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "code-block",
+  "title": "Code Block",
+  "description": "Code display with optional line numbers.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/code-block.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Styled code display with optional line numbers */\n\nexport interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {\n  /** The source code string to display. */\n  code: string;\n  /** Language label shown in the header (decorative only — no syntax highlighting). */\n  language?: string;\n  /** When true, renders line numbers alongside the code. @default false */\n  lineNumbers?: boolean;\n}\n\nexport const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(\n  ({ code, language, lineNumbers = false, className, ...props }, ref) => {\n    const lines = code.split(\"\\n\");\n\n    return (\n      <div\n        ref={ref}\n        className={cn(\"rounded-md overflow-hidden font-mono text-sm\", \"bg-[#1a1a2e]\", className)}\n        {...props}\n      >\n        {language && (\n          <div className=\"flex items-center justify-between px-4 py-2 bg-[#12122a] border-b border-white/10\">\n            <span className=\"text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider\">\n              {language}\n            </span>\n          </div>\n        )}\n\n        <div className=\"overflow-x-auto p-4\">\n          {lineNumbers ? (\n            <table className=\"w-full border-collapse\">\n              <tbody>\n                {lines.map((line, i) => (\n                  <tr key={i}>\n                    <td\n                      className=\"select-none text-right pr-4 text-[#4B5563] text-xs align-top w-[1%] whitespace-nowrap\"\n                      aria-hidden=\"true\"\n                    >\n                      {i + 1}\n                    </td>\n                    <td className=\"text-[#E2E8F0] whitespace-pre\">{line}</td>\n                  </tr>\n                ))}\n              </tbody>\n            </table>\n          ) : (\n            <pre className=\"text-[#E2E8F0] whitespace-pre m-0 p-0\">{code}</pre>\n          )}\n        </div>\n      </div>\n    );\n  },\n);\n\nCodeBlock.displayName = \"CodeBlock\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

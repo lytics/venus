@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list",
+  "title": "List",
+  "description": "Structured list with icon/title/description/action slots.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/list.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Structured list with compound sub-components */\n\n// ── List (root) ────────────────────────────────────────────────────────────\n\nexport interface ListProps extends React.HTMLAttributes<HTMLUListElement> {}\n\nexport const List = React.forwardRef<HTMLUListElement, ListProps>(\n  ({ className, children, ...props }, ref) => (\n    <ul ref={ref} className={cn(\"w-full list-none p-0 m-0\", className)} {...props}>\n      {children}\n    </ul>\n  ),\n);\nList.displayName = \"List\";\n\n// ── ListItem ───────────────────────────────────────────────────────────────\n\nexport interface ListItemProps extends React.LiHTMLAttributes<HTMLLIElement> {\n  /** Optional icon or avatar rendered at the start of the row. */\n  icon?: React.ReactNode;\n  /** Primary text label. */\n  itemTitle?: React.ReactNode;\n  /** Supporting description text. */\n  description?: React.ReactNode;\n  /** Action element (e.g. button or icon) rendered at the trailing edge. */\n  action?: React.ReactNode;\n}\n\nexport const ListItem = React.forwardRef<HTMLLIElement, ListItemProps>(\n  ({ icon, itemTitle, description, action, className, children, ...props }, ref) => (\n    <li\n      ref={ref}\n      className={cn(\n        \"flex items-center gap-3 px-4 py-3\",\n        \"border-b border-[rgba(113,128,150,0.2)] last:border-b-0\",\n        \"bg-white hover:bg-gray-50 transition-colors duration-100\",\n        className,\n      )}\n      {...props}\n    >\n      {icon && <span className=\"shrink-0 flex items-center justify-center text-body\">{icon}</span>}\n      <span className=\"flex-1 min-w-0\">\n        {itemTitle && (\n          <span className=\"block text-sm font-medium text-title truncate\">{itemTitle}</span>\n        )}\n        {description && (\n          <span className=\"block text-xs text-body truncate mt-0.5\">{description}</span>\n        )}\n        {children}\n      </span>\n      {action && <span className=\"shrink-0 flex items-center\">{action}</span>}\n    </li>\n  ),\n);\nListItem.displayName = \"ListItem\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

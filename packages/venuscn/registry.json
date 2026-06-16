@@ -4,6 +4,24 @@
   "homepage": "https://github.com/lytics/venus",
   "items": [
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Expandable sections built on Radix UI Accordion.",
+      "dependencies": [
+        "@radix-ui/react-accordion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
@@ -58,6 +76,24 @@
       ]
     },
     {
+      "name": "avatar-group",
+      "type": "registry:ui",
+      "title": "Avatar Group",
+      "description": "Stacked avatars with an overflow count.",
+      "dependencies": [
+        "@radix-ui/react-avatar"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/avatar-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
@@ -77,6 +113,24 @@
       ]
     },
     {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Navigation hierarchy with separators.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -90,6 +144,21 @@
       "files": [
         {
           "path": "registry/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "callout",
+      "type": "registry:ui",
+      "title": "Callout",
+      "description": "Full-width banner with variant colors and a left accent.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/callout.tsx",
           "type": "registry:ui"
         }
       ]
@@ -128,6 +197,21 @@
       ]
     },
     {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Lightweight CSS/SVG bar and line charts.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
@@ -141,6 +225,103 @@
       "files": [
         {
           "path": "registry/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Code display with optional line numbers.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/code-block.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Show/hide toggle built on Radix UI Collapsible.",
+      "dependencies": [
+        "@radix-ui/react-collapsible"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Searchable command palette.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Right-click menu built on Radix UI Context Menu.",
+      "dependencies": [
+        "@radix-ui/react-context-menu"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/context-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Table with sorting and column definitions.",
+      "registryDependencies": [
+        "utils",
+        "@venus/table"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/data-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Styled native date input.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/date-picker.tsx",
           "type": "registry:ui"
         }
       ]
@@ -198,6 +379,39 @@
       ]
     },
     {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Action menu built on Radix UI Dropdown Menu.",
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "Empty State",
+      "description": "Centered placeholder with icon, title, description, and action.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/empty-state.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
@@ -211,6 +425,21 @@
       "files": [
         {
           "path": "registry/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "title": "Form",
+      "description": "Form wrapper providing a disabled-state context.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/form.tsx",
           "type": "registry:ui"
         }
       ]
@@ -234,6 +463,24 @@
       ]
     },
     {
+      "name": "icon",
+      "type": "registry:ui",
+      "title": "Icon",
+      "description": "Lucide icon wrapper with sm/md/lg sizes.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/icon.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
@@ -244,6 +491,36 @@
       "files": [
         {
           "path": "registry/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Form label with optional required asterisk.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "list",
+      "type": "registry:ui",
+      "title": "List",
+      "description": "Structured list with icon/title/description/action slots.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/list.tsx",
           "type": "registry:ui"
         }
       ]
@@ -301,6 +578,21 @@
       ]
     },
     {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Page navigation with previous/next controls.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "pills",
       "type": "registry:ui",
       "title": "Pills",
@@ -314,6 +606,24 @@
       "files": [
         {
           "path": "registry/ui/pills.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Contextual overlay built on Radix UI Popover.",
+      "dependencies": [
+        "@radix-ui/react-popover"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/popover.tsx",
           "type": "registry:ui"
         }
       ]
@@ -453,6 +763,21 @@
       ]
     },
     {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Horizontal or vertical divider.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
@@ -485,6 +810,38 @@
       "files": [
         {
           "path": "registry/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "simple-accordion",
+      "type": "registry:ui",
+      "title": "Simple Accordion",
+      "description": "Data-driven Accordion wrapper for quick lists.",
+      "registryDependencies": [
+        "utils",
+        "@venus/accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/simple-accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "simple-tabs",
+      "type": "registry:ui",
+      "title": "Simple Tabs",
+      "description": "Data-driven Tabs wrapper for quick tab sets.",
+      "registryDependencies": [
+        "utils",
+        "@venus/tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/simple-tabs.tsx",
           "type": "registry:ui"
         }
       ]
@@ -523,6 +880,36 @@
       ]
     },
     {
+      "name": "stack",
+      "type": "registry:ui",
+      "title": "Stack",
+      "description": "Flex layout with direction, gap, align, and justify.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/stack.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "stat",
+      "type": "registry:ui",
+      "title": "Stat",
+      "description": "Metric display with value, label, and trend.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/stat.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "status-pill",
       "type": "registry:ui",
       "title": "Status Pill",
@@ -533,6 +920,21 @@
       "files": [
         {
           "path": "registry/ui/status-pill.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Accessible on/off toggle with label.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/switch.tsx",
           "type": "registry:ui"
         }
       ]
@@ -692,6 +1094,44 @@
       ]
     },
     {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Venus Theme",
+      "description": "The complete Venus design-token stylesheet — Tailwind v4 @theme (colors, spacing, typography, radius, shadows) plus the shadcn semantic-var bridge and table styles.",
+      "files": [
+        {
+          "path": "src/styles/tokens.css",
+          "type": "registry:file",
+          "target": "styles/venus.css"
+        },
+        {
+          "path": "src/styles/table.css",
+          "type": "registry:file",
+          "target": "styles/venus-table.css"
+        }
+      ],
+      "docs": "Add these to the top of your globals.css, before `@import \"tailwindcss\";`:\n@import \"./styles/venus.css\";\n@import \"./styles/venus-table.css\";"
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Notification with variant and progress, built on Radix UI Toast.",
+      "dependencies": [
+        "@radix-ui/react-toast",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/toast.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "toggle",
       "type": "registry:ui",
       "title": "Toggle",
@@ -720,6 +1160,21 @@
       "files": [
         {
           "path": "registry/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "typography",
+      "type": "registry:ui",
+      "title": "Typography",
+      "description": "Heading, paragraph, and text variants.",
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/typography.tsx",
           "type": "registry:ui"
         }
       ]

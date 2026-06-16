@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker",
+  "title": "Date Picker",
+  "description": "Styled native date input.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/date-picker.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Styled native date input */\n\nexport interface DatePickerProps extends Omit<\n  React.InputHTMLAttributes<HTMLInputElement>,\n  \"type\" | \"onChange\"\n> {\n  /** Current date value in YYYY-MM-DD format. */\n  value?: string;\n  /** Callback when the date changes. */\n  onChange?: (value: string) => void;\n  /** Minimum selectable date in YYYY-MM-DD format. */\n  min?: string;\n  /** Maximum selectable date in YYYY-MM-DD format. */\n  max?: string;\n  /** When true, the input is disabled. @default false */\n  disabled?: boolean;\n}\n\nexport const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(\n  ({ value, onChange, min, max, disabled, className, ...props }, ref) => {\n    return (\n      <input\n        ref={ref}\n        type=\"date\"\n        value={value}\n        min={min}\n        max={max}\n        disabled={disabled}\n        onChange={(e) => onChange?.(e.target.value)}\n        className={cn(\n          \"h-10 w-full rounded-[4px] border border-[rgba(113,128,150,0.3)] bg-white\",\n          \"px-3 text-sm text-title font-normal\",\n          \"transition-colors duration-150\",\n          \"hover:border-primary\",\n          \"focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary\",\n          \"placeholder:text-placeholder\",\n          \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50\",\n          // Native date input calendar icon color (WebKit)\n          \"[&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 [&::-webkit-calendar-picker-indicator]:hover:opacity-100\",\n          className,\n        )}\n        {...props}\n      />\n    );\n  },\n);\n\nDatePicker.displayName = \"DatePicker\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

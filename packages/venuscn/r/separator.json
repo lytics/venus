@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "title": "Separator",
+  "description": "Horizontal or vertical divider.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/separator.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface SeparatorProps extends React.HTMLAttributes<HTMLHRElement> {\n  /**\n   * Layout orientation of the rule.\n   * - `\"horizontal\"` – full-width horizontal line (default)\n   * - `\"vertical\"` – full-height vertical line; requires a fixed height on the parent\n   * @default \"horizontal\"\n   */\n  orientation?: \"horizontal\" | \"vertical\";\n}\n\nexport const Separator = React.forwardRef<HTMLHRElement, SeparatorProps>(\n  ({ orientation = \"horizontal\", className, ...props }, ref) => (\n    <hr\n      ref={ref}\n      role=\"separator\"\n      aria-orientation={orientation}\n      className={cn(\n        \"border-0 bg-border\",\n        orientation === \"horizontal\" ? \"w-full h-px\" : \"h-full w-px self-stretch\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n);\n\nSeparator.displayName = \"Separator\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
